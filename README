@@ -1,0 +1,27 @@
+Raspberry Pi BSP
+================
+
+Building
+--------
+
+Use the following steps to configure a platform project for this BSP with
+Wind River Linux 9:
+
+	$ git clone --branch WRLINUX_9_LTS_CVE /path/to/wrlinux-9
+	$ ./wrlinux-9/setup.sh --distro wrlinux --dl-layers --accept-eula yes
+	$ . environment-setup-x86_64-wrlinuxsdk-linux
+	$ . oe-init-build-env
+	$ bitbake-layers add-layer /path/to/wrl9-rpi-bsp/
+	$ vi conf/local.conf
+
+Add: MACHINE = "rpi"
+
+Then build the platform with:
+
+	$ bitbake wrlinux-image-glibc-std
+
+-or-
+
+	$ bitbake linux-windriver
+
+to build just a kernel.
