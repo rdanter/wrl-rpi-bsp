@@ -1,0 +1,40 @@
+From 819b4190aa1e938e3a0eeb78c7ab94acedbdf211 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Fri, 18 Nov 2016 10:52:49 +0000
+Subject: [PATCH 168/215] ARM: dts: Visit overlays subdir unconditionally
+
+make clean processing occurs without loading the configuration, so the
+overlays subdir must be added unconditionally.
+
+See: https://github.com/raspberrypi/linux/issues/1723
+---
+ arch/arm/boot/dts/Makefile | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index d59b0f0..c8d3d5a 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -8,10 +8,6 @@ dtb-$(CONFIG_ARCH_BCM2835) += \
+ 	bcm2710-rpi-3-b.dtb \
+ 	bcm2710-rpi-cm3.dtb
+ 
+-ifeq ($(CONFIG_ARCH_BCM2835),y)
+-    dts-dirs += overlays
+-endif
+-
+ dtb-$(CONFIG_ARCH_ALPINE) += \
+ 	alpine-db.dtb
+ dtb-$(CONFIG_MACH_ARTPEC6) += \
+@@ -941,7 +937,7 @@ dtstree		:= $(srctree)/$(src)
+ dtb-$(CONFIG_OF_ALL_DTBS) := $(patsubst $(dtstree)/%.dts,%.dtb, $(wildcard $(dtstree)/*.dts))
+ 
+ always		:= $(dtb-y)
+-subdir-y	:= $(dts-dirs)
++subdir-y	:= $(dts-dirs) overlays
+ clean-files	:= *.dtb
+ 
+ # Enable fixups to support overlays on BCM2708 platforms
+-- 
+1.9.1
+

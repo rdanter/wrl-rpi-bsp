@@ -1,0 +1,40 @@
+From eba2ee71f191364f9dc1df220c246f71a554c28f Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Fri, 25 Nov 2016 15:01:15 +0000
+Subject: [PATCH 172/215] config: Add AK4554 audio codec driver
+
+See: https://github.com/raspberrypi/linux/issues/1730
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 10b32a4..48ed6bf 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -876,6 +876,7 @@ CONFIG_SND_BCM2708_SOC_DIONAUDIO_LOCO=m
+ CONFIG_SND_BCM2708_SOC_ALLO_PIANO_DAC=m
+ CONFIG_SND_PISOUND=m
+ CONFIG_SND_SOC_ADAU1701=m
++CONFIG_SND_SOC_AK4554=m
+ CONFIG_SND_SOC_WM8804_I2C=m
+ CONFIG_SND_SIMPLE_CARD=m
+ CONFIG_SOUND_PRIME=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 2979c31..ff69caf 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -871,6 +871,7 @@ CONFIG_SND_BCM2708_SOC_DIONAUDIO_LOCO=m
+ CONFIG_SND_BCM2708_SOC_ALLO_PIANO_DAC=m
+ CONFIG_SND_PISOUND=m
+ CONFIG_SND_SOC_ADAU1701=m
++CONFIG_SND_SOC_AK4554=m
+ CONFIG_SND_SOC_WM8804_I2C=m
+ CONFIG_SND_SIMPLE_CARD=m
+ CONFIG_SOUND_PRIME=m
+-- 
+1.9.1
+

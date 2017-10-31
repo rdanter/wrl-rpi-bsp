@@ -1,0 +1,26 @@
+From 8a098af334ed6d27da4292777b566cdb4ab36163 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Thu, 1 Dec 2016 22:58:07 +0000
+Subject: [PATCH 175/215] BCM2835 DT: Add DTC_FLAGS to support overlays
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm64/boot/dts/broadcom/Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/broadcom/Makefile b/arch/arm64/boot/dts/broadcom/Makefile
+index 2152448..d6a4c2f 100644
+--- a/arch/arm64/boot/dts/broadcom/Makefile
++++ b/arch/arm64/boot/dts/broadcom/Makefile
+@@ -6,3 +6,8 @@ dtb-$(CONFIG_ARCH_BCM2709) += bcm2710-rpi-3-b.dtb
+ always		:= $(dtb-y)
+ subdir-y	:= $(dts-dirs)
+ clean-files	:= *.dtb
++
++# Enable fixups to support overlays on BCM2835 platforms
++ifeq ($(CONFIG_ARCH_BCM2835),y)
++        DTC_FLAGS ?= -@ -H epapr
++endif
+-- 
+1.9.1
+

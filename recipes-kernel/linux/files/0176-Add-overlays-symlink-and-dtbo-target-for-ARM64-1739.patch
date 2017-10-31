@@ -1,0 +1,51 @@
+From d3fbdeb9ed1c90e230f2e4d984d6adca65237517 Mon Sep 17 00:00:00 2001
+From: Gerhard de Clercq <gerharddeclercq@outlook.com>
+Date: Fri, 2 Dec 2016 12:15:26 +0200
+Subject: [PATCH 176/215] Add overlays symlink and dtbo target for ARM64
+ (#1739)
+
+Signed-off-by: Gerhard de Clercq <gerharddeclercq@outlook.com>
+---
+ arch/arm64/Makefile          | 3 +++
+ arch/arm64/boot/dts/Makefile | 1 +
+ arch/arm64/boot/dts/overlays | 1 +
+ 3 files changed, 5 insertions(+)
+ create mode 120000 arch/arm64/boot/dts/overlays
+
+diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+index 5b54f8c..64c6bf2 100644
+--- a/arch/arm64/Makefile
++++ b/arch/arm64/Makefile
+@@ -102,6 +102,9 @@ zinstall install:
+ 
+ %.dtb: scripts
+ 	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
++	
++%.dtbo: | scripts
++	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
+ 
+ PHONY += dtbs dtbs_install
+ 
+diff --git a/arch/arm64/boot/dts/Makefile b/arch/arm64/boot/dts/Makefile
+index 6e199c9..4c203fb 100644
+--- a/arch/arm64/boot/dts/Makefile
++++ b/arch/arm64/boot/dts/Makefile
+@@ -19,6 +19,7 @@ dts-dirs += socionext
+ dts-dirs += sprd
+ dts-dirs += xilinx
+ dts-dirs += lg
++dts-dirs += overlays
+ 
+ subdir-y	:= $(dts-dirs)
+ 
+diff --git a/arch/arm64/boot/dts/overlays b/arch/arm64/boot/dts/overlays
+new file mode 120000
+index 0000000..413315a
+--- /dev/null
++++ b/arch/arm64/boot/dts/overlays
+@@ -0,0 +1 @@
++../../../arm/boot/dts/overlays/
+\ No newline at end of file
+-- 
+1.9.1
+

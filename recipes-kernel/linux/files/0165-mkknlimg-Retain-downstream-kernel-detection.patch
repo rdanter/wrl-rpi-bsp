@@ -1,0 +1,28 @@
+From 0f9af804280b81b8cde2fcaa8cb6204bb1a2fbec Mon Sep 17 00:00:00 2001
+From: Phil Elwell <pelwell@users.noreply.github.com>
+Date: Tue, 15 Nov 2016 15:58:49 +0000
+Subject: [PATCH 165/215] mkknlimg: Retain downstream-kernel detection
+
+With the death of ARCH_BCM2708 and ARCH_BCM2709, a new way is needed to
+determine if this is a "downstream" build that wants the firmware to
+load a bcm27xx .dtb. The vc_cma driver is used downstream but not
+upstream, making vc_cma_init a suitable predicate symbol.
+---
+ scripts/mkknlimg | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/scripts/mkknlimg b/scripts/mkknlimg
+index a21f7e3..60206de 100755
+--- a/scripts/mkknlimg
++++ b/scripts/mkknlimg
+@@ -78,6 +78,7 @@ my $wanted_strings =
+ 	'brcm,bcm2835' => FLAG_PI | FLAG_DTOK | FLAG_283X,
+ 	'brcm,bcm2836' => FLAG_PI | FLAG_DTOK | FLAG_283X,
+ 	'of_cfs_init' => FLAG_DTOK | FLAG_DDTK,
++	'vc_cma_init' => FLAG_PI | FLAG_270X,
+ };
+ 
+ my $res = try_extract($kernel_file, $tmpfile1);
+-- 
+1.9.1
+

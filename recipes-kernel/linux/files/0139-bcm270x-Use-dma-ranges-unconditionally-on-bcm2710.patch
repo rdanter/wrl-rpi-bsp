@@ -1,0 +1,39 @@
+From d980a5b8dea834f3fe5c488ea4f013029025ea7e Mon Sep 17 00:00:00 2001
+From: Phil Elwell <pelwell@users.noreply.github.com>
+Date: Fri, 28 Oct 2016 13:55:36 +0100
+Subject: [PATCH 139/215] bcm270x: Use dma-ranges unconditionally on bcm2710
+
+See: https://github.com/raspberrypi/linux/pull/1699
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/bcm2710.dtsi | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2710.dtsi b/arch/arm/boot/dts/bcm2710.dtsi
+index 491594c..df1a4ce 100644
+--- a/arch/arm/boot/dts/bcm2710.dtsi
++++ b/arch/arm/boot/dts/bcm2710.dtsi
+@@ -9,9 +9,7 @@
+ 	soc {
+ 		ranges = <0x7e000000 0x3f000000 0x01000000>,
+ 		         <0x40000000 0x40000000 0x00040000>;
+-#ifdef RPI364
+ 		dma-ranges = <0xc0000000 0x00000000 0x3f000000>;
+-#endif
+ 
+ 		local_intc: local_intc {
+ 			compatible = "brcm,bcm2836-l1-intc";
+@@ -143,9 +141,7 @@
+ 
+ &intc {
+ 	compatible = "brcm,bcm2836-armctrl-ic";
+-#ifdef RPI364
+ 	reg = <0x7e00b200 0x200>;
+-#endif
+ 	interrupt-parent = <&local_intc>;
+ 	interrupts = <8>;
+ };
+-- 
+1.9.1
+
