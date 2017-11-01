@@ -1,7 +1,7 @@
-From bd6d762bd61330fc373e75bd5b01834e31a8a7c6 Mon Sep 17 00:00:00 2001
+From 3002db10e1c4a99fe2d50da57db0166a089c2987 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 14 Sep 2016 09:16:19 +0100
-Subject: [PATCH 181/215] raspberrypi-firmware: Export the general transaction
+Subject: [PATCH 181/212] raspberrypi-firmware: Export the general transaction
  function.
 
 The vc4-firmware-kms module is going to be doing the MBOX FB call.

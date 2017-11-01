@@ -1,7 +1,7 @@
-From 40ec221f159c3befe2d876facdaf879a9b79b738 Mon Sep 17 00:00:00 2001
+From b97ddedd421d671d79a85e1de5ed22609f523e16 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 31 Oct 2016 17:35:31 +0000
-Subject: [PATCH 142/215] bcm2835: Increase coherent allocation to 1M for
+Subject: [PATCH 142/212] bcm2835: Increase coherent allocation to 1M for
  dwc_otg bounce buffers
 
 ---

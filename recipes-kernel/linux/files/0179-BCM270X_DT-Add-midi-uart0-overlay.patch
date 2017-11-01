@@ -1,7 +1,7 @@
-From b9bba8a00b759e66ab3e36236eb354d6aaaae935 Mon Sep 17 00:00:00 2001
+From 5afc3842d07c803747287198c63614c0a126fcd4 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 6 Dec 2016 17:27:50 +0000
-Subject: [PATCH 179/215] BCM270X_DT: Add midi-uart0 overlay
+Subject: [PATCH 179/212] BCM270X_DT: Add midi-uart0 overlay
 
 MIDI requires 31.25kbaud, a baudrate unsupported by Linux. The
 midi-uart0 overlay configures uart0 (ttyAMA0) to use a fake clock

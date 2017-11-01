@@ -1,7 +1,7 @@
-From bf42a8ed802bfce925d28fe32c19d72884d3196d Mon Sep 17 00:00:00 2001
+From e2426737fdb31776c5cb5af65102ebf8458268bf Mon Sep 17 00:00:00 2001
 From: Phil Elwell <pelwell@users.noreply.github.com>
 Date: Tue, 14 Jul 2015 14:32:47 +0100
-Subject: [PATCH 072/215] mfd: Add Raspberry Pi Sense HAT core driver
+Subject: [PATCH 072/212] mfd: Add Raspberry Pi Sense HAT core driver
 
 ---
  drivers/input/joystick/Kconfig           |   8 +
@@ -9,14 +9,14 @@ Subject: [PATCH 072/215] mfd: Add Raspberry Pi Sense HAT core driver
  drivers/input/joystick/rpisense-js.c     | 153 ++++++++++++++++
  drivers/mfd/Kconfig                      |   8 +
  drivers/mfd/Makefile                     |   1 +
- drivers/mfd/rpisense-core.c              | 157 +++++++++++++++++
+ drivers/mfd/rpisense-core.c              | 156 +++++++++++++++++
  drivers/video/fbdev/Kconfig              |  13 ++
  drivers/video/fbdev/Makefile             |   1 +
- drivers/video/fbdev/rpisense-fb.c        | 293 +++++++++++++++++++++++++++++++
+ drivers/video/fbdev/rpisense-fb.c        | 292 +++++++++++++++++++++++++++++++
  include/linux/mfd/rpisense/core.h        |  47 +++++
  include/linux/mfd/rpisense/framebuffer.h |  32 ++++
  include/linux/mfd/rpisense/joystick.h    |  35 ++++
- 12 files changed, 749 insertions(+)
+ 12 files changed, 747 insertions(+)
  create mode 100644 drivers/input/joystick/rpisense-js.c
  create mode 100644 drivers/mfd/rpisense-core.c
  create mode 100644 drivers/video/fbdev/rpisense-fb.c
@@ -240,10 +240,10 @@ index 2ba3ba3..6f2b1d3 100644
 +obj-$(CONFIG_MFD_RPISENSE_CORE)	+= rpisense-core.o
 diff --git a/drivers/mfd/rpisense-core.c b/drivers/mfd/rpisense-core.c
 new file mode 100644
-index 0000000..eea9312
+index 0000000..715792b
 --- /dev/null
 +++ b/drivers/mfd/rpisense-core.c
-@@ -0,0 +1,157 @@
+@@ -0,0 +1,156 @@
 +/*
 + * Raspberry Pi Sense HAT core driver
 + * http://raspberrypi.org
@@ -400,7 +400,6 @@ index 0000000..eea9312
 +MODULE_DESCRIPTION("Raspberry Pi Sense HAT core driver");
 +MODULE_AUTHOR("Serge Schneider <serge@raspberrypi.org>");
 +MODULE_LICENSE("GPL");
-+
 diff --git a/drivers/video/fbdev/Kconfig b/drivers/video/fbdev/Kconfig
 index 78a9e61..ec1a5c2 100644
 --- a/drivers/video/fbdev/Kconfig
@@ -436,10 +435,10 @@ index ee3b349..459f9d1 100644
  obj-$(CONFIG_FB_VIRTUAL)          += vfb.o
 diff --git a/drivers/video/fbdev/rpisense-fb.c b/drivers/video/fbdev/rpisense-fb.c
 new file mode 100644
-index 0000000..26432a5
+index 0000000..b775edc
 --- /dev/null
 +++ b/drivers/video/fbdev/rpisense-fb.c
-@@ -0,0 +1,293 @@
+@@ -0,0 +1,292 @@
 +/*
 + * Raspberry Pi Sense HAT framebuffer driver
 + * http://raspberrypi.org
@@ -732,7 +731,6 @@ index 0000000..26432a5
 +MODULE_DESCRIPTION("Raspberry Pi Sense HAT framebuffer driver");
 +MODULE_AUTHOR("Serge Schneider <serge@raspberrypi.org>");
 +MODULE_LICENSE("GPL");
-+
 diff --git a/include/linux/mfd/rpisense/core.h b/include/linux/mfd/rpisense/core.h
 new file mode 100644
 index 0000000..4856aa3

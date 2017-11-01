@@ -1,7 +1,7 @@
-From 03befd11cc9c64bc7cd04c7325f76b89bf9e296d Mon Sep 17 00:00:00 2001
+From 91302b3ff2d42288c30ae085bff5b611f98073a8 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 13 Mar 2015 12:43:36 +0000
-Subject: [PATCH 008/215] Protect __release_resource against resources without
+Subject: [PATCH 008/212] Protect __release_resource against resources without
  parents
 
 Without this patch, removing a device tree overlay can crash here.

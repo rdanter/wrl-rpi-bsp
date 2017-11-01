@@ -1,7 +1,7 @@
-From 12964e0dae08b9e085489d84d644088c3b5db650 Mon Sep 17 00:00:00 2001
+From 0720ea18592251b9c4c2b797c41edbfa60b25faa Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 23 Sep 2016 04:57:17 +0200
-Subject: [PATCH 151/215] i2c: bcm2835: Support i2c-dev ioctl I2C_TIMEOUT
+Subject: [PATCH 151/212] i2c: bcm2835: Support i2c-dev ioctl I2C_TIMEOUT
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

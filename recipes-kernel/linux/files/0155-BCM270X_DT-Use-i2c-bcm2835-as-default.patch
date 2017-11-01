@@ -1,7 +1,7 @@
-From 127efd3a08c118e67f33832535d283afb4b24a6b Mon Sep 17 00:00:00 2001
+From 0575066e23f1b4c43e8cd01ccbb3147764dff03a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 1 Nov 2016 15:42:55 +0100
-Subject: [PATCH 155/215] BCM270X_DT: Use i2c-bcm2835 as default
+Subject: [PATCH 155/212] BCM270X_DT: Use i2c-bcm2835 as default
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

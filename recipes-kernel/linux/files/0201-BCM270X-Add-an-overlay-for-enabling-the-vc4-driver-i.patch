@@ -1,7 +1,7 @@
-From 2cda82845db9637096cb231f31b3e0b0c8b5f10e Mon Sep 17 00:00:00 2001
+From 43f4c74552a6a58f7ab2ca8b32d94e5c56c77b82 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 14 Sep 2016 08:52:26 +0100
-Subject: [PATCH 201/215] BCM270X: Add an overlay for enabling the vc4 driver
+Subject: [PATCH 201/212] BCM270X: Add an overlay for enabling the vc4 driver
  in firmware-KMS mode.
 
 This gets us normal 3D support on top of the existing firmware display

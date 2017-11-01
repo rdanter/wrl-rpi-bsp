@@ -1,7 +1,7 @@
-From e898b0086b7d8a84c9709f937c839fbcfac336d5 Mon Sep 17 00:00:00 2001
+From 85924caba69d8e6fdd93d988828a27dd9f9f6076 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Thu, 26 Feb 2015 09:58:22 +0000
-Subject: [PATCH 018/215] pinctrl-bcm2835: Only request the interrupts listed
+Subject: [PATCH 018/212] pinctrl-bcm2835: Only request the interrupts listed
  in the DTB
 
 Although the GPIO controller can generate three interrupts (four counting

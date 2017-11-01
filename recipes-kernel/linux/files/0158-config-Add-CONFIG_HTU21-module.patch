@@ -1,7 +1,7 @@
-From 540dd142d2c7853048e3c81d1507e0997369a983 Mon Sep 17 00:00:00 2001
+From 450a2c1002b0ad0d2a9d3a60e6b47a4537852419 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 1 Nov 2016 13:10:05 +0000
-Subject: [PATCH 158/215] config: Add CONFIG_HTU21 module
+Subject: [PATCH 158/212] config: Add CONFIG_HTU21 module
 
 ---
  arch/arm/configs/bcm2709_defconfig | 1 +

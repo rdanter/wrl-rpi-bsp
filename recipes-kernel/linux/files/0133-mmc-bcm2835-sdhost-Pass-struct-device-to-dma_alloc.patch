@@ -1,7 +1,7 @@
-From 53ab5ec1ad652fcfcf494b28aefab27a1c1db696 Mon Sep 17 00:00:00 2001
+From df6aa0c360b4597be2edfc2be743d5b23e99431c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 19 Oct 2016 16:05:36 +0200
-Subject: [PATCH 133/215] mmc: bcm2835-sdhost: Pass struct device to
+Subject: [PATCH 133/212] mmc: bcm2835-sdhost: Pass struct device to
  dma_alloc*()
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

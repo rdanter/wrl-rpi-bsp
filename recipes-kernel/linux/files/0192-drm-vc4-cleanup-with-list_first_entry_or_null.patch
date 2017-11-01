@@ -1,7 +1,7 @@
-From 9234bfa42a4b0445219dd8454e26efe6b8fb312d Mon Sep 17 00:00:00 2001
+From 5689405f763b6317f74a89d84a8527ce858fab0a Mon Sep 17 00:00:00 2001
 From: Masahiro Yamada <yamada.masahiro@socionext.com>
 Date: Tue, 13 Sep 2016 03:35:20 +0900
-Subject: [PATCH 192/215] drm/vc4: cleanup with list_first_entry_or_null()
+Subject: [PATCH 192/212] drm/vc4: cleanup with list_first_entry_or_null()
 
 The combo of list_empty() check and return list_first_entry()
 can be replaced with list_first_entry_or_null().
@@ -13,10 +13,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 4 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
-index f696b75..7c1e4d9 100644
+index 80773f9..50a55ef 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -324,18 +324,15 @@ struct vc4_exec_info {
+@@ -325,18 +325,15 @@ struct vc4_exec_info {
  static inline struct vc4_exec_info *
  vc4_first_bin_job(struct vc4_dev *vc4)
  {

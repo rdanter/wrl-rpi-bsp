@@ -1,7 +1,7 @@
-From 9a66d25f5b284f73a4a0f680a4a3816587f6161d Mon Sep 17 00:00:00 2001
+From c3b0245534bf09aba05f2367d25d42a43edcf58a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 7 Oct 2016 17:07:46 +0200
-Subject: [PATCH 115/215] bcm270x: Use watchdog for reboot/poweroff
+Subject: [PATCH 115/212] bcm270x: Use watchdog for reboot/poweroff
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

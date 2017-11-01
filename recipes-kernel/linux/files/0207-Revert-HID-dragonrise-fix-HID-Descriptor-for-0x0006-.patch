@@ -1,7 +1,7 @@
-From 0cbb49a141af81ce52ed6bbda20c32d4c847b892 Mon Sep 17 00:00:00 2001
+From f40ce77b8970dc3c71fd58cf3ef4f5b38fc1203e Mon Sep 17 00:00:00 2001
 From: Ioan-Adrian Ratiu <adi@adirat.com>
 Date: Tue, 27 Sep 2016 21:41:37 +0300
-Subject: [PATCH 210/215] Revert "HID: dragonrise: fix HID Descriptor for
+Subject: [PATCH 207/212] Revert "HID: dragonrise: fix HID Descriptor for
  0x0006 PID"
 
 [ Upstream commit 1bcaa05ebee115213e34f1806cc6a4f7a6175a88 ]

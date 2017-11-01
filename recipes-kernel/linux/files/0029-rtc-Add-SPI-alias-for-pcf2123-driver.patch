@@ -1,7 +1,7 @@
-From b4d02edbfe0fead8e5126c7408930009e1b0a790 Mon Sep 17 00:00:00 2001
+From 2610b6fa11f71f65fb0355c4488fa5f147816443 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 15 Jun 2016 16:48:41 +0100
-Subject: [PATCH 029/215] rtc: Add SPI alias for pcf2123 driver
+Subject: [PATCH 029/212] rtc: Add SPI alias for pcf2123 driver
 
 Without this alias, Device Tree won't cause the driver
 to be loaded.

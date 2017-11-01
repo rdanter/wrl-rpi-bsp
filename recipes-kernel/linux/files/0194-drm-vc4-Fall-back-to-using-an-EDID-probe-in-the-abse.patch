@@ -1,7 +1,7 @@
-From ed7f5cb823e88f9d91c4cad58fbb77f35dcbc52c Mon Sep 17 00:00:00 2001
+From 44df3e9f3184a572c9e72797233fb803a0a0070f Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 14 Sep 2016 19:21:29 +0100
-Subject: [PATCH 194/215] drm/vc4: Fall back to using an EDID probe in the
+Subject: [PATCH 194/212] drm/vc4: Fall back to using an EDID probe in the
  absence of a GPIO.
 
 On Pi0/1/2, we use an external GPIO line for hotplug detection, since

@@ -1,7 +1,7 @@
-From f6927e7a32cf01c368e63494c2ccb485371a69aa Mon Sep 17 00:00:00 2001
+From 93d0e9cd856a4e320a7dd7045aa68474104b25c9 Mon Sep 17 00:00:00 2001
 From: Martin Sperl <kernel@martin.sperl.org>
 Date: Fri, 2 Sep 2016 16:45:27 +0100
-Subject: [PATCH 123/215] Register the clocks early during the boot process, so
+Subject: [PATCH 123/212] Register the clocks early during the boot process, so
  that special/critical clocks can get enabled early on in the boot process
  avoiding the risk of disabling a clock, pll_divider or pll when a claiming
  driver fails to install propperly - maybe it needs to defer.
@@ -12,10 +12,10 @@ Signed-off-by: Martin Sperl <kernel@martin.sperl.org>
  1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
-index fbf6160..cbbc8d4 100644
+index caa3aa8..b74fa37 100644
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
-@@ -1891,8 +1891,15 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
+@@ -1893,8 +1893,15 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
  	if (ret)
  		return ret;
  
@@ -33,7 +33,7 @@ index fbf6160..cbbc8d4 100644
  }
  
  static const struct of_device_id bcm2835_clk_of_match[] = {
-@@ -1909,7 +1916,11 @@ static struct platform_driver bcm2835_clk_driver = {
+@@ -1911,7 +1918,11 @@ static struct platform_driver bcm2835_clk_driver = {
  	.probe          = bcm2835_clk_probe,
  };
  

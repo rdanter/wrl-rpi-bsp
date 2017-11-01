@@ -1,7 +1,7 @@
-From 0d72bcb426cfd7ef295acc40ca014e89afea6e21 Mon Sep 17 00:00:00 2001
+From 1ec7e40546377c73ecbbc30dbffc8c93e0e2f3fc Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 10 Oct 2016 17:35:40 +0200
-Subject: [PATCH 116/215] bcm270x: Remove dead files
+Subject: [PATCH 116/212] bcm270x: Remove dead files
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,7 +1,7 @@
-From b404d7c867702729c9215d56f06617296e281868 Mon Sep 17 00:00:00 2001
+From f34a292871c2427d6f7f4ea48c0b7c6e454a8d23 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 3 Jul 2013 00:49:20 +0100
-Subject: [PATCH 050/215] Add cpufreq driver
+Subject: [PATCH 050/212] Add cpufreq driver
 
 Signed-off-by: popcornmix <popcornmix@gmail.com>
 ---

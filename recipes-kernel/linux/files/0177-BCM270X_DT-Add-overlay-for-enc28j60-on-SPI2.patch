@@ -1,7 +1,7 @@
-From 5a1ce92c20b0e30b976b463caff6964142f1ea7f Mon Sep 17 00:00:00 2001
+From 27cb5edeaa5023f8d2e53bb98919a8a8f4104071 Mon Sep 17 00:00:00 2001
 From: Alan Yiding Wang <y2366wan@uwaterloo.ca>
 Date: Sat, 3 Dec 2016 23:22:02 -0500
-Subject: [PATCH 177/215] BCM270X_DT: Add overlay for enc28j60 on SPI2
+Subject: [PATCH 177/212] BCM270X_DT: Add overlay for enc28j60 on SPI2
 
 Works on SPI2 for compute module
 ---

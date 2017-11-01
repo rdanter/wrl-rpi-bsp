@@ -1,7 +1,7 @@
-From 5e55ed527e11d6383b231a5bba328c4e1880fdcb Mon Sep 17 00:00:00 2001
+From 23a5004b7c93b14f69ed226d6cd3c7eb372c7135 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 25 Jul 2016 17:06:50 +0100
-Subject: [PATCH 078/215] iqaudio-dac: Compile fix - untested
+Subject: [PATCH 078/212] iqaudio-dac: Compile fix - untested
 
 ---
  sound/soc/bcm/iqaudio-dac.c | 6 +++++-

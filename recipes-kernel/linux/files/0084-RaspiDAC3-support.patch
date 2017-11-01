@@ -1,7 +1,7 @@
-From f66c0ca674b24d16aa83c3140ebb87a3068d82e7 Mon Sep 17 00:00:00 2001
+From b22212c94dc57e4f6682eacfd2eeb9b81f3621d0 Mon Sep 17 00:00:00 2001
 From: Jan Grulich <jan@grulich.eu>
 Date: Mon, 24 Aug 2015 16:03:47 +0100
-Subject: [PATCH 084/215] RaspiDAC3 support
+Subject: [PATCH 084/212] RaspiDAC3 support
 
 Signed-off-by: Jan Grulich <jan@grulich.eu>
 

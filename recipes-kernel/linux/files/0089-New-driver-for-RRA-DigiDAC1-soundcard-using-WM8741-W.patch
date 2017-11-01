@@ -1,7 +1,7 @@
-From f84f31261305b992d46c25268cbca2d812368b6a Mon Sep 17 00:00:00 2001
+From 9f42189345217402017d96c625c396e6a8c7e7f7 Mon Sep 17 00:00:00 2001
 From: escalator2015 <jmtasende@gmail.com>
 Date: Tue, 24 May 2016 16:20:09 +0100
-Subject: [PATCH 089/215] New driver for RRA DigiDAC1 soundcard using WM8741 +
+Subject: [PATCH 089/212] New driver for RRA DigiDAC1 soundcard using WM8741 +
  WM8804
 
 ---

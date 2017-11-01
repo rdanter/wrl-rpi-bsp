@@ -1,7 +1,7 @@
-From 6d8c01b29028a8012ad54677f0aa808fb6a74220 Mon Sep 17 00:00:00 2001
+From 6ed2deeb2409f1537120e341c57a6fd7b3805f96 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 26 Mar 2012 22:15:50 +0100
-Subject: [PATCH 041/215] bcm2708: alsa sound driver
+Subject: [PATCH 041/212] bcm2708: alsa sound driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

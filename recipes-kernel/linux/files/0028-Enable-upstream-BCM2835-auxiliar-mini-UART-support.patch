@@ -1,7 +1,7 @@
-From d94cf3ecc61b582def203a07810ece3d878de445 Mon Sep 17 00:00:00 2001
+From 2b391e08146b0effb419a834e6879ef312217dd3 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 3 Oct 2016 13:58:40 +0100
-Subject: [PATCH 028/215] Enable upstream BCM2835 auxiliar mini UART support
+Subject: [PATCH 028/212] Enable upstream BCM2835 auxiliar mini UART support
 
 ---
  drivers/tty/serial/8250/Kconfig | 2 +-

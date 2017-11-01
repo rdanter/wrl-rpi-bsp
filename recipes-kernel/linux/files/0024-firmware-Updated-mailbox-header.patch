@@ -1,7 +1,7 @@
-From 047bec3b3a354cbe0cac855428e239f2b094ce14 Mon Sep 17 00:00:00 2001
+From 82fabd05aae4df3bb0591cd2a8334508f8b771f4 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 25 Jan 2016 17:25:12 +0000
-Subject: [PATCH 024/215] firmware: Updated mailbox header
+Subject: [PATCH 024/212] firmware: Updated mailbox header
 
 ---
  include/soc/bcm2835/raspberrypi-firmware.h | 11 +++++++++++

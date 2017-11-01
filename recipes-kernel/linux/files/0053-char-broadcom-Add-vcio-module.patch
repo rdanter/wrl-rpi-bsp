@@ -1,7 +1,7 @@
-From 72f832ff14551ef3075a58edec53e3691c21bb3e Mon Sep 17 00:00:00 2001
+From ca7f7766f57f4c5f73e81b530b7e5b194b089479 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 26 Jun 2015 14:27:06 +0200
-Subject: [PATCH 053/215] char: broadcom: Add vcio module
+Subject: [PATCH 053/212] char: broadcom: Add vcio module
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,7 +1,7 @@
-From 12c8c96cbf6323a91939a3168b3df077234a71a7 Mon Sep 17 00:00:00 2001
+From 362fe11bbaae37117a693dfa0c4f090fb7ab32c7 Mon Sep 17 00:00:00 2001
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 Date: Wed, 10 Aug 2016 18:52:34 +0200
-Subject: [PATCH 182/215] drm/fb-helper: Add a dummy
+Subject: [PATCH 182/212] drm/fb-helper: Add a dummy
  remove_conflicting_framebuffers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -31,7 +31,7 @@ Link: http://patchwork.freedesktop.org/patch/msgid/1470847958-28465-2-git-send-e
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.c b/drivers/gpu/drm/vc4/vc4_drv.c
-index 9ecef93..eff0530 100644
+index 0c48b36..ab5b9d3 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.c
 +++ b/drivers/gpu/drm/vc4/vc4_drv.c
 @@ -16,6 +16,7 @@
@@ -42,7 +42,7 @@ index 9ecef93..eff0530 100644
  
  #include "uapi/drm/vc4_drm.h"
  #include "vc4_drv.h"
-@@ -214,7 +215,7 @@ static void vc4_kick_out_firmware_fb(void)
+@@ -217,7 +218,7 @@ static void vc4_kick_out_firmware_fb(void)
  	ap->ranges[0].base = 0;
  	ap->ranges[0].size = ~0;
  

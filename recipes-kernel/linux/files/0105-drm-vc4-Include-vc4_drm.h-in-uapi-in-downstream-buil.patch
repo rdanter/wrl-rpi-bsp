@@ -1,7 +1,7 @@
-From 5260c9f2f94e786d32a9de6204c4524f38629e89 Mon Sep 17 00:00:00 2001
+From 1887f6b7f47c882362aab69a2330ab4b2d476023 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Mon, 25 Jan 2016 13:03:33 -0800
-Subject: [PATCH 105/215] drm/vc4: Include vc4_drm.h in uapi in downstream
+Subject: [PATCH 105/212] drm/vc4: Include vc4_drm.h in uapi in downstream
  build.
 
 Signed-off-by: Eric Anholt <eric@anholt.net>

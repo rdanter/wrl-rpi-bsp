@@ -1,7 +1,7 @@
-From 023bb0fd8a6787bb6923a8a0aa7d91ce86c3d27e Mon Sep 17 00:00:00 2001
+From 43fd25af559a4c1dd916f224fef1ba08f56bd717 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 3 Jun 2015 12:26:13 +0200
-Subject: [PATCH 022/215] ARM: bcm2835: Set Serial number and Revision
+Subject: [PATCH 022/212] ARM: bcm2835: Set Serial number and Revision
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,7 +1,7 @@
-From 788cba95ad40763ffc7f0539fa806a845b220f22 Mon Sep 17 00:00:00 2001
+From 9aa2ab728c7216034b4ce948a3cb99de22282b23 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Fri, 11 Nov 2016 19:32:54 +0000
-Subject: [PATCH 160/215] rpi-ft5406: Create coherent buffer and push to
+Subject: [PATCH 160/212] rpi-ft5406: Create coherent buffer and push to
  firmware
 
 ---
@@ -10,7 +10,7 @@ Subject: [PATCH 160/215] rpi-ft5406: Create coherent buffer and push to
  2 files changed, 101 insertions(+), 52 deletions(-)
 
 diff --git a/drivers/input/touchscreen/rpi-ft5406.c b/drivers/input/touchscreen/rpi-ft5406.c
-index b27dbee..c5e3197 100644
+index a69ed46..173e13c 100644
 --- a/drivers/input/touchscreen/rpi-ft5406.c
 +++ b/drivers/input/touchscreen/rpi-ft5406.c
 @@ -21,6 +21,7 @@
@@ -42,10 +42,10 @@ index b27dbee..c5e3197 100644
  	struct device_node *fw_node;
  	struct rpi_firmware *fw;
  	u32 touchbuf;
- 	
+ 
 -	dev_info(&pdev->dev, "Probing device\n");
 +	dev_info(dev, "Probing device\n");
- 	
+ 
 -	fw_node = of_parse_phandle(pdev->dev.of_node, "firmware", 0);
 +	fw_node = of_parse_phandle(np, "firmware", 0);
  	if (!fw_node) {
@@ -134,10 +134,10 @@ index b27dbee..c5e3197 100644
 -	ts->input_dev = input_dev;
  	platform_set_drvdata(pdev, ts);
  	ts->pdev = pdev;
- 	
+ 
 -	input_dev->name = "FT5406 memory based driver";
 +	ts->input_dev->name = "FT5406 memory based driver";
- 	
+ 
 -	__set_bit(EV_KEY, input_dev->evbit);
 -	__set_bit(EV_SYN, input_dev->evbit);
 -	__set_bit(EV_ABS, input_dev->evbit);
@@ -157,14 +157,14 @@ index b27dbee..c5e3197 100644
  
 -	input_set_drvdata(input_dev, ts);
 +	input_set_drvdata(ts->input_dev, ts);
- 	
+ 
 -	ret = input_register_device(input_dev);
 -	if (ret) {
 -		dev_err(&pdev->dev, "could not register input device, %d\n",
 -			ret);
 -		return ret;
 -	}
--	
+-
 -	// mmap the physical memory
 -	touchbuf &= ~0xc0000000;
 -	ts->ts_base = ioremap(touchbuf, sizeof(*ts->regs));
@@ -180,7 +180,7 @@ index b27dbee..c5e3197 100644
 +			err);
 +		goto out;
  	}
- 	
+ 
  	ts->regs = (struct ft5406_regs *) ts->ts_base;
 @@ -200,25 +229,44 @@ static int ft5406_probe(struct platform_device *pdev)
  	ts->thread = kthread_run(ft5406_thread, ts, "ft5406");
@@ -217,10 +217,10 @@ index b27dbee..c5e3197 100644
  {
 +	struct device *dev = &pdev->dev;
  	struct ft5406 *ts = (struct ft5406 *) platform_get_drvdata(pdev);
- 	
+ 
 -	dev_info(&pdev->dev, "Removing rpi-ft5406\n");
 +	dev_info(dev, "Removing rpi-ft5406\n");
- 	
+ 
  	kthread_stop(ts->thread);
 -	iounmap(ts->ts_base);
 -	input_unregister_device(ts->input_dev);
@@ -232,7 +232,7 @@ index b27dbee..c5e3197 100644
 +		iounmap(ts->ts_base);
 +	if (ts->input_dev)
 +		input_unregister_device(ts->input_dev);
- 	
+ 
  	return 0;
  }
 diff --git a/include/soc/bcm2835/raspberrypi-firmware.h b/include/soc/bcm2835/raspberrypi-firmware.h

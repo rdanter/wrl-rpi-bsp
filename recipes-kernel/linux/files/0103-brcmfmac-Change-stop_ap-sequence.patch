@@ -1,7 +1,7 @@
-From c8291df4066ce97f4afddda47b02ce44e7dca440 Mon Sep 17 00:00:00 2001
+From 99bcc70580e89102e3937a76b7aff18e9f57fcf6 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 31 Aug 2016 17:10:09 +0100
-Subject: [PATCH 103/215] brcmfmac: Change stop_ap sequence
+Subject: [PATCH 103/212] brcmfmac: Change stop_ap sequence
 
 Patch from Broadcom/Cypress to resolve a customer error
 
@@ -11,7 +11,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
-index 12bffe2..0c3cecb 100644
+index d6f2cba..1da70074 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 @@ -4750,12 +4750,15 @@ static int brcmf_cfg80211_stop_ap(struct wiphy *wiphy, struct net_device *ndev)

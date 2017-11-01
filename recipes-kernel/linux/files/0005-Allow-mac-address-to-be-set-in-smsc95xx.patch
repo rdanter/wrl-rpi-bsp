@@ -1,7 +1,7 @@
-From df0b1da98d1fa76e3e9c9f27c44476e0ae3c9e82 Mon Sep 17 00:00:00 2001
+From 3d3213b4d35f0c6da71095c8e43e666711243a69 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 26 Mar 2013 17:26:38 +0000
-Subject: [PATCH 005/215] Allow mac address to be set in smsc95xx
+Subject: [PATCH 005/212] Allow mac address to be set in smsc95xx
 
 Signed-off-by: popcornmix <popcornmix@gmail.com>
 ---

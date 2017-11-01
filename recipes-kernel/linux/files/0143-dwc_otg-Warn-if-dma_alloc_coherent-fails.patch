@@ -1,14 +1,14 @@
-From 89120ac214b5b1d3dfa259e8e572d9f83c1b407a Mon Sep 17 00:00:00 2001
+From 1a144d91d70669a59f76075aa523e0558b4b8eaf Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 31 Oct 2016 17:35:57 +0000
-Subject: [PATCH 143/215] dwc_otg: Warn if dma_alloc_coherent fails
+Subject: [PATCH 143/212] dwc_otg: Warn if dma_alloc_coherent fails
 
 ---
  drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c b/drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c
-index 50aaeac..e799f15f 100644
+index 50aaeac..e799f15 100644
 --- a/drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c
 +++ b/drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c
 @@ -270,6 +270,7 @@ static void *dwc_otg_pcd_alloc_buffer(struct usb_ep *usb_ep, unsigned bytes,

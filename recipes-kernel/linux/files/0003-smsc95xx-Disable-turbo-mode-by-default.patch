@@ -1,7 +1,7 @@
-From ac272c4f2aa45c5b54ed23b2ed6e14f28c8926d8 Mon Sep 17 00:00:00 2001
+From f15a6ab621d259c3dfcdf03076f85520e948b068 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Fri, 17 Apr 2015 16:58:45 +0100
-Subject: [PATCH 003/215] smsc95xx: Disable turbo mode by default
+Subject: [PATCH 003/212] smsc95xx: Disable turbo mode by default
 
 ---
  drivers/net/usb/smsc95xx.c | 2 +-

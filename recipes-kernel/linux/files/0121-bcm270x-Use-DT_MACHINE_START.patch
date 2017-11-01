@@ -1,7 +1,7 @@
-From 63785837e4a097842d9858668aad2ba7a9155131 Mon Sep 17 00:00:00 2001
+From 111e3a20e02c1a994762355638194aaf59a6770a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 10 Oct 2016 19:37:06 +0200
-Subject: [PATCH 121/215] bcm270x: Use DT_MACHINE_START
+Subject: [PATCH 121/212] bcm270x: Use DT_MACHINE_START
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

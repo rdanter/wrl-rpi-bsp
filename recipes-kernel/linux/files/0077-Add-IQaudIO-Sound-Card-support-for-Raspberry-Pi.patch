@@ -1,7 +1,7 @@
-From 88029b26e8c8b684cb361173aeead4bd24fc4b1c Mon Sep 17 00:00:00 2001
+From fb1b7bd271e2249851c597e907de299a495efb53 Mon Sep 17 00:00:00 2001
 From: Gordon Garrity <gordon@iqaudio.com>
 Date: Sat, 8 Mar 2014 16:56:57 +0000
-Subject: [PATCH 077/215] Add IQaudIO Sound Card support for Raspberry Pi
+Subject: [PATCH 077/212] Add IQaudIO Sound Card support for Raspberry Pi
 
 Set a limit of 0dB on Digital Volume Control
 

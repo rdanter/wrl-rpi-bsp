@@ -1,7 +1,7 @@
-From e77d6268503a15355cb83e32e3e944abeef73a94 Mon Sep 17 00:00:00 2001
+From d5402bfd99d51452eccee889291fc7635898cb8b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 23 Sep 2016 18:24:38 +0200
-Subject: [PATCH 147/215] i2c: bcm2835: Protect against unexpected TXW/RXR
+Subject: [PATCH 147/212] i2c: bcm2835: Protect against unexpected TXW/RXR
  interrupts
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

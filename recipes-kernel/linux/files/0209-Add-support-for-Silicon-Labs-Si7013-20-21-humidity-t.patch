@@ -1,7 +1,7 @@
-From 271ab0417183ac39559f7f03ddbfa618f03927c7 Mon Sep 17 00:00:00 2001
+From c8c255c7cb61044eec78a07380c3400f75580952 Mon Sep 17 00:00:00 2001
 From: Alex Tucker <alex@floop.org.uk>
 Date: Tue, 13 Dec 2016 19:50:18 +0000
-Subject: [PATCH 212/215] Add support for Silicon Labs Si7013/20/21
+Subject: [PATCH 209/212] Add support for Silicon Labs Si7013/20/21
  humidity/temperature sensor.
 
 ---

@@ -1,7 +1,7 @@
-From e413e40b9ca97dedeaf7b5fe0fa120925bf9a4a3 Mon Sep 17 00:00:00 2001
+From 2272f8d98947f3745f76e1b54d7a18e573bf22e7 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Sat, 26 Nov 2016 14:01:52 +0000
-Subject: [PATCH 170/215] ARM: dts: Restore dtbs_install functionality
+Subject: [PATCH 170/212] ARM: dts: Restore dtbs_install functionality
 
 Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index c8d3d5a..9507140 100644
+index 20c5831..aa8c947 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
-@@ -937,10 +937,11 @@ dtstree		:= $(srctree)/$(src)
+@@ -938,10 +938,11 @@ dtstree		:= $(srctree)/$(src)
  dtb-$(CONFIG_OF_ALL_DTBS) := $(patsubst $(dtstree)/%.dts,%.dtb, $(wildcard $(dtstree)/*.dts))
  
  always		:= $(dtb-y)

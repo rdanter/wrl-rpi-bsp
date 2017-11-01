@@ -1,7 +1,7 @@
-From d3978ae4616b99a9784b876cccd47b2bc59adc38 Mon Sep 17 00:00:00 2001
+From 8b8a7087f39be1b61a66e512106881212029cd8c Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 6 Oct 2016 19:42:55 -0700
-Subject: [PATCH 111/215] [media]bcm2835-camera: fix compilation warning/werror
+Subject: [PATCH 111/212] bcm2835-camera: fix compilation warning/werror
 
 | /a/builder/mnt/build/tmp-glibc/work-shared/raspberrypi3/kernel-source/drivers/media/platform/bcm2835/bcm2835-camera.c:656:17: error: initialization from incompatible pointer type [-Werror=incompatible-pointer-types
 ]

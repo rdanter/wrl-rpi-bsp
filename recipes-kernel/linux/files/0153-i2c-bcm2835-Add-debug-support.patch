@@ -1,7 +1,7 @@
-From e7b94d069c78cc5563bf9ff060a79f7c87613cae Mon Sep 17 00:00:00 2001
+From 47c19f4e69f1600e31c74bd37ba1944124a6d3e7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 1 Nov 2016 15:15:41 +0100
-Subject: [PATCH 153/215] i2c: bcm2835: Add debug support
+Subject: [PATCH 153/212] i2c: bcm2835: Add debug support
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

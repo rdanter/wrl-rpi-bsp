@@ -1,7 +1,7 @@
-From 4894e91218d0bef4ba17cd174bd9e34f0624d605 Mon Sep 17 00:00:00 2001
+From 7a756cb7b7a5b96b26ef8cf27063a07805583a13 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Tue, 2 Aug 2016 17:17:52 -0700
-Subject: [PATCH 189/215] drm/vc4: Don't force new binner overflow allocation
+Subject: [PATCH 189/212] drm/vc4: Don't force new binner overflow allocation
  per draw.
 
 This came from the initial bringup code, which always idled the GPU
@@ -15,7 +15,7 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 4 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_gem.c b/drivers/gpu/drm/vc4/vc4_gem.c
-index ae1609e..47a095f 100644
+index 665b929..ab30169 100644
 --- a/drivers/gpu/drm/vc4/vc4_gem.c
 +++ b/drivers/gpu/drm/vc4/vc4_gem.c
 @@ -419,10 +419,6 @@ again:

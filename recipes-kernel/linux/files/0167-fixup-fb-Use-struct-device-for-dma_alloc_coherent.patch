@@ -1,7 +1,7 @@
-From be6cd1f7afd8cd83d50d43ab58e756326cb66401 Mon Sep 17 00:00:00 2001
+From 0cb4988dfe652d34b0cb199bea7ba214d86a9939 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Thu, 17 Nov 2016 16:49:33 +0000
-Subject: [PATCH 167/215] fixup: fb: Use struct device for dma_alloc_coherent
+Subject: [PATCH 167/212] fixup: fb: Use struct device for dma_alloc_coherent
 
 ---
  drivers/video/fbdev/bcm2708_fb.c | 4 ++--

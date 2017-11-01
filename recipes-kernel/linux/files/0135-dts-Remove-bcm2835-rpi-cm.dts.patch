@@ -1,7 +1,7 @@
-From 1f535d53ea42ba61ed8d98e7173ac15494a6778f Mon Sep 17 00:00:00 2001
+From 2701321853d52c3d0bbc1412f47fdd6f5af53dc2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 25 Oct 2016 15:55:09 +0200
-Subject: [PATCH 135/215] dts: Remove bcm2835-rpi-cm.dts
+Subject: [PATCH 135/212] dts: Remove bcm2835-rpi-cm.dts
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -20,7 +20,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  delete mode 100644 arch/arm/boot/dts/bcm2835-rpi-cm.dtsi
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 71f794e..0cb86b7 100644
+index f2e2e34..14d5d4b 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -3,7 +3,6 @@ ifeq ($(CONFIG_OF),y)

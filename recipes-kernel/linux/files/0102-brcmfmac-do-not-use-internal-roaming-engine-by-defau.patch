@@ -1,7 +1,7 @@
-From b2b716ad89c419452a709d17ac7cfdf969c2b4ea Mon Sep 17 00:00:00 2001
+From 9a6fd4c1475cc06ffc4fae59bc767bbf482ed3ac Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 13 Sep 2016 16:32:37 +0100
-Subject: [PATCH 102/215] brcmfmac: do not use internal roaming engine by
+Subject: [PATCH 102/212] brcmfmac: do not use internal roaming engine by
  default
 
 Some evidence of curing disconnects with this disabled, so make it a default.

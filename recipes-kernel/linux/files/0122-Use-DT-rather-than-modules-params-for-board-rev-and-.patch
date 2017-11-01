@@ -1,7 +1,7 @@
-From cf981055e8c02f737553974c1f3b4bd6599b7d87 Mon Sep 17 00:00:00 2001
+From efd35e700784f52bb0e42f6fcfe1ef135141c50a Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 11 Oct 2016 17:48:07 +0100
-Subject: [PATCH 122/215] Use DT rather than modules params for board rev and
+Subject: [PATCH 122/212] Use DT rather than modules params for board rev and
  serial
 
 ---

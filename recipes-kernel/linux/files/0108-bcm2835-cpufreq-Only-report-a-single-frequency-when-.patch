@@ -1,7 +1,7 @@
-From 52950506c71b142a90f72a12a57e2eb02005f032 Mon Sep 17 00:00:00 2001
+From 22730ebfc6e444d0259c838b299072f56c7d55df Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 5 Oct 2016 16:10:59 +0100
-Subject: [PATCH 108/215] bcm2835-cpufreq: Only report a single frequency when
+Subject: [PATCH 108/212] bcm2835-cpufreq: Only report a single frequency when
  max and min frequencies are the same
 
 4.8 kernel gives EINV error when max and min frequencies are the same (e.g. from using force_turbo=1)

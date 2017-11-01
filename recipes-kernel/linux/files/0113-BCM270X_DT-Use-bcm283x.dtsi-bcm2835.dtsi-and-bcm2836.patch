@@ -1,7 +1,7 @@
-From 0d0f7d8e8046edae2b3635281374cf11a7562414 Mon Sep 17 00:00:00 2001
+From 11fbbba005366016cb69d985e152a09536be9fdb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 3 Oct 2016 17:53:15 +0200
-Subject: [PATCH 113/215] BCM270X_DT: Use bcm283x.dtsi, bcm2835.dtsi and
+Subject: [PATCH 113/212] BCM270X_DT: Use bcm283x.dtsi, bcm2835.dtsi and
  bcm2836.dtsi
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

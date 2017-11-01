@@ -1,7 +1,7 @@
-From 22d1f3f719dd5457ba7783381b7350a2da5c3ec9 Mon Sep 17 00:00:00 2001
+From 2d2c2491f0ea32c52af97794e96adabf5a5220bb Mon Sep 17 00:00:00 2001
 From: Gordon Hollingworth <gordon@raspberrypi.org>
 Date: Tue, 12 May 2015 14:47:56 +0100
-Subject: [PATCH 069/215] rpi-ft5406: Add touchscreen driver for pi LCD display
+Subject: [PATCH 069/212] rpi-ft5406: Add touchscreen driver for pi LCD display
 
 Fix driver detection failure Check that the buffer response is non-zero meaning the touchscreen was detected
 
@@ -45,7 +45,7 @@ index b4373d6..9665772 100644
  obj-$(CONFIG_TOUCHSCREEN_EETI)		+= eeti_ts.o
 diff --git a/drivers/input/touchscreen/rpi-ft5406.c b/drivers/input/touchscreen/rpi-ft5406.c
 new file mode 100644
-index 0000000..b27dbee
+index 0000000..a69ed46
 --- /dev/null
 +++ b/drivers/input/touchscreen/rpi-ft5406.c
 @@ -0,0 +1,246 @@
@@ -101,10 +101,10 @@ index 0000000..b27dbee
 +};
 +
 +/* Thread to poll for touchscreen events
-+ * 
++ *
 + * This thread polls the memory based register copy of the ft5406 registers
 + * using the number of points register to know whether the copy has been
-+ * updated (we write 99 to the memory copy, the GPU will write between 
++ * updated (we write 99 to the memory copy, the GPU will write between
 + * 0 - 10 points)
 + */
 +static int ft5406_thread(void *arg)
@@ -112,7 +112,7 @@ index 0000000..b27dbee
 +	struct ft5406 *ts = (struct ft5406 *) arg;
 +	struct ft5406_regs regs;
 +	int known_ids = 0;
-+	
++
 +	while(!kthread_should_stop())
 +	{
 +		// 60fps polling
@@ -130,12 +130,12 @@ index 0000000..b27dbee
 +				int x = (((int) regs.point[i].xh & 0xf) << 8) + regs.point[i].xl;
 +				int y = (((int) regs.point[i].yh & 0xf) << 8) + regs.point[i].yl;
 +				int touchid = (regs.point[i].yh >> 4) & 0xf;
-+				
++
 +				modified_ids |= 1 << touchid;
 +
 +				if(!((1 << touchid) & known_ids))
 +					dev_dbg(&ts->pdev->dev, "x = %d, y = %d, touchid = %d\n", x, y, touchid);
-+				
++
 +				input_mt_slot(ts->input_dev, touchid);
 +				input_mt_report_slot_state(ts->input_dev, MT_TOOL_FINGER, 1);
 +
@@ -156,13 +156,13 @@ index 0000000..b27dbee
 +				}
 +			}
 +			known_ids = modified_ids;
-+			
++
 +			input_mt_report_pointer_emulation(ts->input_dev, true);
 +			input_sync(ts->input_dev);
 +		}
-+			
++
 +	}
-+	
++
 +	return 0;
 +}
 +
@@ -174,9 +174,9 @@ index 0000000..b27dbee
 +	struct device_node *fw_node;
 +	struct rpi_firmware *fw;
 +	u32 touchbuf;
-+	
++
 +	dev_info(&pdev->dev, "Probing device\n");
-+	
++
 +	fw_node = of_parse_phandle(pdev->dev.of_node, "firmware", 0);
 +	if (!fw_node) {
 +		dev_err(&pdev->dev, "Missing firmware node\n");
@@ -211,9 +211,9 @@ index 0000000..b27dbee
 +	ts->input_dev = input_dev;
 +	platform_set_drvdata(pdev, ts);
 +	ts->pdev = pdev;
-+	
++
 +	input_dev->name = "FT5406 memory based driver";
-+	
++
 +	__set_bit(EV_KEY, input_dev->evbit);
 +	__set_bit(EV_SYN, input_dev->evbit);
 +	__set_bit(EV_ABS, input_dev->evbit);
@@ -226,14 +226,14 @@ index 0000000..b27dbee
 +	input_mt_init_slots(input_dev, MAXIMUM_SUPPORTED_POINTS, INPUT_MT_DIRECT);
 +
 +	input_set_drvdata(input_dev, ts);
-+	
++
 +	ret = input_register_device(input_dev);
 +	if (ret) {
 +		dev_err(&pdev->dev, "could not register input device, %d\n",
 +			ret);
 +		return ret;
 +	}
-+	
++
 +	// mmap the physical memory
 +	touchbuf &= ~0xc0000000;
 +	ts->ts_base = ioremap(touchbuf, sizeof(*ts->regs));
@@ -244,7 +244,7 @@ index 0000000..b27dbee
 +		kzfree(ts);
 +		return -ENOMEM;
 +	}
-+	
++
 +	ts->regs = (struct ft5406_regs *) ts->ts_base;
 +
 +	// create thread to poll the touch events
@@ -263,14 +263,14 @@ index 0000000..b27dbee
 +static int ft5406_remove(struct platform_device *pdev)
 +{
 +	struct ft5406 *ts = (struct ft5406 *) platform_get_drvdata(pdev);
-+	
++
 +	dev_info(&pdev->dev, "Removing rpi-ft5406\n");
-+	
++
 +	kthread_stop(ts->thread);
 +	iounmap(ts->ts_base);
 +	input_unregister_device(ts->input_dev);
 +	kzfree(ts);
-+	
++
 +	return 0;
 +}
 +

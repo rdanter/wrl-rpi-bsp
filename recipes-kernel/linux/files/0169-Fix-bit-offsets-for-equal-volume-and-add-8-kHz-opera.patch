@@ -1,8 +1,8 @@
-From d958b10dd122fc54af6100df4d2d91c202e29be4 Mon Sep 17 00:00:00 2001
+From d42bfce742cbf0b9a38c83f5a61fe7ed0eb85d5a Mon Sep 17 00:00:00 2001
 From: Matt Flax <flatmax@flatmax.org>
 Date: Sun, 20 Nov 2016 19:15:24 +1100
-Subject: [PATCH 169/215] [Audioinjector] Fix bit offsets for equal volume and
- add 8 kHz operation (#1727)
+Subject: [PATCH 169/212] Fix bit offsets for equal volume and add 8 kHz
+ operation (#1727)
 
 Applying to the audioinjector sound card only. This patch offsets channel
 2 correctly from the LR clock. This ensures that channel 2 doesn't loose
@@ -15,7 +15,7 @@ Signed-off-by: Matt Flax <flatmax@flatmax.org>
  1 file changed, 9 insertions(+), 7 deletions(-)
 
 diff --git a/sound/soc/bcm/audioinjector-pi-soundcard.c b/sound/soc/bcm/audioinjector-pi-soundcard.c
-index 5ff0985..ef54e0f 100644
+index 976c9db..cd5ee79 100644
 --- a/sound/soc/bcm/audioinjector-pi-soundcard.c
 +++ b/sound/soc/bcm/audioinjector-pi-soundcard.c
 @@ -30,7 +30,7 @@

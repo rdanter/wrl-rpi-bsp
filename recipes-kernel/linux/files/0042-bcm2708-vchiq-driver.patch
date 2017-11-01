@@ -1,7 +1,7 @@
-From f22fe147f36765c06e20a3d116024fca61d5f68d Mon Sep 17 00:00:00 2001
+From 8bef877642b8a2be1426e39d62ec77eaff499e32 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 2 Jul 2013 23:42:01 +0100
-Subject: [PATCH 042/215] bcm2708 vchiq driver
+Subject: [PATCH 042/212] bcm2708 vchiq driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -220,7 +220,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  drivers/misc/Kconfig                               |    1 +
  drivers/misc/Makefile                              |    1 +
  drivers/misc/vc04_services/Kconfig                 |    9 +
- drivers/misc/vc04_services/Makefile                |   14 +
+ drivers/misc/vc04_services/Makefile                |   13 +
  .../interface/vchi/connections/connection.h        |  328 ++
  .../interface/vchi/message_drivers/message.h       |  204 +
  drivers/misc/vc04_services/interface/vchi/vchi.h   |  378 ++
@@ -252,7 +252,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  .../vc04_services/interface/vchiq_arm/vchiq_util.c |  156 +
  .../vc04_services/interface/vchiq_arm/vchiq_util.h |   82 +
  .../interface/vchiq_arm/vchiq_version.c            |   59 +
- 37 files changed, 12836 insertions(+)
+ 37 files changed, 12835 insertions(+)
  create mode 100644 drivers/misc/vc04_services/Kconfig
  create mode 100644 drivers/misc/vc04_services/Makefile
  create mode 100644 drivers/misc/vc04_services/interface/vchi/connections/connection.h
@@ -354,10 +354,10 @@ index 0000000..db8e1be
 +		are included in the build, N otherwise.
 diff --git a/drivers/misc/vc04_services/Makefile b/drivers/misc/vc04_services/Makefile
 new file mode 100644
-index 0000000..8d038fe
+index 0000000..54408dc
 --- /dev/null
 +++ b/drivers/misc/vc04_services/Makefile
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,13 @@
 +obj-$(CONFIG_BCM2708_VCHIQ)	+= vchiq.o
 +
 +vchiq-objs := \
@@ -371,7 +371,6 @@ index 0000000..8d038fe
 +   interface/vchiq_arm/vchiq_connected.o \
 +
 +ccflags-y += -DVCOS_VERIFY_BKPTS=1 -Idrivers/misc/vc04_services -DUSE_VCHIQ_ARM -D__VCCOREVER__=0x04000000
-+
 diff --git a/drivers/misc/vc04_services/interface/vchi/connections/connection.h b/drivers/misc/vc04_services/interface/vchi/connections/connection.h
 new file mode 100644
 index 0000000..fef6ac3

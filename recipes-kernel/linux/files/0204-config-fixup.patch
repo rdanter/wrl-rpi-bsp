@@ -1,7 +1,7 @@
-From e918b2062288f768559c5990bea471e53fc5ca7f Mon Sep 17 00:00:00 2001
+From f0866e8490e7297649691aea4bef5b5f9e646b57 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 6 Dec 2016 18:54:24 +0000
-Subject: [PATCH 207/215] config: fixup
+Subject: [PATCH 204/212] config: fixup
 
 ---
  arch/arm/configs/bcm2709_defconfig | 3 ++-

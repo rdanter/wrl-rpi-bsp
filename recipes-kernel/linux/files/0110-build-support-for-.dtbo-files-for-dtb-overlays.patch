@@ -1,7 +1,7 @@
-From e57fb49e6b9a7cc8130a360d3d1df227710a4c84 Mon Sep 17 00:00:00 2001
+From 526af16b5c6e3d67e5d8787e851c61a90f34903f Mon Sep 17 00:00:00 2001
 From: Herve Jourdain <herve.jourdain@neuf.fr>
 Date: Fri, 20 May 2016 16:02:23 +0800
-Subject: [PATCH 110/215] build: support for .dtbo files for dtb overlays
+Subject: [PATCH 110/212] build: support for .dtbo files for dtb overlays
 
 Kernel 4.4.6+ on RaspberryPi support .dtbo files for overlays, instead of .dtb.
 Patch the kernel, which has faulty rules to generate .dtbo the way yocto does
@@ -14,10 +14,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  2 files changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index d1e4509..275c535 100644
+index fc95189..a29e2cf 100644
 --- a/arch/arm/Makefile
 +++ b/arch/arm/Makefile
-@@ -337,6 +337,8 @@ $(INSTALL_TARGETS):
+@@ -340,6 +340,8 @@ $(INSTALL_TARGETS):
  
  %.dtb: | scripts
  	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) $(boot)/dts/$@

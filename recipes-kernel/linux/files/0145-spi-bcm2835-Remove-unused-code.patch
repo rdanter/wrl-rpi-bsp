@@ -1,7 +1,7 @@
-From bc96e073f57914e3614c2398192d30302748c3d6 Mon Sep 17 00:00:00 2001
+From 1046f79256bb2f4cca960735ed1635fde4cc082e Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 8 Nov 2016 21:35:38 +0000
-Subject: [PATCH 145/215] spi-bcm2835: Remove unused code
+Subject: [PATCH 145/212] spi-bcm2835: Remove unused code
 
 ---
  drivers/spi/spi-bcm2835.c | 61 -----------------------------------------------

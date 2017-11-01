@@ -1,7 +1,7 @@
-From 3ad156116a1e6e3e9ad5a9a22887465b75b3b62d Mon Sep 17 00:00:00 2001
+From 168582501448f30205fddb5c0fcc8c7a3c57a234 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Sat, 12 Nov 2016 20:28:47 +0100
-Subject: [PATCH 164/215] Drop ARCH_BCM2708 and ARCH_BCM2709
+Subject: [PATCH 164/212] Drop ARCH_BCM2708 and ARCH_BCM2709
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

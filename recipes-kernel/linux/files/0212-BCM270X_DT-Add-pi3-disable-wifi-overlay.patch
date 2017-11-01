@@ -1,7 +1,7 @@
-From 061dccce6cf6705bbb5da29a643f4b0ad1d11630 Mon Sep 17 00:00:00 2001
+From 84cf644127c44064e8fa29b4ff2a28bc2eb75a02 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 11 Jan 2017 13:01:21 +0000
-Subject: [PATCH 215/215] BCM270X_DT: Add pi3-disable-wifi overlay
+Subject: [PATCH 212/212] BCM270X_DT: Add pi3-disable-wifi overlay
 
 pi3-disable-wifi is a minimal overlay to disable the onboard WiFi.
 

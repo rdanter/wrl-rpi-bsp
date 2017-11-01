@@ -1,7 +1,7 @@
-From d9edb915e6e5e940850013c6172b93b2c952793b Mon Sep 17 00:00:00 2001
+From 14a2b407a51c4dc4798ebdf2febdfff75ee977f4 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 11 May 2015 09:00:42 +0100
-Subject: [PATCH 056/215] scripts: Add mkknlimg and knlinfo scripts from tools
+Subject: [PATCH 056/212] scripts: Add mkknlimg and knlinfo scripts from tools
  repo
 
 The Raspberry Pi firmware looks for a trailer on the kernel image to
@@ -68,7 +68,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
 diff --git a/scripts/knlinfo b/scripts/knlinfo
 new file mode 100755
-index 0000000..263ec93
+index 0000000..903cd6a
 --- /dev/null
 +++ b/scripts/knlinfo
 @@ -0,0 +1,171 @@
@@ -199,7 +199,7 @@ index 0000000..263ec93
 +		push @$atoms, [ $atom_type, $atom_data ];
 +	}
 +
-+ 	if (($$atoms[-1][0] eq "\x00\x00\x00\x00") &&
++	if (($$atoms[-1][0] eq "\x00\x00\x00\x00") &&
 +	    ($$atoms[-1][1] eq ""))
 +	{
 +		pop @$atoms;

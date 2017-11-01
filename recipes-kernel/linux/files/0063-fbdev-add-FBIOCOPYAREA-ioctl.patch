@@ -1,7 +1,7 @@
-From 814878c8384d1fd5364076ac05ba1fb03c6ffece Mon Sep 17 00:00:00 2001
+From cb120dd983f37ce40774e5dda28b5abc55a82042 Mon Sep 17 00:00:00 2001
 From: Siarhei Siamashka <siarhei.siamashka@gmail.com>
 Date: Mon, 17 Jun 2013 13:32:11 +0300
-Subject: [PATCH 063/215] fbdev: add FBIOCOPYAREA ioctl
+Subject: [PATCH 063/212] fbdev: add FBIOCOPYAREA ioctl
 
 Based on the patch authored by Ali Gholami Rudi at
     https://lkml.org/lkml/2009/7/13/153

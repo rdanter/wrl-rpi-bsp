@@ -1,7 +1,7 @@
-From 33325bf13d4a1f84e959c8ea90fa575756824b6d Mon Sep 17 00:00:00 2001
+From 0937d5107780905c5cfda572d12abe1e34f29660 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 27 Sep 2016 01:00:08 +0200
-Subject: [PATCH 152/215] i2c: bcm2835: Add support for dynamic clock
+Subject: [PATCH 152/212] i2c: bcm2835: Add support for dynamic clock
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

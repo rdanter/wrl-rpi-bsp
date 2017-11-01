@@ -1,7 +1,7 @@
-From bda57eb0c38c2e2728ec53c395859f616d0ba0c1 Mon Sep 17 00:00:00 2001
+From c708f9033d12bfd193a456a8e49fba430cc4bfaf Mon Sep 17 00:00:00 2001
 From: P33M <P33M@github.com>
 Date: Wed, 21 Oct 2015 14:55:21 +0100
-Subject: [PATCH 092/215] rpi_display: add backlight driver and overlay
+Subject: [PATCH 092/212] rpi_display: add backlight driver and overlay
 
 Add a mailbox-driven backlight controller for the Raspberry Pi DSI
 touchscreen display. Requires updated GPU firmware to recognise the

@@ -1,7 +1,7 @@
-From d2574ebfdaf418a7e9a2aa93fee5d443c884cce3 Mon Sep 17 00:00:00 2001
+From de9f262f3faf5728dd37493ae4cf5152731d44fb Mon Sep 17 00:00:00 2001
 From: Liu Ying <gnuiyl@gmail.com>
 Date: Mon, 29 Aug 2016 17:12:03 +0800
-Subject: [PATCH 190/215] drm/atomic-helper: Add NO_DISABLE_AFTER_MODESET flag
+Subject: [PATCH 190/212] drm/atomic-helper: Add NO_DISABLE_AFTER_MODESET flag
  support for plane commit
 
 Drivers may set the NO_DISABLE_AFTER_MODESET flag in the 'flags' parameter
@@ -26,7 +26,7 @@ Link: http://patchwork.freedesktop.org/patch/msgid/1472461923-14364-1-git-send-e
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_kms.c b/drivers/gpu/drm/vc4/vc4_kms.c
-index 4ac894d..c1f65c6 100644
+index a6c1af1..67af2af 100644
 --- a/drivers/gpu/drm/vc4/vc4_kms.c
 +++ b/drivers/gpu/drm/vc4/vc4_kms.c
 @@ -44,7 +44,7 @@ vc4_atomic_complete_commit(struct vc4_commit *c)

@@ -1,7 +1,7 @@
-From d03df89de9f8f1f13200300ff272161f5a51f92f Mon Sep 17 00:00:00 2001
+From c5f58270198da247b414a199504faa1b64d7dd73 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 9 Nov 2016 22:42:39 +0000
-Subject: [PATCH 161/215] brcmvirt_gpio: Create coherent buffer and push to
+Subject: [PATCH 161/212] brcmvirt_gpio: Create coherent buffer and push to
  firmware
 
 ---

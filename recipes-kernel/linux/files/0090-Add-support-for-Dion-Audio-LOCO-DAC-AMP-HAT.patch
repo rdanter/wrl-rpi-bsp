@@ -1,7 +1,7 @@
-From 8aeb80726a2fe1913ebbdb2edb8aa3525dc6d099 Mon Sep 17 00:00:00 2001
+From c387f3d239d50a8f39e191bae7728c76438dd414 Mon Sep 17 00:00:00 2001
 From: DigitalDreamtime <clive.messer@digitaldreamtime.co.uk>
 Date: Sat, 2 Jul 2016 16:26:19 +0100
-Subject: [PATCH 090/215] Add support for Dion Audio LOCO DAC-AMP HAT
+Subject: [PATCH 090/212] Add support for Dion Audio LOCO DAC-AMP HAT
 
 Using dedicated machine driver and pcm5102a codec driver.
 

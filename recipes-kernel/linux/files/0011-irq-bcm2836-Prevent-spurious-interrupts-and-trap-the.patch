@@ -1,7 +1,7 @@
-From dab8f44691b9812c094d084a50e2c7c3452b9045 Mon Sep 17 00:00:00 2001
+From 9b5d0d4268ac1c0689e95657e195ac81e51675f6 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 4 Dec 2015 17:41:50 +0000
-Subject: [PATCH 011/215] irq-bcm2836: Prevent spurious interrupts, and trap
+Subject: [PATCH 011/212] irq-bcm2836: Prevent spurious interrupts, and trap
  them early
 
 The old arch-specific IRQ macros included a dsb to ensure the

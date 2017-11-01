@@ -1,7 +1,7 @@
-From 636d55372c015f0c506b9d8cdaaf5cd705ed9920 Mon Sep 17 00:00:00 2001
+From c8e09a503b118c9927130bdd955df9fc09e6e97b Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 27 Apr 2016 17:43:28 +0100
-Subject: [PATCH 001/215] Revert "SUNRPC: Make NFS swap work with multipath"
+Subject: [PATCH 001/212] Revert "SUNRPC: Make NFS swap work with multipath"
 
 This reverts commit 15001e5a7e1e207b6bd258cd8f187814cd15b6dc.
 ---
@@ -9,10 +9,10 @@ This reverts commit 15001e5a7e1e207b6bd258cd8f187814cd15b6dc.
  1 file changed, 42 insertions(+), 24 deletions(-)
 
 diff --git a/net/sunrpc/clnt.c b/net/sunrpc/clnt.c
-index 66f23b3..f55fe2b 100644
+index 4acf827..e22665f 100644
 --- a/net/sunrpc/clnt.c
 +++ b/net/sunrpc/clnt.c
-@@ -2743,39 +2743,57 @@ void rpc_show_tasks(struct net *net)
+@@ -2748,39 +2748,57 @@ void rpc_show_tasks(struct net *net)
  #endif
  
  #if IS_ENABLED(CONFIG_SUNRPC_SWAP)

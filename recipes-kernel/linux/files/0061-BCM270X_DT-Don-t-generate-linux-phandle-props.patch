@@ -1,7 +1,7 @@
-From d512a434c3cd597086abb44550d852572f39242a Mon Sep 17 00:00:00 2001
+From 682c431c02e7bca650b5b91de35af8eb0f6b4e2c Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 8 Apr 2016 17:43:27 +0100
-Subject: [PATCH 061/215] BCM270X_DT: Don't generate "linux,phandle" props
+Subject: [PATCH 061/212] BCM270X_DT: Don't generate "linux,phandle" props
 
 The EPAPR standard says to use "phandle" properties to store phandles,
 rather than the deprecated "linux,phandle" version. By default, dtc

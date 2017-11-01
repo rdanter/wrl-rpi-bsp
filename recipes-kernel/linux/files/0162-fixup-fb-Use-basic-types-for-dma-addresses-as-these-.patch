@@ -1,7 +1,7 @@
-From 2238a2fe3e752678847ba5ec5f0a026e5fa7c011 Mon Sep 17 00:00:00 2001
+From 0367a0f18a21ceb3b94b886f0246dc0a934f7d86 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 14 Nov 2016 22:05:30 +0000
-Subject: [PATCH 162/215] fixup: fb: Use basic types for dma addresses as these
+Subject: [PATCH 162/212] fixup: fb: Use basic types for dma addresses as these
  are also included from user code
 
 ---

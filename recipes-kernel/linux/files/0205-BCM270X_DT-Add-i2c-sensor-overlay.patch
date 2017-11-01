@@ -1,7 +1,7 @@
-From cec40bb01082449b9245d148d9432b1584e0c0fe Mon Sep 17 00:00:00 2001
+From 7f49f370690fb2b9ff25114c84d542f74cf2d2be Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 5 Dec 2016 17:10:44 +0000
-Subject: [PATCH 208/215] BCM270X_DT: Add i2c-sensor overlay
+Subject: [PATCH 205/212] BCM270X_DT: Add i2c-sensor overlay
 
 The i2c-sensor overlay is a container for various pressure and
 temperature sensors, currently bmp085 and bmp280. The standalone

@@ -1,7 +1,7 @@
-From 6a63898824e3b7543a4004b21dde88756ceb51d1 Mon Sep 17 00:00:00 2001
+From 0206c888c19a9e89d36e1e88f9454e14df9ae175 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Fri, 16 Sep 2016 10:59:45 +0100
-Subject: [PATCH 193/215] drm/vc4: Enable limited range RGB output on HDMI with
+Subject: [PATCH 193/212] drm/vc4: Enable limited range RGB output on HDMI with
  CEA modes.
 
 Fixes broken grayscale ramps on many HDMI monitors, where large areas
@@ -71,10 +71,10 @@ index 68ad106..29be7b7 100644
  	HDMI_WRITE(VC4_HDMI_FIFO_CTL, VC4_HDMI_FIFO_CTL_MASTER_SLAVE_N);
  
 diff --git a/drivers/gpu/drm/vc4/vc4_regs.h b/drivers/gpu/drm/vc4/vc4_regs.h
-index 160942a..9ecd6ff 100644
+index eade8d0..a36d82d 100644
 --- a/drivers/gpu/drm/vc4/vc4_regs.h
 +++ b/drivers/gpu/drm/vc4/vc4_regs.h
-@@ -528,10 +528,17 @@
+@@ -529,10 +529,17 @@
  # define VC4_HD_CSC_CTL_MODE_SHIFT		2
  # define VC4_HD_CSC_CTL_MODE_RGB_TO_SD_YPRPB	0
  # define VC4_HD_CSC_CTL_MODE_RGB_TO_HD_YPRPB	1

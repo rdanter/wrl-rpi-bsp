@@ -1,7 +1,7 @@
-From 6d6f625a380820b28339d1f38aecb664ee52c24f Mon Sep 17 00:00:00 2001
+From 89175299ca5ba46129cd07d9c5b3011051fbd6ec Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 1 Nov 2016 20:03:29 +0100
-Subject: [PATCH 154/215] config: Enable i2c-bcm2835
+Subject: [PATCH 154/212] config: Enable i2c-bcm2835
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

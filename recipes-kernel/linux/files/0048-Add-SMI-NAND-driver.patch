@@ -1,7 +1,7 @@
-From fd3688adf375905b46416a7c7cdb95cce550deaf Mon Sep 17 00:00:00 2001
+From 34a7c6d03a7d91fe820357e168c5853a94596047 Mon Sep 17 00:00:00 2001
 From: Luke Wren <wren6991@gmail.com>
 Date: Sat, 5 Sep 2015 01:16:10 +0100
-Subject: [PATCH 048/215] Add SMI NAND driver
+Subject: [PATCH 048/212] Add SMI NAND driver
 
 Signed-off-by: Luke Wren <wren6991@gmail.com>
 ---
@@ -63,7 +63,7 @@ index 0000000..159544d
 +};
 \ No newline at end of file
 diff --git a/drivers/mtd/nand/Kconfig b/drivers/mtd/nand/Kconfig
-index 21ff580..b6a0529 100644
+index 4139b39..bd5fd2f 100644
 --- a/drivers/mtd/nand/Kconfig
 +++ b/drivers/mtd/nand/Kconfig
 @@ -41,6 +41,13 @@ config MTD_SM_COMMON
@@ -81,7 +81,7 @@ index 21ff580..b6a0529 100644
  	tristate
  
 diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
-index cafde6f..d399ab9c 100644
+index cafde6f..d399ab9 100644
 --- a/drivers/mtd/nand/Makefile
 +++ b/drivers/mtd/nand/Makefile
 @@ -14,6 +14,7 @@ obj-$(CONFIG_MTD_NAND_DENALI)		+= denali.o

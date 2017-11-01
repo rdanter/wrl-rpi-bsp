@@ -1,7 +1,7 @@
-From 1f74cc6eaa88440246b896e3bff5c1433377ffc4 Mon Sep 17 00:00:00 2001
+From 9048b89b0dbf3fd93a892ee896d3d2cbacc89f83 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 23 Feb 2016 19:56:04 +0000
-Subject: [PATCH 093/215] bcm2835-virtgpio: Virtual GPIO driver
+Subject: [PATCH 093/212] bcm2835-virtgpio: Virtual GPIO driver
 
 Add a virtual GPIO driver that uses the firmware mailbox interface to
 request that the VPU toggles LEDs.

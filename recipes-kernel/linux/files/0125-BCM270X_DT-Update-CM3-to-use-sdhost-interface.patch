@@ -1,7 +1,7 @@
-From 13661d569446f0912bf6dcb5d9b073d952f2a360 Mon Sep 17 00:00:00 2001
+From dc30ef6cb33fea0a69bcff26fe7fa7fb59e9358f Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 10 Oct 2016 15:06:20 +0100
-Subject: [PATCH 125/215] BCM270X_DT: Update CM3 to use sdhost interface
+Subject: [PATCH 125/212] BCM270X_DT: Update CM3 to use sdhost interface
 
 ---
  arch/arm/boot/dts/bcm2710-rpi-cm3.dts | 9 ++++-----

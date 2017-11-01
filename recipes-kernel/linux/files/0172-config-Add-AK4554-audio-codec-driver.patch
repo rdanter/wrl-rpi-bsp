@@ -1,7 +1,7 @@
-From eba2ee71f191364f9dc1df220c246f71a554c28f Mon Sep 17 00:00:00 2001
+From ac58e92972bb1ccd01be21ddeca47def909f8656 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 25 Nov 2016 15:01:15 +0000
-Subject: [PATCH 172/215] config: Add AK4554 audio codec driver
+Subject: [PATCH 172/212] config: Add AK4554 audio codec driver
 
 See: https://github.com/raspberrypi/linux/issues/1730
 

@@ -1,7 +1,7 @@
-From 2f81034c2bae23ad9fe71ca348676cd01bda2399 Mon Sep 17 00:00:00 2001
+From 17bd587796e853973f8791320cc852a85c3cdbb4 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 11 Nov 2016 18:24:26 +0100
-Subject: [PATCH 156/215] BCM270X_DT: Add fallback overlay for i2c-bcm2708
+Subject: [PATCH 156/212] BCM270X_DT: Add fallback overlay for i2c-bcm2708
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

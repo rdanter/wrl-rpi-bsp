@@ -1,7 +1,7 @@
-From ad9bae6428bd8e02a0e49d93c6e909132a06c7f3 Mon Sep 17 00:00:00 2001
+From f0f6d4c1b9b049504645b751190ac4af0305f687 Mon Sep 17 00:00:00 2001
 From: Giedrius Trainavicius <giedrius@blokas.io>
 Date: Thu, 5 Jan 2017 02:38:16 +0200
-Subject: [PATCH 214/215] pisound improvements:
+Subject: [PATCH 211/212] pisound improvements:
 
 * Added a writable sysfs object to enable scripts / user space software
 to blink MIDI activity LEDs for variable duration.

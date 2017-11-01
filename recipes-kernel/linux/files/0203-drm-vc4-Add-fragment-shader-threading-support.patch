@@ -1,7 +1,7 @@
-From 41a1a82e5ce6aa70f6a0c7b3edb2451b3b360612 Mon Sep 17 00:00:00 2001
+From ff870c4ed662bac9d6cbeb60aa227d9ff422130b Mon Sep 17 00:00:00 2001
 From: Jonas Pfeil <pfeiljonas@gmx.de>
 Date: Tue, 8 Nov 2016 00:18:39 +0100
-Subject: [PATCH 206/215] drm/vc4: Add fragment shader threading support
+Subject: [PATCH 203/212] drm/vc4: Add fragment shader threading support
 
 FS threading brings performance improvements of 0-20% in glmark2.
 
@@ -40,10 +40,10 @@ index 8302bd7..3abaa0f 100644
  		break;
  	default:
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
-index e1f6ab7..e15eb37 100644
+index b916955..6d06880 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
-@@ -384,6 +384,8 @@ struct vc4_validated_shader_info {
+@@ -385,6 +385,8 @@ struct vc4_validated_shader_info {
  
  	uint32_t num_uniform_addr_offsets;
  	uint32_t *uniform_addr_offsets;

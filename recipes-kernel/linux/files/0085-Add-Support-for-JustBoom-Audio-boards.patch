@@ -1,7 +1,7 @@
-From 4868005d730a95d0a7f4cc7dd118135550c1a3aa Mon Sep 17 00:00:00 2001
+From e56279d5f520afc40fb2a28e35998f975d80c037 Mon Sep 17 00:00:00 2001
 From: Aaron Shaw <shawaj@gmail.com>
 Date: Thu, 7 Apr 2016 21:26:21 +0100
-Subject: [PATCH 085/215] Add Support for JustBoom Audio boards
+Subject: [PATCH 085/212] Add Support for JustBoom Audio boards
 
 justboom-dac: Adjust for ALSA API change
 

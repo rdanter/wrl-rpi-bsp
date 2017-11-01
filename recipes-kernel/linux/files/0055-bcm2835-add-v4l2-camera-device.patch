@@ -1,7 +1,7 @@
-From d2cff531c6782cd449e76bd90a9f3c8bcf81dceb Mon Sep 17 00:00:00 2001
+From ed635d14315d702e7cde493e03d2399997e4b466 Mon Sep 17 00:00:00 2001
 From: Vincent Sanders <vincent.sanders@collabora.co.uk>
 Date: Wed, 30 Jan 2013 12:45:18 +0000
-Subject: [PATCH 055/215] bcm2835: add v4l2 camera device
+Subject: [PATCH 055/212] bcm2835: add v4l2 camera device
 
 - Supports raw YUV capture, preview, JPEG and H264.
 - Uses videobuf2 for data transfer, using dma_buf.
@@ -483,7 +483,7 @@ index 0000000..c585a8f
 +
 +$ v4l2-ctl --list-formats
 diff --git a/drivers/media/platform/Kconfig b/drivers/media/platform/Kconfig
-index 552b635..d22e5d5d 100644
+index 552b635..d22e5d5 100644
 --- a/drivers/media/platform/Kconfig
 +++ b/drivers/media/platform/Kconfig
 @@ -11,6 +11,8 @@ menuconfig V4L_PLATFORM_DRIVERS

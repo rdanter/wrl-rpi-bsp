@@ -1,7 +1,7 @@
-From 679d3813073c1f74719be5f95b1614abc3936468 Mon Sep 17 00:00:00 2001
+From df30f32e5ab18624ee7cc0d19bf6b5dd242b9813 Mon Sep 17 00:00:00 2001
 From: Florian Meier <florian.meier@koalo.de>
 Date: Fri, 22 Nov 2013 19:19:08 +0100
-Subject: [PATCH 073/215] ASoC: Add support for HifiBerry DAC
+Subject: [PATCH 073/212] ASoC: Add support for HifiBerry DAC
 
 This adds a machine driver for the HifiBerry DAC.
 It is a sound card that can

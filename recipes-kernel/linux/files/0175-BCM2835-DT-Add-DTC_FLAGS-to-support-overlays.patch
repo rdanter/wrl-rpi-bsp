@@ -1,7 +1,7 @@
-From 8a098af334ed6d27da4292777b566cdb4ab36163 Mon Sep 17 00:00:00 2001
+From db9d7899021945487a4d4f51af8dd664fb3eaf84 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Thu, 1 Dec 2016 22:58:07 +0000
-Subject: [PATCH 175/215] BCM2835 DT: Add DTC_FLAGS to support overlays
+Subject: [PATCH 175/212] BCM2835 DT: Add DTC_FLAGS to support overlays
 
 Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 ---

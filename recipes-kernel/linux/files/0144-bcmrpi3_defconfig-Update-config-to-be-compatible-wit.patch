@@ -1,7 +1,7 @@
-From d47b3dc68091c80bd06cb01c677dfbadba438613 Mon Sep 17 00:00:00 2001
+From bdb0c82139cd13b251d66184919b51efaacd6eda Mon Sep 17 00:00:00 2001
 From: Michael Zoran <mzoran@crowfest.net>
 Date: Fri, 4 Nov 2016 16:13:07 -0700
-Subject: [PATCH 144/215] bcmrpi3_defconfig: Update config to be compatible
+Subject: [PATCH 144/212] bcmrpi3_defconfig: Update config to be compatible
  with latest Kconfig changes.
 
 This new config has been run through make savedefconfig.

@@ -1,7 +1,7 @@
-From dac66409eb557bb2560ccc88a15b87c74f1b9b9b Mon Sep 17 00:00:00 2001
+From 0dc7af7f4dc2b94d076f19d076a789c495fa4913 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Mon, 9 May 2016 17:28:18 -0700
-Subject: [PATCH 026/215] clk: bcm2835: Mark GPIO clocks enabled at boot as
+Subject: [PATCH 026/212] clk: bcm2835: Mark GPIO clocks enabled at boot as
  critical.
 
 These divide off of PLLD_PER and are used for the ethernet and wifi
@@ -19,10 +19,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
-index 085e521..e527649 100644
+index d09d95c..ecade93 100644
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
-@@ -1257,6 +1257,15 @@ static struct clk *bcm2835_register_clock(struct bcm2835_cprman *cprman,
+@@ -1259,6 +1259,15 @@ static struct clk *bcm2835_register_clock(struct bcm2835_cprman *cprman,
  	init.name = data->name;
  	init.flags = data->flags | CLK_IGNORE_UNUSED;
  
@@ -38,7 +38,7 @@ index 085e521..e527649 100644
  	if (data->is_vpu_clock) {
  		init.ops = &bcm2835_vpu_clock_clk_ops;
  	} else {
-@@ -1731,13 +1740,15 @@ static const struct bcm2835_clk_desc clk_desc_array[] = {
+@@ -1733,13 +1742,15 @@ static const struct bcm2835_clk_desc clk_desc_array[] = {
  		.div_reg = CM_GP1DIV,
  		.int_bits = 12,
  		.frac_bits = 12,

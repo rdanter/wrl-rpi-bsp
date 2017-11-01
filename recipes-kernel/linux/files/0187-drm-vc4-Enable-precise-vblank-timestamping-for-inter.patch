@@ -1,7 +1,7 @@
-From 174f5be37398f0e76ddd5436e7394dce3aba281d Mon Sep 17 00:00:00 2001
+From e70539184a1bc1d7cd07472e44d19281c7467ef9 Mon Sep 17 00:00:00 2001
 From: Mario Kleiner <mario.kleiner.de@gmail.com>
 Date: Tue, 19 Jul 2016 20:59:00 +0200
-Subject: [PATCH 187/215] drm/vc4: Enable precise vblank timestamping for
+Subject: [PATCH 187/212] drm/vc4: Enable precise vblank timestamping for
  interlaced modes.
 
 On top of the interlaced video mode fix and with some additional
@@ -15,10 +15,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 8 insertions(+), 13 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
-index 2bfa247..7ffdad5 100644
+index 489dbd3..0517794 100644
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -163,14 +163,6 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
+@@ -162,14 +162,6 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
  	int vblank_lines;
  	int ret = 0;
  
@@ -33,7 +33,7 @@ index 2bfa247..7ffdad5 100644
  	/* preempt_disable_rt() should go right here in PREEMPT_RT patchset. */
  
  	/* Get optional system timestamp before query. */
-@@ -191,10 +183,15 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
+@@ -190,10 +182,15 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
  
  	/* Vertical position of hvs composed scanline. */
  	*vpos = VC4_GET_FIELD(val, SCALER_DISPSTATX_LINE);
@@ -52,7 +52,7 @@ index 2bfa247..7ffdad5 100644
  
  	/* This is the offset we need for translating hvs -> pv scanout pos. */
  	fifo_lines = vc4_crtc->cob_size / mode->crtc_hdisplay;
-@@ -217,8 +214,6 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
+@@ -216,8 +213,6 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
  		 * position of the PV.
  		 */
  		*vpos -= fifo_lines + 1;

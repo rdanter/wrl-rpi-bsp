@@ -1,7 +1,7 @@
-From 02d7b76344dba089489c88bbe15203aa1b9e9428 Mon Sep 17 00:00:00 2001
+From 91da891ea0e71cc62dd36b9f241f2fa604ad9614 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <pelwell@users.noreply.github.com>
 Date: Tue, 3 Jan 2017 21:27:46 +0000
-Subject: [PATCH 213/215] Document the si7020 option
+Subject: [PATCH 210/212] Document the si7020 option
 
 ---
  arch/arm/boot/dts/overlays/README | 3 +++

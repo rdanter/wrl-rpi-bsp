@@ -1,7 +1,7 @@
-From 5252c24bed3e9ad2cddff7ca9c4c2d3df389de40 Mon Sep 17 00:00:00 2001
+From 48b144aadeaf370036a4d36ec7da695583b0f229 Mon Sep 17 00:00:00 2001
 From: Sam Nazarko <email@samnazarko.co.uk>
 Date: Fri, 1 Apr 2016 17:27:21 +0100
-Subject: [PATCH 004/215] add smsc95xx packetsize module_param
+Subject: [PATCH 004/212] add smsc95xx packetsize module_param
 
 Signed-off-by: Sam Nazarko <email@samnazarko.co.uk>
 ---

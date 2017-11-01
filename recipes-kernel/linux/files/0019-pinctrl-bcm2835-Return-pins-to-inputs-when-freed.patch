@@ -1,7 +1,7 @@
-From 21a0217bb1c595f477a27e5b15256828ea907292 Mon Sep 17 00:00:00 2001
+From 75c33aeb20dedeef2f4ed43809a4f5fb367bca09 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 6 May 2016 12:32:47 +0100
-Subject: [PATCH 019/215] pinctrl-bcm2835: Return pins to inputs when freed
+Subject: [PATCH 019/212] pinctrl-bcm2835: Return pins to inputs when freed
 
 When dynamically unloading overlays, it is important that freed pins are
 restored to being inputs to prevent functions from being enabled in

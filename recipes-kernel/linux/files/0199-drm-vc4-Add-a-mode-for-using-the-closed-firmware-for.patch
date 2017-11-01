@@ -1,7 +1,7 @@
-From 245dafeafec7226baa15fb6768b2023fb2794074 Mon Sep 17 00:00:00 2001
+From c613867c2f4787cb15275182421c36f4e4250604 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 14 Sep 2016 08:39:33 +0100
-Subject: [PATCH 199/215] drm/vc4: Add a mode for using the closed firmware for
+Subject: [PATCH 199/212] drm/vc4: Add a mode for using the closed firmware for
  display.
 
 Signed-off-by: Eric Anholt <eric@anholt.net>
@@ -27,10 +27,10 @@ index fb77db7..c6dd06c 100644
  	vc4_gem.o \
  	vc4_hdmi.o \
 diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
-index 7f08d68..7366e76 100644
+index c7e6c98..c7e478f 100644
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -163,6 +163,9 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
+@@ -162,6 +162,9 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
  	int vblank_lines;
  	int ret = 0;
  
@@ -40,7 +40,7 @@ index 7f08d68..7366e76 100644
  	/* preempt_disable_rt() should go right here in PREEMPT_RT patchset. */
  
  	/* Get optional system timestamp before query. */
-@@ -656,6 +659,11 @@ int vc4_enable_vblank(struct drm_device *dev, unsigned int crtc_id)
+@@ -655,6 +658,11 @@ int vc4_enable_vblank(struct drm_device *dev, unsigned int crtc_id)
  	struct vc4_dev *vc4 = to_vc4_dev(dev);
  	struct vc4_crtc *vc4_crtc = vc4->crtc[crtc_id];
  
@@ -52,7 +52,7 @@ index 7f08d68..7366e76 100644
  	CRTC_WRITE(PV_INTEN, PV_INT_VFP_START);
  
  	return 0;
-@@ -666,6 +674,11 @@ void vc4_disable_vblank(struct drm_device *dev, unsigned int crtc_id)
+@@ -665,6 +673,11 @@ void vc4_disable_vblank(struct drm_device *dev, unsigned int crtc_id)
  	struct vc4_dev *vc4 = to_vc4_dev(dev);
  	struct vc4_crtc *vc4_crtc = vc4->crtc[crtc_id];
  
@@ -65,10 +65,10 @@ index 7f08d68..7366e76 100644
  }
  
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.c b/drivers/gpu/drm/vc4/vc4_drv.c
-index 8703f56..6c4a4fb 100644
+index 246d1ae..e0b4c4d 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.c
 +++ b/drivers/gpu/drm/vc4/vc4_drv.c
-@@ -292,6 +292,7 @@ static struct platform_driver *const component_drivers[] = {
+@@ -295,6 +295,7 @@ static struct platform_driver *const component_drivers[] = {
  	&vc4_dpi_driver,
  	&vc4_hvs_driver,
  	&vc4_crtc_driver,
@@ -77,7 +77,7 @@ index 8703f56..6c4a4fb 100644
  };
  
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
-index 7c1e4d9..e1f6ab7 100644
+index 50a55ef..b916955 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.h
 +++ b/drivers/gpu/drm/vc4/vc4_drv.h
 @@ -12,6 +12,9 @@
@@ -90,7 +90,7 @@ index 7c1e4d9..e1f6ab7 100644
  	struct vc4_hdmi *hdmi;
  	struct vc4_hvs *hvs;
  	struct vc4_crtc *crtc[3];
-@@ -460,6 +463,10 @@ void __iomem *vc4_ioremap_regs(struct platform_device *dev, int index);
+@@ -462,6 +465,10 @@ void __iomem *vc4_ioremap_regs(struct platform_device *dev, int index);
  extern struct platform_driver vc4_dpi_driver;
  int vc4_dpi_debugfs_regs(struct seq_file *m, void *unused);
  

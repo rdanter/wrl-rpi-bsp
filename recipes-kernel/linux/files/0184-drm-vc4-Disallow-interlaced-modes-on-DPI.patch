@@ -1,7 +1,7 @@
-From 87b26c65ea49f95a61c9655bab214e4311aa0ee8 Mon Sep 17 00:00:00 2001
+From fbee99da9ec180b081acda31918d62790ad04617 Mon Sep 17 00:00:00 2001
 From: Mario Kleiner <mario.kleiner.de@gmail.com>
 Date: Tue, 19 Jul 2016 20:58:57 +0200
-Subject: [PATCH 184/215] drm/vc4: Disallow interlaced modes on DPI.
+Subject: [PATCH 184/212] drm/vc4: Disallow interlaced modes on DPI.
 
 We already don't expose such modes to userspace, but make
 sure userspace can't sneak some interlaced mode in.

@@ -1,7 +1,7 @@
-From 8462279c13683d66abcf9b58c8340d47b471e6a2 Mon Sep 17 00:00:00 2001
+From 311a87a765a3430b22d58aedde5164f50e10b62a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 25 Oct 2016 17:32:02 +0200
-Subject: [PATCH 138/215] kconfig: Just use ARCH_BCM2835 for depends on
+Subject: [PATCH 138/212] kconfig: Just use ARCH_BCM2835 for depends on
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -219,7 +219,7 @@ index 205d836..87d251e 100644
  	  This selects the SDHost controller on BCM2835/6.
  
 diff --git a/drivers/mtd/nand/Kconfig b/drivers/mtd/nand/Kconfig
-index b6a0529..7825a51 100644
+index bd5fd2f..fb44033 100644
 --- a/drivers/mtd/nand/Kconfig
 +++ b/drivers/mtd/nand/Kconfig
 @@ -43,7 +43,7 @@ config MTD_SM_COMMON

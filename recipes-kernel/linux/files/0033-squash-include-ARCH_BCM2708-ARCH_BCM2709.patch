@@ -1,7 +1,7 @@
-From b4432842de7b352b6f60ee4cf2bd3ff39ddbc6b5 Mon Sep 17 00:00:00 2001
+From 65f789ed0fa5b8b00abc60af01e6e89e3aae5922 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 11 Nov 2015 21:01:15 +0000
-Subject: [PATCH 033/215] squash: include ARCH_BCM2708 / ARCH_BCM2709
+Subject: [PATCH 033/212] squash: include ARCH_BCM2708 / ARCH_BCM2709
 
 ---
  drivers/char/hw_random/Kconfig    |  2 +-

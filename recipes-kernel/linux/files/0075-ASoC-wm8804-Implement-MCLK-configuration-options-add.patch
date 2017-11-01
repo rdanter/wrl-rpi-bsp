@@ -1,7 +1,7 @@
-From 6035ccac9eeec6a724081f6b2e8de66cb4613597 Mon Sep 17 00:00:00 2001
+From 7e783ae06cd8f1470b7d709b7033c42c605eb046 Mon Sep 17 00:00:00 2001
 From: Daniel Matuschek <info@crazy-audio.com>
 Date: Wed, 15 Jan 2014 21:41:23 +0100
-Subject: [PATCH 075/215] ASoC: wm8804: Implement MCLK configuration options,
+Subject: [PATCH 075/212] ASoC: wm8804: Implement MCLK configuration options,
  add 32bit support WM8804 can run with PLL frequencies of 256xfs and 128xfs
  for most sample rates. At 192kHz only 128xfs is supported. The existing
  driver selects 128xfs automatically for some lower samples rates. By using an

@@ -1,7 +1,7 @@
-From a73a9c991d72cba866ade4197d1ab5735cc0862c Mon Sep 17 00:00:00 2001
+From 67ddceda5fe2f748dc491a2e2d83727fcf4e4cad Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 1 Jun 2016 12:05:35 -0700
-Subject: [PATCH 027/215] clk: bcm2835: Mark the CM SDRAM clock's parent as
+Subject: [PATCH 027/212] clk: bcm2835: Mark the CM SDRAM clock's parent as
  critical
 
 While the SDRAM is being driven by its dedicated PLL most of the time,
@@ -18,7 +18,7 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 25 insertions(+)
 
 diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
-index e527649..fbf6160 100644
+index ecade93..caa3aa8 100644
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
 @@ -36,6 +36,7 @@
@@ -29,7 +29,7 @@ index e527649..fbf6160 100644
  #include <linux/clk/bcm2835.h>
  #include <linux/debugfs.h>
  #include <linux/module.h>
-@@ -1827,6 +1828,25 @@ static const struct bcm2835_clk_desc clk_desc_array[] = {
+@@ -1829,6 +1830,25 @@ static const struct bcm2835_clk_desc clk_desc_array[] = {
  		.ctl_reg = CM_PERIICTL),
  };
  
@@ -55,7 +55,7 @@ index e527649..fbf6160 100644
  static int bcm2835_clk_probe(struct platform_device *pdev)
  {
  	struct device *dev = &pdev->dev;
-@@ -1836,6 +1856,7 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
+@@ -1838,6 +1858,7 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
  	const struct bcm2835_clk_desc *desc;
  	const size_t asize = ARRAY_SIZE(clk_desc_array);
  	size_t i;
@@ -63,7 +63,7 @@ index e527649..fbf6160 100644
  
  	cprman = devm_kzalloc(dev,
  			      sizeof(*cprman) + asize * sizeof(*clks),
-@@ -1866,6 +1887,10 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
+@@ -1868,6 +1889,10 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
  			clks[i] = desc->clk_register(cprman, desc->data);
  	}
  

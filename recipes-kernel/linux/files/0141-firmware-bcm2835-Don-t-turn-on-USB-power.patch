@@ -1,7 +1,7 @@
-From a84f3aa89204a750ae94aa40ebfaa5b8ac8db8f4 Mon Sep 17 00:00:00 2001
+From 84942254274b8afa7e21616dc924af4b20f68ca9 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Thu, 27 Oct 2016 21:58:09 +0200
-Subject: [PATCH 141/215] firmware: bcm2835: Don't turn on USB power
+Subject: [PATCH 141/212] firmware: bcm2835: Don't turn on USB power
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

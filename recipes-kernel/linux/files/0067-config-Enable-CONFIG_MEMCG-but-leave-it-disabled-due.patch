@@ -1,7 +1,7 @@
-From 337911b393930e0e35c85a5247ae70bf53718b97 Mon Sep 17 00:00:00 2001
+From e8a879ca171000ca959c1593376226192ca7ccc4 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 18 Dec 2013 22:16:19 +0000
-Subject: [PATCH 067/215] config: Enable CONFIG_MEMCG, but leave it disabled
+Subject: [PATCH 067/212] config: Enable CONFIG_MEMCG, but leave it disabled
  (due to memory cost). Enable with cgroup_enable=memory.
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 067/215] config: Enable CONFIG_MEMCG, but leave it disabled
  1 file changed, 23 insertions(+), 1 deletion(-)
 
 diff --git a/kernel/cgroup.c b/kernel/cgroup.c
-index d6b729b..69e8d21 100644
+index ed51085..7c71e90 100644
 --- a/kernel/cgroup.c
 +++ b/kernel/cgroup.c
-@@ -5609,7 +5609,7 @@ int __init cgroup_init_early(void)
+@@ -5606,7 +5606,7 @@ int __init cgroup_init_early(void)
  	return 0;
  }
  
@@ -21,7 +21,7 @@ index d6b729b..69e8d21 100644
  
  /**
   * cgroup_init - cgroup initialization
-@@ -6139,6 +6139,28 @@ static int __init cgroup_no_v1(char *str)
+@@ -6136,6 +6136,28 @@ static int __init cgroup_no_v1(char *str)
  }
  __setup("cgroup_no_v1=", cgroup_no_v1);
  

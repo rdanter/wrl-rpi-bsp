@@ -1,7 +1,7 @@
-From 945332d4b1ab6d4299e594a969c15797eba54ce7 Mon Sep 17 00:00:00 2001
+From 6e3d7423002cdf027dfa3cacc90dd7d33032ab8e Mon Sep 17 00:00:00 2001
 From: Cheong2K <cheong@redbear.cc>
 Date: Fri, 26 Feb 2016 18:20:10 +0800
-Subject: [PATCH 099/215] brcm: adds support for BCM43341 wifi
+Subject: [PATCH 099/212] brcm: adds support for BCM43341 wifi
 
 ---
  drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c       | 2 ++
@@ -9,7 +9,7 @@ Subject: [PATCH 099/215] brcm: adds support for BCM43341 wifi
  2 files changed, 3 insertions(+)
 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
-index 68ab3ac..a008d3c 100644
+index 1bc7963..06cd005 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
 @@ -603,6 +603,7 @@ BRCMF_FW_NVRAM_DEF(4329, "brcmfmac4329-sdio.bin", "brcmfmac4329-sdio.txt");

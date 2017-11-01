@@ -1,7 +1,7 @@
-From 12e9f2d6c981497eb86a6e81263a91eb1ddfbcb7 Mon Sep 17 00:00:00 2001
+From b4cbdb07f3d47c93468c87d3f9b59e05cadc6369 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Thu, 3 Nov 2016 18:53:10 -0700
-Subject: [PATCH 204/215] drm/vc4: Add support for rendering with ETC1
+Subject: [PATCH 202/212] drm/vc4: Add support for rendering with ETC1
  textures.
 
 The validation for it ends up being quite simple, but I hadn't got
@@ -19,11 +19,11 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  3 files changed, 9 insertions(+)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.c b/drivers/gpu/drm/vc4/vc4_drv.c
-index 6c4a4fb..157e08a 100644
+index e0b4c4d..8302bd7 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.c
 +++ b/drivers/gpu/drm/vc4/vc4_drv.c
-@@ -78,6 +78,7 @@ static int vc4_get_param_ioctl(struct drm_device *dev, void *data,
- 		pm_runtime_put(&vc4->v3d->pdev->dev);
+@@ -81,6 +81,7 @@ static int vc4_get_param_ioctl(struct drm_device *dev, void *data,
+ 		pm_runtime_put_autosuspend(&vc4->v3d->pdev->dev);
  		break;
  	case DRM_VC4_PARAM_SUPPORTS_BRANCHES:
 +	case DRM_VC4_PARAM_SUPPORTS_ETC1:

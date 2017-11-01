@@ -1,20 +1,20 @@
-From 98247334bc8dab12e97c45832e778e6cca41cd60 Mon Sep 17 00:00:00 2001
+From 43180099e049db0697b0a5801b70d7d82af3f366 Mon Sep 17 00:00:00 2001
 From: Luke Wren <wren6991@gmail.com>
 Date: Sat, 5 Sep 2015 01:14:45 +0100
-Subject: [PATCH 046/215] Add SMI driver
+Subject: [PATCH 046/212] Add SMI driver
 
 Signed-off-by: Luke Wren <wren6991@gmail.com>
 ---
- .../bindings/misc/brcm,bcm2835-smi-dev.txt         |  17 +
- .../devicetree/bindings/misc/brcm,bcm2835-smi.txt  |  48 +
- drivers/char/broadcom/Kconfig                      |   8 +
- drivers/char/broadcom/Makefile                     |   2 +-
+ .../bindings/misc/brcm,bcm2835-smi-dev.txt         |  15 +
+ .../devicetree/bindings/misc/brcm,bcm2835-smi.txt  |  47 +
+ drivers/char/broadcom/Kconfig                      |   9 +
+ drivers/char/broadcom/Makefile                     |   1 +
  drivers/char/broadcom/bcm2835_smi_dev.c            | 402 +++++++++
  drivers/misc/Kconfig                               |   8 +
  drivers/misc/Makefile                              |   1 +
  drivers/misc/bcm2835_smi.c                         | 985 +++++++++++++++++++++
  include/linux/broadcom/bcm2835_smi.h               | 391 ++++++++
- 9 files changed, 1861 insertions(+), 1 deletion(-)
+ 9 files changed, 1859 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/misc/brcm,bcm2835-smi-dev.txt
  create mode 100644 Documentation/devicetree/bindings/misc/brcm,bcm2835-smi.txt
  create mode 100644 drivers/char/broadcom/bcm2835_smi_dev.c
@@ -23,10 +23,10 @@ Signed-off-by: Luke Wren <wren6991@gmail.com>
 
 diff --git a/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi-dev.txt b/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi-dev.txt
 new file mode 100644
-index 0000000..68cc8eb
+index 0000000..1347fdf5d
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi-dev.txt
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,15 @@
 +* Broadcom BCM2835 SMI character device driver.
 +
 +SMI or secondary memory interface is a peripheral specific to certain Broadcom
@@ -42,14 +42,12 @@ index 0000000..68cc8eb
 +
 +Optional properties:
 +- None.
-+
-+
 diff --git a/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi.txt b/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi.txt
 new file mode 100644
-index 0000000..b76dc69
+index 0000000..b2345aa
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/misc/brcm,bcm2835-smi.txt
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,47 @@
 +* Broadcom BCM2835 SMI driver.
 +
 +SMI or secondary memory interface is a peripheral specific to certain Broadcom
@@ -97,15 +95,15 @@ index 0000000..b76dc69
 +	   generally active low signals */
 +	brcm,pull = <2 2 2 2 2 2 0 0 0 0 0 0 0 0>;
 +};
-+
 diff --git a/drivers/char/broadcom/Kconfig b/drivers/char/broadcom/Kconfig
-index b75c9b2..2292ed2 100644
+index 2a82c1b..2292ed2 100644
 --- a/drivers/char/broadcom/Kconfig
 +++ b/drivers/char/broadcom/Kconfig
-@@ -41,3 +41,11 @@ config BCM2835_DEVGPIOMEM
+@@ -40,3 +40,12 @@ config BCM2835_DEVGPIOMEM
+ 		Provides users with root-free access to the GPIO registers
  		on the 2835. Calling mmap(/dev/gpiomem) will map the GPIO
  		register page to the user's pointer.
- 
++
 +config BCM2835_SMI_DEV
 +	tristate "Character device driver for BCM2835 Secondary Memory Interface"
 +	depends on (MACH_BCM2708 || MACH_BCM2709 || ARCH_BCM2835) && BCM2835_SMI
@@ -115,14 +113,13 @@ index b75c9b2..2292ed2 100644
 +		Broadcom's Secondary Memory interface. The low-level functionality is provided
 +		by the SMI driver itself.
 diff --git a/drivers/char/broadcom/Makefile b/drivers/char/broadcom/Makefile
-index 1eb06e9..667d33e 100644
+index debd9e1..667d33e 100644
 --- a/drivers/char/broadcom/Makefile
 +++ b/drivers/char/broadcom/Makefile
-@@ -3,4 +3,4 @@ obj-$(CONFIG_BCM2708_VCMEM)	+= vc_mem.o
+@@ -3,3 +3,4 @@ obj-$(CONFIG_BCM2708_VCMEM)	+= vc_mem.o
  obj-$(CONFIG_BCM_VC_SM)         += vc_sm/
  
  obj-$(CONFIG_BCM2835_DEVGPIOMEM)+= bcm2835-gpiomem.o
--
 +obj-$(CONFIG_BCM2835_SMI_DEV)	+= bcm2835_smi_dev.o
 diff --git a/drivers/char/broadcom/bcm2835_smi_dev.c b/drivers/char/broadcom/bcm2835_smi_dev.c
 new file mode 100644
@@ -552,7 +549,7 @@ index dc9a6ae..cff8c3d 100644
  	tristate "Analog Devices Digital Potentiometers"
  	depends on (I2C || SPI) && SYSFS
 diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index bdf0f5f..d31dd62a 100644
+index bdf0f5f..d31dd62 100644
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
 @@ -9,6 +9,7 @@ obj-$(CONFIG_AD525X_DPOT_SPI)	+= ad525x_dpot-spi.o

@@ -1,7 +1,7 @@
-From 79583008db5ac36047c6b3fd45f209b465aa7ac3 Mon Sep 17 00:00:00 2001
+From 81def58937fd0b6f66fddc91491b464cf4a69a5f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Thu, 22 Sep 2016 22:05:50 +0200
-Subject: [PATCH 149/215] i2c: bcm2835: Can't support I2C_M_IGNORE_NAK
+Subject: [PATCH 149/212] i2c: bcm2835: Can't support I2C_M_IGNORE_NAK
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

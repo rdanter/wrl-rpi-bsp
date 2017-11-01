@@ -1,7 +1,7 @@
-From d1d16f5ce3fcad1654aeaa0161001dcde055dc99 Mon Sep 17 00:00:00 2001
+From 862822c716e1d6e63afba7826fcaa1d6569f22be Mon Sep 17 00:00:00 2001
 From: gtrainavicius <gtrainavicius@users.noreply.github.com>
 Date: Sun, 23 Oct 2016 12:06:53 +0300
-Subject: [PATCH 128/215] Support for Blokas Labs pisound board
+Subject: [PATCH 128/212] Support for Blokas Labs pisound board
 
 ---
  .../devicetree/bindings/vendor-prefixes.txt        |   1 +

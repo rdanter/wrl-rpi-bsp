@@ -1,7 +1,7 @@
-From 0b4b9f7737d8686a9cdcce47c45be1ca3d42315c Mon Sep 17 00:00:00 2001
+From e18b53a247babcd57fa57b4f0df9b9979290d437 Mon Sep 17 00:00:00 2001
 From: Robert Tiemann <rtie@gmx.de>
 Date: Mon, 20 Jul 2015 11:01:25 +0200
-Subject: [PATCH 010/215] BCM2835_DT: Fix I2S register map
+Subject: [PATCH 010/212] BCM2835_DT: Fix I2S register map
 
 ---
  Documentation/devicetree/bindings/dma/brcm,bcm2835-dma.txt   | 4 ++--

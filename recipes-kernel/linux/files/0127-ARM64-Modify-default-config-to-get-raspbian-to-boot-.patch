@@ -1,7 +1,7 @@
-From b9d3a9f82d9bdec7e5772992e039432a490cc38c Mon Sep 17 00:00:00 2001
+From b656fb10d4788a974698b79a4365511bcd719389 Mon Sep 17 00:00:00 2001
 From: Electron752 <mzoran@crowfest.net>
 Date: Sat, 15 Oct 2016 11:49:52 -0700
-Subject: [PATCH 127/215] ARM64: Modify default config to get raspbian to boot
+Subject: [PATCH 127/212] ARM64: Modify default config to get raspbian to boot
  (#1686)
 
 1. Enable emulation of deprecated instructions.

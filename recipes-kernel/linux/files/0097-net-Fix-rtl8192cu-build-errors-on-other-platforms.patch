@@ -1,7 +1,7 @@
-From 117cc8d6b54ab46413a892ea5e8c5e28dc163092 Mon Sep 17 00:00:00 2001
+From 8cd2a6eed2aca82311a031c4b88f4c168dc02885 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 23 Mar 2016 17:20:58 +0000
-Subject: [PATCH 097/215] net: Fix rtl8192cu build errors on other platforms
+Subject: [PATCH 097/212] net: Fix rtl8192cu build errors on other platforms
 
 Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
@@ -478,7 +478,7 @@ index 1ff400a..c0a7488 100644
  	if ((*da) & 0x01)
  		return _TRUE;
 diff --git a/drivers/net/wireless/realtek/rtl8192cu/os_dep/linux/ioctl_cfg80211.c b/drivers/net/wireless/realtek/rtl8192cu/os_dep/linux/ioctl_cfg80211.c
-index 60e92b8..f7db885 100644
+index 60e92b8..a7e542c 100644
 --- a/drivers/net/wireless/realtek/rtl8192cu/os_dep/linux/ioctl_cfg80211.c
 +++ b/drivers/net/wireless/realtek/rtl8192cu/os_dep/linux/ioctl_cfg80211.c
 @@ -57,7 +57,7 @@ static const u32 rtw_cipher_suites[] = {
@@ -730,7 +730,7 @@ index 60e92b8..f7db885 100644
 +			struct cfg80211_scan_info info = {
 +				.aborted = aborted,
 +			};
-+ 	 
++
 +			cfg80211_scan_done(pwdev_priv->scan_request, &info);
 +			#endif
  		}

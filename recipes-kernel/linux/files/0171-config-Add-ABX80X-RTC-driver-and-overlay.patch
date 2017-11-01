@@ -1,7 +1,7 @@
-From a26053b2cd28e915ac0bcaad0d95aa9fe211b2bf Mon Sep 17 00:00:00 2001
+From 67b30aac20056e9983dd8621185111a711eb172d Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 23 Nov 2016 14:19:40 +0000
-Subject: [PATCH 171/215] config: Add ABX80X RTC driver and overlay
+Subject: [PATCH 171/212] config: Add ABX80X RTC driver and overlay
 
 Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 ---

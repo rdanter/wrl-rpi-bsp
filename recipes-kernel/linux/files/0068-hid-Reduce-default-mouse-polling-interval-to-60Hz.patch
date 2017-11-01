@@ -1,7 +1,7 @@
-From 14306d214698ff01759fa6e3afaac0178c1fbd0a Mon Sep 17 00:00:00 2001
+From b7029c418af0d4aecec07f39fedbb02765d16fed Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 14 Jul 2014 22:02:09 +0100
-Subject: [PATCH 068/215] hid: Reduce default mouse polling interval to 60Hz
+Subject: [PATCH 068/212] hid: Reduce default mouse polling interval to 60Hz
 
 Reduces overhead when using X
 ---
@@ -9,10 +9,10 @@ Reduces overhead when using X
  1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/hid/usbhid/hid-core.c b/drivers/hid/usbhid/hid-core.c
-index ae83af6..4a7af9d 100644
+index 56f9afc..f77cba7 100644
 --- a/drivers/hid/usbhid/hid-core.c
 +++ b/drivers/hid/usbhid/hid-core.c
-@@ -49,7 +49,7 @@
+@@ -51,7 +51,7 @@
   * Module parameters.
   */
  
@@ -21,7 +21,7 @@ index ae83af6..4a7af9d 100644
  module_param_named(mousepoll, hid_mousepoll_interval, uint, 0644);
  MODULE_PARM_DESC(mousepoll, "Polling interval of mice");
  
-@@ -1083,8 +1083,12 @@ static int usbhid_start(struct hid_device *hid)
+@@ -1093,8 +1093,12 @@ static int usbhid_start(struct hid_device *hid)
  		}
  
  		/* Change the polling interval of mice. */

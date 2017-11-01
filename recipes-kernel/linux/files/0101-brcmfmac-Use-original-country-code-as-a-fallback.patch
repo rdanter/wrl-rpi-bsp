@@ -1,7 +1,7 @@
-From 4164bee69664d13b90e65186c5be4eb46ad82b6b Mon Sep 17 00:00:00 2001
+From 57212ffe2297216b7996882418d4a3d90e9a9801 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Thu, 28 Apr 2016 17:13:47 +0100
-Subject: [PATCH 101/215] brcmfmac: Use original country code as a fallback
+Subject: [PATCH 101/212] brcmfmac: Use original country code as a fallback
 
 Commit 73345fd212980d2e28a5c6d83801c903bd773680:
 
@@ -17,10 +17,10 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  1 file changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
-index f6221c2..12bffe2 100644
+index 2642b16..d6f2cba 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
-@@ -6740,12 +6740,18 @@ static s32 brcmf_translate_country_code(struct brcmf_pub *drvr, char alpha2[2],
+@@ -6745,12 +6745,18 @@ static s32 brcmf_translate_country_code(struct brcmf_pub *drvr, char alpha2[2],
  	struct brcmfmac_pd_cc *country_codes;
  	struct brcmfmac_pd_cc_entry *cc;
  	s32 found_index;
@@ -41,7 +41,7 @@ index f6221c2..12bffe2 100644
  	}
  
  	if ((alpha2[0] == ccreq->country_abbrev[0]) &&
-@@ -6769,10 +6775,14 @@ static s32 brcmf_translate_country_code(struct brcmf_pub *drvr, char alpha2[2],
+@@ -6774,10 +6780,14 @@ static s32 brcmf_translate_country_code(struct brcmf_pub *drvr, char alpha2[2],
  		brcmf_dbg(TRACE, "No country code match found\n");
  		return -EINVAL;
  	}

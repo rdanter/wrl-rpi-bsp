@@ -1,7 +1,7 @@
-From d2d8a480282bfcdea06255594675d372521bf2e3 Mon Sep 17 00:00:00 2001
+From faacc14cd16f0d4f723d164b0f939f0200fcb699 Mon Sep 17 00:00:00 2001
 From: notro <notro@tronnes.org>
 Date: Thu, 10 Jul 2014 13:59:47 +0200
-Subject: [PATCH 016/215] pinctrl-bcm2835: Set base to 0 give expected gpio
+Subject: [PATCH 016/212] pinctrl-bcm2835: Set base to 0 give expected gpio
  numbering
 
 Signed-off-by: Noralf Tronnes <notro@tronnes.org>

@@ -1,7 +1,7 @@
-From d5b7938192ec164da75e3775b1367ac2395c1755 Mon Sep 17 00:00:00 2001
+From ae9de3075cbb4c1f06e5f58144f1229d23c8afb3 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Tue, 24 Feb 2015 13:40:50 +0000
-Subject: [PATCH 017/215] pinctrl-bcm2835: Fix interrupt handling for GPIOs
+Subject: [PATCH 017/212] pinctrl-bcm2835: Fix interrupt handling for GPIOs
  28-31 and 46-53
 
 Contrary to the documentation, the BCM2835 GPIO controller actually has

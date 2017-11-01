@@ -1,7 +1,7 @@
-From 1a984d0425f53876673c98ae3c46cf17fd9df7f6 Mon Sep 17 00:00:00 2001
+From 18983520f7931d190273a3e18d707ff856c224d3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 10 Oct 2016 17:41:26 +0200
-Subject: [PATCH 118/215] bcm270x: Remove unnecessary of_platform_populate
+Subject: [PATCH 118/212] bcm270x: Remove unnecessary of_platform_populate
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

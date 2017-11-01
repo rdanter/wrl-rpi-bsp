@@ -1,7 +1,7 @@
-From c946faf89bdb80410a1aa153121d11ed4605bc2c Mon Sep 17 00:00:00 2001
+From 36e3f68ea2020f8e1f09f0e1a67bca459e1a33b8 Mon Sep 17 00:00:00 2001
 From: Mario Kleiner <mario.kleiner.de@gmail.com>
 Date: Tue, 19 Jul 2016 20:58:58 +0200
-Subject: [PATCH 185/215] drm/vc4: Fix handling of interlaced video modes.
+Subject: [PATCH 185/212] drm/vc4: Fix handling of interlaced video modes.
 
 We must not apply CRTC_INTERLACE_HALVE_V to interlaced modes during
 mode enumeration, as drm_helper_probe_single_connector_modes
@@ -21,10 +21,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  2 files changed, 45 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
-index 8fc2b73..a479d3d 100644
+index 063a457..b643223 100644
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -532,6 +532,23 @@ static void vc4_crtc_enable(struct drm_crtc *crtc)
+@@ -531,6 +531,23 @@ static void vc4_crtc_enable(struct drm_crtc *crtc)
  		   CRTC_READ(PV_V_CONTROL) | PV_VCONTROL_VIDEN);
  }
  
@@ -48,7 +48,7 @@ index 8fc2b73..a479d3d 100644
  static int vc4_crtc_atomic_check(struct drm_crtc *crtc,
  				 struct drm_crtc_state *state)
  {
-@@ -819,6 +836,7 @@ static const struct drm_crtc_helper_funcs vc4_crtc_helper_funcs = {
+@@ -837,6 +854,7 @@ static const struct drm_crtc_helper_funcs vc4_crtc_helper_funcs = {
  	.mode_set_nofb = vc4_crtc_mode_set_nofb,
  	.disable = vc4_crtc_disable,
  	.enable = vc4_crtc_enable,

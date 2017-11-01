@@ -1,7 +1,7 @@
-From 51f1a7c8f62914beb0732965394cd3ba1a96e00d Mon Sep 17 00:00:00 2001
+From 9f4b082c2417cfc15c152f12e92c8ebe132ee194 Mon Sep 17 00:00:00 2001
 From: Giedrius Trainavicius <giedrius@blokas.io>
 Date: Tue, 25 Oct 2016 01:47:20 +0300
-Subject: [PATCH 129/215] FIXUP: pisound: Fix a warning in DEBUG builds
+Subject: [PATCH 129/212] FIXUP: pisound: Fix a warning in DEBUG builds
 
 Also change a macro that enables debug level printing from DEBUG to
 PISOUND_DEBUG.

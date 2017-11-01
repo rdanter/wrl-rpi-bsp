@@ -1,7 +1,7 @@
-From 01b8f70dc982bdc22cc0b2541aab014068aef3c4 Mon Sep 17 00:00:00 2001
+From a04fe21fafe89a508e73466dceff9e147cd46bf3 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 28 Sep 2016 17:30:25 -0700
-Subject: [PATCH 196/215] drm/vc4: Fix support for interlaced modes on HDMI.
+Subject: [PATCH 196/212] drm/vc4: Fix support for interlaced modes on HDMI.
 
 We really do need to be using the halved V fields.  I had been
 confused by the code I was using as a reference because it stored
@@ -24,10 +24,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  3 files changed, 41 insertions(+), 56 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
-index 2682f07..83cafea 100644
+index cedc6fd..521eed1 100644
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -229,7 +229,7 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
+@@ -228,7 +228,7 @@ int vc4_crtc_get_scanoutpos(struct drm_device *dev, unsigned int crtc_id,
  	 * and need to make things up in a approximative but consistent way.
  	 */
  	ret |= DRM_SCANOUTPOS_IN_VBLANK;
@@ -36,7 +36,7 @@ index 2682f07..83cafea 100644
  
  	if (flags & DRM_CALLED_FROM_VBLIRQ) {
  		/*
-@@ -378,7 +378,6 @@ static void vc4_crtc_mode_set_nofb(struct drm_crtc *crtc)
+@@ -377,7 +377,6 @@ static void vc4_crtc_mode_set_nofb(struct drm_crtc *crtc)
  	struct drm_crtc_state *state = crtc->state;
  	struct drm_display_mode *mode = &state->adjusted_mode;
  	bool interlace = mode->flags & DRM_MODE_FLAG_INTERLACE;
@@ -44,7 +44,7 @@ index 2682f07..83cafea 100644
  	u32 format = PV_CONTROL_FORMAT_24;
  	bool debug_dump_regs = false;
  	int clock_select = vc4_get_clock_select(crtc);
-@@ -404,32 +403,46 @@ static void vc4_crtc_mode_set_nofb(struct drm_crtc *crtc)
+@@ -403,32 +402,46 @@ static void vc4_crtc_mode_set_nofb(struct drm_crtc *crtc)
  		   VC4_SET_FIELD(mode->hdisplay, PV_HORZB_HACTIVE));
  
  	CRTC_WRITE(PV_VERTA,
@@ -102,7 +102,7 @@ index 2682f07..83cafea 100644
  
  	CRTC_WRITE(PV_CONTROL,
  		   VC4_SET_FIELD(format, PV_CONTROL_FORMAT) |
-@@ -544,16 +557,6 @@ static bool vc4_crtc_mode_fixup(struct drm_crtc *crtc,
+@@ -543,16 +556,6 @@ static bool vc4_crtc_mode_fixup(struct drm_crtc *crtc,
  		return false;
  	}
  
@@ -197,10 +197,10 @@ index fe1c4e3..d94108c 100644
  
  	HD_WRITE(VC4_HD_VID_CTL,
 diff --git a/drivers/gpu/drm/vc4/vc4_regs.h b/drivers/gpu/drm/vc4/vc4_regs.h
-index 9ecd6ff..c5a423e 100644
+index a36d82d..566c270 100644
 --- a/drivers/gpu/drm/vc4/vc4_regs.h
 +++ b/drivers/gpu/drm/vc4/vc4_regs.h
-@@ -183,6 +183,9 @@
+@@ -184,6 +184,9 @@
  # define PV_CONTROL_EN				BIT(0)
  
  #define PV_V_CONTROL				0x04

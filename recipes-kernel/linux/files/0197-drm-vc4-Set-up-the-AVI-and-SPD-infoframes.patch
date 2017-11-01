@@ -1,7 +1,7 @@
-From 4e3c762efa383cf206f57121f851ea14ce57d453 Mon Sep 17 00:00:00 2001
+From ab3c732c56263a007eea3d868aabae74749dc377 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Thu, 29 Sep 2016 15:34:43 -0700
-Subject: [PATCH 197/215] drm/vc4: Set up the AVI and SPD infoframes.
+Subject: [PATCH 197/212] drm/vc4: Set up the AVI and SPD infoframes.
 
 Fixes a purple bar on the left side of the screen with my Dell
 2408WFP.  It will also be required for supporting the double-clocked
@@ -203,10 +203,10 @@ index d94108c..d6b54b9 100644
  		drift = HDMI_READ(VC4_HDMI_FIFO_CTL);
  		drift &= VC4_HDMI_FIFO_VALID_WRITE_MASK;
 diff --git a/drivers/gpu/drm/vc4/vc4_regs.h b/drivers/gpu/drm/vc4/vc4_regs.h
-index c5a423e..0b868aa 100644
+index 566c270..4f89e4c 100644
 --- a/drivers/gpu/drm/vc4/vc4_regs.h
 +++ b/drivers/gpu/drm/vc4/vc4_regs.h
-@@ -441,6 +441,8 @@
+@@ -442,6 +442,8 @@
  #define VC4_HDMI_RAM_PACKET_CONFIG		0x0a0
  # define VC4_HDMI_RAM_PACKET_ENABLE		BIT(16)
  
@@ -215,7 +215,7 @@ index c5a423e..0b868aa 100644
  #define VC4_HDMI_HORZA				0x0c4
  # define VC4_HDMI_HORZA_VPOS			BIT(14)
  # define VC4_HDMI_HORZA_HPOS			BIT(13)
-@@ -502,6 +504,9 @@
+@@ -503,6 +505,9 @@
  
  #define VC4_HDMI_TX_PHY_RESET_CTL		0x2c0
  

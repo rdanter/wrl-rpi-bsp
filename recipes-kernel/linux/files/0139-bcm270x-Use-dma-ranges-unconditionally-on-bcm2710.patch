@@ -1,7 +1,7 @@
-From d980a5b8dea834f3fe5c488ea4f013029025ea7e Mon Sep 17 00:00:00 2001
+From a149452256251b342a7205bf6a8ab8cec198e81d Mon Sep 17 00:00:00 2001
 From: Phil Elwell <pelwell@users.noreply.github.com>
 Date: Fri, 28 Oct 2016 13:55:36 +0100
-Subject: [PATCH 139/215] bcm270x: Use dma-ranges unconditionally on bcm2710
+Subject: [PATCH 139/212] bcm270x: Use dma-ranges unconditionally on bcm2710
 
 See: https://github.com/raspberrypi/linux/pull/1699
 

@@ -1,7 +1,7 @@
-From 497b552cf6e472c32e2dd9bff34b86f32c723d17 Mon Sep 17 00:00:00 2001
+From 629a71daa98891ae586c5d6de0a18196d58d5d86 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 10 Aug 2015 09:49:15 +0100
-Subject: [PATCH 057/215] scripts/dtc: Update to upstream version 1.4.1
+Subject: [PATCH 057/212] scripts/dtc: Update to upstream version 1.4.1
 
 Includes the new localfixups format.
 

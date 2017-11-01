@@ -1,7 +1,7 @@
-From 9f193efffebb0031a65c53bb1ce4f4105ed571ed Mon Sep 17 00:00:00 2001
+From 013a480e6b0f90068a6e49e4bf0cf699c2885ef1 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 8 May 2013 11:46:50 +0100
-Subject: [PATCH 065/215] enabling the realtime clock 1-wire chip DS1307 and
+Subject: [PATCH 065/212] enabling the realtime clock 1-wire chip DS1307 and
  1-wire on GPIO4 (as a module)
 
 1-wire: Add support for configuring pin for w1-gpio kernel module

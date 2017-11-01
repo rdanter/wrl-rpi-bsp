@@ -1,7 +1,7 @@
-From 75bb10a26360b35ad4e042d7788690a8659448ee Mon Sep 17 00:00:00 2001
+From a7f6a52f35ec51d35b0eba13a40134de15421634 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 10 Oct 2016 17:37:43 +0200
-Subject: [PATCH 117/215] bcm270x: Drop bcm2835-aux-uart hack
+Subject: [PATCH 117/212] bcm270x: Drop bcm2835-aux-uart hack
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

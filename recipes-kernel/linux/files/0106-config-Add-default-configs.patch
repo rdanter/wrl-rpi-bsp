@@ -1,7 +1,7 @@
-From 720a7fb1d66d71358999686e0159cb3f2fad5b50 Mon Sep 17 00:00:00 2001
+From 6d9e15875c3e3ab933b201e489b84f092110e922 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 13 Apr 2015 17:16:29 +0100
-Subject: [PATCH 106/215] config: Add default configs
+Subject: [PATCH 106/212] config: Add default configs
 
 ---
  arch/arm/configs/bcm2709_defconfig | 1294 +++++++++++++++++++++++++++++++++++

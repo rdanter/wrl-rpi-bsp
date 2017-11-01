@@ -1,7 +1,7 @@
-From f9397b1bd3c1fd790d75d6c2ec6ff60ff753054d Mon Sep 17 00:00:00 2001
+From 4a89f403816a0aa25e8bc0d9eb0ca12add70c0d2 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Tue, 19 Apr 2016 15:55:02 -0700
-Subject: [PATCH 030/215] ARM: bcm2708: Enable building power domain driver.
+Subject: [PATCH 030/212] ARM: bcm2708: Enable building power domain driver.
 
 Signed-off-by: Eric Anholt <eric@anholt.net>
 ---

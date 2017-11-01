@@ -1,7 +1,7 @@
-From c29177d94262985287a26fa808bd1cf7b2ba7498 Mon Sep 17 00:00:00 2001
+From be48196ef141c0cdb9fda0258fc25c3ce1891d84 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 23 Sep 2016 04:54:27 +0200
-Subject: [PATCH 150/215] i2c: bcm2835: Add support for Repeated Start
+Subject: [PATCH 150/212] i2c: bcm2835: Add support for Repeated Start
  Condition
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

@@ -1,7 +1,7 @@
-From 7dcc9be55b2ab35b98e3b6f002bea69e7848dd40 Mon Sep 17 00:00:00 2001
+From 62ed2fab15178caffa595bdc1e1099b5f676701e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 19 Oct 2016 16:25:41 +0200
-Subject: [PATCH 130/215] bcm270x: Remove bcm2708_reboot_mode parameter
+Subject: [PATCH 130/212] bcm270x: Remove bcm2708_reboot_mode parameter
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

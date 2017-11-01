@@ -1,7 +1,7 @@
-From 8a002bfb7e86527de3940e1ce82015c8320ab40d Mon Sep 17 00:00:00 2001
+From d0bd6e41ad32deb01bbb052f3235c350e7975086 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 19 Oct 2016 15:54:41 +0200
-Subject: [PATCH 131/215] bcm270x: Remove NEED_MACH_IO_H
+Subject: [PATCH 131/212] bcm270x: Remove NEED_MACH_IO_H
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

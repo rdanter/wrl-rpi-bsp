@@ -1,7 +1,7 @@
-From 707b83ed9ad807bf8a3bbd65473a892f1b75ff02 Mon Sep 17 00:00:00 2001
+From ab6d1118b4904cbfb0d13a572eb8ad0d24668cf1 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Sun, 12 May 2013 12:24:19 +0100
-Subject: [PATCH 031/215] Main bcm2708/bcm2709 linux port
+Subject: [PATCH 031/212] Main bcm2708/bcm2709 linux port
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -159,7 +159,7 @@ index a9693b6..f47f4e7 100644
  
  config DEBUG_AT91_UART
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index 61f6ccc..d1e4509 100644
+index 4d2ea05..fc95189 100644
 --- a/arch/arm/Makefile
 +++ b/arch/arm/Makefile
 @@ -152,6 +152,8 @@ textofs-$(CONFIG_ARCH_AXXIA) := 0x00308000

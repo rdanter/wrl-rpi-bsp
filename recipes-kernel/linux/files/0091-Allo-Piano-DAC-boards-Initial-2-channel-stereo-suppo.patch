@@ -1,7 +1,7 @@
-From 8f78160e9921b1430e82fb3a9f7f627449c7236e Mon Sep 17 00:00:00 2001
+From 46286982dfec2f7c9c39041594c370e35c0f202b Mon Sep 17 00:00:00 2001
 From: Clive Messer <clive.m.messer@gmail.com>
 Date: Mon, 19 Sep 2016 14:01:04 +0100
-Subject: [PATCH 091/215] Allo Piano DAC boards: Initial 2 channel (stereo)
+Subject: [PATCH 091/212] Allo Piano DAC boards: Initial 2 channel (stereo)
  support (#1645)
 
 Add initial 2 channel (stereo) support for Allo Piano DAC (2.0/2.1) boards,

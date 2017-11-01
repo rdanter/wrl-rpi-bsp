@@ -1,7 +1,7 @@
-From 0a2aa9016b669cefaf4a48a9cef2a0d39391293f Mon Sep 17 00:00:00 2001
+From 413c1ee1178f448dcd15cec41cb50f1077e6aa32 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Mon, 13 Oct 2014 11:47:53 +0100
-Subject: [PATCH 070/215] Improve __copy_to_user and __copy_from_user
+Subject: [PATCH 070/212] Improve __copy_to_user and __copy_from_user
  performance
 
 Provide a __copy_from_user that uses memcpy. On BCM2708, use
@@ -72,7 +72,7 @@ index a93c0f9..cbad0e0 100644
  __copy_from_user(void *to, const void __user *from, unsigned long n)
  {
 diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 27f4d962..5235717 100644
+index d04c4fe..78e3ff4 100644
 --- a/arch/arm/lib/Makefile
 +++ b/arch/arm/lib/Makefile
 @@ -6,9 +6,8 @@
@@ -85,7 +85,7 @@ index 27f4d962..5235717 100644
 +		   delay.o delay-loop.o findbit.o memchr.o memzero.o  \
 +		   setbit.o strchr.o strrchr.o                        \
  		   testchangebit.o testclearbit.o testsetbit.o        \
- 		   ashldi3.o ashrdi3.o lshrdi3.o muldi3.o             \
+ 		   ashldi3.o ashrdi3.o lshrdi3.o muldi3.o uldivmod.o  \
  		   ucmpdi2.o lib1funcs.o div64.o                      \
 @@ -18,6 +17,16 @@ lib-y		:= backtrace.o changebit.o csumipv6.o csumpartial.o   \
  mmu-y		:= clear_user.o copy_page.o getuser.o putuser.o       \

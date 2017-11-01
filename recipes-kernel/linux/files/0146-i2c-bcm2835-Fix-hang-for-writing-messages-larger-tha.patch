@@ -1,7 +1,7 @@
-From b409033d1885efa92e98dca54ca7f37c9b3d5a57 Mon Sep 17 00:00:00 2001
+From 82e1e759fc869b396f8308622b9af6305d8332dc Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Sat, 17 Sep 2016 15:07:10 +0200
-Subject: [PATCH 146/215] i2c: bcm2835: Fix hang for writing messages larger
+Subject: [PATCH 146/212] i2c: bcm2835: Fix hang for writing messages larger
  than 16 bytes
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

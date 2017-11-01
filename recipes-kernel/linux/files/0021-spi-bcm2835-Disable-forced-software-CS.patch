@@ -1,7 +1,7 @@
-From 5459e41d94df002478deeadae0d26288d4ddac3b Mon Sep 17 00:00:00 2001
+From f627bcf3d62695985cf77f4edb7128bc9634268f Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 1 Jul 2016 22:09:24 +0100
-Subject: [PATCH 021/215] spi-bcm2835: Disable forced software CS
+Subject: [PATCH 021/212] spi-bcm2835: Disable forced software CS
 
 Select software CS in bcm2708_common.dtsi, and disable the automatic
 conversion in the driver to allow hardware CS to be re-enabled with an

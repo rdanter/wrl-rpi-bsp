@@ -1,7 +1,7 @@
-From 3e6548d1c36e9c7449b5c5cfe4a843272ed68693 Mon Sep 17 00:00:00 2001
+From 08dafb38ad0aaaad07f4e8912ac35e007ae6346b Mon Sep 17 00:00:00 2001
 From: Matt Flax <flatmax@flatmax.org>
 Date: Mon, 16 May 2016 21:36:31 +1000
-Subject: [PATCH 087/215] New AudioInjector.net Pi soundcard with low jitter
+Subject: [PATCH 087/212] New AudioInjector.net Pi soundcard with low jitter
  audio in and out.
 
 Contains the sound/soc/bcm ALSA machine driver and necessary alterations to the Kconfig and Makefile.
@@ -14,9 +14,9 @@ Added support for headphones, microphone and bclk_ratio settings.
 This patch adds headphone and microphone capability to the Audio Injector sound card. The patch also sets the bit clock ratio for use in the bcm2835-i2s driver. The bcm2835-i2s can't handle an 8 kHz sample rate when the bit clock is at 12 MHz because its register is only 10 bits wide which can't represent the ch2 offset of 1508. For that reason, the rate constraint is added.
 ---
  sound/soc/bcm/Kconfig                      |   7 ++
- sound/soc/bcm/Makefile                     |   3 +
- sound/soc/bcm/audioinjector-pi-soundcard.c | 191 +++++++++++++++++++++++++++++
- 3 files changed, 201 insertions(+)
+ sound/soc/bcm/Makefile                     |   2 +
+ sound/soc/bcm/audioinjector-pi-soundcard.c | 190 +++++++++++++++++++++++++++++
+ 3 files changed, 199 insertions(+)
  create mode 100644 sound/soc/bcm/audioinjector-pi-soundcard.c
 
 diff --git a/sound/soc/bcm/Kconfig b/sound/soc/bcm/Kconfig
@@ -35,7 +35,7 @@ index cacc104..214aa13 100644
 +	help
 +	  Say Y or M if you want to add support for audioinjector.net Pi Hat
 diff --git a/sound/soc/bcm/Makefile b/sound/soc/bcm/Makefile
-index 63584bc..eb21e3b 100644
+index 63584bc..ea359a6 100644
 --- a/sound/soc/bcm/Makefile
 +++ b/sound/soc/bcm/Makefile
 @@ -20,6 +20,7 @@ snd-soc-rpi-dac-objs := rpi-dac.o
@@ -46,18 +46,17 @@ index 63584bc..eb21e3b 100644
  
  obj-$(CONFIG_SND_BCM2708_SOC_ADAU1977_ADC) += snd-soc-adau1977-adc.o
  obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DAC) += snd-soc-hifiberry-dac.o
-@@ -32,3 +33,5 @@ obj-$(CONFIG_SND_BCM2708_SOC_RPI_DAC) += snd-soc-rpi-dac.o
+@@ -32,3 +33,4 @@ obj-$(CONFIG_SND_BCM2708_SOC_RPI_DAC) += snd-soc-rpi-dac.o
  obj-$(CONFIG_SND_BCM2708_SOC_RPI_PROTO) += snd-soc-rpi-proto.o
  obj-$(CONFIG_SND_BCM2708_SOC_IQAUDIO_DAC) += snd-soc-iqaudio-dac.o
  obj-$(CONFIG_SND_BCM2708_SOC_RASPIDAC3) += snd-soc-raspidac3.o
 +obj-$(CONFIG_SND_AUDIOINJECTOR_PI_SOUNDCARD) += snd-soc-audioinjector-pi-soundcard.o
-+
 diff --git a/sound/soc/bcm/audioinjector-pi-soundcard.c b/sound/soc/bcm/audioinjector-pi-soundcard.c
 new file mode 100644
-index 0000000..5ff0985
+index 0000000..976c9db
 --- /dev/null
 +++ b/sound/soc/bcm/audioinjector-pi-soundcard.c
-@@ -0,0 +1,191 @@
+@@ -0,0 +1,190 @@
 +/*
 + * ASoC Driver for AudioInjector Pi add on soundcard
 + *
@@ -194,7 +193,7 @@ index 0000000..5ff0985
 +{
 +	struct snd_soc_card *card = &snd_soc_audioinjector;
 +	int ret;
-+	
++
 +	card->dev = &pdev->dev;
 +
 +	if (pdev->dev.of_node) {
@@ -248,7 +247,6 @@ index 0000000..5ff0985
 +MODULE_DESCRIPTION("AudioInjector.net Pi Soundcard");
 +MODULE_LICENSE("GPL v2");
 +MODULE_ALIAS("platform:audioinjector-pi-soundcard");
-+
 -- 
 1.9.1
 

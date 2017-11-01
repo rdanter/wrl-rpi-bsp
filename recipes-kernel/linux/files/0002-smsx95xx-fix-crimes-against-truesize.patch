@@ -1,7 +1,7 @@
-From 1c52b299a3abb4891b4690d09a8a965aaf3bb602 Mon Sep 17 00:00:00 2001
+From ddacf85698235ba4bd7894382e84bfe4e0d774d8 Mon Sep 17 00:00:00 2001
 From: Steve Glendinning <steve.glendinning@smsc.com>
 Date: Thu, 19 Feb 2015 18:47:12 +0000
-Subject: [PATCH 002/215] smsx95xx: fix crimes against truesize
+Subject: [PATCH 002/212] smsx95xx: fix crimes against truesize
 
 smsc95xx is adjusting truesize when it shouldn't, and following a recent patch from Eric this is now triggering warnings.
 

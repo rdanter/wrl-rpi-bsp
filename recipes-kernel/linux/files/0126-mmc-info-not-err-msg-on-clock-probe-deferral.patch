@@ -1,7 +1,7 @@
-From e19052c6a3491bd1710ab26e8eead2df0d8085c9 Mon Sep 17 00:00:00 2001
+From d90f1a4211e6c721f9c24787a78468fd0ad9f1c9 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 12 Oct 2016 15:10:14 +0100
-Subject: [PATCH 126/215] mmc: info (not err) msg on clock probe deferral
+Subject: [PATCH 126/212] mmc: info (not err) msg on clock probe deferral
 
 ---
  drivers/mmc/host/bcm2835-mmc.c    | 5 ++++-

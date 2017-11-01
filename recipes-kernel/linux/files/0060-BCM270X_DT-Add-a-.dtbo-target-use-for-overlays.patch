@@ -1,7 +1,7 @@
-From 1f77eb6c3af0704b99bdb71ee2183cfaa32b5ac7 Mon Sep 17 00:00:00 2001
+From e8c1b13726492b90fa2b2bbf73065add3f144a13 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 13 Mar 2015 20:00:21 +0000
-Subject: [PATCH 060/215] BCM270X_DT: Add a .dtbo target, use for overlays
+Subject: [PATCH 060/212] BCM270X_DT: Add a .dtbo target, use for overlays
 
 Change the filenames and extensions to keep the pre-DDT style of
 overlay (<name>-overlay.dtb) distinct from new ones that use a

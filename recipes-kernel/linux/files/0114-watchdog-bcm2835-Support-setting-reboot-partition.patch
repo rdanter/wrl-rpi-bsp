@@ -1,7 +1,7 @@
-From 98abb9dbd1eeea92d643ae5e5088a9f888c636d1 Mon Sep 17 00:00:00 2001
+From 44305093e99abaa06c2ad0d581a9b0c616870c16 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 7 Oct 2016 16:50:59 +0200
-Subject: [PATCH 114/215] watchdog: bcm2835: Support setting reboot partition
+Subject: [PATCH 114/212] watchdog: bcm2835: Support setting reboot partition
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

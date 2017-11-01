@@ -1,7 +1,7 @@
-From d3fbdeb9ed1c90e230f2e4d984d6adca65237517 Mon Sep 17 00:00:00 2001
+From be1e88f0c2918eaae2583d5031e4e842ed844b45 Mon Sep 17 00:00:00 2001
 From: Gerhard de Clercq <gerharddeclercq@outlook.com>
 Date: Fri, 2 Dec 2016 12:15:26 +0200
-Subject: [PATCH 176/215] Add overlays symlink and dtbo target for ARM64
+Subject: [PATCH 176/212] Add overlays symlink and dtbo target for ARM64
  (#1739)
 
 Signed-off-by: Gerhard de Clercq <gerharddeclercq@outlook.com>
@@ -13,19 +13,19 @@ Signed-off-by: Gerhard de Clercq <gerharddeclercq@outlook.com>
  create mode 120000 arch/arm64/boot/dts/overlays
 
 diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-index 5b54f8c..64c6bf2 100644
+index 5b54f8c..e37ca62 100644
 --- a/arch/arm64/Makefile
 +++ b/arch/arm64/Makefile
-@@ -102,6 +102,9 @@ zinstall install:
- 
+@@ -103,6 +103,9 @@ zinstall install:
  %.dtb: scripts
  	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
-+	
+ 
 +%.dtbo: | scripts
 +	$(Q)$(MAKE) $(build)=$(boot)/dts $(boot)/dts/$@
- 
++
  PHONY += dtbs dtbs_install
  
+ dtbs: prepare scripts
 diff --git a/arch/arm64/boot/dts/Makefile b/arch/arm64/boot/dts/Makefile
 index 6e199c9..4c203fb 100644
 --- a/arch/arm64/boot/dts/Makefile

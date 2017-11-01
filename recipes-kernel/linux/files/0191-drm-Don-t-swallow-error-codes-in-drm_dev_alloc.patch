@@ -1,7 +1,7 @@
-From 2dfacb6376dca5223c1b22f0b94968286fe15565 Mon Sep 17 00:00:00 2001
+From d732e4d241544e84be57ae176a6e19713b2b6729 Mon Sep 17 00:00:00 2001
 From: Tom Gundersen <teg@jklm.no>
 Date: Wed, 21 Sep 2016 16:59:19 +0200
-Subject: [PATCH 191/215] drm: Don't swallow error codes in drm_dev_alloc()
+Subject: [PATCH 191/212] drm: Don't swallow error codes in drm_dev_alloc()
 
 There are many reasons other than ENOMEM that drm_dev_init() can
 fail. Return ERR_PTR rather than NULL to be able to distinguish
@@ -15,10 +15,10 @@ Link: http://patchwork.freedesktop.org/patch/msgid/20160921145919.13754-2-teg@jk
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_drv.c b/drivers/gpu/drm/vc4/vc4_drv.c
-index eff0530..8703f56 100644
+index ab5b9d3..246d1ae 100644
 --- a/drivers/gpu/drm/vc4/vc4_drv.c
 +++ b/drivers/gpu/drm/vc4/vc4_drv.c
-@@ -233,8 +233,8 @@ static int vc4_drm_bind(struct device *dev)
+@@ -236,8 +236,8 @@ static int vc4_drm_bind(struct device *dev)
  		return -ENOMEM;
  
  	drm = drm_dev_alloc(&vc4_drm_driver, dev);

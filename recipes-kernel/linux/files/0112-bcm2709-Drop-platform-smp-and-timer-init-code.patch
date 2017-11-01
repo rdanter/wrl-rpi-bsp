@@ -1,7 +1,7 @@
-From 00decac7e01489a896affc362c580182e904a81b Mon Sep 17 00:00:00 2001
+From cf02b0ff763a35d61b21ab5ec8044c5d56d2cab2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Sat, 8 Oct 2016 16:26:46 +0200
-Subject: [PATCH 112/215] bcm2709: Drop platform smp and timer init code
+Subject: [PATCH 112/212] bcm2709: Drop platform smp and timer init code
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

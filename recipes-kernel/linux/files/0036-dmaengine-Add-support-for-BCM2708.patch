@@ -1,7 +1,7 @@
-From 649520389acfb02ae477698869656ec5456bd77e Mon Sep 17 00:00:00 2001
+From 3b1b056950528dd4245d585607b923365a29f7f2 Mon Sep 17 00:00:00 2001
 From: Florian Meier <florian.meier@koalo.de>
 Date: Fri, 22 Nov 2013 14:22:53 +0100
-Subject: [PATCH 036/215] dmaengine: Add support for BCM2708
+Subject: [PATCH 036/212] dmaengine: Add support for BCM2708
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

@@ -1,7 +1,7 @@
-From e62b4a7013de962a8afe039074ef8c6a79cd2dc1 Mon Sep 17 00:00:00 2001
+From f1c290082e41f788794a4f50dd0eaf098bdd75d3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 25 Oct 2016 16:00:07 +0200
-Subject: [PATCH 136/215] bcm2708: Convert to ARCH_MULTIPLATFORM
+Subject: [PATCH 136/212] bcm2708: Convert to ARCH_MULTIPLATFORM
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -68,7 +68,7 @@ index 82cbd04..4578b06 100644
  
  source "arch/arm/mach-mvebu/Kconfig"
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index 275c535..ca1877e 100644
+index a29e2cf..ccf9626 100644
 --- a/arch/arm/Makefile
 +++ b/arch/arm/Makefile
 @@ -152,7 +152,6 @@ textofs-$(CONFIG_ARCH_AXXIA) := 0x00308000

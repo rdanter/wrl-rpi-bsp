@@ -1,7 +1,7 @@
-From ba6c54a1ee9cafdedbe9aaec6c2e9854085ddb44 Mon Sep 17 00:00:00 2001
+From b4fada5f1f39cc01c5a58213783879ca3d033ca4 Mon Sep 17 00:00:00 2001
 From: Michael Zoran <mzoran@crowfest.net>
 Date: Wed, 24 Aug 2016 03:35:56 -0700
-Subject: [PATCH 107/215] Add arm64 configuration and device tree differences.
+Subject: [PATCH 107/212] Add arm64 configuration and device tree differences.
  Disable MMC_BCM2835_SDHOST and MMC_BCM2835 since these drivers are crashing
  at the moment.
 

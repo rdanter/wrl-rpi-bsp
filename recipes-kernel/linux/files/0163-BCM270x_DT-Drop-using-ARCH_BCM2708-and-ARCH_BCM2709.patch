@@ -1,7 +1,7 @@
-From 87ad2d61749f5deaec1a9619e597760b50d0782e Mon Sep 17 00:00:00 2001
+From 21811e449c0b7232d1b23a0339b8856618c3501f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Sat, 12 Nov 2016 20:28:25 +0100
-Subject: [PATCH 163/215] BCM270x_DT: Drop using ARCH_BCM2708 and ARCH_BCM2709
+Subject: [PATCH 163/212] BCM270x_DT: Drop using ARCH_BCM2708 and ARCH_BCM2709
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,7 +15,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  2 files changed, 101 insertions(+), 123 deletions(-)
 
 diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
-index 0cb86b7..d59b0f0 100644
+index 14d5d4b..8445245 100644
 --- a/arch/arm/boot/dts/Makefile
 +++ b/arch/arm/boot/dts/Makefile
 @@ -1,23 +1,14 @@
@@ -49,7 +49,7 @@ index 0cb86b7..d59b0f0 100644
      dts-dirs += overlays
  endif
  
-@@ -954,6 +945,6 @@ subdir-y	:= $(dts-dirs)
+@@ -955,6 +946,6 @@ subdir-y	:= $(dts-dirs)
  clean-files	:= *.dtb
  
  # Enable fixups to support overlays on BCM2708 platforms

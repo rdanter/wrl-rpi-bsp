@@ -1,7 +1,7 @@
-From 11691e49affd43233b210ed4e0c8e860ef45397f Mon Sep 17 00:00:00 2001
+From 81847e4f32eda4372e2660b7253d10af41a1e312 Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Wed, 1 May 2013 19:46:17 +0100
-Subject: [PATCH 034/215] Add dwc_otg driver
+Subject: [PATCH 034/212] Add dwc_otg driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -697,10 +697,10 @@ index 358ca8d..abaac7c 100644
  	return i;
  }
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index f3a7408..f66bf22 100644
+index ae54ee1..499d4e4 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -5012,7 +5012,7 @@ static void port_event(struct usb_hub *hub, int port1)
+@@ -5011,7 +5011,7 @@ static void port_event(struct usb_hub *hub, int port1)
  	if (portchange & USB_PORT_STAT_C_OVERCURRENT) {
  		u16 status = 0, unused;
  
@@ -36377,7 +36377,7 @@ index 0000000..ffa8d21
 +END(_dwc_otg_fiq_stub)
 diff --git a/drivers/usb/host/dwc_otg/dwc_otg_hcd.c b/drivers/usb/host/dwc_otg/dwc_otg_hcd.c
 new file mode 100644
-index 0000000..135b611
+index 0000000..fb79515
 --- /dev/null
 +++ b/drivers/usb/host/dwc_otg/dwc_otg_hcd.c
 @@ -0,0 +1,4257 @@
@@ -37815,7 +37815,7 @@ index 0000000..135b611
 +		fiq_fsm_spin_unlock(&hcd->fiq_state->lock);
 +		local_fiq_enable();
 +	}
-+	
++
 +	local_irq_restore(flags);
 +	hc->qh = qh;
 +}
@@ -43069,7 +43069,7 @@ index 0000000..fb57db0
 +#endif /* DWC_DEVICE_ONLY */
 diff --git a/drivers/usb/host/dwc_otg/dwc_otg_hcd_intr.c b/drivers/usb/host/dwc_otg/dwc_otg_hcd_intr.c
 new file mode 100644
-index 0000000..e6b38ac
+index 0000000..68fb754
 --- /dev/null
 +++ b/drivers/usb/host/dwc_otg/dwc_otg_hcd_intr.c
 @@ -0,0 +1,2727 @@
@@ -45690,7 +45690,7 @@ index 0000000..e6b38ac
 +		break;
 +
 +	default:
-+		DWC_WARN("Unexpected state received on hc=%d fsm=%d on transfer to device %d ep 0x%x", 
++		DWC_WARN("Unexpected state received on hc=%d fsm=%d on transfer to device %d ep 0x%x",
 +					hc->hc_num, st->fsm, hc->dev_addr, hc->ep_num);
 +		qtd->error_count++;
 +		release_channel(hcd, hc, qtd, DWC_OTG_HC_XFER_NO_HALT_STATUS);

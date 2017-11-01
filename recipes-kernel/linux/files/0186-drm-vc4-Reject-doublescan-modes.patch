@@ -1,7 +1,7 @@
-From 6212ad07e4edb2c7cba6ab049e02973acefebf01 Mon Sep 17 00:00:00 2001
+From 101a1d275c2e7489b2b8218afbe67459ba825c32 Mon Sep 17 00:00:00 2001
 From: Mario Kleiner <mario.kleiner.de@gmail.com>
 Date: Tue, 19 Jul 2016 20:58:59 +0200
-Subject: [PATCH 186/215] drm/vc4: Reject doublescan modes.
+Subject: [PATCH 186/212] drm/vc4: Reject doublescan modes.
 
 We can't handle doublescan modes at the moment, so if
 userspace tries to set one, reject the mode set.
@@ -13,10 +13,10 @@ Signed-off-by: Eric Anholt <eric@anholt.net>
  1 file changed, 7 insertions(+)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
-index a479d3d..2bfa247 100644
+index b643223..489dbd3 100644
 --- a/drivers/gpu/drm/vc4/vc4_crtc.c
 +++ b/drivers/gpu/drm/vc4/vc4_crtc.c
-@@ -536,6 +536,13 @@ static bool vc4_crtc_mode_fixup(struct drm_crtc *crtc,
+@@ -535,6 +535,13 @@ static bool vc4_crtc_mode_fixup(struct drm_crtc *crtc,
  				const struct drm_display_mode *mode,
  				struct drm_display_mode *adjusted_mode)
  {

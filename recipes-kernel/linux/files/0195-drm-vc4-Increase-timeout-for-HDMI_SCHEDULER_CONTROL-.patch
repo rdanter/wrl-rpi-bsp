@@ -1,7 +1,7 @@
-From 5aed62761faffa36631309df7cbc68b5de526164 Mon Sep 17 00:00:00 2001
+From 8824dc510eed42d1add87249b8a0d2a3d0b743a8 Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 28 Sep 2016 17:21:05 -0700
-Subject: [PATCH 195/215] drm/vc4: Increase timeout for HDMI_SCHEDULER_CONTROL
+Subject: [PATCH 195/212] drm/vc4: Increase timeout for HDMI_SCHEDULER_CONTROL
  changes.
 
 Fixes occasional debug spew at boot when connected directly through

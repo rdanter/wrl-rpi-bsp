@@ -1,7 +1,7 @@
-From 291921aa350f3db311528241d8399d4dcbfc2a36 Mon Sep 17 00:00:00 2001
+From 6cf937b17391efcafaeba95a02fcb75895235188 Mon Sep 17 00:00:00 2001
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 Date: Wed, 10 Aug 2016 18:52:34 +0200
-Subject: [PATCH 200/215] drm/fb-helper: Add a dummy
+Subject: [PATCH 200/212] drm/fb-helper: Add a dummy
  remove_conflicting_framebuffers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

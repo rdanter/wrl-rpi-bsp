@@ -1,7 +1,7 @@
-From b29f45cef00003c7737c134c297c1de9a4af69e4 Mon Sep 17 00:00:00 2001
+From 8dfb915e3211853d340489ebc4c814bbf7a67aaf Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Fri, 4 Mar 2016 12:49:09 +0000
-Subject: [PATCH 094/215] DRM_VC4: Allow to be built for ARCH_BCM270x
+Subject: [PATCH 094/212] DRM_VC4: Allow to be built for ARCH_BCM270x
 
 ---
  drivers/gpu/drm/vc4/Kconfig | 2 +-

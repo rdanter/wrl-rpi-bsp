@@ -1,7 +1,7 @@
-From 02ef0f3c128bbae76da7265c4a6f66c840fd7d25 Mon Sep 17 00:00:00 2001
+From 65c660b174210a8875dd50dfce1791e13e226d8b Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 6 Feb 2015 13:50:57 +0000
-Subject: [PATCH 062/215] BCM270x_DT: Add pwr_led, and the required "input"
+Subject: [PATCH 062/212] BCM270x_DT: Add pwr_led, and the required "input"
  trigger
 
 The "input" trigger makes the associated GPIO an input.  This is to support

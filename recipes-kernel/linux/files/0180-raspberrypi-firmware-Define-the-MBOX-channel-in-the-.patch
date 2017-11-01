@@ -1,7 +1,7 @@
-From c5cc72142f9d55e9b6810f7bf748bfbb5e316139 Mon Sep 17 00:00:00 2001
+From c5da22ec0a2bce1aa545d647746435bfb4229adf Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Wed, 14 Sep 2016 09:18:09 +0100
-Subject: [PATCH 180/215] raspberrypi-firmware: Define the MBOX channel in the
+Subject: [PATCH 180/212] raspberrypi-firmware: Define the MBOX channel in the
  header.
 
 Signed-off-by: Eric Anholt <eric@anholt.net>

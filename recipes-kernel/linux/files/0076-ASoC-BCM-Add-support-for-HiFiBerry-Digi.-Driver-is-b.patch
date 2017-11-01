@@ -1,7 +1,7 @@
-From 930cbc8969dd1e37d10cbd961ed2047758576a69 Mon Sep 17 00:00:00 2001
+From 4047aef0aa00ee25f491eda8725018cdc257e887 Mon Sep 17 00:00:00 2001
 From: Daniel Matuschek <info@crazy-audio.com>
 Date: Wed, 15 Jan 2014 21:42:08 +0100
-Subject: [PATCH 076/215] ASoC: BCM:Add support for HiFiBerry Digi. Driver is
+Subject: [PATCH 076/212] ASoC: BCM:Add support for HiFiBerry Digi. Driver is
  based on the patched WM8804 driver.
 
 Signed-off-by: Daniel Matuschek <daniel@matuschek.net>
@@ -60,7 +60,7 @@ index 0950191..862f00f 100644
  obj-$(CONFIG_SND_BCM2708_SOC_RPI_DAC) += snd-soc-rpi-dac.o
 diff --git a/sound/soc/bcm/hifiberry_digi.c b/sound/soc/bcm/hifiberry_digi.c
 new file mode 100644
-index 0000000..9840e15
+index 0000000..8fe6ecd
 --- /dev/null
 +++ b/sound/soc/bcm/hifiberry_digi.c
 @@ -0,0 +1,224 @@
@@ -153,7 +153,7 @@ index 0000000..9840e15
 +		mclk_freq=samplerate*128;
 +		mclk_div=WM8804_MCLKDIV_128FS;
 +	}
-+	
++
 +	switch (samplerate) {
 +		case 32000:
 +			sampling_freq=0x03;

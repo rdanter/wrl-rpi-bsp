@@ -1,7 +1,7 @@
-From f5378fc8741bac92e1ec5864f711ce80452fd000 Mon Sep 17 00:00:00 2001
+From 962c4f6b45f3eb3e7eec5f6f9a59c01c30810601 Mon Sep 17 00:00:00 2001
 From: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
 Date: Fri, 19 Aug 2016 11:39:29 +0300
-Subject: [PATCH 183/215] drm: Don't implement empty prepare_fb()/cleanup_fb()
+Subject: [PATCH 183/212] drm: Don't implement empty prepare_fb()/cleanup_fb()
 
 The plane .prepare_fb() and .cleanup_fb() helpers are optional, there's
 no need to implement empty stubs, and no need to explicitly set the

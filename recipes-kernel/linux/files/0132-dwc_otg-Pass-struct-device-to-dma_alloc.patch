@@ -1,7 +1,7 @@
-From f0cedd1c4c3f92aee727d40912eaeb7c528cdf54 Mon Sep 17 00:00:00 2001
+From b90bfaf3fafa1e3f724b8610c86f03dfeeca9cef Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 19 Oct 2016 16:01:01 +0200
-Subject: [PATCH 132/215] dwc_otg: Pass struct device to dma_alloc*()
+Subject: [PATCH 132/212] dwc_otg: Pass struct device to dma_alloc*()
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -12,7 +12,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
 ---
  .../usb/host/dwc_common_port/dwc_common_linux.c    | 19 +----
  drivers/usb/host/dwc_common_port/dwc_os.h          | 18 ++---
- drivers/usb/host/dwc_otg/dwc_otg_hcd.c             | 13 ++--
+ drivers/usb/host/dwc_otg/dwc_otg_hcd.c             | 11 ++-
  drivers/usb/host/dwc_otg/dwc_otg_hcd.h             |  6 ++
  drivers/usb/host/dwc_otg/dwc_otg_hcd_ddma.c        | 23 ++++--
  drivers/usb/host/dwc_otg/dwc_otg_hcd_linux.c       |  2 +-
@@ -22,7 +22,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  drivers/usb/host/dwc_otg/dwc_otg_pcd_if.h          |  3 +-
  drivers/usb/host/dwc_otg/dwc_otg_pcd_intr.c        |  3 +-
  drivers/usb/host/dwc_otg/dwc_otg_pcd_linux.c       |  2 +-
- 12 files changed, 105 insertions(+), 81 deletions(-)
+ 12 files changed, 104 insertions(+), 80 deletions(-)
 
 diff --git a/drivers/usb/host/dwc_common_port/dwc_common_linux.c b/drivers/usb/host/dwc_common_port/dwc_common_linux.c
 index 4664684..0d641e6 100644
@@ -95,7 +95,7 @@ index a2bbe23..9a86d29 100644
  
  # if defined(DWC_FREEBSD) || defined(DWC_NETBSD)
 diff --git a/drivers/usb/host/dwc_otg/dwc_otg_hcd.c b/drivers/usb/host/dwc_otg/dwc_otg_hcd.c
-index 135b611..027414b 100644
+index fb79515..027414b 100644
 --- a/drivers/usb/host/dwc_otg/dwc_otg_hcd.c
 +++ b/drivers/usb/host/dwc_otg/dwc_otg_hcd.c
 @@ -884,6 +884,7 @@ void dwc_otg_cleanup_fiq_channel(dwc_otg_hcd_t *hcd, uint32_t num)
@@ -158,15 +158,6 @@ index 135b611..027414b 100644
  							 &qh->dw_align_buf_dma);
  			if (!qh->dw_align_buf) {
  				DWC_ERROR
-@@ -1432,7 +1435,7 @@ static void assign_and_init_hc(dwc_otg_hcd_t * hcd, dwc_otg_qh_t * qh)
- 		fiq_fsm_spin_unlock(&hcd->fiq_state->lock);
- 		local_fiq_enable();
- 	}
--	
-+
- 	local_irq_restore(flags);
- 	hc->qh = qh;
- }
 diff --git a/drivers/usb/host/dwc_otg/dwc_otg_hcd.h b/drivers/usb/host/dwc_otg/dwc_otg_hcd.h
 index 43dbed9..4539cd7 100644
 --- a/drivers/usb/host/dwc_otg/dwc_otg_hcd.h

@@ -1,7 +1,7 @@
-From 3712ced6ffe7e401c0a046f282fa61c8b9cd6d20 Mon Sep 17 00:00:00 2001
+From 50cc1fdcd00ff0c12426a1a014bd3dfe6fc0c3f5 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Fri, 7 Oct 2016 12:37:09 +0100
-Subject: [PATCH 109/215] scripts/mkknlimg: Change string for DDT detection
+Subject: [PATCH 109/212] scripts/mkknlimg: Change string for DDT detection
 
 The old "of_overlay_apply" string does not appear in 4.8 kernel builds.
 "of_cfs_init" is both present and a more accurate indication of support

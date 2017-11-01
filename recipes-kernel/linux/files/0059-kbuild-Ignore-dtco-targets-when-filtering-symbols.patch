@@ -1,7 +1,7 @@
-From 480de1ba43c1c1b40060848af3a7d956552085c1 Mon Sep 17 00:00:00 2001
+From 0d601546e2f8a8fccaf7040a5e5b2b0bc7261453 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.org>
 Date: Wed, 24 Aug 2016 16:28:44 +0100
-Subject: [PATCH 059/215] kbuild: Ignore dtco targets when filtering symbols
+Subject: [PATCH 059/212] kbuild: Ignore dtco targets when filtering symbols
 
 ---
  scripts/Kbuild.include | 2 +-

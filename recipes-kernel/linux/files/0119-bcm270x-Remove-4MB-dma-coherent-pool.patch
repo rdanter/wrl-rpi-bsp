@@ -1,7 +1,7 @@
-From 7100bbeb8444caed6e33ce4d6d7f2e81f151a240 Mon Sep 17 00:00:00 2001
+From e2b99139e88a96c30204218b5980b41329010c04 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Mon, 10 Oct 2016 17:46:27 +0200
-Subject: [PATCH 119/215] bcm270x: Remove 4MB dma coherent pool
+Subject: [PATCH 119/212] bcm270x: Remove 4MB dma coherent pool
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

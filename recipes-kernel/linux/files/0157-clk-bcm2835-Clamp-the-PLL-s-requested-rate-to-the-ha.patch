@@ -1,7 +1,7 @@
-From 45eef9a7111a536cb453965b984de463f02bf0b1 Mon Sep 17 00:00:00 2001
+From 5c4478b28b913fc11cdfe2926d9c7234d4181f0e Mon Sep 17 00:00:00 2001
 From: Eric Anholt <eric@anholt.net>
 Date: Fri, 30 Sep 2016 10:07:27 -0700
-Subject: [PATCH 157/215] clk: bcm2835: Clamp the PLL's requested rate to the
+Subject: [PATCH 157/212] clk: bcm2835: Clamp the PLL's requested rate to the
  hardware limits.
 
 Fixes setting low-resolution video modes on HDMI.  Now the PLLH_PIX
@@ -14,7 +14,7 @@ Signed-off-by: Stephen Boyd <sboyd@codeaurora.org>
  1 file changed, 4 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/clk/bcm/clk-bcm2835.c b/drivers/clk/bcm/clk-bcm2835.c
-index cbbc8d4..89645d6 100644
+index b74fa37..898a818 100644
 --- a/drivers/clk/bcm/clk-bcm2835.c
 +++ b/drivers/clk/bcm/clk-bcm2835.c
 @@ -502,8 +502,12 @@ static long bcm2835_pll_rate_from_divisors(unsigned long parent_rate,

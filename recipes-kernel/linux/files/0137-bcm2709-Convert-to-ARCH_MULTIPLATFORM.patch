@@ -1,7 +1,7 @@
-From 84412aabe1d8e02cd3aaad65260c89b0eea16417 Mon Sep 17 00:00:00 2001
+From 2e1e997da51aaae3000de27c2a6f52bcb4d665b8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Tue, 25 Oct 2016 16:02:39 +0200
-Subject: [PATCH 137/215] bcm2709: Convert to ARCH_MULTIPLATFORM
+Subject: [PATCH 137/212] bcm2709: Convert to ARCH_MULTIPLATFORM
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -71,7 +71,7 @@ index 4578b06..a9c4e48 100644
  
  source "arch/arm/mach-alpine/Kconfig"
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index ca1877e..5eb5aef 100644
+index ccf9626..824daff 100644
 --- a/arch/arm/Makefile
 +++ b/arch/arm/Makefile
 @@ -152,7 +152,6 @@ textofs-$(CONFIG_ARCH_AXXIA) := 0x00308000

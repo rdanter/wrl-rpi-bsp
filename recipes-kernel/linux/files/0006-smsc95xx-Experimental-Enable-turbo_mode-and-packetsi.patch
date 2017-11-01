@@ -1,7 +1,7 @@
-From 602eb116eeeb6be01c79600313bd7486f2c9a470 Mon Sep 17 00:00:00 2001
+From 80c7e308304903421617c1a863f276f91cb04c8a Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Tue, 9 Aug 2016 22:19:28 +0100
-Subject: [PATCH 006/215] smsc95xx: Experimental: Enable turbo_mode and
+Subject: [PATCH 006/212] smsc95xx: Experimental: Enable turbo_mode and
  packetsize=2560 by default
 
 See: http://forum.kodi.tv/showthread.php?tid=285288

@@ -1,7 +1,7 @@
-From 0f9af804280b81b8cde2fcaa8cb6204bb1a2fbec Mon Sep 17 00:00:00 2001
+From d0ee7191ecdec95c5b5724206cc37cba2b98283b Mon Sep 17 00:00:00 2001
 From: Phil Elwell <pelwell@users.noreply.github.com>
 Date: Tue, 15 Nov 2016 15:58:49 +0000
-Subject: [PATCH 165/215] mkknlimg: Retain downstream-kernel detection
+Subject: [PATCH 165/212] mkknlimg: Retain downstream-kernel detection
 
 With the death of ARCH_BCM2708 and ARCH_BCM2709, a new way is needed to
 determine if this is a "downstream" build that wants the firmware to

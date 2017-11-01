@@ -1,7 +1,7 @@
-From 392e41209932cb9dc85bf71d5ff6430dc49fb5b4 Mon Sep 17 00:00:00 2001
+From 57482a7d473137d78f33e18979747090aa6d4aa2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Wed, 19 Oct 2016 16:16:48 +0200
-Subject: [PATCH 134/215] bcm270x: Drop NEED_MACH_MEMORY_H and use DT
+Subject: [PATCH 134/212] bcm270x: Drop NEED_MACH_MEMORY_H and use DT
  dma-ranges
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

@@ -1,7 +1,7 @@
-From 12988250cf37af8f67c96919dbfe503422735b5f Mon Sep 17 00:00:00 2001
+From d05289522cebd37d17e8d1361e98aee251111d3e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
 Date: Fri, 26 Jun 2015 14:25:01 +0200
-Subject: [PATCH 054/215] firmware: bcm2835: Support ARCH_BCM270x
+Subject: [PATCH 054/212] firmware: bcm2835: Support ARCH_BCM270x
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -17,7 +17,7 @@ Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
  1 file changed, 39 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/firmware/raspberrypi.c b/drivers/firmware/raspberrypi.c
-index dd506cd3..b980d53 100644
+index dd506cd..b980d53 100644
 --- a/drivers/firmware/raspberrypi.c
 +++ b/drivers/firmware/raspberrypi.c
 @@ -28,6 +28,8 @@ struct rpi_firmware {

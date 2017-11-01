@@ -1,7 +1,7 @@
-From 9c086954469247657d126b167f946d5c74920baf Mon Sep 17 00:00:00 2001
+From 1b28c98dd6def3a7492a86b0fabe5bb5347d469a Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Sat, 5 Nov 2016 14:14:43 +0000
-Subject: [PATCH 159/215] bcm2708_fb: Add ioctl for reading gpu memory through
+Subject: [PATCH 159/212] bcm2708_fb: Add ioctl for reading gpu memory through
  dma
 
 ---
