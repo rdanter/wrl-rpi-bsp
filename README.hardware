@@ -1,0 +1,23 @@
+Raspberry Pi BSP
+================
+
+1. Supported Boards
+-------------------
+
+This BSP supports the following boards:
+
+	* Raspberry Pi
+
+Untested, but these should also work:
+
+	* Raspberry Pi Zero
+	* Raspberry Pi Zero Wireless
+	* Compute Module
+
+
+2. Change History
+-----------------
+
+- 2017-10-02	Initial Release.
+		Tested on RPi using WR Linux 9 RCPL 11.
+
