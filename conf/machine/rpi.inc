@@ -14,7 +14,6 @@ KERNEL_IMAGETYPE = "Image"
 
 SERIAL_CONSOLE = "115200 ttyAMA0"
 
-UBOOT_MACHINE = "rpi_config"
 VC4_CMA_SIZE_rpi = "cma-64"
 
 IMAGE_FSTYPES ?= "tar.bz2"
