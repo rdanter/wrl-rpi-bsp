@@ -92,8 +92,8 @@ Then build the platform with:
 
 	$ sudo mount -t vfat /dev/mmcblk0p1 /mnt
 	$ cd /mnt
-	$ sudo cp -a ~/Work/rpi/broadcom/* .
-	$ sudo cp ~/Work/rpi/WRL9p11/Image.bin kernel.img
+	$ sudo cp -a <layerDir>/bootloader/broadcom/* .
+	$ sudo cp <prjDir>/build/tmp/deploy/images/rpi/Image kernel.img
 
 If necessary, edit the cmdline.txt and/or config.txt files, then:
 
@@ -105,7 +105,7 @@ If necessary, edit the cmdline.txt and/or config.txt files, then:
 
 	$ sudo mount -t ext4 /dev/mmcblk0p2 /mnt
 	$ cd /mnt
-	$ sudo tar jxpf ~/Work/rpi/WRL9p11/wrlinux-image-glibc-std-rpi.tar.bz2 
+	$ sudo tar jxpf <prjDir>/build/tmp/deploy/images/rpi/wrlinux-image-glibc-std-rpi.tar.bz2
 
 Optionally, enable mount of the boot partition on /boot of the rootfs:
 
