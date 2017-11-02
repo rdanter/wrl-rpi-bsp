@@ -20,6 +20,7 @@ Then build the platform with:
 
 	$ bitbake wrlinux-image-glibc-std
 
+
 2. Boot Instructions
 --------------------
 
@@ -92,7 +93,7 @@ Then build the platform with:
 
 	$ sudo mount -t vfat /dev/mmcblk0p1 /mnt
 	$ cd /mnt
-	$ sudo cp -a <layerDir>/bootloader/broadcom/* .
+	$ sudo cp -r <layerDir>/bootloader/broadcom/* .
 	$ sudo cp <prjDir>/build/tmp/deploy/images/rpi/Image kernel.img
 
 If necessary, edit the cmdline.txt and/or config.txt files, then:
