@@ -37,7 +37,7 @@ and, if required, build the SDK with:
 then install with:
 
 	$ cd tmp/deploy/sdk/
-	$ ./wrlinux-9.0.0.11-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
+	$ ./wrlinux-9.0.0.12-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
 
 See the User Guide for SDK usage instructions.
 
