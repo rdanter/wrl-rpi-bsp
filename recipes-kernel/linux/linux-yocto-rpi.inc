@@ -1,5 +1,7 @@
 # Raspberry Pi
 
+COMPATIBLE_MACHINE = "${MACHINE}"
+
 # Currently, only the standard kernel is supported
 TARGET_SUPPORTED_KTYPES_rpi = "standard"
 
