@@ -1,0 +1,28 @@
+From b51a9b42bc5add9f78a791c459b2e951d94a7c75 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 1 Sep 2017 17:47:32 +0100
+Subject: [PATCH 208/215] vcsm: Fix "Prefer kcalloc over kzalloc with multiply"
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vmcs_sm.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index ecff69d..ea82a37 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -2984,7 +2984,9 @@ static long vc_sm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 					ret = -EFAULT;
+ 					goto out;
+ 				}
+-				block = kzalloc(ioparam.op_count * sizeof(struct vmcs_sm_ioctl_clean_invalid_block), GFP_KERNEL);
++				block = kcalloc(ioparam.op_count,
++						sizeof(struct vmcs_sm_ioctl_clean_invalid_block),
++						GFP_KERNEL);
+ 				if (!block) {
+ 					ret = -EFAULT;
+ 					goto out;
+-- 
+1.9.1
+

@@ -1,0 +1,50 @@
+From ebe8b82cf97b5f5ed888e3c68b6e5b9d9736f47a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 19 Jul 2017 15:20:50 +0100
+Subject: [PATCH 184/215] overlays: i2c1-bcm2708: Don't overwrite i2c1 pins
+ node
+
+It is bad practise to overwrite an entire node in an overlay. Instead,
+target the node and overwrite any properties that need changing.
+
+See: https://github.com/raspberrypi/linux/pull/2118
+
+Suggested-by: soodvarun78 <soodvarun78@gmail.com>
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts b/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts
+index e303b9c..7c69047 100644
+--- a/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c1-bcm2708-overlay.dts
+@@ -20,18 +20,15 @@
+    };
+ 
+    fragment@1 {
+-      target = <&gpio>;
+-      __overlay__ {
+-         i2c1_pins: i2c1 {
+-            brcm,pins = <2 3>;
+-            brcm,function = <4>; /* alt0 */
+-         };
++      target = <&i2c1_pins>;
++         pins: __overlay__ {
++         brcm,pins = <2 3>;
++         brcm,function = <4>; /* alt 0 */
+       };
+    };
+-
+    __overrides__ {
+-      sda1_pin = <&i2c1_pins>,"brcm,pins:0";
+-      scl1_pin = <&i2c1_pins>,"brcm,pins:4";
+-      pin_func = <&i2c1_pins>,"brcm,function:0";
++      sda1_pin = <&pins>,"brcm,pins:0";
++      scl1_pin = <&pins>,"brcm,pins:4";
++      pin_func = <&pins>,"brcm,function:0";
+    };
+ };
+-- 
+1.9.1
+

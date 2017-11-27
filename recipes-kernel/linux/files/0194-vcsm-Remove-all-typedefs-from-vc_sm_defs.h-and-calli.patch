@@ -1,0 +1,509 @@
+From ece569f7c7a86c32a337d21e302a16255237ea35 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 1 Sep 2017 16:26:12 +0100
+Subject: [PATCH 194/215] vcsm: Remove all typedefs from vc_sm_defs.h and
+ calling code
+
+Remove typedefs on the structures that make up the IPC
+to the firmware for VCSM. Update all calling code appropriately.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vc_sm_defs.h | 83 ++++++++++++++++----------------
+ drivers/char/broadcom/vc_sm/vc_sm_knl.h  |  2 +-
+ drivers/char/broadcom/vc_sm/vc_vchi_sm.c | 34 +++++++------
+ drivers/char/broadcom/vc_sm/vc_vchi_sm.h | 19 ++++----
+ drivers/char/broadcom/vc_sm/vmcs_sm.c    | 26 +++++-----
+ 5 files changed, 84 insertions(+), 80 deletions(-)
+
+diff --git a/drivers/char/broadcom/vc_sm/vc_sm_defs.h b/drivers/char/broadcom/vc_sm/vc_sm_defs.h
+index bf05796..29057db 100644
+--- a/drivers/char/broadcom/vc_sm/vc_sm_defs.h
++++ b/drivers/char/broadcom/vc_sm/vc_sm_defs.h
+@@ -19,14 +19,14 @@
+ #define VC_SM_SERVER_NAME MAKE_FOURCC("SMEM")
+ 
+ /* Maximum message length */
+-#define VC_SM_MAX_MSG_LEN (sizeof(VC_SM_MSG_UNION_T) + \
+-	sizeof(VC_SM_MSG_HDR_T))
+-#define VC_SM_MAX_RSP_LEN (sizeof(VC_SM_MSG_UNION_T))
++#define VC_SM_MAX_MSG_LEN (sizeof(union vc_sm_msg_union_t) + \
++	sizeof(struct vc_sm_msg_hdr_t))
++#define VC_SM_MAX_RSP_LEN (sizeof(union vc_sm_msg_union_t))
+ 
+ /* Resource name maximum size */
+ #define VC_SM_RESOURCE_NAME 32
+ 
+-typedef enum {
++enum vc_sm_msg_type {
+ 	/* Message types supported for HOST->VC direction */
+ 
+ 	/* Allocate shared memory block */
+@@ -62,27 +62,26 @@
+ 	VC_SM_MSG_TYPE_RELEASED,
+ 
+ 	VC_SM_MSG_TYPE_MAX
+-} VC_SM_MSG_TYPE;
++};
+ 
+ /* Type of memory to be allocated */
+-typedef enum {
++enum vc_sm_alloc_type_t {
+ 	VC_SM_ALLOC_CACHED,
+ 	VC_SM_ALLOC_NON_CACHED,
+-
+-} VC_SM_ALLOC_TYPE_T;
++};
+ 
+ /* Message header for all messages in HOST->VC direction */
+-typedef struct {
++struct vc_sm_msg_hdr_t {
+ 	int32_t type;
+ 	uint32_t trans_id;
+ 	uint8_t body[0];
+ 
+-} VC_SM_MSG_HDR_T;
++};
+ 
+ /* Request to allocate memory (HOST->VC) */
+-typedef struct {
++struct vc_sm_alloc_t {
+ 	/* type of memory to allocate */
+-	VC_SM_ALLOC_TYPE_T type;
++	enum vc_sm_alloc_type_t type;
+ 	/* byte amount of data to allocate per unit */
+ 	uint32_t base_unit;
+ 	/* number of unit to allocate */
+@@ -94,10 +93,10 @@
+ 	/* resource name (for easier tracking on vc side) */
+ 	char name[VC_SM_RESOURCE_NAME];
+ 
+-} VC_SM_ALLOC_T;
++};
+ 
+ /* Result of a requested memory allocation (VC->HOST) */
+-typedef struct {
++struct vc_sm_alloc_result_t {
+ 	/* Transaction identifier */
+ 	uint32_t trans_id;
+ 
+@@ -110,28 +109,28 @@
+ 	/* Resource number */
+ 	uint32_t res_num;
+ 
+-} VC_SM_ALLOC_RESULT_T;
++};
+ 
+ /* Request to free a previously allocated memory (HOST->VC) */
+-typedef struct {
++struct vc_sm_free_t {
+ 	/* Resource handle (returned from alloc) */
+ 	uint32_t res_handle;
+ 	/* Resource buffer (returned from alloc) */
+ 	uint32_t res_mem;
+ 
+-} VC_SM_FREE_T;
++};
+ 
+ /* Request to lock a previously allocated memory (HOST->VC) */
+-typedef struct {
++struct vc_sm_lock_unlock_t {
+ 	/* Resource handle (returned from alloc) */
+ 	uint32_t res_handle;
+ 	/* Resource buffer (returned from alloc) */
+ 	uint32_t res_mem;
+ 
+-} VC_SM_LOCK_UNLOCK_T;
++};
+ 
+ /* Request to resize a previously allocated memory (HOST->VC) */
+-typedef struct {
++struct vc_sm_resize_t {
+ 	/* Resource handle (returned from alloc) */
+ 	uint32_t res_handle;
+ 	/* Resource buffer (returned from alloc) */
+@@ -139,10 +138,10 @@
+ 	/* Resource *new* size requested (bytes) */
+ 	uint32_t res_new_size;
+ 
+-} VC_SM_RESIZE_T;
++};
+ 
+ /* Result of a requested memory lock (VC->HOST) */
+-typedef struct {
++struct vc_sm_lock_result_t {
+ 	/* Transaction identifier */
+ 	uint32_t trans_id;
+ 
+@@ -154,37 +153,36 @@
+ 	 * was reallocated */
+ 	uint32_t res_old_mem;
+ 
+-} VC_SM_LOCK_RESULT_T;
++};
+ 
+ /* Generic result for a request (VC->HOST) */
+-typedef struct {
++struct vc_sm_result_t {
+ 	/* Transaction identifier */
+ 	uint32_t trans_id;
+ 
+ 	int32_t success;
+ 
+-} VC_SM_RESULT_T;
++};
+ 
+ /* Request to revert a previously applied action (HOST->VC) */
+-typedef struct {
++struct vc_sm_action_clean_t {
+ 	/* Action of interest */
+-	VC_SM_MSG_TYPE res_action;
++	enum vc_sm_msg_type res_action;
+ 	/* Transaction identifier for the action of interest */
+ 	uint32_t action_trans_id;
+ 
+-} VC_SM_ACTION_CLEAN_T;
++};
+ 
+ /* Request to remove all data associated with a given allocator (HOST->VC) */
+-typedef struct {
++struct vc_sm_free_all_t {
+ 	/* Allocator identifier */
+ 	uint32_t allocator;
+-
+-} VC_SM_FREE_ALL_T;
++};
+ 
+ /* Request to import memory (HOST->VC) */
+ struct vc_sm_import {
+ 	/* type of memory to allocate */
+-	VC_SM_ALLOC_TYPE_T type;
++	enum vc_sm_alloc_type_t type;
+ 	/* pointer to the VC (ie physical) address of the allocated memory */
+ 	uint32_t addr;
+ 	/* size of buffer */
+@@ -217,18 +215,19 @@ struct vc_sm_released {
+ };
+ 
+ /* Union of ALL messages */
+-typedef union {
+-	VC_SM_ALLOC_T alloc;
+-	VC_SM_ALLOC_RESULT_T alloc_result;
+-	VC_SM_FREE_T free;
+-	VC_SM_ACTION_CLEAN_T action_clean;
+-	VC_SM_RESIZE_T resize;
+-	VC_SM_LOCK_RESULT_T lock_result;
+-	VC_SM_RESULT_T result;
+-	VC_SM_FREE_ALL_T free_all;
++union vc_sm_msg_union_t {
++	struct vc_sm_alloc_t alloc;
++	struct vc_sm_alloc_result_t alloc_result;
++	struct vc_sm_free_t free;
++	struct vc_sm_lock_unlock_t lock_unlock;
++	struct vc_sm_action_clean_t action_clean;
++	struct vc_sm_resize_t resize;
++	struct vc_sm_lock_result_t lock_result;
++	struct vc_sm_result_t result;
++	struct vc_sm_free_all_t free_all;
+ 	struct vc_sm_import import;
+ 	struct vc_sm_import_result import_result;
+ 	struct vc_sm_released released;
+-} VC_SM_MSG_UNION_T;
++};
+ 
+ #endif /* __VC_SM_DEFS_H__INCLUDED__ */
+diff --git a/drivers/char/broadcom/vc_sm/vc_sm_knl.h b/drivers/char/broadcom/vc_sm/vc_sm_knl.h
+index 31050d3..3c684dd 100644
+--- a/drivers/char/broadcom/vc_sm/vc_sm_knl.h
++++ b/drivers/char/broadcom/vc_sm/vc_sm_knl.h
+@@ -27,7 +27,7 @@
+ } VC_SM_LOCK_CACHE_MODE_T;
+ 
+ /* Allocate a shared memory handle and block. */
+-int vc_sm_alloc(VC_SM_ALLOC_T *alloc, int *handle);
++int vc_sm_alloc(struct vc_sm_alloc_t *alloc, int *handle);
+ 
+ /* Free a previously allocated shared memory handle and block. */
+ int vc_sm_free(int handle);
+diff --git a/drivers/char/broadcom/vc_sm/vc_vchi_sm.c b/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
+index 53fc11a..a702b0c 100644
+--- a/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
++++ b/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
+@@ -83,11 +83,11 @@ struct sm_instance {
+ 
+ static struct
+ sm_cmd_rsp_blk *vc_vchi_cmd_create(struct sm_instance *instance,
+-		VC_SM_MSG_TYPE id, void *msg,
++		enum vc_sm_msg_type id, void *msg,
+ 		uint32_t size, int wait)
+ {
+ 	struct sm_cmd_rsp_blk *blk;
+-	VC_SM_MSG_HDR_T *hdr;
++	struct vc_sm_msg_hdr_t *hdr;
+ 
+ 	if (down_interruptible(&instance->free_sema)) {
+ 		blk = kmalloc(sizeof(*blk), GFP_KERNEL);
+@@ -109,7 +109,7 @@ sm_cmd_rsp_blk *vc_vchi_cmd_create(struct sm_instance *instance,
+ 	blk->wait = wait;
+ 	blk->length = sizeof(*hdr) + size;
+ 
+-	hdr = (VC_SM_MSG_HDR_T *) blk->msg;
++	hdr = (struct vc_sm_msg_hdr_t *) blk->msg;
+ 	hdr->type = id;
+ 	mutex_lock(&instance->lock);
+ 	hdr->trans_id = blk->id = ++instance->trans_id;
+@@ -139,7 +139,7 @@ static int vc_vchi_sm_videocore_io(void *arg)
+ {
+ 	struct sm_instance *instance = arg;
+ 	struct sm_cmd_rsp_blk *cmd = NULL, *cmd_tmp;
+-	VC_SM_RESULT_T *reply;
++	struct vc_sm_result_t *reply;
+ 	uint32_t reply_len;
+ 	int32_t status;
+ 	int svc_use = 1;
+@@ -374,7 +374,7 @@ int vc_vchi_sm_stop(VC_VCHI_SM_HANDLE_T *handle)
+ }
+ 
+ int vc_vchi_sm_send_msg(VC_VCHI_SM_HANDLE_T handle,
+-			VC_SM_MSG_TYPE msg_id,
++			enum vc_sm_msg_type msg_id,
+ 			void *msg, uint32_t msg_size,
+ 			void *result, uint32_t result_size,
+ 			uint32_t *cur_trans_id, uint8_t wait_reply)
+@@ -433,7 +433,8 @@ int vc_vchi_sm_send_msg(VC_VCHI_SM_HANDLE_T handle,
+ 	if (result && result_size) {
+ 		memcpy(result, cmd_blk->msg, result_size);
+ 	} else {
+-		VC_SM_RESULT_T *res = (VC_SM_RESULT_T *) cmd_blk->msg;
++		struct vc_sm_result_t *res =
++			(struct vc_sm_result_t *) cmd_blk->msg;
+ 		status = (res->success == 0) ? 0 : -ENXIO;
+ 	}
+ 
+@@ -444,8 +445,9 @@ int vc_vchi_sm_send_msg(VC_VCHI_SM_HANDLE_T handle,
+ 	return status;
+ }
+ 
+-int vc_vchi_sm_alloc(VC_VCHI_SM_HANDLE_T handle, VC_SM_ALLOC_T *msg,
+-		VC_SM_ALLOC_RESULT_T *result, uint32_t *cur_trans_id)
++int vc_vchi_sm_alloc(VC_VCHI_SM_HANDLE_T handle, struct vc_sm_alloc_t *msg,
++		     struct vc_sm_alloc_result_t *result,
++		     uint32_t *cur_trans_id)
+ {
+ 	return vc_vchi_sm_send_msg(handle, VC_SM_MSG_TYPE_ALLOC,
+ 				   msg, sizeof(*msg), result, sizeof(*result),
+@@ -453,15 +455,16 @@ int vc_vchi_sm_alloc(VC_VCHI_SM_HANDLE_T handle, VC_SM_ALLOC_T *msg,
+ }
+ 
+ int vc_vchi_sm_free(VC_VCHI_SM_HANDLE_T handle,
+-		    VC_SM_FREE_T *msg, uint32_t *cur_trans_id)
++		    struct vc_sm_free_t *msg, uint32_t *cur_trans_id)
+ {
+ 	return vc_vchi_sm_send_msg(handle, VC_SM_MSG_TYPE_FREE,
+ 				   msg, sizeof(*msg), 0, 0, cur_trans_id, 0);
+ }
+ 
+ int vc_vchi_sm_lock(VC_VCHI_SM_HANDLE_T handle,
+-		    VC_SM_LOCK_UNLOCK_T *msg,
+-		    VC_SM_LOCK_RESULT_T *result, uint32_t *cur_trans_id)
++		    struct vc_sm_lock_unlock_t *msg,
++		    struct vc_sm_lock_result_t *result,
++		    uint32_t *cur_trans_id)
+ {
+ 	return vc_vchi_sm_send_msg(handle, VC_SM_MSG_TYPE_LOCK,
+ 				   msg, sizeof(*msg), result, sizeof(*result),
+@@ -469,7 +472,7 @@ int vc_vchi_sm_lock(VC_VCHI_SM_HANDLE_T handle,
+ }
+ 
+ int vc_vchi_sm_unlock(VC_VCHI_SM_HANDLE_T handle,
+-		      VC_SM_LOCK_UNLOCK_T *msg,
++		      struct vc_sm_lock_unlock_t *msg,
+ 		      uint32_t *cur_trans_id, uint8_t wait_reply)
+ {
+ 	return vc_vchi_sm_send_msg(handle, wait_reply ?
+@@ -479,8 +482,8 @@ int vc_vchi_sm_unlock(VC_VCHI_SM_HANDLE_T handle,
+ 				   wait_reply);
+ }
+ 
+-int vc_vchi_sm_resize(VC_VCHI_SM_HANDLE_T handle, VC_SM_RESIZE_T *msg,
+-		uint32_t *cur_trans_id)
++int vc_vchi_sm_resize(VC_VCHI_SM_HANDLE_T handle, struct vc_sm_resize_t *msg,
++		      uint32_t *cur_trans_id)
+ {
+ 	return vc_vchi_sm_send_msg(handle, VC_SM_MSG_TYPE_RESIZE,
+ 				   msg, sizeof(*msg), 0, 0, cur_trans_id, 1);
+@@ -492,7 +495,8 @@ int vc_vchi_sm_walk_alloc(VC_VCHI_SM_HANDLE_T handle)
+ 				   0, 0, 0, 0, 0, 0);
+ }
+ 
+-int vc_vchi_sm_clean_up(VC_VCHI_SM_HANDLE_T handle, VC_SM_ACTION_CLEAN_T *msg)
++int vc_vchi_sm_clean_up(VC_VCHI_SM_HANDLE_T handle,
++			struct vc_sm_action_clean_t *msg)
+ {
+ 	return vc_vchi_sm_send_msg(handle, VC_SM_MSG_TYPE_ACTION_CLEAN,
+ 				   msg, sizeof(*msg), 0, 0, 0, 0);
+diff --git a/drivers/char/broadcom/vc_sm/vc_vchi_sm.h b/drivers/char/broadcom/vc_sm/vc_vchi_sm.h
+index 5622178..f97cddf 100644
+--- a/drivers/char/broadcom/vc_sm/vc_vchi_sm.h
++++ b/drivers/char/broadcom/vc_sm/vc_vchi_sm.h
+@@ -41,31 +41,32 @@ VC_VCHI_SM_HANDLE_T vc_vchi_sm_init(VCHI_INSTANCE_T vchi_instance,
+  * return the result of this allocation (which upon success will be a pointer
+  * to some memory in videocore space).
+  */
+-int vc_vchi_sm_alloc(VC_VCHI_SM_HANDLE_T handle,
+-		     VC_SM_ALLOC_T *alloc,
+-		     VC_SM_ALLOC_RESULT_T *alloc_result, uint32_t *trans_id);
++int vc_vchi_sm_alloc(VC_VCHI_SM_HANDLE_T handle, struct vc_sm_alloc_t *alloc,
++		     struct vc_sm_alloc_result_t *alloc_result,
++		     uint32_t *trans_id);
+ 
+ /*
+  * Ask the shared memory service to free up some memory that was previously
+  * allocated by the vc_vchi_sm_alloc function call.
+  */
+ int vc_vchi_sm_free(VC_VCHI_SM_HANDLE_T handle,
+-		    VC_SM_FREE_T *free, uint32_t *trans_id);
++		    struct vc_sm_free_t *free, uint32_t *trans_id);
+ 
+ /*
+  * Ask the shared memory service to lock up some memory that was previously
+  * allocated by the vc_vchi_sm_alloc function call.
+ */
+ int vc_vchi_sm_lock(VC_VCHI_SM_HANDLE_T handle,
+-		    VC_SM_LOCK_UNLOCK_T *lock_unlock,
+-		    VC_SM_LOCK_RESULT_T *lock_result, uint32_t *trans_id);
++		    struct vc_sm_lock_unlock_t *lock_unlock,
++		    struct vc_sm_lock_result_t *lock_result,
++		    uint32_t *trans_id);
+ 
+ /*
+  * Ask the shared memory service to unlock some memory that was previously
+  * allocated by the vc_vchi_sm_alloc function call.
+ */
+ int vc_vchi_sm_unlock(VC_VCHI_SM_HANDLE_T handle,
+-		      VC_SM_LOCK_UNLOCK_T *lock_unlock,
++		      struct vc_sm_lock_unlock_t *lock_unlock,
+ 		      uint32_t *trans_id, uint8_t wait_reply);
+ 
+ /*
+@@ -73,7 +74,7 @@ int vc_vchi_sm_unlock(VC_VCHI_SM_HANDLE_T handle,
+  * allocated by the vc_vchi_sm_alloc function call.
+ */
+ int vc_vchi_sm_resize(VC_VCHI_SM_HANDLE_T handle,
+-		      VC_SM_RESIZE_T *resize, uint32_t *trans_id);
++		      struct vc_sm_resize_t *resize, uint32_t *trans_id);
+ 
+ /*
+  * Walk the allocated resources on the videocore side, the allocation will
+@@ -87,7 +88,7 @@ int vc_vchi_sm_resize(VC_VCHI_SM_HANDLE_T handle,
+  * in a bad state of some sort.
+  */
+ int vc_vchi_sm_clean_up(VC_VCHI_SM_HANDLE_T handle,
+-			VC_SM_ACTION_CLEAN_T *action_clean);
++			struct vc_sm_action_clean_t *action_clean);
+ 
+ /*
+  * Import a contiguous block of memory and wrap it in a GPU MEM_HANDLE_T.
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index 520f343..e67d96d 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -170,7 +170,7 @@ struct SM_PRIV_DATA_T {
+ 	struct SM_PDE_T dir_res;   /* Debug fs resource sub-tree. */
+ 
+ 	int restart_sys;           /* Tracks restart on interrupt. */
+-	VC_SM_MSG_TYPE int_action; /* Interrupted action. */
++	enum vc_sm_msg_type int_action; /* Interrupted action. */
+ 	uint32_t int_trans_id;     /* Interrupted transaction. */
+ 
+ };
+@@ -928,7 +928,7 @@ static void vmcs_sm_release_resource(struct SM_RESOURCE_T *resource, int force)
+ 
+ 	/* Free up the videocore allocated resource. */
+ 	if (resource->res_handle) {
+-		VC_SM_FREE_T free = {
++		struct vc_sm_free_t free = {
+ 			resource->res_handle, (uint32_t)resource->res_base_mem
+ 		};
+ 		int status = vc_vchi_sm_free(sm_state->sm_handle, &free,
+@@ -1123,7 +1123,7 @@ static int vc_sm_release(struct inode *inode, struct file *file)
+ 	pr_debug("[%s]: using private data %p\n", __func__, file_data);
+ 
+ 	if (file_data->restart_sys == -EINTR) {
+-		VC_SM_ACTION_CLEAN_T action_clean;
++		struct vc_sm_action_clean_t action_clean;
+ 
+ 		pr_debug("[%s]: releasing following EINTR on %u (trans_id: %u) (likely due to signal)...\n",
+ 			__func__, file_data->int_action,
+@@ -1189,8 +1189,8 @@ static int vcsm_vma_fault(struct vm_fault *vmf)
+ 	/* Lock the resource if necessary.
+ 	 */
+ 	if (!resource->lock_count) {
+-		VC_SM_LOCK_UNLOCK_T lock_unlock;
+-		VC_SM_LOCK_RESULT_T lock_result;
++		struct vc_sm_lock_unlock_t lock_unlock;
++		struct vc_sm_lock_result_t lock_result;
+ 		int status;
+ 
+ 		lock_unlock.res_handle = resource->res_handle;
+@@ -1465,8 +1465,8 @@ int vc_sm_ioctl_alloc(struct SM_PRIV_DATA_T *private,
+ 	int ret = 0;
+ 	int status;
+ 	struct SM_RESOURCE_T *resource;
+-	VC_SM_ALLOC_T alloc = { 0 };
+-	VC_SM_ALLOC_RESULT_T result = { 0 };
++	struct vc_sm_alloc_t alloc = { 0 };
++	struct vc_sm_alloc_result_t result = { 0 };
+ 	enum vmcs_sm_cache_e cached = ioparam->cached;
+ 	bool map = false;
+ 
+@@ -1671,7 +1671,7 @@ static int vc_sm_ioctl_resize(struct SM_PRIV_DATA_T *private,
+ {
+ 	int ret = 0;
+ 	int status;
+-	VC_SM_RESIZE_T resize;
++	struct vc_sm_resize_t resize;
+ 	struct SM_RESOURCE_T *resource;
+ 
+ 	/* Locate resource from GUID.
+@@ -1761,8 +1761,8 @@ static int vc_sm_ioctl_lock(struct SM_PRIV_DATA_T *private,
+ 			    unsigned int vc_addr)
+ {
+ 	int status;
+-	VC_SM_LOCK_UNLOCK_T lock;
+-	VC_SM_LOCK_RESULT_T result;
++	struct vc_sm_lock_unlock_t lock;
++	struct vc_sm_lock_result_t result;
+ 	struct SM_RESOURCE_T *resource;
+ 	int ret = 0;
+ 	struct sm_mmap *map, *map_tmp;
+@@ -1935,7 +1935,7 @@ static int vc_sm_ioctl_unlock(struct SM_PRIV_DATA_T *private,
+ 			      int flush, int wait_reply, int no_vc_unlock)
+ {
+ 	int status;
+-	VC_SM_LOCK_UNLOCK_T unlock;
++	struct vc_sm_lock_unlock_t unlock;
+ 	struct sm_mmap *map, *map_tmp;
+ 	struct SM_RESOURCE_T *resource;
+ 	int ret = 0;
+@@ -2261,7 +2261,7 @@ static long vc_sm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 
+ 	/* Action is a re-post of a previously interrupted action? */
+ 	if (file_data->restart_sys == -EINTR) {
+-		VC_SM_ACTION_CLEAN_T action_clean;
++		struct vc_sm_action_clean_t action_clean;
+ 
+ 		pr_debug("[%s]: clean up of action %u (trans_id: %u) following EINTR\n",
+ 			__func__, file_data->int_action,
+@@ -3359,7 +3359,7 @@ static int bcm2835_vcsm_remove(struct platform_device *pdev)
+ 
+ #if defined(__KERNEL__)
+ /* Allocate a shared memory handle and block. */
+-int vc_sm_alloc(VC_SM_ALLOC_T *alloc, int *handle)
++int vc_sm_alloc(struct vc_sm_alloc_t *alloc, int *handle)
+ {
+ 	struct vmcs_sm_ioctl_alloc ioparam = { 0 };
+ 	int ret;
+-- 
+1.9.1
+

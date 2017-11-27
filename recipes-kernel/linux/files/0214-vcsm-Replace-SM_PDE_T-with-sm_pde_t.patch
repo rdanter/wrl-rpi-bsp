@@ -1,0 +1,86 @@
+From 65371fa588670dffb13912cb3e52fb26d66244e4 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 5 Sep 2017 10:18:33 +0100
+Subject: [PATCH 214/215] vcsm: Replace SM_PDE_T with sm_pde_t
+
+Follows the Linux kernel coding style
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vmcs_sm.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index 9f1ea82..160e109 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -101,7 +101,7 @@ enum sm_stats_t {
+ };
+ 
+ typedef int (*VC_SM_SHOW) (struct seq_file *s, void *v);
+-struct SM_PDE_T {
++struct sm_pde_t {
+ 	VC_SM_SHOW show;          /* Debug fs function hookup. */
+ 	struct dentry *dir_entry; /* Debug fs directory entry. */
+ 	void *priv_data;          /* Private data */
+@@ -164,8 +164,8 @@ struct sm_priv_data_t {
+ 	pid_t pid;                      /* PID of creator. */
+ 
+ 	struct dentry *dir_pid;	   /* Debug fs entries root. */
+-	struct SM_PDE_T dir_stats; /* Debug fs entries statistics sub-tree. */
+-	struct SM_PDE_T dir_res;   /* Debug fs resource sub-tree. */
++	struct sm_pde_t dir_stats; /* Debug fs entries statistics sub-tree. */
++	struct sm_pde_t dir_res;   /* Debug fs resource sub-tree. */
+ 
+ 	int restart_sys;           /* Tracks restart on interrupt. */
+ 	enum vc_sm_msg_type int_action; /* Interrupted action. */
+@@ -179,8 +179,8 @@ struct sm_state_t {
+ 	struct sm_instance *sm_handle;	/* Handle for videocore service. */
+ 	struct dentry *dir_root;   /* Debug fs entries root. */
+ 	struct dentry *dir_alloc;  /* Debug fs entries allocations. */
+-	struct SM_PDE_T dir_stats; /* Debug fs entries statistics sub-tree. */
+-	struct SM_PDE_T dir_state; /* Debug fs entries state sub-tree. */
++	struct sm_pde_t dir_stats; /* Debug fs entries statistics sub-tree. */
++	struct sm_pde_t dir_state; /* Debug fs entries state sub-tree. */
+ 	struct dentry *debug;      /* Debug fs entries debug. */
+ 
+ 	struct mutex map_lock;          /* Global map lock. */
+@@ -636,9 +636,9 @@ static int vc_sm_statistics_show(struct seq_file *s, void *v)
+ 	struct sm_priv_data_t *file_data;
+ 	struct sm_resource_t *resource;
+ 	int res_count = 0;
+-	struct SM_PDE_T *p_pde;
++	struct sm_pde_t *p_pde;
+ 
+-	p_pde = (struct SM_PDE_T *)(s->private);
++	p_pde = (struct sm_pde_t *)(s->private);
+ 	file_data = (struct sm_priv_data_t *)(p_pde->priv_data);
+ 
+ 	if (file_data == NULL)
+@@ -693,9 +693,9 @@ static int vc_sm_alloc_show(struct seq_file *s, void *v)
+ 	struct sm_priv_data_t *file_data;
+ 	struct sm_resource_t *resource;
+ 	int alloc_count = 0;
+-	struct SM_PDE_T *p_pde;
++	struct sm_pde_t *p_pde;
+ 
+-	p_pde = (struct SM_PDE_T *)(s->private);
++	p_pde = (struct sm_pde_t *)(s->private);
+ 	file_data = (struct sm_priv_data_t *)(p_pde->priv_data);
+ 
+ 	if (!file_data)
+@@ -738,9 +738,9 @@ static int vc_sm_alloc_show(struct seq_file *s, void *v)
+ 
+ static int vc_sm_seq_file_show(struct seq_file *s, void *v)
+ {
+-	struct SM_PDE_T *sm_pde;
++	struct sm_pde_t *sm_pde;
+ 
+-	sm_pde = (struct SM_PDE_T *)(s->private);
++	sm_pde = (struct sm_pde_t *)(s->private);
+ 
+ 	if (sm_pde && sm_pde->show)
+ 		sm_pde->show(s, v);
+-- 
+1.9.1
+

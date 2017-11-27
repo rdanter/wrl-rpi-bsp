@@ -1,0 +1,161 @@
+From e838e98ef3322aeb5813f1bca597a61a3a2320ef Mon Sep 17 00:00:00 2001
+From: Matthijs Kooijman <matthijs@stdin.nl>
+Date: Sun, 9 Jul 2017 15:15:22 +0200
+Subject: [PATCH 175/215] overlays: Add gpio-shutdown overlay (#2103)
+
+This overlay facilitates the addition of a powerbutton by converting
+GPIO edges into KEY_POWER keypresses, which can be handled by
+systemd-logind to shut down the system.
+
+Signed-off-by: Matthijs Kooijman <matthijs@stdin.nl>
+---
+ arch/arm/boot/dts/overlays/Makefile                |  1 +
+ arch/arm/boot/dts/overlays/README                  | 32 +++++++++
+ .../boot/dts/overlays/gpio-shutdown-overlay.dts    | 80 ++++++++++++++++++++++
+ 3 files changed, 113 insertions(+)
+ create mode 100644 arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index 8a3131f..c50b1df 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -30,6 +30,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	googlevoicehat-soundcard.dtbo \
+ 	gpio-ir.dtbo \
+ 	gpio-poweroff.dtbo \
++	gpio-shutdown.dtbo \
+ 	hifiberry-amp.dtbo \
+ 	hifiberry-dac.dtbo \
+ 	hifiberry-dacplus.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index a69e3a0..e6d777a 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -508,6 +508,38 @@ Params: gpiopin                 GPIO for signalling (default 26)
+                                 will also cause the pin to go low.
+ 
+ 
++Name:   gpio-shutdown
++Info:   Initiates a shutdown when GPIO pin changes. The given GPIO pin
++        is configured as an input key that generates KEY_POWER events.
++        This event is handled by systemd-logind by initiating a
++        shutdown. Systemd versions older than 225 need an udev rule
++        enable listening to the input device:
++
++                ACTION!="REMOVE", SUBSYSTEM=="input", KERNEL=="event*", \
++                        SUBSYSTEMS=="platform", DRIVERS=="gpio-keys", \
++                        ATTRS{keys}=="116", TAG+="power-switch"
++
++        This overlay only handles shutdown. After shutdown, the system
++        can be powered up again by driving GPIO3 low. The default
++        configuration uses GPIO3 with a pullup, so if you connect a
++        button between GPIO3 and GND (pin 5 and 6 on the 40-pin header),
++        you get a shutdown and power-up button.
++Load:   dtoverlay=gpio-shutdown,<param>=<val>
++Params: gpio_pin                GPIO pin to trigger on (default 3)
++
++        active_low              When this is 1 (active low), a falling
++                                edge generates a key down event and a
++                                rising edge generates a key up event.
++                                When this is 0 (active high), this is
++                                reversed. The default is 1 (active low).
++
++        gpio_pull               Desired pull-up/down state (off, down, up)
++                                Default is "up".
++
++                                Note that the default pin (GPIO3) has an
++                                external pullup.
++
++
+ Name:   hifiberry-amp
+ Info:   Configures the HifiBerry Amp and Amp+ audio cards
+ Load:   dtoverlay=hifiberry-amp
+diff --git a/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts b/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts
+new file mode 100644
+index 0000000..863fb39
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/gpio-shutdown-overlay.dts
+@@ -0,0 +1,80 @@
++// Definitions for gpio-poweroff module
++/dts-v1/;
++/plugin/;
++
++// This overlay sets up an input device that generates KEY_POWER events
++// when a given GPIO pin changes. It defaults to using GPIO3, which can
++// also be used to wake up (start) the Rpi again after shutdown. Since
++// wakeup is active-low, this defaults to active-low with a pullup
++// enabled, but all of this can be changed using overlay parameters (but
++// note that GPIO3 has an external pullup on at least some boards).
++
++/ {
++	compatible = "brcm,bcm2708";
++
++	fragment@0 {
++		// Configure the gpio pin controller
++		target = <&gpio>;
++		__overlay__ {
++			// Define a pinctrl state, that sets up the gpio
++			// as an input with a pullup enabled. This does
++			// not take effect by itself, only when referenced
++			// by a "pinctrl client", as is done below. See:
++			//   https://www.kernel.org/doc/Documentation/devicetree/bindings/pinctrl/pinctrl-bindings.txt
++			//   https://www.kernel.org/doc/Documentation/devicetree/bindings/pinctrl/brcm,bcm2835-gpio.txt
++			pin_state: shutdown_button_pins {
++				brcm,pins = <3>; // gpio number
++				brcm,function = <0>; // 0 = input, 1 = output
++				brcm,pull = <2>; // 0 = none, 1 = pull down, 2 = pull up
++			};
++		};
++	};
++	fragment@1 {
++		// Add a new device to the /soc devicetree node
++		target-path = "/soc";
++		__overlay__ {
++			shutdown_button {
++				// Let the gpio-keys driver handle this device. See:
++				// https://www.kernel.org/doc/Documentation/devicetree/bindings/input/gpio-keys.txt
++				compatible = "gpio-keys";
++
++				// Declare a single pinctrl state (referencing the one declared above) and name it
++				// default, so it is activated automatically.
++				pinctrl-names = "default";
++				pinctrl-0 = <&pin_state>;
++
++				// Enable this device
++				status = "okay";
++
++				// Define a single key, called "shutdown" that monitors the gpio and sends KEY_POWER
++				// (keycode 116, see
++				// https://github.com/torvalds/linux/blob/v4.12/include/uapi/linux/input-event-codes.h#L190)
++				button: shutdown {
++					label = "shutdown";
++					linux,code = <116>; // KEY_POWER
++					gpios = <&gpio 3 1>;
++				};
++			};
++		};
++	};
++
++	// This defines parameters that can be specified when loading
++	// the overlay. Each foo = line specifies one parameter, named
++	// foo. The rest of the specification gives properties where the
++	// parameter value is inserted into (changing the values above
++	// or adding new ones).
++	__overrides__ {
++		// Allow overriding the GPIO number.
++		gpio_pin = <&button>,"gpios:4",
++		           <&pin_state>,"brcm,pins:0";
++
++		// Allow changing the internal pullup/down state. 0 = none, 1 = pulldown, 2 = pullup
++		// Note that GPIO3 and GPIO2 are the I2c pins and have an external pullup (at least
++                // on some boards).
++		gpio_pull = <&pin_state>,"brcm,pull:0";
++
++		// Allow setting the active_low flag. 0 = active high, 1 = active low
++		active_low = <&button>,"gpios:8";
++	};
++
++};
+-- 
+1.9.1
+

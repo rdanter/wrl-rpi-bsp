@@ -1,0 +1,40 @@
+From 8d07f226420d25f27fc35a2d155f47665d1e11c4 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Thu, 18 May 2017 15:36:46 +0100
+Subject: [PATCH 132/215] staging: bcm2835-audio: Fix memory corruption
+
+I'm all for fixing memory leaks, but freeing a block while it is still
+being used is a recipe for hard-to-debug kernel exeptions.
+
+1) There is already a vchi method for freeing the instance, so use it.
+2) Only call it on error, and then only before initted is false.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+Fixes: 0adbfd4694c2 ("staging: bcm2835-audio: fix memory leak in bcm2835_audio_open_connection()")
+---
+ drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
+index 5f3d8f2..89f96f3 100644
+--- a/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
++++ b/drivers/staging/vc04_services/bcm2835-audio/bcm2835-vchiq.c
+@@ -409,6 +409,7 @@ static int bcm2835_audio_open_connection(struct bcm2835_alsa_stream *alsa_stream
+ 			LOG_ERR("%s: failed to connect VCHI instance (ret=%d)\n",
+ 				__func__, ret);
+ 
++			vchi_disconnect(vchi_instance);
+ 			ret = -EIO;
+ 			goto err_free_mem;
+ 		}
+@@ -431,7 +432,6 @@ static int bcm2835_audio_open_connection(struct bcm2835_alsa_stream *alsa_stream
+ 	LOG_DBG(" success !\n");
+ 	ret = 0;
+ err_free_mem:
+-	kfree(vchi_instance);
+ 
+ 	return ret;
+ }
+-- 
+1.9.1
+

@@ -1,0 +1,42 @@
+From 3f794c81f8c9c99f030cf0cb62ae1c91e78ef973 Mon Sep 17 00:00:00 2001
+From: Matt Flax <flatmax@flatmax.org>
+Date: Tue, 4 Apr 2017 19:20:59 +1000
+Subject: [PATCH 156/215] Audioinjector : make the octo and pi sound cards have
+ different driver names
+
+This patch gives the audioinjector octo and pi soundcards different driver
+names. This allows both the be loaded without clashing.
+---
+ sound/soc/bcm/audioinjector-octo-soundcard.c | 2 +-
+ sound/soc/bcm/audioinjector-pi-soundcard.c   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sound/soc/bcm/audioinjector-octo-soundcard.c b/sound/soc/bcm/audioinjector-octo-soundcard.c
+index dcf403a..49115c8 100644
+--- a/sound/soc/bcm/audioinjector-octo-soundcard.c
++++ b/sound/soc/bcm/audioinjector-octo-soundcard.c
+@@ -324,7 +324,7 @@ static int audioinjector_octo_remove(struct platform_device *pdev)
+ 
+ static struct platform_driver audioinjector_octo_driver = {
+ 	.driver	= {
+-		.name			= "audioinjector-audio",
++		.name			= "audioinjector-octo",
+ 		.owner			= THIS_MODULE,
+ 		.of_match_table = audioinjector_octo_of_match,
+ 	},
+diff --git a/sound/soc/bcm/audioinjector-pi-soundcard.c b/sound/soc/bcm/audioinjector-pi-soundcard.c
+index ef54e0f..491906b 100644
+--- a/sound/soc/bcm/audioinjector-pi-soundcard.c
++++ b/sound/soc/bcm/audioinjector-pi-soundcard.c
+@@ -177,7 +177,7 @@ static int audioinjector_pi_soundcard_remove(struct platform_device *pdev)
+ 
+ static struct platform_driver audioinjector_pi_soundcard_driver = {
+        .driver         = {
+-		.name   = "audioinjector-audio",
++		.name   = "audioinjector-stereo",
+ 		.owner  = THIS_MODULE,
+ 		.of_match_table = audioinjector_pi_soundcard_of_match,
+        },
+-- 
+1.9.1
+

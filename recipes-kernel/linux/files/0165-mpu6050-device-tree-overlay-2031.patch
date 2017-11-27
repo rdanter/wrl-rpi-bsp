@@ -1,0 +1,120 @@
+From 5fa32b9aed31206c82a63279fc9d9772963d68b2 Mon Sep 17 00:00:00 2001
+From: Anton Onishchenko <tony.o.developer@gmail.com>
+Date: Tue, 23 May 2017 18:55:46 +0300
+Subject: [PATCH 165/215] mpu6050 device tree overlay (#2031)
+
+Add overlay and config options for InvenSense MPU6050 6-axis motion
+detector.
+---
+ arch/arm/boot/dts/overlays/Makefile            |  1 +
+ arch/arm/boot/dts/overlays/README              |  6 ++++++
+ arch/arm/boot/dts/overlays/mpu6050-overlay.dts | 28 ++++++++++++++++++++++++++
+ arch/arm/configs/bcm2709_defconfig             |  3 +--
+ arch/arm/configs/bcmrpi_defconfig              |  3 +--
+ 5 files changed, 37 insertions(+), 4 deletions(-)
+ create mode 100644 arch/arm/boot/dts/overlays/mpu6050-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index 6853e35..c95b37f 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -59,6 +59,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	midi-uart0.dtbo \
+ 	midi-uart1.dtbo \
+ 	mmc.dtbo \
++	mpu6050.dtbo \
+ 	mz61581.dtbo \
+ 	pi3-act-led.dtbo \
+ 	pi3-disable-bt.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index f7e1138..d560490 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -898,6 +898,12 @@ Params: overclock_50            Clock (in MHz) to use when the MMC framework
+                                 requests 50MHz
+ 
+ 
++Name:   mpu6050
++Info:   Overlay for i2c connected mpu6050 imu
++Load:   dtoverlay=mpu6050,<param>=<val>
++Params: interrupt               GPIO pin for interrupt (default 4)
++
++
+ Name:   mz61581
+ Info:   MZ61581 display by Tontec
+ Load:   dtoverlay=mz61581,<param>=<val>
+diff --git a/arch/arm/boot/dts/overlays/mpu6050-overlay.dts b/arch/arm/boot/dts/overlays/mpu6050-overlay.dts
+new file mode 100644
+index 0000000..0603796
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/mpu6050-overlay.dts
+@@ -0,0 +1,28 @@
++// Definitions for MPU6050
++/dts-v1/;
++/plugin/;
++
++/ {
++        compatible = "brcm,bcm2708";
++
++        fragment@0 {
++                target = <&i2c1>;
++                __overlay__ {
++                        #address-cells = <1>;
++                        #size-cells = <0>;
++                        status = "okay";
++                        clock-frequency = <400000>;
++
++                        mpu6050: mpu6050@68 {
++                                compatible = "invensense,mpu6050";
++                                reg = <0x68>;
++                                interrupt-parent = <&gpio>;
++                                interrupts = <4 1>;
++                        };
++                };
++        };
++
++        __overrides__ {
++                interrupt = <&mpu6050>,"interrupts:0";
++        };
++};
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 01a723d..d015a84 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1166,13 +1166,12 @@ CONFIG_RASPBERRYPI_POWER=y
+ CONFIG_EXTCON=m
+ CONFIG_EXTCON_ARIZONA=m
+ CONFIG_IIO=m
+-CONFIG_IIO_BUFFER=y
+ CONFIG_IIO_BUFFER_CB=m
+-CONFIG_IIO_KFIFO_BUF=m
+ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_DHT11=m
+ CONFIG_HTU21=m
++CONFIG_INV_MPU6050_I2C=m
+ CONFIG_BMP280=m
+ CONFIG_PWM_BCM2835=m
+ CONFIG_PWM_PCA9685=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 91a5234..2a28b01 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1173,13 +1173,12 @@ CONFIG_RASPBERRYPI_POWER=y
+ CONFIG_EXTCON=m
+ CONFIG_EXTCON_ARIZONA=m
+ CONFIG_IIO=m
+-CONFIG_IIO_BUFFER=y
+ CONFIG_IIO_BUFFER_CB=m
+-CONFIG_IIO_KFIFO_BUF=m
+ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_DHT11=m
+ CONFIG_HTU21=m
++CONFIG_INV_MPU6050_I2C=m
+ CONFIG_BMP280=m
+ CONFIG_PWM_BCM2835=m
+ CONFIG_PWM_PCA9685=m
+-- 
+1.9.1
+

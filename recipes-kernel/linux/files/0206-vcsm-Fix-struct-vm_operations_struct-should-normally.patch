@@ -1,0 +1,27 @@
+From 4b67d882cab359a249298321f7ef9cb644ab1a9f Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 1 Sep 2017 17:38:27 +0100
+Subject: [PATCH 206/215] vcsm: Fix "struct vm_operations_struct should
+ normally be const"
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vmcs_sm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index 8244b36..d8fe579 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -1248,7 +1248,7 @@ static int vcsm_vma_fault(struct vm_fault *vmf)
+ 	}
+ }
+ 
+-static struct vm_operations_struct vcsm_vm_ops = {
++static const struct vm_operations_struct vcsm_vm_ops = {
+ 	.open = vcsm_vma_open,
+ 	.close = vcsm_vma_close,
+ 	.fault = vcsm_vma_fault,
+-- 
+1.9.1
+

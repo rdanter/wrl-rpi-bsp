@@ -1,0 +1,59 @@
+From 6877691786d5ac2d154d98f99374231db6dd42c2 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Sat, 20 May 2017 22:10:14 +0100
+Subject: [PATCH 148/215] overlays: README: remove vestigial SDIO parameters
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/overlays/README | 24 ++----------------------
+ 1 file changed, 2 insertions(+), 22 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index ec9e7b1..499cd19 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -1203,19 +1203,9 @@ Name:   sdio
+ Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
+         and enables SDIO via GPIOs 22-27.
+ Load:   dtoverlay=sdio,<param>=<val>
+-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
+-                                requests 50MHz
+-
+-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
++Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+                                 framework requests 50MHz
+ 
+-        force_pio               Disable DMA support (default off)
+-
+-        pio_limit               Number of blocks above which to use DMA
+-                                (default 1)
+-
+-        debug                   Enable debug output (default off)
+-
+         poll_once               Disable SDIO-device polling every second
+                                 (default on: polling once at boot-time)
+ 
+@@ -1226,19 +1216,9 @@ Name:   sdio-1bit
+ Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
+         and enables 1-bit SDIO via GPIOs 22-25.
+ Load:   dtoverlay=sdio-1bit,<param>=<val>
+-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
+-                                requests 50MHz
+-
+-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
++Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+                                 framework requests 50MHz
+ 
+-        force_pio               Disable DMA support (default off)
+-
+-        pio_limit               Number of blocks above which to use DMA
+-                                (default 1)
+-
+-        debug                   Enable debug output (default off)
+-
+         poll_once               Disable SDIO-device polling every second
+                                 (default on: polling once at boot-time)
+ 
+-- 
+1.9.1
+

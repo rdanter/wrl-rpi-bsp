@@ -1,0 +1,82 @@
+From 47b00b3698ebbb7afd8c8f5885e8245ed0be67cf Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 1 Sep 2017 16:59:49 +0100
+Subject: [PATCH 199/215] vcsm: Fix blank lines after declarations.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vc_vchi_sm.c | 1 +
+ drivers/char/broadcom/vc_sm/vmcs_sm.c    | 7 +++++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/drivers/char/broadcom/vc_sm/vc_vchi_sm.c b/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
+index b9f65e3..f8b909a 100644
+--- a/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
++++ b/drivers/char/broadcom/vc_sm/vc_vchi_sm.c
+@@ -362,6 +362,7 @@ int vc_vchi_sm_stop(struct sm_instance **handle)
+ 	/* Close all VCHI service connections */
+ 	for (i = 0; i < instance->num_connections; i++) {
+ 		int32_t success;
++
+ 		vchi_service_use(instance->vchi_handle[i]);
+ 
+ 		success = vchi_service_close(instance->vchi_handle[i]);
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index 8bea643..abee526 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -230,6 +230,7 @@ struct SM_STATE_T {
+ static inline unsigned int vcaddr_to_pfn(unsigned long vc_addr)
+ {
+ 	unsigned long pfn = vc_addr & 0x3FFFFFFF;
++
+ 	pfn += mm_vc_mem_phys_addr;
+ 	pfn >>= PAGE_SHIFT;
+ 	return pfn;
+@@ -1441,9 +1442,11 @@ static int vc_sm_mmap(struct file *file, struct vm_area_struct *vma)
+ 	if (resource->map) {
+ 		/* We don't use vmf->pgoff since that has the fake offset */
+ 		unsigned long addr;
++
+ 		for (addr = vma->vm_start; addr < vma->vm_end; addr += PAGE_SIZE) {
+ 			/* Finally, remap it */
+ 			unsigned long pfn = (unsigned long)resource->res_base_mem & 0x3FFFFFFF;
++
+ 			pfn += mm_vc_mem_phys_addr;
+ 			pfn += addr - vma->vm_start;
+ 			pfn >>= PAGE_SHIFT;
+@@ -1974,6 +1977,7 @@ static int vc_sm_ioctl_unlock(struct SM_PRIV_DATA_T *private,
+ 		/* Flush if requested */
+ 		if (resource->res_cached && flush) {
+ 			dma_addr_t phys_addr = 0;
++
+ 			resource->res_stats[FLUSH]++;
+ 
+ 			phys_addr =
+@@ -1988,6 +1992,7 @@ static int vc_sm_ioctl_unlock(struct SM_PRIV_DATA_T *private,
+ 				if (map->vma) {
+ 					unsigned long start;
+ 					unsigned long end;
++
+ 					start = map->vma->vm_start;
+ 					end = map->vma->vm_end;
+ 
+@@ -3022,6 +3027,7 @@ static long vc_sm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 						if ((resource != NULL) && resource->res_cached) {
+ 							unsigned long base = ioparam.s[i].addr & ~(PAGE_SIZE-1);
+ 							unsigned long end = (ioparam.s[i].addr + ioparam.s[i].size + PAGE_SIZE-1) & ~(PAGE_SIZE-1);
++
+ 							resource->res_stats[ioparam.s[i].cmd == 1 ? INVALID:FLUSH]++;
+ 
+ 							/* L1/L2 cache flush */
+@@ -3071,6 +3077,7 @@ static long vc_sm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+ 
+ 				for (i=0; i<ioparam.op_count; i++) {
+ 					struct vmcs_sm_ioctl_clean_invalid_block *op = block + i;
++
+ 					for (j = 0; j < op->block_count; ++j) {
+ 
+ 
+-- 
+1.9.1
+

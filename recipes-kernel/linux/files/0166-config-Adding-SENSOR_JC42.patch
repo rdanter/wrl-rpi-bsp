@@ -1,0 +1,45 @@
+From 692f37240aa00270ca05c6a1b729a75dc09c731c Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 31 May 2017 09:33:55 +0100
+Subject: [PATCH 166/215] config: Adding SENSOR_JC42
+
+The jc42 module supports a number of I2C-based temperature
+sensor modules.
+
+[ DM_RAID0 config lost because now selected by DM_RAID ]
+
+See: https://github.com/raspberrypi/linux/issues/2046
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index d015a84..3a41d3a 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -653,6 +653,7 @@ CONFIG_POWER_RESET=y
+ CONFIG_POWER_RESET_GPIO=y
+ CONFIG_BATTERY_DS2760=m
+ CONFIG_HWMON=m
++CONFIG_SENSORS_JC42=m
+ CONFIG_SENSORS_LM75=m
+ CONFIG_SENSORS_SHT21=m
+ CONFIG_SENSORS_SHTC1=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 2a28b01..706bd88 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -647,6 +647,7 @@ CONFIG_POWER_RESET=y
+ CONFIG_POWER_RESET_GPIO=y
+ CONFIG_BATTERY_DS2760=m
+ CONFIG_HWMON=m
++CONFIG_SENSORS_JC42=m
+ CONFIG_SENSORS_LM75=m
+ CONFIG_SENSORS_SHT21=m
+ CONFIG_SENSORS_SHTC1=m
+-- 
+1.9.1
+

@@ -1,0 +1,35 @@
+From 986779949b46d4dff533005b9987394643d710fb Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Mon, 17 Jul 2017 16:54:06 +0100
+Subject: [PATCH 179/215] Revert "bcm2835-mmc: Fix DMA usage"
+
+This reverts commit f4258b9352afc1480dd1c29a11528e53b73bf356.
+---
+ drivers/mmc/host/bcm2835-mmc.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/mmc/host/bcm2835-mmc.c b/drivers/mmc/host/bcm2835-mmc.c
+index 981db05..4fe8d1f 100644
+--- a/drivers/mmc/host/bcm2835-mmc.c
++++ b/drivers/mmc/host/bcm2835-mmc.c
+@@ -1354,14 +1354,14 @@ static int bcm2835_mmc_add_host(struct bcm2835_host *host)
+ 		if (ret == 0) {
+ 			host->dma_cfg_rx = cfg;
+ 
+-			host->have_dma = true;
++			host->use_dma = true;
+ 		} else {
+ 			pr_err("%s: unable to configure DMA channel. "
+-			       "Falling back to PIO\n",
++			       "Faling back to PIO\n",
+ 			       mmc_hostname(mmc));
+ 			dma_release_channel(host->dma_chan_rxtx);
+ 			host->dma_chan_rxtx = NULL;
+-			host->have_dma = false;
++			host->use_dma = false;
+ 		}
+ 	}
+ #endif
+-- 
+1.9.1
+

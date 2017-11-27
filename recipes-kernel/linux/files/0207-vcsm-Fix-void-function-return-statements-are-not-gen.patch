@@ -1,0 +1,36 @@
+From 2616cca5721c6171baf3c24f3c9bf1b36032e890 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 1 Sep 2017 17:45:34 +0100
+Subject: [PATCH 207/215] vcsm: Fix "void function return statements are not
+ generally useful"
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/char/broadcom/vc_sm/vmcs_sm.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/drivers/char/broadcom/vc_sm/vmcs_sm.c b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+index d8fe579..ecff69d 100644
+--- a/drivers/char/broadcom/vc_sm/vmcs_sm.c
++++ b/drivers/char/broadcom/vc_sm/vmcs_sm.c
+@@ -984,8 +984,6 @@ static void vmcs_sm_host_walk_map_per_pid(int pid)
+ 	}
+ 
+ 	mutex_unlock(&(sm_state->map_lock));
+-
+-	return;
+ }
+ 
+ /*
+@@ -1015,8 +1013,6 @@ static void vmcs_sm_host_walk_alloc(struct SM_PRIV_DATA_T *file_data)
+ 	}
+ 
+ 	mutex_unlock(&(sm_state->map_lock));
+-
+-	return;
+ }
+ 
+ /* Create support for private data tracking. */
+-- 
+1.9.1
+

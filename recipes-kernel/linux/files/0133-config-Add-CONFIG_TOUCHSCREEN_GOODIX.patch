@@ -1,0 +1,37 @@
+From 0de2029bcc2faee7c6c5638c293f23d1fced88e9 Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Mon, 15 May 2017 16:40:05 +0100
+Subject: [PATCH 133/215] config: Add CONFIG_TOUCHSCREEN_GOODIX
+
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 13b653b..42ee457 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -566,6 +566,7 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=m
+ CONFIG_TOUCHSCREEN_EGALAX=m
+ CONFIG_TOUCHSCREEN_EDT_FT5X06=m
++CONFIG_TOUCHSCREEN_GOODIX=m
+ CONFIG_TOUCHSCREEN_RPI_FT5406=m
+ CONFIG_TOUCHSCREEN_USB_COMPOSITE=m
+ CONFIG_TOUCHSCREEN_STMPE=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index ef7bfc4..573cbd7 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -561,7 +561,6 @@ CONFIG_JOYSTICK_RPISENSE=m
+ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=m
+ CONFIG_TOUCHSCREEN_EGALAX=m
+-CONFIG_TOUCHSCREEN_EDT_FT5X06=m
+ CONFIG_TOUCHSCREEN_GOODIX=m
+ CONFIG_TOUCHSCREEN_RPI_FT5406=m
+ CONFIG_TOUCHSCREEN_USB_COMPOSITE=m
+-- 
+1.9.1
+

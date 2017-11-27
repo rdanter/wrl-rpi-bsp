@@ -1,0 +1,102 @@
+From 98b46f49bb6d8f04b2bb6062c73445d2cb11a801 Mon Sep 17 00:00:00 2001
+From: Ahmet Inan <inan@distec.de>
+Date: Mon, 15 May 2017 17:10:53 +0200
+Subject: [PATCH 163/215] overlays: Add Goodix overlay
+
+Add support for I2C connected Goodix gt9271 multiple touch controller using
+GPIOs 4 and 17 (pins 7 and 11 on GPIO header) for interrupt and reset.
+
+Signed-off-by: Ahmet Inan <inan@distec.de>
+---
+ arch/arm/boot/dts/overlays/Makefile           |  1 +
+ arch/arm/boot/dts/overlays/README             |  8 +++++
+ arch/arm/boot/dts/overlays/goodix-overlay.dts | 46 +++++++++++++++++++++++++++
+ 3 files changed, 55 insertions(+)
+ create mode 100644 arch/arm/boot/dts/overlays/goodix-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index e0ff579..ddf4318 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -25,6 +25,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	enc28j60.dtbo \
+ 	enc28j60-spi2.dtbo \
+ 	fe-pi-audio.dtbo \
++	goodix.dtbo \
+ 	googlevoicehat-soundcard.dtbo \
+ 	gpio-ir.dtbo \
+ 	gpio-poweroff.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 4171208..dc391ac 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -459,6 +459,14 @@ Load:   dtoverlay=fe-pi-audio
+ Params: <None>
+ 
+ 
++Name:   goodix
++Info:   Enables I2C connected Goodix gt9271 multiple touch controller using
++        GPIOs 4 and 17 (pins 7 and 11 on GPIO header) for interrupt and reset.
++Load:   dtoverlay=goodix,<param>=<val>
++Params: interrupt               GPIO used for interrupt (default 4)
++        reset                   GPIO used for reset (default 17)
++
++
+ Name:   googlevoicehat-soundcard
+ Info:   Configures the Google voiceHAT soundcard
+ Load:   dtoverlay=googlevoicehat-soundcard
+diff --git a/arch/arm/boot/dts/overlays/goodix-overlay.dts b/arch/arm/boot/dts/overlays/goodix-overlay.dts
+new file mode 100644
+index 0000000..084f740
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/goodix-overlay.dts
+@@ -0,0 +1,46 @@
++// Device tree overlay for I2C connected Goodix gt9271 multiple touch controller
++/dts-v1/;
++/plugin/;
++
++/ {
++	compatible = "brcm,bcm2708";
++
++	fragment@0 {
++		target = <&gpio>;
++		__overlay__ {
++			goodix_pins: goodix_pins {
++				brcm,pins = <4 17>; // interrupt and reset
++				brcm,function = <0 0>; // in
++				brcm,pull = <2 2>; // pull-up
++			};
++		};
++	};
++
++	fragment@1 {
++		target = <&i2c1>;
++		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "okay";
++
++			gt9271: gt9271@14 {
++				compatible = "goodix,gt9271";
++				reg = <0x14>;
++				pinctrl-names = "default";
++				pinctrl-0 = <&goodix_pins>;
++				interrupt-parent = <&gpio>;
++				interrupts = <4 2>; // high-to-low edge triggered
++				irq-gpios = <&gpio 4 0>; // Pin7 on GPIO header
++				reset-gpios = <&gpio 17 0>; // Pin11 on GPIO header
++			};
++		};
++	};
++
++	__overrides__ {
++		interrupt = <&goodix_pins>,"brcm,pins:0",
++			<&gt9271>,"interrupts:0",
++			<&gt9271>,"irq-gpios:4";
++		reset = <&goodix_pins>,"brcm,pins:4",
++			<&gt9271>,"reset-gpios:4";
++	};
++};
+-- 
+1.9.1
+

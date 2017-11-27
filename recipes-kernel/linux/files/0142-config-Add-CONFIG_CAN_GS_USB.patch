@@ -1,0 +1,37 @@
+From 05fc2c5045439e59996e2fb3b76e91a357934e85 Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Mon, 12 Jun 2017 13:05:43 +0100
+Subject: [PATCH 142/215] config: Add CONFIG_CAN_GS_USB
+
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index aacd961..5b0f116 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -361,6 +361,7 @@ CONFIG_CAN=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
++CONFIG_CAN_GS_USB=m
+ CONFIG_IRDA=m
+ CONFIG_IRLAN=m
+ CONFIG_IRNET=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 4ae56037..8894ef2 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -357,6 +357,7 @@ CONFIG_CAN=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
++CONFIG_CAN_GS_USB=m
+ CONFIG_IRDA=m
+ CONFIG_IRLAN=m
+ CONFIG_IRNET=m
+-- 
+1.9.1
+
