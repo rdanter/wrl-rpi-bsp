@@ -18,6 +18,7 @@ Untested, but these should also work:
 2. Change History
 -----------------
 
+- 2017-11-27	Tested on WR Linux LTS 17 RCPL 1.
 - 2017-11-25	Tested on WR Linux 9 RCPL 12.
 - 2017-10-02	Initial Release.
 		Tested on RPi using WR Linux 9 RCPL 11.

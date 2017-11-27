@@ -5,28 +5,23 @@ Raspberry Pi BSP
 ---------------------
 
 Use the following steps to configure a platform project for this BSP with
-Wind River Linux 9:
+Wind River Linux LTS 17:
 
-	$ git clone --branch WRLINUX_9_LTS_CVE /path/to/wrlinux-9
-	$ ./wrlinux-9/setup.sh --distro wrlinux --dl-layers --accept-eula yes
+	$ git clone --branch WRLINUX_10_17_LTS /path/to/wrlinux-x
+	$ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
 	$ . environment-setup-x86_64-wrlinuxsdk-linux
 	$ . oe-init-build-env
-	$ bitbake-layers add-layer /path/to/wrl9-rpi-bsp/
-
-Optionally, add the kernel-dev layer. Add this only if you intend to work
-on the kernel or kernel modules with an SDK:
-
-	$ bitbake-layers add-layer ../layers/wr-kernel/kernel-dev/
+	$ bitbake-layers add-layer /path/to/wrl-rpi-bsp/
 
 Then:
 
 	$ vi conf/local.conf
 
-Add:
+and add:
 
 	MACHINE = "rpi"
 
-Then build the platform with:
+Build the platform with:
 
 	$ bitbake wrlinux-image-glibc-std
 
@@ -36,8 +31,8 @@ and, if required, build the SDK with:
 
 then install with:
 
-	$ cd tmp/deploy/sdk/
-	$ ./wrlinux-9.0.0.12-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
+	$ cd tmp-glibc/deploy/sdk/
+	$ ./wrlinux-10.17.41.1-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
 
 See the User Guide for SDK usage instructions.
 
@@ -115,7 +110,7 @@ See the User Guide for SDK usage instructions.
 	$ sudo mount -t vfat /dev/mmcblk0p1 /mnt
 	$ cd /mnt
 	$ sudo cp -r <layerDir>/bootloader/broadcom/* .
-	$ sudo cp <prjDir>/build/tmp/deploy/images/rpi/Image kernel.img
+	$ sudo cp <prjDir>/build/tmp-glibc/deploy/images/rpi/Image kernel.img
 
 If necessary, edit the cmdline.txt and/or config.txt files, then:
 
@@ -127,7 +122,7 @@ If necessary, edit the cmdline.txt and/or config.txt files, then:
 
 	$ sudo mount -t ext4 /dev/mmcblk0p2 /mnt
 	$ cd /mnt
-	$ sudo tar jxpf <prjDir>/build/tmp/deploy/images/rpi/wrlinux-image-glibc-std-rpi.tar.bz2
+	$ sudo tar jxpf <prjDir>/build/tmp-glibc/deploy/images/rpi/wrlinux-image-glibc-std-rpi.tar.bz2
 
 Optionally, enable mount of the boot partition on /boot of the rootfs:
 
