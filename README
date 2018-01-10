@@ -15,21 +15,17 @@ Wind River Linux LTS 17:
 
 Then:
 
-	$ vi conf/local.conf
+	$ echo "MACHINE = \"rpi\"" >> conf/local.conf
 
-and add:
-
-	MACHINE = "rpi"
-
-Build the platform with:
+to set the BSP name, and build the platform with:
 
 	$ bitbake wrlinux-image-glibc-std
 
-and, if required, build the SDK with:
+If required, build the SDK with:
 
 	$ bitbake -c populate_sdk wrlinux-image-glibc-std
 
-then install with:
+and install it with:
 
 	$ cd tmp-glibc/deploy/sdk/
 	$ ./wrlinux-10.17.41.1-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
