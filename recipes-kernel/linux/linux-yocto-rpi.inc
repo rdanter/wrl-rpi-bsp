@@ -144,7 +144,7 @@ SRC_URI += "file://0128-mmc-Change-downstream-MMC-driver-CONFIG-option.patch"
 SRC_URI += "file://0129-config-Add-CONFIG_I2C_ROBOTFUZZ_OSIF.patch"
 SRC_URI += "file://0130-config-Add-FB_TFT_ST7789V-module.patch"
 SRC_URI += "file://0131-fixup-rtl8192cu-fixes-from-milhouse.patch"
-SRC_URI += "file://0132-staging-bcm2835-audio-Fix-memory-corruption.patch"
+# Patch 0132 not needed since RCPL 3.
 SRC_URI += "file://0133-config-Add-CONFIG_TOUCHSCREEN_GOODIX.patch"
 SRC_URI += "file://0134-config-Add-CONFIG_TOUCHSCREEN_EDT_FT5X06.patch"
 SRC_URI += "file://0135-config-Add-CONFIG_IPV6_SIT_6RD.patch"
