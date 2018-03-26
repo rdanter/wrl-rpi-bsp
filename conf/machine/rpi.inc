@@ -1,6 +1,8 @@
 #@TYPE: Machine inc.
 #@NAME: rpi layer
 
+PREFERRED_PROVIDER_virtual/kernel_rpi = "linux-yocto"
+
 DEFAULTTUNE = "arm1176jzfshf"
 require conf/machine/include/tune-arm1176jzf-s.inc
 
