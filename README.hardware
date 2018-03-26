@@ -18,8 +18,11 @@ Untested, but these should also work:
 2. Change History
 -----------------
 
+- 2018-03-26	Updated to latest Broadcom firmware & refactor machine conf dir.
+- 2018-02-13	Tested with LTS 17 RCPL 4 (no changes needed).
+- 2018-02-11	Updated to LTS 17 RCPL 3, one kernel patch removed.
+- 2018-01-10	Updated to LTS 17 RCPL 2.
 - 2017-11-27	Tested on WR Linux LTS 17 RCPL 1.
 - 2017-11-25	Tested on WR Linux 9 RCPL 12.
 - 2017-10-02	Initial Release.
 		Tested on RPi using WR Linux 9 RCPL 11.
-
