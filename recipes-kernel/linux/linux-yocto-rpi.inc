@@ -108,7 +108,7 @@ SRC_URI += "file://0092-amba_pl011-Don-t-use-DT-aliases-for-numbering.patch"
 SRC_URI += "file://0093-amba_pl011-Round-input-clock-up.patch"
 SRC_URI += "file://0094-net-Add-non-mainline-source-for-rtl8192cu-wlan.patch"
 SRC_URI += "file://0095-net-Fix-rtl8192cu-build-errors-on-other-platforms.patch"
-SRC_URI += "file://0096-OF-DT-Overlay-configfs-interface.patch"
+# Patch 0096 not needed since RCPL 5.
 SRC_URI += "file://0097-brcm-adds-support-for-BCM43341-wifi.patch"
 SRC_URI += "file://0098-brcmfmac-Mute-expected-startup-errors.patch"
 SRC_URI += "file://0099-hci_h5-Don-t-send-conf_req-when-ACTIVE.patch"
