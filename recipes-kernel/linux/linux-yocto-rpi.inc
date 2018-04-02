@@ -1,17 +1,17 @@
 # Raspberry Pi
 
-COMPATIBLE_MACHINE_rpi = "rpi"
+COMPATIBLE_MACHINE = "rpi"
 
 # Currently, only the standard kernel is supported
-TARGET_SUPPORTED_KTYPES_rpi = "standard"
+TARGET_SUPPORTED_KTYPES = "standard"
 
 # We don't have a BSP-specific branch in the repository
-KBRANCH_DEFAULT_standard_rpi = "standard/base"
+KBRANCH_DEFAULT_standard = "standard/base"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://rpi-standard.scc"
-SRC_URI += "file://rpi-standard.cfg"
+SRC_URI += "file://${MACHINE}-standard.scc"
+SRC_URI += "file://${MACHINE}-standard.cfg"
 
 SRC_URI += "file://0001-smsx95xx-fix-crimes-against-truesize.patch"
 SRC_URI += "file://0002-smsc95xx-Experimental-Enable-turbo_mode-and-packetsi.patch"

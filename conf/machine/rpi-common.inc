@@ -2,7 +2,7 @@
 #@NAME: Raspberry Pi common configuration settings
 
 # Use the standard kernel
-PREFERRED_PROVIDER_virtual/kernel_rpi = "linux-yocto"
+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
 
 SOC_FAMILY = "rpi"
 include conf/machine/include/soc-family.inc
