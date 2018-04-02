@@ -13,20 +13,24 @@ Wind River Linux LTS 17:
     $ . oe-init-build-env
     $ bitbake-layers add-layer /path/to/wrl-rpi-bsp/
 
-Then:
+Set `MACHINE` to the required board variant, one of:
+
+  * rpi
+  * rpi2
+
+for example:
 
     $ echo "MACHINE = \"rpi\"" >> conf/local.conf
 
-to set the BSP name, and build the platform with:
+for the original Raspberry Pi.
+
+Build the platform with:
 
     $ bitbake wrlinux-image-glibc-std
 
-If required, build the SDK with:
+and finally, if required, build and install the SDK:
 
     $ bitbake -c populate_sdk wrlinux-image-glibc-std
-
-and install it with:
-
     $ cd tmp-glibc/deploy/sdk/
     $ ./wrlinux-10.17.41.1-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
 
@@ -105,6 +109,8 @@ See the User Guide for SDK usage instructions.
     $ cd /mnt
     $ sudo cp -r <layerDir>/bootloader/broadcom/* .
     $ sudo cp <prjDir>/build/tmp-glibc/deploy/images/rpi/Image kernel.img
+
+**NOTE**: For the RPi 2 the kernel image file should be called `kernel7.img`.
 
 If necessary, edit the cmdline.txt and/or config.txt files, then:
 
