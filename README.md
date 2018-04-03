@@ -42,6 +42,10 @@ See the User Guide for SDK usage instructions.
 
 ### 2.1. SD Card Boot
 
+The original Raspberry Pi has an SD card reader which can be used to boot the
+device. Newer models use a microSD instead. The following instructions are
+suitable for both.
+
 #### 2.1.1. Partition and Format SD Card
 
     $ sudo fdisk /dev/mmcblk0
@@ -135,13 +139,4 @@ Finally, unmount the card:
     $ cd
     $ sudo umount /mnt
 
-
-3. Features
------------
-
-The following features have been tested:
-
-* Serial console (ttyAMA0)
-* HDMI console (tty1)
-* Wired Ethernet
-* I2C bus
+The SD / microSD card is now ready for use.

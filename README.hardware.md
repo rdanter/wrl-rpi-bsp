@@ -20,7 +20,21 @@ Further details of the Raspberry Pi hardware variations can be found on the
 [RaspberryPi.org][1] web site.
 
 
-2. Change History
+2. Features
+-----------
+
+The following features have been tested:
+
+* Serial console (ttyAMA0)
+* HDMI console (tty1)
+* SD / microSD card reader (mmcblk0)
+* USB interface with:
+  + On-board wired Ethernet (eth0)
+  + External USB storage devices (sd)
+* I2C bus
+
+
+3. Change History
 -----------------
 
 The following table lists the major changes to the BSP.
