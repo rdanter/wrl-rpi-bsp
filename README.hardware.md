@@ -4,13 +4,14 @@ Raspberry Pi BSP
 1. Supported Boards
 -------------------
 
-This BSP supports the following boards:
+This BSP has been tested on the following boards:
 
-  * Raspberry Pi
-  * Raspberry Pi 2
+  * Raspberry Pi Model B Rev 1
+  * Raspberry Pi 2 Model B Rev 1.1
 
 Untested, but these should also work using the "rpi" configuration:
 
+  * Raspberry Pi Model A/A+/B+
   * Raspberry Pi Zero
   * Raspberry Pi Zero Wireless
   * Compute Module
