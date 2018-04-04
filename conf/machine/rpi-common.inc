@@ -14,8 +14,5 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
 # The bootloader looks for a bzImage file
 KERNEL_IMAGETYPE = "Image"
 
-# Use the ARM serial interface for a console
-SERIAL_CONSOLE = "115200 ttyAMA0"
-
 # Generate a tar archive of the rootfs by default
 IMAGE_FSTYPES ?= "tar.bz2"
