@@ -17,6 +17,7 @@ Set `MACHINE` to the required board variant, one of:
 
   * rpi
   * rpi2
+  * rpi3
 
 for example:
 
@@ -113,13 +114,13 @@ suitable for both.
     $ cd /mnt
     $ sudo cp -r <layerDir>/bootloader/broadcom/* .
     $ sudo cp <prjDir>/build/tmp-glibc/deploy/images/rpi/Image kernel.img
-
-**NOTE**: For the RPi 2 the kernel image file should be called `kernel7.img`.
-
-If necessary, edit the cmdline.txt and/or config.txt files, then:
-
     $ cd
     $ sudo umount /mnt
+
+**NOTE**:
+  * For the RPi 2 & 3 the kernel image file should be called `kernel7.img`.
+  * For the RPi 3, enable the micro-UART in config.txt and change the root
+    device to `mmcblk1p2` in the cmdline.txt file.
 
 #### 2.1.3. Install rootfs
 
@@ -133,6 +134,8 @@ Optionally, enable mount of the boot partition on /boot of the rootfs:
     $ sudo vi etc/fstab
 
         /dev/mmcblk0p1  /boot  vfat  defaults,sync  0  0
+
+**Note**: Use `mmcblk1p1` for the RPi 3.
 
 Finally, unmount the card:
 

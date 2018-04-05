@@ -8,6 +8,7 @@ This BSP has been tested on the following boards:
 
   * Raspberry Pi Model B Rev 1
   * Raspberry Pi 2 Model B Rev 1.1
+  * Raspberry Pi 3 Model B Rev 1.2
 
 Untested, but these should also work using the "rpi" configuration:
 
@@ -25,12 +26,12 @@ Further details of the Raspberry Pi hardware variations can be found on the
 
 The following features have been tested:
 
-* Serial console (ttyAMA0)
-* HDMI console (tty1)
-* SD / microSD card reader (mmcblk0)
+* Serial console (`ttyAMA0` & `ttyS0`)
+* HDMI console (`tty1`)
+* SD / microSD card reader (`mmcblk0` & `mmcblk1`)
 * USB interface with:
-  + On-board wired Ethernet (eth0)
-  + External USB storage devices (sd)
+  + On-board wired Ethernet (`eth0`)
+  + External USB storage devices (`sd`)
 * I2C bus
 
 
@@ -41,6 +42,7 @@ The following table lists the major changes to the BSP.
 
 Date       | Description
 -----------|-------------
+2018-04-05 | Add Raspberry Pi 3 support.
 2018-04-02 | Add Raspberry Pi 2 support.
 2018-03-30 | Updated to LTS 17 RCPL 5.
 2018-03-26 | Updated to latest Broadcom firmware.
