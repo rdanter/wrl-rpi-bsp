@@ -18,6 +18,7 @@ Set `MACHINE` to the required board variant, one of:
   * rpi
   * rpi2
   * rpi3
+  * rpi3-64 (64-bit)
 
 for example:
 
@@ -118,9 +119,11 @@ suitable for both.
     $ sudo umount /mnt
 
 **NOTE**:
-  * For the RPi 2 & 3 the kernel image file should be called `kernel7.img`.
-  * For the RPi 3, enable the micro-UART in config.txt and change the root
-    device to `mmcblk1p2` in the cmdline.txt file.
+  * The rpi2 and rpi3 kernel image file should be called `kernel7.img`.
+  * The rpi3-64 kernel image file should be called `kernel8.img`.
+  * For the rpi3 and rpi3-64, enable the micro-UART in config.txt if a serial
+    console is required.
+  * For the rpi3, change root device to `mmcblk1p2` in the cmdline.txt file.
 
 #### 2.1.3. Install rootfs
 
@@ -135,7 +138,7 @@ Optionally, enable mount of the boot partition on /boot of the rootfs:
 
         /dev/mmcblk0p1  /boot  vfat  defaults,sync  0  0
 
-**Note**: Use `mmcblk1p1` for the RPi 3.
+**Note**: Use `mmcblk1p1` for the rpi3.
 
 Finally, unmount the card:
 
