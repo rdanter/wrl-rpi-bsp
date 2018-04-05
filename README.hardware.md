@@ -45,7 +45,6 @@ Date       | Description
 2018-04-05 | Add Raspberry Pi 3 support.
 2018-04-02 | Add Raspberry Pi 2 support.
 2018-03-30 | Updated to LTS 17 RCPL 5.
-2018-03-26 | Updated to latest Broadcom firmware.
 2018-02-13 | Updated to LTS 17 RCPL 4.
 2018-02-11 | Updated to LTS 17 RCPL 3.
 2018-01-10 | Updated to LTS 17 RCPL 2.
