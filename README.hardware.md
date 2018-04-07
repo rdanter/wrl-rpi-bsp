@@ -35,7 +35,17 @@ The following features have been tested:
 * I2C bus
 
 
-3. Change History
+3. Known Issues
+---------------
+
+The following problems have been identified with this BSP:
+
+* Raspberry Pi 3 B+ does not boot. A firmware upgrade is required to support
+  the new 3B+, but this firmware in turn requires a kernel upgrade to resolve
+  USB issues.
+
+
+4. Change History
 -----------------
 
 The following table lists the major changes to the BSP.
