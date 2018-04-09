@@ -8,7 +8,7 @@ SOC_FAMILY = "rpi"
 include conf/machine/include/soc-family.inc
 
 # The RPi does not have a real-time clock
-MACHINE_FEATURES = "apm sdio vfat ext3 usbhost keyboard screen"
+MACHINE_FEATURES = "apm sdio vfat ext3 usbhost keyboard screen bluetooth wifi alsa"
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
 
 # The bootloader looks for a bzImage file

@@ -40,9 +40,12 @@ The following features have been tested:
 
 The following problems have been identified with this BSP:
 
-* Raspberry Pi 3 B+ does not boot. A firmware upgrade is required to support
-  the new 3B+, but this firmware in turn requires a kernel upgrade to resolve
-  USB issues.
+* Raspberry Pi 3 B+ does not boot. A bootloader upgrade is required to support
+  the new 3B+, but this in turn requires a kernel upgrade to resolve USB
+  issues.
+* Several RPi boards have built-in wireless (wifi) and bluetooth (bt) support.
+  The drivers for these devices require binary firmware blobs which are not
+  free, therefore they have not been included in this BSP.
 
 
 4. Change History
