@@ -32,6 +32,7 @@ The following features have been tested:
 * USB interface with:
   + On-board wired Ethernet (`eth0`)
   + External USB storage devices (`sd`)
+* On-board wireless Ethernet (`wlan0`)
 * I2C bus
 
 
@@ -46,6 +47,7 @@ The following problems have been identified with this BSP:
 * Several RPi boards have built-in wireless (wifi) and bluetooth (bt) support.
   The drivers for these devices require binary firmware blobs which are not
   free, therefore they have not been included in this BSP.
+  See docs/Wireless.md for more details.
 
 
 4. Change History
