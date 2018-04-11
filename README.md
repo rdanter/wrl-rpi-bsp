@@ -13,6 +13,9 @@ Wind River Linux LTS 17:
     $ . oe-init-build-env
     $ bitbake-layers add-layer /path/to/wrl-rpi-bsp/
 
+If you will build an SDK and plan to use it to build kernel modules then also
+add `--templates feature/kernel-dev` when running `setup.sh` above.
+
 Set `MACHINE` to the required board variant, one of:
 
   * rpi
