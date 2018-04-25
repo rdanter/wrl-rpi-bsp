@@ -127,6 +127,8 @@ suitable for both.
   * For the rpi3 and rpi3-64, enable the micro-UART in config.txt if a serial
     console is required.
   * For the rpi3, change root device to `mmcblk1p2` in the cmdline.txt file.
+  * For the rpi3-64, replace the `bcm2710-rpi-3-b.dtb` file with the version
+    from the 64-bit subdirectory.
 
 #### 2.1.3. Install rootfs
 
