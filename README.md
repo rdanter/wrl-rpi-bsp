@@ -124,17 +124,19 @@ The version used for testing has the following tag: 1.20171029
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt
     $ sudo cp -r <firmware>/boot/* .
+    $ sudo cp -r <bspLayerDir>/boot/* .
     $ sudo rm kernel.img kernel7.img
     $ sudo cp <prjDir>/build/tmp-glibc/deploy/images/rpi/Image kernel.img
     $ cd
     $ sudo umount /mnt
 
 **NOTE**:
+  * As above, the rpi kernel image file should be called `kernel.img`.
   * The rpi2 and rpi3 kernel image file should be called `kernel7.img`.
   * The rpi3-64 kernel image file should be called `kernel8.img`.
-  * For the rpi3 and rpi3-64, enable the micro-UART in config.txt if a serial
-    console is required.
-  * For the rpi3, change root device to `mmcblk1p2` in the cmdline.txt file.
+  * For the rpi3 and rpi3-64, enable the micro-UART in `config.txt` and use
+    `ttyS0` instead of `ttyAMA0` in `cmdline.txt` for a serial console.
+  * For the rpi3, change root device to `mmcblk1p2` in the `cmdline.txt` file.
   * For the rpi3-64, replace the `bcm2710-rpi-3-b.dtb` file with the version
     from the 64-bit subdirectory.
 
