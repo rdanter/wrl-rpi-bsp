@@ -114,15 +114,22 @@ suitable for both.
 
 #### 2.1.2. Install Bootloader and Kernel
 
+The Broadcom bootloader is closed source (binary only) and therefore not
+included in this BSP layer. However, it can be obtained from here:
+
+    https://github.com/raspberrypi/firmware
+
+The version used for testing has the following tag: 1.20171029
+
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt
-    $ sudo cp -r <nonfreeLayerDir>/bootloader/broadcom/* .
+    $ sudo cp -r <firmware>/boot/* .
+    $ sudo rm kernel.img kernel7.img
     $ sudo cp <prjDir>/build/tmp-glibc/deploy/images/rpi/Image kernel.img
     $ cd
     $ sudo umount /mnt
 
 **NOTE**:
-  * The bootloader can be found in the wrl-rpi-nonfree layer.
   * The rpi2 and rpi3 kernel image file should be called `kernel7.img`.
   * The rpi3-64 kernel image file should be called `kernel8.img`.
   * For the rpi3 and rpi3-64, enable the micro-UART in config.txt if a serial
