@@ -1,0 +1,25 @@
+From 1ab02dd188f53deeaa560cad70c09bb5434c5ae6 Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Sun, 17 Jun 2018 13:22:07 +0100
+Subject: [PATCH 161/220] vc4_firmware_kms: fix build
+
+---
+ drivers/gpu/drm/vc4/vc4_firmware_kms.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_firmware_kms.c b/drivers/gpu/drm/vc4/vc4_firmware_kms.c
+index 60e9d8f..ea8a90b 100644
+--- a/drivers/gpu/drm/vc4/vc4_firmware_kms.c
++++ b/drivers/gpu/drm/vc4/vc4_firmware_kms.c
+@@ -33,6 +33,8 @@
+ #define SMICS 0x0
+ #define SMICS_INTERRUPTS (BIT(9) | BIT(10) | BIT(11))
+ 
++#define vc4_crtc vc4_kms_crtc
++#define to_vc4_crtc to_vc4_kms_crtc
+ struct vc4_crtc {
+ 	struct drm_crtc base;
+ 	struct drm_encoder *encoder;
+-- 
+1.9.1
+

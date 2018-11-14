@@ -1,0 +1,28 @@
+From dec97edd68465bb50c31ba576c1dcacf5f20b67c Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Mon, 11 Jun 2018 16:10:35 +0100
+Subject: [PATCH 144/220] dwc_otg: Disable fiq by default until it is fixed
+
+---
+ drivers/usb/host/dwc_otg/dwc_otg_driver.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/host/dwc_otg/dwc_otg_driver.c b/drivers/usb/host/dwc_otg/dwc_otg_driver.c
+index e945900..315f260 100644
+--- a/drivers/usb/host/dwc_otg/dwc_otg_driver.c
++++ b/drivers/usb/host/dwc_otg/dwc_otg_driver.c
+@@ -241,9 +241,9 @@ struct dwc_otg_driver_module_params {
+ };
+ 
+ //Global variable to switch the fiq fix on or off
+-bool fiq_enable = 1;
++bool fiq_enable = false;
+ // Global variable to enable the split transaction fix
+-bool fiq_fsm_enable = true;
++bool fiq_fsm_enable = false;
+ //Bulk split-transaction NAK holdoff in microframes
+ uint16_t nak_holdoff = 8;
+ 
+-- 
+1.9.1
+

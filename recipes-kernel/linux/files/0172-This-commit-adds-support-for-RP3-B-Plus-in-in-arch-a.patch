@@ -1,0 +1,25 @@
+From 845998b5dfde3ee0ac888c12256c23e4ab2456e8 Mon Sep 17 00:00:00 2001
+From: derpeter <derpeter@users.noreply.github.com>
+Date: Sun, 25 Mar 2018 23:27:30 +0200
+Subject: [PATCH 172/220] This commit adds support for RP3-B-Plus in in arch
+ arm64 (#2464)
+
+---
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index e2ecf8f..e3eee75 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -466,6 +466,7 @@ CONFIG_USB_NET_SR9700=m
+ CONFIG_USB_NET_SR9800=m
+ CONFIG_USB_NET_SMSC75XX=m
+ CONFIG_USB_NET_SMSC95XX=y
++CONFIG_USB_LAN78XX=y
+ CONFIG_USB_NET_GL620A=m
+ CONFIG_USB_NET_NET1080=m
+ CONFIG_USB_NET_PLUSB=m
+-- 
+1.9.1
+

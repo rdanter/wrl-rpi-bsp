@@ -1,0 +1,196 @@
+From f22083991c76198086fad0fece300e1e939c741d Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Mon, 8 Oct 2018 17:16:28 +0100
+Subject: [PATCH 210/220] overlays: Fix a few dtc warnings
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ .../dts/overlays/pitft28-resistive-overlay.dts     |  2 --
+ .../dts/overlays/pitft35-resistive-overlay.dts     |  2 --
+ arch/arm/boot/dts/overlays/qca7000-overlay.dts     | 13 ++++++-----
+ .../dts/overlays/rpi-cirrus-wm5102-overlay.dts     | 26 +++++++++++++---------
+ arch/arm/boot/dts/overlays/rpi-tv-overlay.dts      | 11 +++++----
+ arch/arm/boot/dts/overlays/smi-nand-overlay.dts    |  3 ---
+ arch/arm/boot/dts/overlays/tinylcd35-overlay.dts   |  2 --
+ 7 files changed, 31 insertions(+), 28 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
+index ed2afc2..7cfb7ef 100644
+--- a/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
++++ b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
+@@ -64,8 +64,6 @@
+ 			};
+ 
+ 			pitft_ts@1 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+ 				compatible = "st,stmpe610";
+ 				reg = <1>;
+ 
+diff --git a/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
+index 25cb5cc..3271993 100644
+--- a/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
++++ b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
+@@ -64,8 +64,6 @@
+ 			};
+ 
+ 			pitft_ts@1 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+ 				compatible = "st,stmpe610";
+ 				reg = <1>;
+ 
+diff --git a/arch/arm/boot/dts/overlays/qca7000-overlay.dts b/arch/arm/boot/dts/overlays/qca7000-overlay.dts
+index b4e6013..f2cdd99 100644
+--- a/arch/arm/boot/dts/overlays/qca7000-overlay.dts
++++ b/arch/arm/boot/dts/overlays/qca7000-overlay.dts
+@@ -8,6 +8,13 @@
+ 	compatible = "brcm,bcm2708";
+ 
+ 	fragment@0 {
++		target = <&spidev0>;
++		__overlay__ {
++			status = "disabled";
++		};
++	};
++
++	fragment@1 {
+ 		target = <&spi0>;
+ 		__overlay__ {
+ 			/* needed to avoid dtc warning */
+@@ -16,10 +23,6 @@
+ 
+ 			status = "okay";
+ 
+-			spidev@0 {
+-				status = "disabled";
+-			};
+-
+ 			eth1: qca7000@0 {
+ 				compatible = "qca,qca7000";
+ 				reg = <0>; /* CE0 */
+@@ -33,7 +36,7 @@
+ 		};
+ 	};
+ 
+-	fragment@1 {
++	fragment@2 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+ 			eth1_pins: eth1_pins {
+diff --git a/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts b/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts
+index cf85f0a..b4602bd 100644
+--- a/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts
++++ b/arch/arm/boot/dts/overlays/rpi-cirrus-wm5102-overlay.dts
+@@ -44,20 +44,26 @@
+ 	};
+ 
+ 	fragment@3 {
++		target = <&spidev0>;
++		__overlay__ {
++			status = "disabled";
++		};
++	};
++
++	fragment@4 {
++		target = <&spidev1>;
++		__overlay__ {
++			status = "disabled";
++		};
++	};
++
++	fragment@5 {
+ 		target = <&spi0>;
+ 		__overlay__ {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			status = "okay";
+ 
+-			spidev@0{
+-				status = "disabled";
+-			};
+-
+-			spidev@1{
+-				status = "disabled";
+-			};
+-
+ 			wm5102@1{
+ 				compatible = "wlf,wm5102";
+ 				reg = <1>;
+@@ -117,7 +123,7 @@
+ 		};
+ 	};
+ 
+-	fragment@4 {
++	fragment@6 {
+ 		target = <&i2c1>;
+ 		__overlay__ {
+ 			status = "okay";
+@@ -135,7 +141,7 @@
+ 		};
+ 	};
+ 
+-	fragment@5 {
++	fragment@7 {
+ 		target = <&sound>;
+ 		__overlay__ {
+ 			compatible = "wlf,rpi-cirrus";
+diff --git a/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts b/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts
+index a68f6f7..eeb1e31 100644
+--- a/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts
++++ b/arch/arm/boot/dts/overlays/rpi-tv-overlay.dts
+@@ -7,6 +7,13 @@
+ 	compatible = "brcm,bcm2708", "brcm,bcm2709";
+ 
+ 	fragment@0 {
++		target = <&spidev0>;
++		__overlay__ {
++			status = "disabled";
++		};
++	};
++
++	fragment@1 {
+ 		target = <&spi0>;
+ 		__overlay__ {
+ 			/* needed to avoid dtc warning */
+@@ -15,10 +22,6 @@
+ 
+ 			status = "okay";
+ 
+-			spidev@0 {
+-				status = "disabled";
+-			};
+-
+ 			cxd2880@0 {
+ 				compatible = "sony,cxd2880";
+ 				reg = <0>; /* CE0 */
+diff --git a/arch/arm/boot/dts/overlays/smi-nand-overlay.dts b/arch/arm/boot/dts/overlays/smi-nand-overlay.dts
+index 13ce0b7..e742262 100644
+--- a/arch/arm/boot/dts/overlays/smi-nand-overlay.dts
++++ b/arch/arm/boot/dts/overlays/smi-nand-overlay.dts
+@@ -20,9 +20,6 @@
+ 	fragment@1 {
+ 		target = <&soc>;
+ 		__overlay__ {
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+ 			nand: flash@0 {
+ 				compatible = "brcm,bcm2835-smi-nand";
+ 				smi_handle = <&smi>;
+diff --git a/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts b/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts
+index ed2b053..906b79d 100644
+--- a/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts
++++ b/arch/arm/boot/dts/overlays/tinylcd35-overlay.dts
+@@ -171,8 +171,6 @@
+ 		__overlay__ {
+ 			keypad: keypad {
+ 				compatible = "gpio-keys";
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+ 				pinctrl-names = "default";
+ 				pinctrl-0 = <&keypad_pins>;
+ 				status = "disabled";
+-- 
+1.9.1
+

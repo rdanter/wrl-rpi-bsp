@@ -1,0 +1,29 @@
+From 3dbcec750f66de6e7c874a053a0ea7560b172da3 Mon Sep 17 00:00:00 2001
+From: Tim Gover <tim.gover@raspberrypi.org>
+Date: Wed, 5 Sep 2018 22:09:28 +0100
+Subject: [PATCH 202/220] rpi-simple-soundcard: Use nicer driver name
+ "RPi-simple"
+
+Rename the driver from "RPI simple soundcard" to "RPi-simple" so that
+the driver name won't be mangled allowing to be used unaltered as the
+card conf filename.
+---
+ sound/soc/bcm/rpi-simple-soundcard.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/bcm/rpi-simple-soundcard.c b/sound/soc/bcm/rpi-simple-soundcard.c
+index 811345d..7fa92e2 100644
+--- a/sound/soc/bcm/rpi-simple-soundcard.c
++++ b/sound/soc/bcm/rpi-simple-soundcard.c
+@@ -202,7 +202,7 @@ static int adau1977_init(struct snd_soc_pcm_runtime *rtd)
+ };
+ 
+ static struct snd_soc_card snd_rpi_simple = {
+-	.driver_name  = "RPI simple soundcard",
++	.driver_name  = "RPi-simple",
+ 	.owner        = THIS_MODULE,
+ 	.dai_link     = NULL,
+ 	.num_links    = 1, /* Only a single DAI supported at the moment */
+-- 
+1.9.1
+

@@ -1,0 +1,40 @@
+From 16a88d12f4151a796e7af3862fd10b1fd1997cb7 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Tue, 12 Jun 2018 10:16:07 +0100
+Subject: [PATCH 178/220] config: Add CONFIG_SPI_GPIO
+
+See: https://github.com/raspberrypi/linux/pull/2318
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 1952966..56acecb 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -617,6 +617,7 @@ CONFIG_I2C_TINY_USB=m
+ CONFIG_SPI=y
+ CONFIG_SPI_BCM2835=m
+ CONFIG_SPI_BCM2835AUX=m
++CONFIG_SPI_GPIO=m
+ CONFIG_SPI_SPIDEV=m
+ CONFIG_SPI_SLAVE=y
+ CONFIG_PPS=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 868f69e..5caf5d5 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -612,6 +612,7 @@ CONFIG_I2C_TINY_USB=m
+ CONFIG_SPI=y
+ CONFIG_SPI_BCM2835=m
+ CONFIG_SPI_BCM2835AUX=m
++CONFIG_SPI_GPIO=m
+ CONFIG_SPI_SPIDEV=m
+ CONFIG_SPI_SLAVE=y
+ CONFIG_PPS=m
+-- 
+1.9.1
+

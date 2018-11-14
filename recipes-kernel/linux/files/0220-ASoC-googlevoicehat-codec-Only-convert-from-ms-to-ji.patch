@@ -1,0 +1,78 @@
+From b916eff15bbeda8e48bc1b5ba2a57380188a0d65 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 23 Oct 2018 15:33:30 +0100
+Subject: [PATCH 220/220] ASoC: googlevoicehat-codec: Only convert from ms to
+ jiffies once
+
+Minor optimisation and allows to become checkpatch clean.
+A msec value is read out of DT or from a define, and convert once to
+jiffies, rather than every time that it is used.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ sound/soc/bcm/googlevoicehat-codec.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/sound/soc/bcm/googlevoicehat-codec.c b/sound/soc/bcm/googlevoicehat-codec.c
+index 61e97c3..871a25a 100644
+--- a/sound/soc/bcm/googlevoicehat-codec.c
++++ b/sound/soc/bcm/googlevoicehat-codec.c
+@@ -38,7 +38,7 @@
+ struct voicehat_priv {
+ 	struct delayed_work enable_sdmode_work;
+ 	struct gpio_desc *sdmode_gpio;
+-	unsigned int sdmode_delay;
++	unsigned long sdmode_delay_jiffies;
+ };
+ 
+ static void voicehat_enable_sdmode_work(struct work_struct *work)
+@@ -98,7 +98,7 @@ static int voicehat_daiops_trigger(struct snd_pcm_substream *substream, int cmd,
+ 	struct voicehat_priv *voicehat =
+ 				snd_soc_component_get_drvdata(component);
+ 
+-	if (voicehat->sdmode_delay == 0)
++	if (voicehat->sdmode_delay_jiffies == 0)
+ 		return 0;
+ 
+ 	dev_dbg(dai->dev, "CMD             %d", cmd);
+@@ -114,7 +114,7 @@ static int voicehat_daiops_trigger(struct snd_pcm_substream *substream, int cmd,
+ 			queue_delayed_work(
+ 				system_power_efficient_wq,
+ 				&voicehat->enable_sdmode_work,
+-				msecs_to_jiffies(voicehat->sdmode_delay));
++				voicehat->sdmode_delay_jiffies);
+ 		}
+ 		break;
+ 	case SNDRV_PCM_TRIGGER_STOP:
+@@ -164,6 +164,7 @@ static int voicehat_daiops_trigger(struct snd_pcm_substream *substream, int cmd,
+ static int voicehat_platform_probe(struct platform_device *pdev)
+ {
+ 	struct voicehat_priv *voicehat;
++	unsigned int sdmode_delay;
+ 	int ret;
+ 
+ 	voicehat = devm_kzalloc(&pdev->dev, sizeof(*voicehat), GFP_KERNEL);
+@@ -171,16 +172,17 @@ static int voicehat_platform_probe(struct platform_device *pdev)
+ 		return -ENOMEM;
+ 
+ 	ret = device_property_read_u32(&pdev->dev, "voicehat_sdmode_delay",
+-				       &voicehat->sdmode_delay);
++				       &sdmode_delay);
+ 
+ 	if (ret) {
+-		voicehat->sdmode_delay = SDMODE_DELAY_MS;
++		sdmode_delay = SDMODE_DELAY_MS;
+ 		dev_info(&pdev->dev,
+ 			 "property 'voicehat_sdmode_delay' not found default 5 mS");
+ 	} else {
+ 		dev_info(&pdev->dev, "property 'voicehat_sdmode_delay' found delay= %d mS",
+-			 voicehat->sdmode_delay);
++			 sdmode_delay);
+ 	}
++	voicehat->sdmode_delay_jiffies = msecs_to_jiffies(sdmode_delay);
+ 
+ 	dev_set_drvdata(&pdev->dev, voicehat);
+ 
+-- 
+1.9.1
+

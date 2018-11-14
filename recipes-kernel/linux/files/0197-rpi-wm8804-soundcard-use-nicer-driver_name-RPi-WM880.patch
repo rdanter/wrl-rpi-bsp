@@ -1,0 +1,37 @@
+From ca80eaca50ac2f40b0591391b757d684dd62691e Mon Sep 17 00:00:00 2001
+From: Matthias Reichl <hias@horus.com>
+Date: Sat, 25 Aug 2018 20:21:40 +0200
+Subject: [PATCH 197/220] rpi-wm8804-soundcard: use nicer driver_name
+ "RPi-WM8804"
+
+The driver_name shows up in /proc/asound/devices and is used
+to load the proper Alsa card conf from /usr/share/alsa/cards.
+
+But the length is limited to 15 characters and spaces are
+replaced by underscore so the mangled name currently is
+"RPI_WM8804_soun" which is not very nice.
+
+Use "RPi-WM8804" instead which won't be mangled and can be used
+unaltered as the card conf filename and card name in that file.
+
+Signed-off-by: Matthias Reichl <hias@horus.com>
+---
+ sound/soc/bcm/rpi-wm8804-soundcard.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/bcm/rpi-wm8804-soundcard.c b/sound/soc/bcm/rpi-wm8804-soundcard.c
+index 50daaed..361d478 100644
+--- a/sound/soc/bcm/rpi-wm8804-soundcard.c
++++ b/sound/soc/bcm/rpi-wm8804-soundcard.c
+@@ -313,7 +313,7 @@ static int snd_hifiberry_digi_probe(struct platform_device *pdev)
+ };
+ 
+ static struct snd_soc_card snd_rpi_wm8804 = {
+-	.driver_name  = "RPI WM8804 soundcard",
++	.driver_name  = "RPi-WM8804",
+ 	.owner        = THIS_MODULE,
+ 	.dai_link     = NULL,
+ 	.num_links    = 1,
+-- 
+1.9.1
+

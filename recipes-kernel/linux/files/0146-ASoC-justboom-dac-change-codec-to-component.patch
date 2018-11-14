@@ -1,0 +1,52 @@
+From 2a50f1c694df2835f3ed1fe778d2ae3f2db8be46 Mon Sep 17 00:00:00 2001
+From: Matthias Reichl <hias@horus.com>
+Date: Wed, 13 Jun 2018 01:36:22 +0200
+Subject: [PATCH 146/220] ASoC: justboom-dac: change codec to component
+
+Signed-off-by: Matthias Reichl <hias@horus.com>
+---
+ sound/soc/bcm/justboom-dac.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/sound/soc/bcm/justboom-dac.c b/sound/soc/bcm/justboom-dac.c
+index 217626c..dab0ac7 100644
+--- a/sound/soc/bcm/justboom-dac.c
++++ b/sound/soc/bcm/justboom-dac.c
+@@ -31,10 +31,10 @@
+ 
+ static int snd_rpi_justboom_dac_init(struct snd_soc_pcm_runtime *rtd)
+ {
+-	struct snd_soc_codec *codec = rtd->codec;
+-	snd_soc_update_bits(codec, PCM512x_GPIO_EN, 0x08, 0x08);
+-	snd_soc_update_bits(codec, PCM512x_GPIO_OUTPUT_4, 0xf, 0x02);
+-	snd_soc_update_bits(codec, PCM512x_GPIO_CONTROL_1, 0x08,0x08);
++	struct snd_soc_component *component = rtd->codec_dai->component;
++	snd_soc_component_update_bits(component, PCM512x_GPIO_EN, 0x08, 0x08);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_OUTPUT_4, 0xf, 0x02);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x08,0x08);
+ 
+ 	if (digital_gain_0db_limit)
+ 	{
+@@ -51,15 +51,15 @@ static int snd_rpi_justboom_dac_init(struct snd_soc_pcm_runtime *rtd)
+ 
+ static int snd_rpi_justboom_dac_startup(struct snd_pcm_substream *substream) {
+ 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+-	struct snd_soc_codec *codec = rtd->codec;
+-	snd_soc_update_bits(codec, PCM512x_GPIO_CONTROL_1, 0x08,0x08);
++	struct snd_soc_component *component = rtd->codec_dai->component;
++	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x08,0x08);
+ 	return 0;
+ }
+ 
+ static void snd_rpi_justboom_dac_shutdown(struct snd_pcm_substream *substream) {
+ 	struct snd_soc_pcm_runtime *rtd = substream->private_data;
+-	struct snd_soc_codec *codec = rtd->codec;
+-	snd_soc_update_bits(codec, PCM512x_GPIO_CONTROL_1, 0x08,0x00);
++	struct snd_soc_component *component = rtd->codec_dai->component;
++	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x08,0x00);
+ }
+ 
+ /* machine stream operations */
+-- 
+1.9.1
+

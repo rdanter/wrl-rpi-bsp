@@ -1,0 +1,31 @@
+From 9f42094dc2467497781f64b7950cbe2f5b740fa7 Mon Sep 17 00:00:00 2001
+From: Jaikumar <jaikumar@cem-solutions.com>
+Date: Tue, 26 Jun 2018 19:21:00 +0530
+Subject: [PATCH 185/220] Allo Katana DAC: Updated default values
+
+Signed-off-by: Jaikumar <jaikumar@cem-solutions.com>
+---
+ sound/soc/bcm/allo-katana-codec.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/sound/soc/bcm/allo-katana-codec.c b/sound/soc/bcm/allo-katana-codec.c
+index 4c60ecb..99d8076 100644
+--- a/sound/soc/bcm/allo-katana-codec.c
++++ b/sound/soc/bcm/allo-katana-codec.c
+@@ -76,7 +76,7 @@ struct katana_codec_priv {
+ 	{ KATANA_CODEC_MUTE,		0x00 },
+ 	{ KATANA_CODEC_DSP_PROGRAM,	0x04 },
+ 	{ KATANA_CODEC_DEEMPHASIS,	0x00 },
+-	{ KATANA_CODEC_DOP,			0x01 },
++	{ KATANA_CODEC_DOP,		0x00 },
+ 	{ KATANA_CODEC_FORMAT,		0xb4 },
+ };
+ 
+@@ -358,4 +358,3 @@ static int allo_katana_component_remove(struct i2c_client *i2c)
+ MODULE_DESCRIPTION("ASoC Allo Katana Codec Driver");
+ MODULE_AUTHOR("Jaikumar <jaikumar@cem-solutions.net>");
+ MODULE_LICENSE("GPL v2");
+-
+-- 
+1.9.1
+

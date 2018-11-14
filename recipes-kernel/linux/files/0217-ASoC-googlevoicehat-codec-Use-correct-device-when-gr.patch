@@ -1,0 +1,34 @@
+From 0d9aa86fdd6cd90cb5356ebf165a8a623a9f6606 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 23 Oct 2018 15:16:35 +0100
+Subject: [PATCH 217/220] ASoC: googlevoicehat-codec: Use correct device when
+ grabbing GPIO
+
+The fixup for the VoiceHAT in 4.18 incorrectly tried to find the
+sdmode GPIO pin under the card device, not the codec device.
+This failed, and therefore caused the device probe to fail.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ sound/soc/bcm/googlevoicehat-codec.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sound/soc/bcm/googlevoicehat-codec.c b/sound/soc/bcm/googlevoicehat-codec.c
+index 1cbd3ed..187706c 100644
+--- a/sound/soc/bcm/googlevoicehat-codec.c
++++ b/sound/soc/bcm/googlevoicehat-codec.c
+@@ -50,9 +50,9 @@ static void voicehat_enable_sdmode_work(struct work_struct *work) {
+ static int voicehat_component_probe(struct snd_soc_component *component) {
+   struct voicehat_priv *voicehat = snd_soc_component_get_drvdata(component);
+ 
+-  voicehat->sdmode_gpio = devm_gpiod_get(component->card->dev, "sdmode", GPIOD_OUT_LOW);
++  voicehat->sdmode_gpio = devm_gpiod_get(component->dev, "sdmode", GPIOD_OUT_LOW);
+   if (IS_ERR(voicehat->sdmode_gpio)) {
+-    dev_err(component->card->dev, "Unable to allocate GPIO pin\n");
++    dev_err(component->dev, "Unable to allocate GPIO pin\n");
+     return PTR_ERR(voicehat->sdmode_gpio);
+   }
+ 
+-- 
+1.9.1
+

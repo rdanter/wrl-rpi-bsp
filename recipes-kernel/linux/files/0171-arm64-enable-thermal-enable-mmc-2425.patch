@@ -1,0 +1,22 @@
+From 3dce0cf3d4de304d4542f8e5571b2bcd2db2ce0f Mon Sep 17 00:00:00 2001
+From: Piraty <Piraty@users.noreply.github.com>
+Date: Mon, 12 Mar 2018 17:07:45 +0100
+Subject: [PATCH 171/220] arm64: enable thermal / enable mmc (#2425)
+
+---
+ arch/arm64/configs/bcmrpi3_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 8b37c2e..e2ecf8f 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1280,3 +1280,5 @@ CONFIG_CRYPTO_USER_API_SKCIPHER=m
+ CONFIG_ARM64_CRYPTO=y
+ CONFIG_CRC_ITU_T=y
+ CONFIG_LIBCRC32C=y
++CONFIG_MMC_BCM2835_MMC=y
++CONFIG_MMC_SDHCI_IPROC=m
+-- 
+1.9.1
+

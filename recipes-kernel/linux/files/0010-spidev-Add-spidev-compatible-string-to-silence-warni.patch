@@ -1,0 +1,26 @@
+From b4b964010512a0c7d2ddae28b8df4ef5571dda87 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Tue, 14 Jul 2015 10:26:09 +0100
+Subject: [PATCH 010/220] spidev: Add "spidev" compatible string to silence
+ warning
+
+See: https://github.com/raspberrypi/linux/issues/1054
+---
+ drivers/spi/spidev.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/spi/spidev.c b/drivers/spi/spidev.c
+index cda1071..4f3779d 100644
+--- a/drivers/spi/spidev.c
++++ b/drivers/spi/spidev.c
+@@ -669,6 +669,7 @@ static int spidev_release(struct inode *inode, struct file *filp)
+ 	{ .compatible = "lineartechnology,ltc2488" },
+ 	{ .compatible = "ge,achc" },
+ 	{ .compatible = "semtech,sx1301" },
++	{ .compatible = "spidev" },
+ 	{},
+ };
+ MODULE_DEVICE_TABLE(of, spidev_dt_ids);
+-- 
+1.9.1
+

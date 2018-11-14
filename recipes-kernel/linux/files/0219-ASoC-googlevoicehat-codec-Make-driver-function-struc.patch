@@ -1,0 +1,29 @@
+From f91af4a2193992a5a7b184e1c7490dabee875447 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 23 Oct 2018 15:40:47 +0100
+Subject: [PATCH 219/220] ASoC: googlevoicehat-codec: Make driver function
+ structure const
+
+Make voicehat_component_driver a const structure.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ sound/soc/bcm/googlevoicehat-codec.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/bcm/googlevoicehat-codec.c b/sound/soc/bcm/googlevoicehat-codec.c
+index cc22c77..61e97c3 100644
+--- a/sound/soc/bcm/googlevoicehat-codec.c
++++ b/sound/soc/bcm/googlevoicehat-codec.c
+@@ -82,7 +82,7 @@ static void voicehat_component_remove(struct snd_soc_component *component)
+ 	{"Speaker", NULL, "HiFi Playback"},
+ };
+ 
+-static struct snd_soc_component_driver voicehat_component_driver = {
++static const struct snd_soc_component_driver voicehat_component_driver = {
+ 	.probe = voicehat_component_probe,
+ 	.remove = voicehat_component_remove,
+ 	.dapm_widgets = voicehat_dapm_widgets,
+-- 
+1.9.1
+

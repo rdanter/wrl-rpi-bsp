@@ -1,0 +1,91 @@
+From fa6a273730bcd68256ec4b82b15d3727d2026b37 Mon Sep 17 00:00:00 2001
+From: Nathan Chancellor <natechancellor@gmail.com>
+Date: Sat, 3 Mar 2018 23:31:22 -0700
+Subject: [PATCH 095/220] net: rtl8192cu: Normalize indentation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+These warnings appear with GCC 6.4.0 from toolchains.bootlin.com:
+
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c: In function ‘aes_cipher’:
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c:1504:5: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+     for (j = 0; j < 8; j++)
+     ^~~
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c:1507:2: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the ‘for’
+  payload_index = hdrlen + 8;
+  ^~~~~~~~~~~~~
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c: In function ‘aes_decipher’:
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c:1878:5: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+     for (j = 0; j < 8; j++)
+     ^~~
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c:1881:2: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the ‘for’
+  payload_index = hdrlen + 8;
+  ^~~~~~~~~~~~~
+
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c:5666:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+     if( _rtw_memcmp(pwdinfo->rx_prov_disc_info.peerDevAddr, empty_addr, ETH_ALEN) );
+     ^~
+../drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c:5667:6: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the ‘if’
+      _rtw_memcpy(pwdinfo->rx_prov_disc_info.peerDevAddr, GetAddr2Ptr(pframe), ETH_ALEN);
+      ^~~~~~~~~~~
+
+It appears to be due to tabs versus spaces.
+
+Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
+---
+ drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c |  2 +-
+ drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c b/drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c
+index d29a20c..d0b423c 100755
+--- a/drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c
++++ b/drivers/net/wireless/realtek/rtl8192cu/core/rtw_mlme_ext.c
+@@ -5663,7 +5663,7 @@ unsigned int on_action_public_p2p(union recv_frame *precv_frame)
+ 
+ 				//	Commented by Kurt 20120113
+ 				//	Get peer_dev_addr here if peer doesn't issue prov_disc frame.
+-				if( _rtw_memcmp(pwdinfo->rx_prov_disc_info.peerDevAddr, empty_addr, ETH_ALEN) );
++				if( _rtw_memcmp(pwdinfo->rx_prov_disc_info.peerDevAddr, empty_addr, ETH_ALEN) )
+ 					_rtw_memcpy(pwdinfo->rx_prov_disc_info.peerDevAddr, GetAddr2Ptr(pframe), ETH_ALEN);
+ 
+ 				result = process_p2p_group_negotation_req( pwdinfo, frame_body, len );
+diff --git a/drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c b/drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c
+index 8fa8ed5..9e066f2 100755
+--- a/drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c
++++ b/drivers/net/wireless/realtek/rtl8192cu/core/rtw_security.c
+@@ -1477,7 +1477,7 @@ static sint aes_cipher(u8 *key, uint	hdrlen,
+     bitwise_xor(aes_out, mic_header2, chain_buffer);
+     aes128k128d(key, chain_buffer, aes_out);
+ 
+-	for (i = 0; i < num_blocks; i++)
++    for (i = 0; i < num_blocks; i++)
+     {
+         bitwise_xor(aes_out, &pframe[payload_index], chain_buffer);//bitwise_xor(aes_out, &message[payload_index], chain_buffer);
+ 
+@@ -1504,8 +1504,8 @@ static sint aes_cipher(u8 *key, uint	hdrlen,
+     for (j = 0; j < 8; j++)
+     	pframe[payload_index+j] = mic[j];	//message[payload_index+j] = mic[j];
+ 
+-	payload_index = hdrlen + 8;
+-	for (i=0; i< num_blocks; i++)
++    payload_index = hdrlen + 8;
++    for (i=0; i< num_blocks; i++)
+     {
+         construct_ctr_preload(
+                                 ctr_preload,
+@@ -1878,8 +1878,8 @@ static sint aes_decipher(u8 *key, uint	hdrlen,
+     for (j = 0; j < 8; j++)
+     	message[payload_index+j] = mic[j];
+ 
+-	payload_index = hdrlen + 8;
+-	for (i=0; i< num_blocks; i++)
++    payload_index = hdrlen + 8;
++    for (i=0; i< num_blocks; i++)
+     {
+         construct_ctr_preload(
+                                 ctr_preload,
+-- 
+1.9.1
+

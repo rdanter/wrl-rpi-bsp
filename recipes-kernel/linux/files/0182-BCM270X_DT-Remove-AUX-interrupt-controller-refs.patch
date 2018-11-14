@@ -1,0 +1,50 @@
+From d62df27cc931e02323ebe709a280b4c0373ebc97 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 20 Jun 2018 09:55:43 +0100
+Subject: [PATCH 182/220] BCM270X_DT: Remove AUX interrupt controller refs
+
+As of 4.18 we've dropped the auxilliary interrupt controller because
+the upstream code has a fix for the SPI driver (effectiveness TBD).
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/bcm270x.dtsi | 23 -----------------------
+ 1 file changed, 23 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm270x.dtsi b/arch/arm/boot/dts/bcm270x.dtsi
+index d26b10a..145e455 100644
+--- a/arch/arm/boot/dts/bcm270x.dtsi
++++ b/arch/arm/boot/dts/bcm270x.dtsi
+@@ -147,29 +147,6 @@
+ 	};
+ };
+ 
+-/* Configure and use the auxilliary interrupt controller */
+-
+-&aux {
+-	interrupts = <1 29>;
+-	interrupt-controller;
+-	#interrupt-cells = <1>;
+-};
+-
+-&uart1 {
+-	interrupt-parent = <&aux>;
+-	interrupts = <0>;
+-};
+-
+-&spi1 {
+-	interrupt-parent = <&aux>;
+-	interrupts = <1>;
+-};
+-
+-&spi2 {
+-	interrupt-parent = <&aux>;
+-	interrupts = <2>;
+-};
+-
+ &vc4 {
+ 	status = "disabled";
+ };
+-- 
+1.9.1
+

@@ -1,0 +1,27 @@
+From 20813e3ee744affcf64f5df5d07cb8502a2b60e7 Mon Sep 17 00:00:00 2001
+From: eccgecko <36884529+eccgecko@users.noreply.github.com>
+Date: Wed, 23 May 2018 19:22:33 +0200
+Subject: [PATCH 174/220] Enable AES, AES bit slice, and AES NEON engines on
+ arm64
+
+---
+ arch/arm64/configs/bcmrpi3_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index e3eee75..9bcb4ca 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1279,6 +1279,9 @@ CONFIG_CRYPTO_DES=y
+ CONFIG_CRYPTO_LZ4=m
+ CONFIG_CRYPTO_USER_API_SKCIPHER=m
+ CONFIG_ARM64_CRYPTO=y
++CONFIG_CRYPTO_AES_ARM64=m
++CONFIG_CRYPTO_AES_ARM64_BS=m
++CONFIG_CRYPTO_AES_ARM64_NEON_BLK=m
+ CONFIG_CRC_ITU_T=y
+ CONFIG_LIBCRC32C=y
+ CONFIG_MMC_BCM2835_MMC=y
+-- 
+1.9.1
+
