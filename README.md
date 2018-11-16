@@ -5,16 +5,13 @@ Raspberry Pi BSP
 ---------------------
 
 Use the following steps to configure a platform project for this BSP with
-Wind River Linux LTS 17:
+Wind River Linux LTS 18:
 
-    $ git clone --branch WRLINUX_10_17_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_18_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
     $ . oe-init-build-env
     $ bitbake-layers add-layer /path/to/wrl-rpi-bsp/
-
-If you will build an SDK and plan to use it to build kernel modules then also
-add `--templates feature/kernel-dev` when running `setup.sh` above.
 
 Set `MACHINE` to the required board variant, one of:
 
@@ -37,7 +34,7 @@ and finally, if required, build and install the SDK:
 
     $ bitbake -c populate_sdk wrlinux-image-glibc-std
     $ cd tmp-glibc/deploy/sdk/
-    $ ./wrlinux-10.17.41.1-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
+    $ ./wrlinux-10.18.44.0-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
 
 See the User Guide for SDK usage instructions.
 
@@ -119,7 +116,9 @@ included in this BSP layer. However, it can be obtained from here:
 
     https://github.com/raspberrypi/firmware
 
-The version used for testing has the following tag: 1.20171029
+The version used for testing has the following commit id:
+
+	86e3ccc14e43618f82a13e639002199de29a16b1
 
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt
@@ -136,9 +135,8 @@ The version used for testing has the following tag: 1.20171029
   * The rpi3-64 kernel image file should be called `kernel8.img`.
   * For the rpi3 and rpi3-64, enable the micro-UART in `config.txt` and use
     `ttyS0` instead of `ttyAMA0` in `cmdline.txt` for a serial console.
-  * For the rpi3, change root device to `mmcblk1p2` in the `cmdline.txt` file.
-  * For the rpi3-64, replace the `bcm2710-rpi-3-b.dtb` file with the version
-    from the 64-bit subdirectory.
+  * Alternatively, for any target use `tty1` to have the console on the
+    HDMI display output.
 
 #### 2.1.3. Install rootfs
 
@@ -152,8 +150,6 @@ Optionally, enable mount of the boot partition on /boot of the rootfs:
     $ sudo vi etc/fstab
 
         /dev/mmcblk0p1  /boot  vfat  defaults,sync  0  0
-
-**Note**: Use `mmcblk1p1` for the rpi3.
 
 Finally, unmount the card:
 
