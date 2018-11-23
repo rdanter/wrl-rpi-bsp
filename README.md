@@ -116,9 +116,10 @@ included in this BSP layer. However, it can be obtained from here:
 
     https://github.com/raspberrypi/firmware
 
-The version used for testing has the following commit id:
+The version used for testing comes from the 'next' branch and has the
+following commit id:
 
-	86e3ccc14e43618f82a13e639002199de29a16b1
+	f79c75e6f5aeaef8b3786bc8f31c09b5c731a4d8
 
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt

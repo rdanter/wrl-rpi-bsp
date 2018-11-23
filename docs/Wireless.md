@@ -1,8 +1,8 @@
 Raspberry Pi Wireless
 =====================
 
-The Raspberry Pi 3 and Zero-Wireless have on-board wifi adapters. The following
-steps are needed to enable the adapter with this BSP.
+The Raspberry Pi 3 B/B+ and Zero-Wireless have on-board wifi adapters. The
+following steps are needed to enable the adapter with this BSP.
 
 1. Install Firmware
 -------------------
@@ -10,17 +10,25 @@ The Broadcom firmware can be obtained from:
 
     https://github.com/RPi-Distro/firmware-nonfree.git
 
-From the brcm subdirectory you need just two files:
+From the brcm subdirectory you need just the following files:
 
   * brcmfmac43430-sdio.bin
   * brcmfmac43430-sdio.txt
+
+for the 3B, or:
+
+  * brcmfmac43455-sdio.bin
+  * brcmfmac43455-sdio.clm_blob
+  * brcmfmac43455-sdio.txt
+
+for the 3B Plus.
 
 Create a directory on the RPi rootfs and copy these files as follows:
 
     $ sudo mount -t ext4 /dev/mmcblk0p2 /mnt
     $ cd /mnt
     $ sudo mkdir -p lib/firmware/brcm
-    $ sudo cp /path/to/firmware-nonfree/brcm/brcmfmac43430-sdio.* lib/firmware/brcm/
+    $ sudo cp /path/to/firmware-nonfree/brcm/brcmfmac43???-sdio.* lib/firmware/brcm/
     $ cd
     $ sudo umount /mnt
 
