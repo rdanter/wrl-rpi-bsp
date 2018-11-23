@@ -27,7 +27,7 @@ Further details of the Raspberry Pi hardware variations can be found on the
 
 The following features have been tested:
 
-* Serial console (`ttyAMA0`)
+* Serial console (`ttyAMA0` & `ttyS0`)
 * HDMI console (`tty1`)
 * SD / microSD card reader (`mmcblk0`)
 * USB interface with:
@@ -41,8 +41,6 @@ The following features have been tested:
 ---------------
 
 The following problems have been identified with this BSP:
-
-* The microUART on the RaspberryPi 3B and 3B+ do not appear to work.
 
 * Several RPi boards have built-in wireless (wifi) and bluetooth (bt) support.
   The drivers for these devices require binary firmware blobs which are not
