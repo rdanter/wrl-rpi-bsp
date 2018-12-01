@@ -136,8 +136,8 @@ following commit id:
   * The rpi3-64 kernel image file should be called `kernel8.img`.
   * For the rpi3 and rpi3-64, enable the micro-UART in `config.txt` and use
     `ttyS0` instead of `ttyAMA0` in `cmdline.txt` for a serial console.
-  * Alternatively, for any target use `tty1` to have the console on the
-    HDMI display output.
+  * Alternatively, for any target, use `tty1` to have the console displayed
+    via the HDMI output. A USB keyboard can be used for entering commands.
 
 #### 2.1.3. Install rootfs
 
