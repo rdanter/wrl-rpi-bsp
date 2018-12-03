@@ -4,9 +4,6 @@ require linux-yocto-rpi.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto-4.18:"
 
-SRC_URI += "file://${MACHINE}-standard.scc"
-SRC_URI += "file://${MACHINE}-standard.cfg"
-
 SRC_URI += "file://0001-arm-partially-revert-702b94bff3c50542a6e4ab9a4f4cef0.patch"
 SRC_URI += "file://0002-smsx95xx-fix-crimes-against-truesize.patch"
 SRC_URI += "file://0003-smsc95xx-Experimental-Enable-turbo_mode-and-packetsi.patch"
