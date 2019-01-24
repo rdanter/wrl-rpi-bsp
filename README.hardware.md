@@ -55,6 +55,7 @@ The following table lists the major changes to the BSP.
 
 Date       | Description
 -----------|-------------
+2019-01-24 | Updated to LTS 18 RCPL 3.
 2018-11-14 | Ported to WRL LTS 18.
 2018-04-05 | Add Raspberry Pi 3 support.
 2018-04-02 | Add Raspberry Pi 2 support.

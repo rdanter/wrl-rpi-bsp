@@ -131,7 +131,8 @@ SRC_URI += "file://0124-drm-vc4-Add-missing-enable-disable-vblank-handlers-i.pat
 SRC_URI += "file://0125-vc4_fkms-Apply-firmware-overscan-offset-to-hardware-.patch"
 SRC_URI += "file://0126-hack-cache-Fix-linker-error.patch"
 SRC_URI += "file://0127-i2c-gpio-Also-set-bus-numbers-from-reg-property.patch"
-SRC_URI += "file://0128-sc16is7xx-Fix-for-multi-channel-stall.patch"
+# Not needed since RCPL 3:
+#SRC_URI += "file://0128-sc16is7xx-Fix-for-multi-channel-stall.patch"
 SRC_URI += "file://0129-firmware-raspberrypi-Add-a-get_throttled-sysfs-file.patch"
 SRC_URI += "file://0130-sound-bcm-Fix-memset-dereference-warning.patch"
 SRC_URI += "file://0131-added-capture_clear-option-to-pps-gpio-via-dtoverlay.patch"
