@@ -36,7 +36,18 @@ and finally, if required, build and install the SDK:
     $ cd tmp-glibc/deploy/sdk/
     $ ./wrlinux-10.18.44.0-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
 
-See the User Guide for SDK usage instructions.
+If you will be building kernel modules with the SDK then the following
+additional steps should be taken before building:
+
+  1. Add the layers/wrlinux/wrlinux-kernel-dev layer,
+  2. Add ENABLE_KERNEL_DEV = '1' to the local.conf file, and
+  3. Add WRTEMPLATE += "kernel-dev" to the local.conf file.
+
+After installing the SDK make sure to run "make scripts" within the kernel
+source directory. The SDK can then be used to build kernel modules as well as
+userspace applications.
+
+See the User Guide for further SDK usage instructions.
 
 
 2. Boot Instructions
