@@ -1,8 +1,7 @@
-From 54a1ce2a9429aa2e48f5870b1f2c08f3967b2aff Mon Sep 17 00:00:00 2001
+From bdc5bb724667f1fc8a62b928e4960e8949b637ca Mon Sep 17 00:00:00 2001
 From: popcornmix <popcornmix@gmail.com>
 Date: Mon, 28 Nov 2016 16:50:04 +0000
-Subject: [PATCH 062/220] Improve __copy_to_user and __copy_from_user
- performance
+Subject: [PATCH] Improve __copy_to_user and __copy_from_user performance
 
 Provide a __copy_from_user that uses memcpy. On BCM2708, use
 optimised memcpy/memmove/memcmp/memset implementations.
@@ -23,15 +22,15 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  arch/arm/include/asm/string.h      |   5 +
  arch/arm/include/asm/uaccess.h     |   3 +
  arch/arm/lib/Makefile              |  14 +-
- arch/arm/lib/arm-mem.h             | 159 ++++++++++++
+ arch/arm/lib/arm-mem.h             | 159 +++++++++
  arch/arm/lib/copy_from_user.S      |   4 +-
  arch/arm/lib/exports_rpi.c         |  37 +++
- arch/arm/lib/memcmp_rpi.S          | 285 +++++++++++++++++++++
- arch/arm/lib/memcpy_rpi.S          |  61 +++++
- arch/arm/lib/memcpymove.h          | 506 +++++++++++++++++++++++++++++++++++++
- arch/arm/lib/memmove_rpi.S         |  61 +++++
- arch/arm/lib/memset_rpi.S          | 128 ++++++++++
- arch/arm/lib/uaccess_with_memcpy.c | 120 ++++++++-
+ arch/arm/lib/memcmp_rpi.S          | 285 ++++++++++++++++
+ arch/arm/lib/memcpy_rpi.S          |  61 ++++
+ arch/arm/lib/memcpymove.h          | 506 +++++++++++++++++++++++++++++
+ arch/arm/lib/memmove_rpi.S         |  61 ++++
+ arch/arm/lib/memset_rpi.S          | 128 ++++++++
+ arch/arm/lib/uaccess_with_memcpy.c | 120 ++++++-
  arch/arm/mach-bcm/Kconfig          |   7 +
  13 files changed, 1385 insertions(+), 5 deletions(-)
  create mode 100644 arch/arm/lib/arm-mem.h
@@ -43,7 +42,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
  create mode 100644 arch/arm/lib/memset_rpi.S
 
 diff --git a/arch/arm/include/asm/string.h b/arch/arm/include/asm/string.h
-index 111a1d8..867a446 100644
+index 111a1d8a41dd..867a4465cebf 100644
 --- a/arch/arm/include/asm/string.h
 +++ b/arch/arm/include/asm/string.h
 @@ -39,4 +39,9 @@ static inline void *memset64(uint64_t *p, uint64_t v, __kernel_size_t n)
@@ -57,10 +56,10 @@ index 111a1d8..867a446 100644
 +
  #endif
 diff --git a/arch/arm/include/asm/uaccess.h b/arch/arm/include/asm/uaccess.h
-index 3d614e9..40e9400 100644
+index 8380e4678d2e..2f0123493f06 100644
 --- a/arch/arm/include/asm/uaccess.h
 +++ b/arch/arm/include/asm/uaccess.h
-@@ -447,6 +447,9 @@ static inline void set_fs(mm_segment_t fs)
+@@ -484,6 +484,9 @@ do {									\
  extern unsigned long __must_check
  arm_copy_from_user(void *to, const void __user *from, unsigned long n);
  
@@ -71,7 +70,7 @@ index 3d614e9..40e9400 100644
  raw_copy_from_user(void *to, const void __user *from, unsigned long n)
  {
 diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index ad25fd1..50a8bc5 100644
+index ad25fd1872c7..50a8bc5a93ea 100644
 --- a/arch/arm/lib/Makefile
 +++ b/arch/arm/lib/Makefile
 @@ -7,8 +7,8 @@
@@ -104,7 +103,7 @@ index ad25fd1..50a8bc5 100644
  
 diff --git a/arch/arm/lib/arm-mem.h b/arch/arm/lib/arm-mem.h
 new file mode 100644
-index 0000000..5d4bda1
+index 000000000000..5d4bda19ad20
 --- /dev/null
 +++ b/arch/arm/lib/arm-mem.h
 @@ -0,0 +1,159 @@
@@ -268,17 +267,20 @@ index 0000000..5d4bda1
 +92:
 +.endm
 diff --git a/arch/arm/lib/copy_from_user.S b/arch/arm/lib/copy_from_user.S
-index 7a4b060..fb40a1b 100644
+index 6709a8d33963..125891417451 100644
 --- a/arch/arm/lib/copy_from_user.S
 +++ b/arch/arm/lib/copy_from_user.S
-@@ -89,11 +89,13 @@
+@@ -89,7 +89,8 @@
  
  	.text
  
 -ENTRY(arm_copy_from_user)
 +ENTRY(__copy_from_user_std)
 +WEAK(arm_copy_from_user)
- 
+ #ifdef CONFIG_CPU_SPECTRE
+ 	get_thread_info r3
+ 	ldr	r3, [r3, #TI_ADDR_LIMIT]
+@@ -99,6 +100,7 @@ ENTRY(arm_copy_from_user)
  #include "copy_template.S"
  
  ENDPROC(arm_copy_from_user)
@@ -288,7 +290,7 @@ index 7a4b060..fb40a1b 100644
  	.align 0
 diff --git a/arch/arm/lib/exports_rpi.c b/arch/arm/lib/exports_rpi.c
 new file mode 100644
-index 0000000..1f82604
+index 000000000000..1f826047db75
 --- /dev/null
 +++ b/arch/arm/lib/exports_rpi.c
 @@ -0,0 +1,37 @@
@@ -331,7 +333,7 @@ index 0000000..1f82604
 +EXPORT_SYMBOL(memcmp);
 diff --git a/arch/arm/lib/memcmp_rpi.S b/arch/arm/lib/memcmp_rpi.S
 new file mode 100644
-index 0000000..bf6e4ed
+index 000000000000..bf6e4edfc9d3
 --- /dev/null
 +++ b/arch/arm/lib/memcmp_rpi.S
 @@ -0,0 +1,285 @@
@@ -622,7 +624,7 @@ index 0000000..bf6e4ed
 +ENDPROC(memcmp)
 diff --git a/arch/arm/lib/memcpy_rpi.S b/arch/arm/lib/memcpy_rpi.S
 new file mode 100644
-index 0000000..30f8a90
+index 000000000000..30f8a9089a83
 --- /dev/null
 +++ b/arch/arm/lib/memcpy_rpi.S
 @@ -0,0 +1,61 @@
@@ -689,7 +691,7 @@ index 0000000..30f8a90
 +ENDPROC(mmiocpy)
 diff --git a/arch/arm/lib/memcpymove.h b/arch/arm/lib/memcpymove.h
 new file mode 100644
-index 0000000..d8be584
+index 000000000000..d8be5849c860
 --- /dev/null
 +++ b/arch/arm/lib/memcpymove.h
 @@ -0,0 +1,506 @@
@@ -1201,7 +1203,7 @@ index 0000000..d8be584
 +.endm
 diff --git a/arch/arm/lib/memmove_rpi.S b/arch/arm/lib/memmove_rpi.S
 new file mode 100644
-index 0000000..8b0760c
+index 000000000000..8b0760c0904c
 --- /dev/null
 +++ b/arch/arm/lib/memmove_rpi.S
 @@ -0,0 +1,61 @@
@@ -1268,7 +1270,7 @@ index 0000000..8b0760c
 +ENDPROC(memmove)
 diff --git a/arch/arm/lib/memset_rpi.S b/arch/arm/lib/memset_rpi.S
 new file mode 100644
-index 0000000..e8469ce
+index 000000000000..e8469cecabc1
 --- /dev/null
 +++ b/arch/arm/lib/memset_rpi.S
 @@ -0,0 +1,128 @@
@@ -1401,7 +1403,7 @@ index 0000000..e8469ce
 +ENDPROC(memset)
 +ENDPROC(mmioset)
 diff --git a/arch/arm/lib/uaccess_with_memcpy.c b/arch/arm/lib/uaccess_with_memcpy.c
-index 9b4ed17..9dc1b85 100644
+index 73dc7360cbdd..1ea66521768d 100644
 --- a/arch/arm/lib/uaccess_with_memcpy.c
 +++ b/arch/arm/lib/uaccess_with_memcpy.c
 @@ -22,6 +22,14 @@
@@ -1419,7 +1421,7 @@ index 9b4ed17..9dc1b85 100644
  static int
  pin_page_for_write(const void __user *_addr, pte_t **ptep, spinlock_t **ptlp)
  {
-@@ -84,7 +92,44 @@
+@@ -84,7 +92,44 @@ pin_page_for_write(const void __user *_addr, pte_t **ptep, spinlock_t **ptlp)
  	return 1;
  }
  
@@ -1465,7 +1467,7 @@ index 9b4ed17..9dc1b85 100644
  __copy_to_user_memcpy(void __user *to, const void *from, unsigned long n)
  {
  	unsigned long ua_flags;
-@@ -137,6 +182,57 @@
+@@ -137,6 +182,57 @@ __copy_to_user_memcpy(void __user *to, const void *from, unsigned long n)
  	return n;
  }
  
@@ -1523,7 +1525,7 @@ index 9b4ed17..9dc1b85 100644
  unsigned long
  arm_copy_to_user(void __user *to, const void *from, unsigned long n)
  {
-@@ -147,7 +243,7 @@
+@@ -147,7 +243,7 @@ arm_copy_to_user(void __user *to, const void *from, unsigned long n)
  	 * With frame pointer disabled, tail call optimization kicks in
  	 * as well making this test almost invisible.
  	 */
@@ -1532,7 +1534,7 @@ index 9b4ed17..9dc1b85 100644
  		unsigned long ua_flags = uaccess_save_and_enable();
  		n = __copy_to_user_std(to, from, n);
  		uaccess_restore(ua_flags);
-@@ -156,6 +252,26 @@
+@@ -157,6 +253,26 @@ arm_copy_to_user(void __user *to, const void *from, unsigned long n)
  	}
  	return n;
  }
@@ -1560,7 +1562,7 @@ index 9b4ed17..9dc1b85 100644
  static unsigned long noinline
  __clear_user_memset(void __user *addr, unsigned long n)
 diff --git a/arch/arm/mach-bcm/Kconfig b/arch/arm/mach-bcm/Kconfig
-index abae0e7..e85de84 100644
+index abae0e72c3d6..e85de844f98e 100644
 --- a/arch/arm/mach-bcm/Kconfig
 +++ b/arch/arm/mach-bcm/Kconfig
 @@ -187,6 +187,13 @@ config ARCH_BCM_53573
@@ -1578,5 +1580,5 @@ index abae0e7..e85de84 100644
  	bool "Broadcom BCM63xx DSL SoC"
  	depends on ARCH_MULTI_V7
 -- 
-1.9.1
+2.18.1
 
