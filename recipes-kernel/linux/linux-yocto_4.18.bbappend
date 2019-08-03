@@ -226,3 +226,4 @@ SRC_URI += "file://0217-ASoC-googlevoicehat-codec-Use-correct-device-when-gr.pat
 SRC_URI += "file://0218-ASoC-googlevoicehat-codec-Reformat-for-kernel-coding.patch"
 SRC_URI += "file://0219-ASoC-googlevoicehat-codec-Make-driver-function-struc.patch"
 SRC_URI += "file://0220-ASoC-googlevoicehat-codec-Only-convert-from-ms-to-ji.patch"
+SRC_URI += "file://0001-bcm2835-mmc-fix-register-name.patch"

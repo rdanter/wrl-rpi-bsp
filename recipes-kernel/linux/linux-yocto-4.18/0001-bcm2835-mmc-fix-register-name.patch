@@ -1,0 +1,29 @@
+From 6c68002f767577700e05394cb5bb33ae2980e94a Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Sat, 3 Aug 2019 11:43:53 +0100
+Subject: [PATCH] bcm2835: mmc: fix register name
+
+Upstream the SDHCI_ACMD12_ERR register was renamed SDHCI_AUTO_CMD_STATUS
+in sdhci.h, update the BCM2835 MMC driver to use the new name.
+
+Signed-off-by: Richard Danter <radanter@gmail.com>
+---
+ drivers/mmc/host/bcm2835-mmc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mmc/host/bcm2835-mmc.c b/drivers/mmc/host/bcm2835-mmc.c
+index 08a700e..8edc15c 100644
+--- a/drivers/mmc/host/bcm2835-mmc.c
++++ b/drivers/mmc/host/bcm2835-mmc.c
+@@ -251,7 +251,7 @@ static void bcm2835_mmc_dumpregs(struct bcm2835_host *host)
+ 		bcm2835_mmc_readl(host, SDHCI_INT_ENABLE),
+ 		bcm2835_mmc_readl(host, SDHCI_SIGNAL_ENABLE));
+ 	pr_debug(DRIVER_NAME ": AC12 err: 0x%08x | Slot int: 0x%08x\n",
+-		bcm2835_mmc_readw(host, SDHCI_ACMD12_ERR),
++		bcm2835_mmc_readw(host, SDHCI_AUTO_CMD_STATUS ),
+ 		bcm2835_mmc_readw(host, SDHCI_SLOT_INT_STATUS));
+ 	pr_debug(DRIVER_NAME ": Caps:     0x%08x | Caps_1:   0x%08x\n",
+ 		bcm2835_mmc_readl(host, SDHCI_CAPABILITIES),
+-- 
+1.9.1
+
