@@ -41,7 +41,7 @@ additional steps should be taken before building:
 
   1. Add the layers/wrlinux/wrlinux-kernel-dev layer,
   2. Add ENABLE_KERNEL_DEV = '1' to the local.conf file, and
-  3. Add WRTEMPLATE += "kernel-dev" to the local.conf file.
+  3. Add WRTEMPLATE += "feature/kernel-dev" to the local.conf file.
 
 After installing the SDK make sure to run "make scripts" within the kernel
 source directory. The SDK can then be used to build kernel modules as well as
