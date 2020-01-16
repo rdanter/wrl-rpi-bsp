@@ -1,0 +1,27 @@
+From 4cb2b06704e616c60c5b6b3fa256250e388fc372 Mon Sep 17 00:00:00 2001
+From: Dan Robertson <daniel.robertson@starlab.io>
+Date: Sun, 1 Sep 2019 19:05:11 -0400
+Subject: [PATCH 453/587] net: account for the srctree rtl8192 cflags
+
+Account for the srctree in the rtl8192 non-mainline driver.
+See cdd750bfb1f76fe9be8cfb53cbe77b2e811081ab for details.
+---
+ drivers/net/wireless/realtek/rtl8192cu/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/realtek/rtl8192cu/Makefile b/drivers/net/wireless/realtek/rtl8192cu/Makefile
+index c399011a3e37..ef6156c0f368 100644
+--- a/drivers/net/wireless/realtek/rtl8192cu/Makefile
++++ b/drivers/net/wireless/realtek/rtl8192cu/Makefile
+@@ -16,7 +16,7 @@ EXTRA_CFLAGS += -Wno-unused
+ 
+ EXTRA_CFLAGS += -Wno-uninitialized
+ 
+-EXTRA_CFLAGS += -I$(src)/include
++EXTRA_CFLAGS += -I$(srctree)/$(src)/include
+ 
+ CONFIG_AUTOCFG_CP = n
+ 
+-- 
+2.17.1
+

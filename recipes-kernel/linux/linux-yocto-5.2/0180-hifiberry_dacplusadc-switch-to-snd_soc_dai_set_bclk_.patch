@@ -1,0 +1,33 @@
+From 1e896fa951f6cc372e238ca9ef1eb3fdb59b067e Mon Sep 17 00:00:00 2001
+From: Matthias Reichl <hias@horus.com>
+Date: Tue, 7 May 2019 13:03:59 +0200
+Subject: [PATCH 180/587] hifiberry_dacplusadc: switch to
+ snd_soc_dai_set_bclk_ratio
+
+Signed-off-by: Matthias Reichl <hias@horus.com>
+---
+ sound/soc/bcm/hifiberry_dacplusadc.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/sound/soc/bcm/hifiberry_dacplusadc.c b/sound/soc/bcm/hifiberry_dacplusadc.c
+index 8a0bf9f13f52..896f60d13449 100644
+--- a/sound/soc/bcm/hifiberry_dacplusadc.c
++++ b/sound/soc/bcm/hifiberry_dacplusadc.c
+@@ -239,12 +239,10 @@ static int snd_rpi_hifiberry_dacplusadc_hw_params(
+ 			substream, params);
+ 	}
+ 
+-	ret = snd_soc_dai_set_tdm_slot(rtd->cpu_dai, 0x03, 0x03,
+-		channels, width);
++	ret = snd_soc_dai_set_bclk_ratio(rtd->cpu_dai, channels * width);
+ 	if (ret)
+ 		return ret;
+-	ret = snd_soc_dai_set_tdm_slot(rtd->codec_dai, 0x03, 0x03,
+-		channels, width);
++	ret = snd_soc_dai_set_bclk_ratio(rtd->codec_dai, channels * width);
+ 	return ret;
+ }
+ 
+-- 
+2.17.1
+

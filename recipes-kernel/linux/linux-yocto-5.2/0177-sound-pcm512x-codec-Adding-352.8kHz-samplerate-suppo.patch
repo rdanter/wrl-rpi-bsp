@@ -1,0 +1,26 @@
+From fffcf64bebc2ce63e19b20adca68542b26051688 Mon Sep 17 00:00:00 2001
+From: Klaus Schulz <klsschlz@gmail.com>
+Date: Thu, 16 May 2019 13:35:32 +0200
+Subject: [PATCH 177/587] sound: pcm512x-codec: Adding 352.8kHz samplerate
+ support
+
+---
+ sound/soc/codecs/pcm512x.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/codecs/pcm512x.c b/sound/soc/codecs/pcm512x.c
+index 861210f6bf4f..28bf9fc66e1e 100644
+--- a/sound/soc/codecs/pcm512x.c
++++ b/sound/soc/codecs/pcm512x.c
+@@ -534,7 +534,7 @@ static unsigned long pcm512x_ncp_target(struct pcm512x_priv *pcm512x,
+ 
+ static const u32 pcm512x_dai_rates[] = {
+ 	8000, 11025, 16000, 22050, 32000, 44100, 48000, 64000,
+-	88200, 96000, 176400, 192000, 384000,
++	88200, 96000, 176400, 192000, 352800, 384000,
+ };
+ 
+ static const struct snd_pcm_hw_constraint_list constraints_slave = {
+-- 
+2.17.1
+

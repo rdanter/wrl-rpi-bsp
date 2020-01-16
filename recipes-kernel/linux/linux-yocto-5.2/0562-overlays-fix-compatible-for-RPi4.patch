@@ -1,0 +1,239 @@
+From 120d2a4a5145d169c7f7d34633c98a737d335fe0 Mon Sep 17 00:00:00 2001
+From: Matthias Brugger <mbrugger@suse.com>
+Date: Wed, 2 Oct 2019 18:41:32 +0200
+Subject: [PATCH 562/587] overlays: fix compatible for RPi4
+
+RPi4 compatible is now bcm2711, but some overlays refer to the SoC as
+bcm2838. Fix this overlays as they otherwise won't apply.
+
+Signed-off-by: Matthias Brugger <mbrugger@suse.com>
+---
+ arch/arm/boot/dts/overlays/i2c3-overlay.dts     | 2 +-
+ arch/arm/boot/dts/overlays/i2c4-overlay.dts     | 2 +-
+ arch/arm/boot/dts/overlays/i2c5-overlay.dts     | 2 +-
+ arch/arm/boot/dts/overlays/i2c6-overlay.dts     | 2 +-
+ arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts | 2 +-
+ arch/arm/boot/dts/overlays/uart2-overlay.dts    | 2 +-
+ arch/arm/boot/dts/overlays/uart3-overlay.dts    | 2 +-
+ arch/arm/boot/dts/overlays/uart4-overlay.dts    | 2 +-
+ arch/arm/boot/dts/overlays/uart5-overlay.dts    | 2 +-
+ 16 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/i2c3-overlay.dts b/arch/arm/boot/dts/overlays/i2c3-overlay.dts
+index f651f3541d25..e24a1df21f99 100644
+--- a/arch/arm/boot/dts/overlays/i2c3-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c3-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&i2c3>;
+diff --git a/arch/arm/boot/dts/overlays/i2c4-overlay.dts b/arch/arm/boot/dts/overlays/i2c4-overlay.dts
+index 3cfd87913918..14c7f4d1da4c 100644
+--- a/arch/arm/boot/dts/overlays/i2c4-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c4-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&i2c4>;
+diff --git a/arch/arm/boot/dts/overlays/i2c5-overlay.dts b/arch/arm/boot/dts/overlays/i2c5-overlay.dts
+index c71f511d90cf..7953621112de 100644
+--- a/arch/arm/boot/dts/overlays/i2c5-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c5-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&i2c5>;
+diff --git a/arch/arm/boot/dts/overlays/i2c6-overlay.dts b/arch/arm/boot/dts/overlays/i2c6-overlay.dts
+index 17861ef00c5b..555305a7ee1f 100644
+--- a/arch/arm/boot/dts/overlays/i2c6-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c6-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&i2c6>;
+diff --git a/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts
+index 248426f69fb5..335af8637051 100644
+--- a/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi3-1cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi3_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts
+index 9aa779420b31..ce65da27f767 100644
+--- a/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi3-2cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi3_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts
+index af1392f7c9de..85d70b40352b 100644
+--- a/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi4-1cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi4_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts
+index 7af0afc17fc4..8bc2215a6a7e 100644
+--- a/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi4-2cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi4_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts
+index 998dd96a15b0..c0f8cb8510ee 100644
+--- a/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi5-1cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi5_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts
+index 94c108140e0b..7758b9c00b4e 100644
+--- a/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi5-2cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi5_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts b/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts
+index 30564eeba22a..8c8a953eca01 100644
+--- a/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi6-1cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi6_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts b/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts
+index c57b2802c83e..2ff897f21aed 100644
+--- a/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts
++++ b/arch/arm/boot/dts/overlays/spi6-2cs-overlay.dts
+@@ -3,7 +3,7 @@
+ 
+ 
+ / {
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&spi6_cs_pins>;
+diff --git a/arch/arm/boot/dts/overlays/uart2-overlay.dts b/arch/arm/boot/dts/overlays/uart2-overlay.dts
+index d1ed09542058..9face240aca1 100644
+--- a/arch/arm/boot/dts/overlays/uart2-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart2-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&uart2>;
+diff --git a/arch/arm/boot/dts/overlays/uart3-overlay.dts b/arch/arm/boot/dts/overlays/uart3-overlay.dts
+index 28bd2349125a..ae9f9fe5ea1d 100644
+--- a/arch/arm/boot/dts/overlays/uart3-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart3-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&uart3>;
+diff --git a/arch/arm/boot/dts/overlays/uart4-overlay.dts b/arch/arm/boot/dts/overlays/uart4-overlay.dts
+index ea253eb20070..ac004ffbadbf 100644
+--- a/arch/arm/boot/dts/overlays/uart4-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart4-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&uart4>;
+diff --git a/arch/arm/boot/dts/overlays/uart5-overlay.dts b/arch/arm/boot/dts/overlays/uart5-overlay.dts
+index af3fd8410ed6..04eaf376effe 100644
+--- a/arch/arm/boot/dts/overlays/uart5-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart5-overlay.dts
+@@ -2,7 +2,7 @@
+ /plugin/;
+ 
+ /{
+-	compatible = "brcm,bcm2838";
++	compatible = "brcm,bcm2711";
+ 
+ 	fragment@0 {
+ 		target = <&uart5>;
+-- 
+2.17.1
+

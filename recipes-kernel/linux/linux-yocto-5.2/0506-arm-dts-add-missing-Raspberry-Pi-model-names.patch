@@ -1,0 +1,69 @@
+From 2f67789d115ada23e8a15432c8c450d1d942ff17 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>
+Date: Thu, 29 Aug 2019 16:26:22 +0200
+Subject: [PATCH 506/587] arm: dts: add missing Raspberry Pi model names
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is needed to identify the different models on distributions like OpenWrt.
+
+Signed-off-by: Álvaro Fernández Rojas <noltari@gmail.com>
+---
+ arch/arm/boot/dts/bcm2708-rpi-b-plus.dts | 1 +
+ arch/arm/boot/dts/bcm2708-rpi-b.dts      | 1 +
+ arch/arm/boot/dts/bcm2708-rpi-cm.dts     | 1 +
+ arch/arm/boot/dts/bcm2710-rpi-cm3.dts    | 1 +
+ 4 files changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts b/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts
+index b2b8e5c9d582..b800699a03fb 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-b-plus.dts
+@@ -6,6 +6,7 @@
+ #include "bcm283x-rpi-csi1-2lane.dtsi"
+ 
+ / {
++	compatible = "raspberrypi,model-b-plus", "brcm,bcm2835";
+ 	model = "Raspberry Pi Model B+";
+ };
+ 
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-b.dts b/arch/arm/boot/dts/bcm2708-rpi-b.dts
+index 3f9a8e4cfe8f..ef47775692ce 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-b.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-b.dts
+@@ -6,6 +6,7 @@
+ #include "bcm283x-rpi-csi1-2lane.dtsi"
+ 
+ / {
++	compatible = "raspberrypi,model-b", "brcm,bcm2835";
+ 	model = "Raspberry Pi Model B";
+ };
+ 
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-cm.dts b/arch/arm/boot/dts/bcm2708-rpi-cm.dts
+index 1a3975b35630..64809aee5c0c 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-cm.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-cm.dts
+@@ -5,6 +5,7 @@
+ #include "bcm283x-rpi-csi1-4lane.dtsi"
+ 
+ / {
++	compatible = "raspberrypi,compute-module", "brcm,bcm2835";
+ 	model = "Raspberry Pi Compute Module";
+ };
+ 
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-cm3.dts b/arch/arm/boot/dts/bcm2710-rpi-cm3.dts
+index 14a37ffda855..addebe448e32 100644
+--- a/arch/arm/boot/dts/bcm2710-rpi-cm3.dts
++++ b/arch/arm/boot/dts/bcm2710-rpi-cm3.dts
+@@ -6,6 +6,7 @@
+ #include "bcm283x-rpi-csi1-4lane.dtsi"
+ 
+ / {
++	compatible = "raspberrypi,3-compute-module", "brcm,bcm2837";
+ 	model = "Raspberry Pi Compute Module 3";
+ };
+ 
+-- 
+2.17.1
+

@@ -1,0 +1,38 @@
+From f446f12fcf8eee481587fd64e143f4392844fd2a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 31 Jul 2019 17:36:34 +0100
+Subject: [PATCH 464/587] drm/vc4: A present but empty dmas disables audio
+
+Overlays are unable to remove properties in the base DTB, but they
+can overwrite them. Allow a present but empty 'dmas' property
+to also disable the HDMI audio interface.
+
+See: https://github.com/raspberrypi/linux/issues/2489
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 718b26276dbd..f78d16ebeffc 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1045,10 +1045,12 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *hdmi)
+ 	struct device *dev = &hdmi->pdev->dev;
+ 	const __be32 *addr;
+ 	int ret;
++	int len;
+ 
+-	if (!of_find_property(dev->of_node, "dmas", NULL)) {
++	if (!of_find_property(dev->of_node, "dmas", &len) ||
++	    len == 0) {
+ 		dev_warn(dev,
+-			 "'dmas' DT property is missing, no HDMI audio\n");
++			 "'dmas' DT property is missing or empty, no HDMI audio\n");
+ 		return 0;
+ 	}
+ 
+-- 
+2.17.1
+

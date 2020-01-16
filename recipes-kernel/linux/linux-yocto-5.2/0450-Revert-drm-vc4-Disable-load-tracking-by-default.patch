@@ -1,0 +1,30 @@
+From 11654e49d873b37b9290616fbb6bbefe70b29211 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 14 Aug 2019 15:57:28 +0100
+Subject: [PATCH 450/587] Revert "drm/vc4: Disable load tracking by default"
+
+This reverts commit c1aa0775e17cc761dcd525b6a06dde5560cb19c2.
+---
+ drivers/gpu/drm/vc4/vc4_kms.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_kms.c b/drivers/gpu/drm/vc4/vc4_kms.c
+index e532041c83c1..c52ae7fdcc36 100644
+--- a/drivers/gpu/drm/vc4/vc4_kms.c
++++ b/drivers/gpu/drm/vc4/vc4_kms.c
+@@ -517,10 +517,10 @@ int vc4_kms_load(struct drm_device *dev)
+ 	struct vc4_load_tracker_state *load_state;
+ 	int ret;
+ 
+-	/* Start with the load tracker disabled. Can be enabled through the
++	/* Start with the load tracker enabled. Can be disabled through the
+ 	 * debugfs load_tracker file.
+ 	 */
+-	vc4->load_tracker_enabled = false;
++	vc4->load_tracker_enabled = true;
+ 
+ 	sema_init(&vc4->async_modeset, 1);
+ 
+-- 
+2.17.1
+

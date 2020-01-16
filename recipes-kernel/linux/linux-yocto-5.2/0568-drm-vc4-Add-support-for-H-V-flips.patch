@@ -1,0 +1,111 @@
+From bfae6922869b43daa4936d51e663124181358d0d Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 17 Sep 2019 18:36:32 +0100
+Subject: [PATCH 568/587] drm/vc4: Add support for H & V flips
+
+The HVS supports horizontal and vertical flips whilst composing.
+
+Expose these through the standard DRM rotation property.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/gpu/drm/vc4/vc4_plane.c | 49 +++++++++++++++++++++++++--------
+ 1 file changed, 38 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_plane.c b/drivers/gpu/drm/vc4/vc4_plane.c
+index e334b25fa18e..7228d94386ef 100644
+--- a/drivers/gpu/drm/vc4/vc4_plane.c
++++ b/drivers/gpu/drm/vc4/vc4_plane.c
+@@ -637,6 +637,7 @@ static int vc4_plane_mode_set(struct drm_plane *plane,
+ 	const struct hvs_format *format = vc4_get_hvs_format(fb->format->format);
+ 	u64 base_format_mod = fourcc_mod_broadcom_mod(fb->modifier);
+ 	int num_planes = drm_format_num_planes(format->drm);
++	bool hflip = false, vflip = false;
+ 	u32 h_subsample, v_subsample;
+ 	bool mix_plane_alpha;
+ 	bool covers_screen;
+@@ -653,6 +654,24 @@ static int vc4_plane_mode_set(struct drm_plane *plane,
+ 	if (ret)
+ 		return ret;
+ 
++	rotation = drm_rotation_simplify(state->rotation,
++					 DRM_MODE_ROTATE_0 |
++					 DRM_MODE_REFLECT_X |
++					 DRM_MODE_REFLECT_Y);
++
++	if ((rotation & DRM_MODE_ROTATE_MASK) == DRM_MODE_ROTATE_180) {
++		hflip = true;
++		vflip = true;
++	}
++	if (rotation & DRM_MODE_REFLECT_X)
++		hflip ^= true;
++	if (rotation & DRM_MODE_REFLECT_Y)
++		vflip ^= true;
++
++	ret = vc4_plane_setup_clipping_and_scaling(state);
++	if (ret)
++		return ret;
++
+ 	/* SCL1 is used for Cb/Cr scaling of planar formats.  For RGB
+ 	 * and 4:4:4, scl1 should be set to scl0 so both channels of
+ 	 * the scaler do the same thing.  For YUV, the Y plane needs
+@@ -670,15 +689,15 @@ static int vc4_plane_mode_set(struct drm_plane *plane,
+ 	h_subsample = drm_format_horz_chroma_subsampling(format->drm);
+ 	v_subsample = drm_format_vert_chroma_subsampling(format->drm);
+ 
+-	rotation = drm_rotation_simplify(state->rotation,
+-					 DRM_MODE_ROTATE_0 |
+-					 DRM_MODE_REFLECT_X |
+-					 DRM_MODE_REFLECT_Y);
+-
+-	/* We must point to the last line when Y reflection is enabled. */
+-	src_y = vc4_state->src_y;
+-	if (rotation & DRM_MODE_REFLECT_Y)
+-		src_y += vc4_state->src_h[0] - 1;
++	if (!vflip)
++		src_y = vc4_state->src_y;
++	else
++		/* When vflipped the image offset needs to be
++		 * the start of the last line of the image, and
++		 * the pitch will be subtracted from the offset.
++		 */
++		src_y = vc4_state->src_y +
++			vc4_state->src_h[0] - 1;
+ 
+ 	switch (base_format_mod) {
+ 	case DRM_FORMAT_MOD_LINEAR:
+@@ -738,7 +757,7 @@ static int vc4_plane_mode_set(struct drm_plane *plane,
+ 		 * definitely required (I guess it's also related to the "going
+ 		 * backward" situation).
+ 		 */
+-		if (rotation & DRM_MODE_REFLECT_Y) {
++		if (vflip) {
+ 			y_off = tile_h_mask - y_off;
+ 			pitch0 = SCALER_PITCH0_TILE_LINE_DIR;
+ 		} else {
+@@ -836,7 +855,9 @@ static int vc4_plane_mode_set(struct drm_plane *plane,
+ 			VC4_SET_FIELD(tiling, SCALER_CTL0_TILING) |
+ 			(vc4_state->is_unity ? SCALER_CTL0_UNITY : 0) |
+ 			VC4_SET_FIELD(scl0, SCALER_CTL0_SCL0) |
+-			VC4_SET_FIELD(scl1, SCALER_CTL0_SCL1));
++			VC4_SET_FIELD(scl1, SCALER_CTL0_SCL1) |
++			(vflip ? SCALER_CTL0_VFLIP : 0) |
++			(hflip ? SCALER_CTL0_HFLIP : 0));
+ 
+ 	/* Position Word 0: Image Positions and Alpha Value */
+ 	vc4_state->pos0_offset = vc4_state->dlist_count;
+@@ -1335,5 +1356,11 @@ struct drm_plane *vc4_plane_init(struct drm_device *dev,
+ 					  DRM_COLOR_YCBCR_BT709,
+ 					  DRM_COLOR_YCBCR_LIMITED_RANGE);
+ 
++	drm_plane_create_rotation_property(plane, DRM_MODE_ROTATE_0,
++					   DRM_MODE_ROTATE_0 |
++					   DRM_MODE_ROTATE_180 |
++					   DRM_MODE_REFLECT_X |
++					   DRM_MODE_REFLECT_Y);
++
+ 	return plane;
+ }
+-- 
+2.17.1
+

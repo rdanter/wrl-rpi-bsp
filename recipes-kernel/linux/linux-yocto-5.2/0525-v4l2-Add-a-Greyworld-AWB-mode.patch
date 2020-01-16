@@ -1,0 +1,41 @@
+From 7644372ca3e65a0d3a6056b63b07a2cc03fe1ccc Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 6 Sep 2019 15:04:51 +0100
+Subject: [PATCH 525/587] v4l2: Add a Greyworld AWB mode.
+
+Adds a simple greyworld white balance preset, mainly for use
+with cameras without an IR filter (eg Raspberry Pi NoIR)
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/media/v4l2-core/v4l2-ctrls.c | 1 +
+ include/uapi/linux/v4l2-controls.h   | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/drivers/media/v4l2-core/v4l2-ctrls.c b/drivers/media/v4l2-core/v4l2-ctrls.c
+index 4d385489be6d..d9b7e1372552 100644
+--- a/drivers/media/v4l2-core/v4l2-ctrls.c
++++ b/drivers/media/v4l2-core/v4l2-ctrls.c
+@@ -263,6 +263,7 @@ const char * const *v4l2_ctrl_get_menu(u32 id)
+ 		"Flash",
+ 		"Cloudy",
+ 		"Shade",
++		"Greyworld",
+ 		NULL,
+ 	};
+ 	static const char * const camera_iso_sensitivity_auto[] = {
+diff --git a/include/uapi/linux/v4l2-controls.h b/include/uapi/linux/v4l2-controls.h
+index 37807f23231e..98380b2a79ee 100644
+--- a/include/uapi/linux/v4l2-controls.h
++++ b/include/uapi/linux/v4l2-controls.h
+@@ -827,6 +827,7 @@ enum v4l2_auto_n_preset_white_balance {
+ 	V4L2_WHITE_BALANCE_FLASH		= 7,
+ 	V4L2_WHITE_BALANCE_CLOUDY		= 8,
+ 	V4L2_WHITE_BALANCE_SHADE		= 9,
++	V4L2_WHITE_BALANCE_GREYWORLD		= 10,
+ };
+ 
+ #define V4L2_CID_WIDE_DYNAMIC_RANGE		(V4L2_CID_CAMERA_CLASS_BASE+21)
+-- 
+2.17.1
+

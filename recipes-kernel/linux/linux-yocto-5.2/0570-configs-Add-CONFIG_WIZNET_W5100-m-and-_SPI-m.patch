@@ -1,0 +1,87 @@
+From ad419c5322368bc355116dcf55327d7c80e17df0 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Thu, 10 Oct 2019 09:05:44 +0100
+Subject: [PATCH 570/587] configs: Add CONFIG_WIZNET_W5100=m and _SPI=m
+
+Add config settings to enable building the driver for the W5100/5500
+SPI-attached Ethernet controller.
+
+See: https://github.com/raspberrypi/linux/issues/3276
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig   | 2 ++
+ arch/arm/configs/bcm2711_defconfig   | 2 ++
+ arch/arm/configs/bcmrpi_defconfig    | 2 ++
+ arch/arm64/configs/bcm2711_defconfig | 2 ++
+ arch/arm64/configs/bcmrpi3_defconfig | 2 ++
+ 5 files changed, 10 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 7e9ea54c7d73..d47e37387534 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -483,6 +483,8 @@ CONFIG_VETH=m
+ CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
++CONFIG_WIZNET_W5100=m
++CONFIG_WIZNET_W5100_SPI=m
+ CONFIG_MDIO_BITBANG=m
+ CONFIG_PPP=m
+ CONFIG_PPP_BSDCOMP=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 9d7923530110..0eebb9085d28 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -452,6 +452,8 @@ CONFIG_NET_VRF=m
+ CONFIG_BCMGENET=y
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
++CONFIG_WIZNET_W5100=m
++CONFIG_WIZNET_W5100_SPI=m
+ CONFIG_MDIO_BITBANG=m
+ CONFIG_BROADCOM_PHY=y
+ CONFIG_PPP=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 8e2c2f931e1a..8d81f1dd45ce 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -476,6 +476,8 @@ CONFIG_VETH=m
+ CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
++CONFIG_WIZNET_W5100=m
++CONFIG_WIZNET_W5100_SPI=m
+ CONFIG_MDIO_BITBANG=m
+ CONFIG_PPP=m
+ CONFIG_PPP_BSDCOMP=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 00a3f8d3f99b..426734caca5a 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -484,6 +484,8 @@ CONFIG_NET_VRF=m
+ CONFIG_BCMGENET=y
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
++CONFIG_WIZNET_W5100=m
++CONFIG_WIZNET_W5100_SPI=m
+ CONFIG_MDIO_BITBANG=m
+ CONFIG_BROADCOM_PHY=y
+ CONFIG_PPP=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 32d2326b64fd..ecb04d8d9106 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -429,6 +429,8 @@ CONFIG_VETH=m
+ CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
++CONFIG_WIZNET_W5100=m
++CONFIG_WIZNET_W5100_SPI=m
+ CONFIG_MDIO_BITBANG=m
+ CONFIG_PPP=m
+ CONFIG_PPP_BSDCOMP=m
+-- 
+2.17.1
+

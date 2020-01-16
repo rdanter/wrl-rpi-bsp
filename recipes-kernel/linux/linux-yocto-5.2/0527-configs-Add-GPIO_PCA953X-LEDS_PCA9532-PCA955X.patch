@@ -1,0 +1,129 @@
+From cfe749706ce5af089abdf0099540823667dfb448 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Fri, 6 Sep 2019 17:31:51 +0100
+Subject: [PATCH 527/587] configs: Add GPIO_PCA953X, LEDS_PCA9532/PCA955X
+
+See: https://github.com/raspberrypi/linux/issues/3182
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig   | 3 +++
+ arch/arm/configs/bcm2711_defconfig   | 3 +++
+ arch/arm/configs/bcmrpi_defconfig    | 3 +++
+ arch/arm64/configs/bcm2711_defconfig | 3 +++
+ arch/arm64/configs/bcmrpi3_defconfig | 3 +++
+ 5 files changed, 15 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index f5cf64eec179..6f3815119a77 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -680,6 +680,7 @@ CONFIG_PPS_CLIENT_GPIO=m
+ CONFIG_PINCTRL_MCP23S08=m
+ CONFIG_GPIO_BCM_VIRT=y
+ CONFIG_GPIO_MOCKUP=m
++CONFIG_GPIO_PCA953X=m
+ CONFIG_GPIO_PCF857X=m
+ CONFIG_GPIO_ARIZONA=m
+ CONFIG_GPIO_STMPE=y
+@@ -1182,7 +1183,9 @@ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_PLTFM=y
+ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_PCA9532=m
+ CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_PCA955X=m
+ CONFIG_LEDS_PCA963X=m
+ CONFIG_LEDS_IS31FL32XX=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 74af1bc3bbc6..a9ef9b4b73a9 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -644,6 +644,7 @@ CONFIG_PPS_CLIENT_GPIO=m
+ CONFIG_PINCTRL_MCP23S08=m
+ CONFIG_GPIO_BCM_VIRT=y
+ CONFIG_GPIO_MOCKUP=m
++CONFIG_GPIO_PCA953X=m
+ CONFIG_GPIO_PCF857X=m
+ CONFIG_GPIO_ARIZONA=m
+ CONFIG_GPIO_STMPE=y
+@@ -1170,7 +1171,9 @@ CONFIG_MMC_SDHCI_PLTFM=y
+ CONFIG_MMC_SDHCI_IPROC=y
+ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_PCA9532=m
+ CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_PCA955X=m
+ CONFIG_LEDS_PCA963X=m
+ CONFIG_LEDS_IS31FL32XX=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 71eecc43a50a..023cad7d3af4 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -672,6 +672,7 @@ CONFIG_PPS_CLIENT_LDISC=m
+ CONFIG_PPS_CLIENT_GPIO=m
+ CONFIG_PINCTRL_MCP23S08=m
+ CONFIG_GPIO_MOCKUP=m
++CONFIG_GPIO_PCA953X=m
+ CONFIG_GPIO_PCF857X=m
+ CONFIG_GPIO_ARIZONA=m
+ CONFIG_GPIO_STMPE=y
+@@ -1192,7 +1193,9 @@ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_PLTFM=y
+ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_PCA9532=m
+ CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_PCA955X=m
+ CONFIG_LEDS_PCA963X=m
+ CONFIG_LEDS_IS31FL32XX=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index ad221f6af87b..0909ae818c05 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -620,6 +620,7 @@ CONFIG_SPI_SLAVE=y
+ CONFIG_PINCTRL_MCP23S08=m
+ CONFIG_GPIO_BCM_VIRT=y
+ CONFIG_GPIO_MOCKUP=m
++CONFIG_GPIO_PCA953X=m
+ CONFIG_GPIO_PCF857X=m
+ CONFIG_GPIO_ARIZONA=m
+ CONFIG_GPIO_STMPE=y
+@@ -1039,7 +1040,9 @@ CONFIG_MMC_SDHCI_PLTFM=y
+ CONFIG_MMC_SDHCI_IPROC=y
+ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_PCA9532=m
+ CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_PCA955X=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+ CONFIG_LEDS_TRIGGER_ONESHOT=y
+ CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index fec6b6d2b6aa..a0771612c0f5 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -606,6 +606,7 @@ CONFIG_PPS_CLIENT_LDISC=m
+ CONFIG_PPS_CLIENT_GPIO=m
+ CONFIG_GPIO_SYSFS=y
+ CONFIG_GPIO_BCM_VIRT=y
++CONFIG_GPIO_PCA953X=m
+ CONFIG_GPIO_ARIZONA=m
+ CONFIG_GPIO_STMPE=y
+ CONFIG_W1=m
+@@ -990,7 +991,9 @@ CONFIG_MMC_SDHCI_PLTFM=y
+ CONFIG_MMC_SDHCI_IPROC=m
+ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
++CONFIG_LEDS_PCA9532=m
+ CONFIG_LEDS_GPIO=y
++CONFIG_LEDS_PCA955X=m
+ CONFIG_LEDS_PCA963X=m
+ CONFIG_LEDS_IS31FL32XX=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+-- 
+2.17.1
+

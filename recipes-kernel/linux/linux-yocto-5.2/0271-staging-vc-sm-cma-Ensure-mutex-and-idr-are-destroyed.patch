@@ -1,0 +1,32 @@
+From c2d038ae6353d4e8ab6a00a31e99b01598ce26a9 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Fri, 8 Mar 2019 11:11:46 +0000
+Subject: [PATCH 271/587] staging: vc-sm-cma: Ensure mutex and idr are
+ destroyed
+
+map_lock and kernelid_map are created in probe, but not released
+in release should the vcsm service not connect (eg running the
+cutdown firmware).
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/staging/vc04_services/vc-sm-cma/vc_sm.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c b/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
+index 7f1cd4ce4b8d..198411b58f4d 100644
+--- a/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
++++ b/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
+@@ -752,7 +752,9 @@ static int bcm2835_vc_sm_cma_remove(struct platform_device *pdev)
+ 
+ 		/* Stop the videocore shared memory service. */
+ 		vc_sm_cma_vchi_stop(&sm_state->sm_handle);
++	}
+ 
++	if (sm_state) {
+ 		idr_destroy(&sm_state->kernelid_map);
+ 
+ 		/* Free the memory for the state structure. */
+-- 
+2.17.1
+

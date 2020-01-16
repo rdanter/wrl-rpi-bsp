@@ -1,0 +1,61 @@
+From 2e37b90ccc3dcad3142c4661a38a3057b1b9b861 Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Mon, 23 Sep 2019 20:09:12 +0200
+Subject: [PATCH 546/587] ARM: dts: bcm27xx: Fix DTC warning for memory node
+
+Compiling the bcm27xx DTS with W=1 leads to the following warning:
+
+Warning (unit_address_vs_reg): /memory: node has a reg or ranges property,
+but no unit name
+
+Fix this by adding the unit address.
+
+Signed-off-by: Stefan Wahren <wahrenst@gmx.net>
+---
+ arch/arm/boot/dts/bcm2708-rpi.dtsi    | 2 +-
+ arch/arm/boot/dts/bcm2711-rpi-4-b.dts | 2 +-
+ arch/arm/boot/dts/bcm2838-rpi-4-b.dts | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2708-rpi.dtsi b/arch/arm/boot/dts/bcm2708-rpi.dtsi
+index 6a82591c51d1..a2e0166ce3c6 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi.dtsi
++++ b/arch/arm/boot/dts/bcm2708-rpi.dtsi
+@@ -3,7 +3,7 @@
+ #include "bcm2835-rpi.dtsi"
+ 
+ / {
+-	memory {
++	memory@0 {
+ 		device_type = "memory";
+ 		reg = <0x0 0x0>;
+ 	};
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+index 18c0f9599d3a..9b0278114369 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+@@ -8,7 +8,7 @@
+ 	compatible = "raspberrypi,4-model-b", "brcm,bcm2838";
+ 	model = "Raspberry Pi 4 Model B";
+ 
+-	memory {
++	memory@0 {
+ 		device_type = "memory";
+ 		reg = <0x0 0x0 0x0>;
+ 	};
+diff --git a/arch/arm/boot/dts/bcm2838-rpi-4-b.dts b/arch/arm/boot/dts/bcm2838-rpi-4-b.dts
+index c851ba108543..ccc05f9312b9 100644
+--- a/arch/arm/boot/dts/bcm2838-rpi-4-b.dts
++++ b/arch/arm/boot/dts/bcm2838-rpi-4-b.dts
+@@ -13,7 +13,7 @@
+ 		stdout-path = "serial1:115200n8";
+ 	};
+ 
+-	memory {
++	memory@0 {
+ 		reg = <0 0 0x40000000>;
+ 	};
+ 
+-- 
+2.17.1
+

@@ -1,0 +1,81 @@
+From 3954581ab2e3524a89767476e4e87748d3408f18 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Tue, 24 Sep 2019 09:31:38 +0100
+Subject: [PATCH 542/587] configs: Enable CONFIG_NET_VRF=m
+
+Add the Virtual Routing and Forwarding module.
+
+See: https://github.com/raspberrypi/linux/issues/3253
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index afd05de93718..7e9ea54c7d73 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -480,6 +480,7 @@ CONFIG_VXLAN=m
+ CONFIG_NETCONSOLE=m
+ CONFIG_TUN=m
+ CONFIG_VETH=m
++CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
+ CONFIG_MDIO_BITBANG=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 35b1e35a8f86..9d7923530110 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -448,6 +448,7 @@ CONFIG_VXLAN=m
+ CONFIG_NETCONSOLE=m
+ CONFIG_TUN=m
+ CONFIG_VETH=m
++CONFIG_NET_VRF=m
+ CONFIG_BCMGENET=y
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index ed1ea6ac2d59..8e2c2f931e1a 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -473,6 +473,7 @@ CONFIG_VXLAN=m
+ CONFIG_NETCONSOLE=m
+ CONFIG_TUN=m
+ CONFIG_VETH=m
++CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
+ CONFIG_MDIO_BITBANG=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index bf6da1c173d8..e9a6c926ee75 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -480,6 +480,7 @@ CONFIG_VXLAN=m
+ CONFIG_NETCONSOLE=m
+ CONFIG_TUN=m
+ CONFIG_VETH=m
++CONFIG_NET_VRF=m
+ CONFIG_BCMGENET=y
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 9c5972b8df20..32d2326b64fd 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -426,6 +426,7 @@ CONFIG_VXLAN=m
+ CONFIG_NETCONSOLE=m
+ CONFIG_TUN=m
+ CONFIG_VETH=m
++CONFIG_NET_VRF=m
+ CONFIG_ENC28J60=m
+ CONFIG_QCA7000_SPI=m
+ CONFIG_MDIO_BITBANG=m
+-- 
+2.17.1
+

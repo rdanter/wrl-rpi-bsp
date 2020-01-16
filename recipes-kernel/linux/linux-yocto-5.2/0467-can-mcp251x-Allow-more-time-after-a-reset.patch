@@ -1,0 +1,52 @@
+From 7101ca521f81de9ad335b725b105031909482b9a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Thu, 1 Aug 2019 08:58:48 +0100
+Subject: [PATCH 467/587] can: mcp251x: Allow more time after a reset
+
+Some boards take longer than 5ms to power up after a reset, so allow
+a few retry attempts before giving up.
+
+See: https://github.com/raspberrypi/linux/issues/2767
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ drivers/net/can/spi/mcp251x.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/net/can/spi/mcp251x.c b/drivers/net/can/spi/mcp251x.c
+index 01416d6619bf..883ac1955bb5 100644
+--- a/drivers/net/can/spi/mcp251x.c
++++ b/drivers/net/can/spi/mcp251x.c
+@@ -614,6 +614,7 @@ static int mcp251x_hw_reset(struct spi_device *spi)
+ 	struct mcp251x_priv *priv = spi_get_drvdata(spi);
+ 	u8 reg;
+ 	int ret;
++	int retries = 10;
+ 
+ 	/* Wait for oscillator startup timer after power up */
+ 	mdelay(MCP251X_OST_DELAY_MS);
+@@ -623,10 +624,18 @@ static int mcp251x_hw_reset(struct spi_device *spi)
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Wait for oscillator startup timer after reset */
+-	mdelay(MCP251X_OST_DELAY_MS);
++	/*
++	 * Wait for oscillator startup timer after reset
++	 *
++	 * Some devices can take longer than the expected 5ms to wake
++	 * up, so allow a few retries.
++	 */
++
++	do {
++		mdelay(MCP251X_OST_DELAY_MS);
++		reg = mcp251x_read_reg(spi, CANSTAT);
++	} while (!reg && retries--);
+ 
+-	reg = mcp251x_read_reg(spi, CANSTAT);
+ 	if ((reg & CANCTRL_REQOP_MASK) != CANCTRL_REQOP_CONF)
+ 		return -ENODEV;
+ 
+-- 
+2.17.1
+

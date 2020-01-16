@@ -1,0 +1,32 @@
+From fa81615c0eb1d6a03a8c798b6ce8e7a174df1c3f Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Mon, 25 Jan 2016 17:25:12 +0000
+Subject: [PATCH 013/587] firmware: Updated mailbox header
+
+---
+ include/soc/bcm2835/raspberrypi-firmware.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/include/soc/bcm2835/raspberrypi-firmware.h b/include/soc/bcm2835/raspberrypi-firmware.h
+index 7800e12ee042..3f357c05788e 100644
+--- a/include/soc/bcm2835/raspberrypi-firmware.h
++++ b/include/soc/bcm2835/raspberrypi-firmware.h
+@@ -9,6 +9,8 @@
+ #include <linux/types.h>
+ #include <linux/of_device.h>
+ 
++#define RPI_FIRMWARE_CHAN_FB		1
++
+ struct rpi_firmware;
+ 
+ enum rpi_firmware_property_status {
+@@ -159,5 +161,6 @@ static inline struct rpi_firmware *rpi_firmware_get(struct device_node *firmware
+ 	return NULL;
+ }
+ #endif
++int rpi_firmware_transaction(struct rpi_firmware *fw, u32 chan, u32 data);
+ 
+ #endif /* __SOC_RASPBERRY_FIRMWARE_H__ */
+-- 
+2.17.1
+

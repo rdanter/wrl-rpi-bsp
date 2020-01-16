@@ -1,0 +1,32 @@
+From 47d79115811430a2e6962cdd5bf210d621c303b7 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Thu, 28 Jun 2018 15:57:25 +0100
+Subject: [PATCH 454/587] staging: bcm2835_camera: Ensure all buffers are
+ returned on disable
+
+With the recent change to match MMAL and V4L2 buffers there
+is a need to wait for all MMAL buffers to be returned during
+stop_streaming.
+
+Fixes: 9384167 "staging: bcm2835-camera: Remove V4L2/MMAL buffer remapping"
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/staging/vc04_services/vchiq-mmal/mmal-vchiq.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/vchiq-mmal/mmal-vchiq.c b/drivers/staging/vc04_services/vchiq-mmal/mmal-vchiq.c
+index 61a3593cdcfc..341594ab669f 100644
+--- a/drivers/staging/vc04_services/vchiq-mmal/mmal-vchiq.c
++++ b/drivers/staging/vc04_services/vchiq-mmal/mmal-vchiq.c
+@@ -268,6 +268,8 @@ static void buffer_work_cb(struct work_struct *work)
+ 	if (!buffer->cmd)
+ 		atomic_dec(&msg_context->u.bulk.port->buffers_with_vpu);
+ 
++	atomic_dec(&msg_context->u.bulk.port->buffers_with_vpu);
++
+ 	msg_context->u.bulk.port->buffer_cb(msg_context->u.bulk.instance,
+ 					    msg_context->u.bulk.port,
+ 					    msg_context->u.bulk.status,
+-- 
+2.17.1
+

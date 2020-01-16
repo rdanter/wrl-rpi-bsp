@@ -1,0 +1,189 @@
+From 2cc2a972e938b875165f1ffaa580a2cb82cd3d64 Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Tue, 17 Sep 2019 19:31:19 +0200
+Subject: [PATCH 552/587] ARM: dts: bcm283x: Enable HDMI at board level
+
+commit 60c833d5664e1b3f71c4471233469790adf505ca upstream.
+
+There might be headless setups of the Compute Module without HDMI,
+so better enable HDMI at board level. Btw this allows moving HDMI
+base definition into upcoming bcm2835-common.dtsi.
+
+Signed-off-by: Stefan Wahren <wahrenst@gmx.net>
+Reviewed-by: Eric Anholt <eric@anholt.net>
+---
+ arch/arm/boot/dts/bcm2835-rpi-a-plus.dts   | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-a.dts        | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-b-plus.dts   | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts   | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-b.dts        | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts  | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-zero-w.dts   | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi-zero.dts     | 2 ++
+ arch/arm/boot/dts/bcm2835-rpi.dtsi         | 4 ++++
+ arch/arm/boot/dts/bcm2836-rpi-2-b.dts      | 2 ++
+ arch/arm/boot/dts/bcm2837-rpi-3-b-plus.dts | 2 ++
+ arch/arm/boot/dts/bcm2837-rpi-3-b.dts      | 2 ++
+ 12 files changed, 26 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
+index b3f83e586c08..1c5fee0679f6 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
+@@ -100,6 +100,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a.dts b/arch/arm/boot/dts/bcm2835-rpi-a.dts
+index 01e3d3ad1b4a..4b1ca9e673e9 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-a.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-a.dts
+@@ -95,6 +95,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_HIGH>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
+index eb3a67f2cdc8..866cfb3be787 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
+@@ -102,6 +102,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
+index 7eb317af1e1a..6613891cb2c4 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
+@@ -95,6 +95,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_HIGH>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b.dts b/arch/arm/boot/dts/bcm2835-rpi-b.dts
+index d709bbbf26f6..1cb793116422 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b.dts
+@@ -90,6 +90,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_HIGH>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts b/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
+index 41afea4f1da2..a75c882e6575 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
+@@ -79,6 +79,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &sdhost {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts b/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
+index 96bba783adae..fbfd30708c73 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
+@@ -100,6 +100,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &sdhci {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-zero.dts b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
+index b89eefa57c0c..60eb357672b8 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-zero.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
+@@ -97,6 +97,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &sdhost {
+diff --git a/arch/arm/boot/dts/bcm2835-rpi.dtsi b/arch/arm/boot/dts/bcm2835-rpi.dtsi
+index 302e7bc72888..517479221ace 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi.dtsi
++++ b/arch/arm/boot/dts/bcm2835-rpi.dtsi
+@@ -93,6 +93,10 @@
+ 	status = "okay";
+ };
+ 
++&v3d {
++	power-domains = <&power RPI_POWER_DOMAIN_V3D>;
++};
++
+ &vec {
+ 	power-domains = <&power RPI_POWER_DOMAIN_VEC>;
+ 	status = "okay";
+diff --git a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
+index e970444df3bb..183e61283cfc 100644
+--- a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
++++ b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
+@@ -106,6 +106,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2837-rpi-3-b-plus.dts b/arch/arm/boot/dts/bcm2837-rpi-3-b-plus.dts
+index c6fa34c24100..4f230e2439c8 100644
+--- a/arch/arm/boot/dts/bcm2837-rpi-3-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2837-rpi-3-b-plus.dts
+@@ -124,6 +124,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&gpio 28 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ &pwm {
+diff --git a/arch/arm/boot/dts/bcm2837-rpi-3-b.dts b/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
+index fbe91c4f597a..5f1290f82176 100644
+--- a/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
++++ b/arch/arm/boot/dts/bcm2837-rpi-3-b.dts
+@@ -126,6 +126,8 @@
+ 
+ &hdmi {
+ 	hpd-gpios = <&expgpio 4 GPIO_ACTIVE_LOW>;
++	power-domains = <&power RPI_POWER_DOMAIN_HDMI>;
++	status = "okay";
+ };
+ 
+ /* uart0 communicates with the BT module */
+-- 
+2.17.1
+

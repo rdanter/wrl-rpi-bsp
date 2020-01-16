@@ -1,0 +1,30 @@
+From 45f64835424e5ed27239417155c3629b83d53c1d Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Sat, 17 Aug 2019 19:47:46 +0200
+Subject: [PATCH 452/587] ARM: dts: bcm2835-common: Restore V3D power domain
+
+The commit ARM: dts: bcm283x: Move BCM2835/6/7 specific to
+bcm2835-common.dtsi hasn't ported properly to the newer kernel versions 5.1
+and newer. It accidentially drops the V3D power domain, which could lead to
+firmware hangups.
+
+Signed-off-by: Stefan Wahren <wahrenst@gmx.net>
+---
+ arch/arm/boot/dts/bcm2835-common.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/bcm2835-common.dtsi b/arch/arm/boot/dts/bcm2835-common.dtsi
+index 17771730a37b..eceb170fd5b7 100644
+--- a/arch/arm/boot/dts/bcm2835-common.dtsi
++++ b/arch/arm/boot/dts/bcm2835-common.dtsi
+@@ -36,6 +36,7 @@
+ 			compatible = "brcm,bcm2835-v3d";
+ 			reg = <0x7ec00000 0x1000>;
+ 			interrupts = <1 10>;
++			power-domains = <&pm BCM2835_POWER_DOMAIN_GRAFX_V3D>;
+ 		};
+ 	};
+ };
+-- 
+2.17.1
+

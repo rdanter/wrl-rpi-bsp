@@ -1,0 +1,43 @@
+From 235e8786fbb6411ef8d2f006b1b96e8a78b46553 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Fri, 13 Sep 2019 09:06:43 +0100
+Subject: [PATCH 529/587] arm/dts: Give v3dbus a 16GB DMA address range
+
+Without this change, V3D ends up using (and rapidly running out of)
+bounce buffers.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/bcm2838.dtsi | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2838.dtsi b/arch/arm/boot/dts/bcm2838.dtsi
+index 1d321ad6640a..d845341053ff 100644
+--- a/arch/arm/boot/dts/bcm2838.dtsi
++++ b/arch/arm/boot/dts/bcm2838.dtsi
+@@ -287,16 +287,16 @@
+ 	v3dbus {
+ 		compatible = "simple-bus";
+ 		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x7c500000  0x0 0xfc500000  0x03300000>,
+-			 <0x40000000  0x0 0xff800000  0x00800000>;
+-		dma-ranges = <0x00000000  0x0 0x00000000  0x3c000000>;
++		#size-cells = <2>;
++		ranges = <0x7c500000  0x0 0xfc500000  0x0 0x03300000>,
++			 <0x40000000  0x0 0xff800000  0x0 0x00800000>;
++		dma-ranges = <0x00000000  0x0 0x00000000  0x4 0x00000000>;
+ 
+ 		v3d: v3d@7ec04000 {
+ 			compatible = "brcm,2711-v3d";
+ 			reg =
+-			    <0x7ec00000 0x4000>,
+-			    <0x7ec04000 0x4000>;
++			    <0x7ec00000 0x0 0x4000>,
++			    <0x7ec04000 0x0 0x4000>;
+ 			reg-names = "hub", "core0";
+ 
+ 			power-domains = <&pm BCM2835_POWER_DOMAIN_GRAFX_V3D>;
+-- 
+2.17.1
+

@@ -1,0 +1,32 @@
+From 8a7d0921f8044588e9db266409a0e27010ebe26b Mon Sep 17 00:00:00 2001
+From: Kieran Bingham <kieran.bingham@ideasonboard.com>
+Date: Sun, 28 Apr 2019 12:15:35 +0200
+Subject: [PATCH 514/587] staging: bcm2835-codec: Fix non-documentation comment
+ block
+
+The job_ready comment is incorrectly using the documentation prefix
+(/**) which causes a warning at build time.
+
+Simplify it.
+
+Signed-off-by: Kieran Bingham <kieran.bingham@ideasonboard.com>
+---
+ .../staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+index d4a31d0259cc..ad071ad53067 100644
+--- a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
++++ b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+@@ -557,7 +557,7 @@ static struct vchiq_mmal_port *get_port_data(struct bcm2835_codec_ctx *ctx,
+  * mem2mem callbacks
+  */
+ 
+-/**
++/*
+  * job_ready() - check whether an instance is ready to be scheduled to run
+  */
+ static int job_ready(void *priv)
+-- 
+2.17.1
+

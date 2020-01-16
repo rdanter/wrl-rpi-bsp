@@ -1,0 +1,25 @@
+From bfc1f106832544fad4be471e6f7946c5420e16d7 Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Mon, 29 Apr 2019 19:28:51 +0200
+Subject: [PATCH 169/587] configs: enable LED driver for PiGlow
+
+Signed-off-by: Stefan Wahren <wahrenst@gmx.net>
+---
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 84d33006d5e1..528e640fb1bb 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -987,6 +987,7 @@ CONFIG_MMC_SPI=m
+ CONFIG_LEDS_CLASS=y
+ CONFIG_LEDS_GPIO=y
+ CONFIG_LEDS_PCA963X=m
++CONFIG_LEDS_IS31FL32XX=m
+ CONFIG_LEDS_TRIGGER_TIMER=y
+ CONFIG_LEDS_TRIGGER_ONESHOT=y
+ CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-- 
+2.17.1
+

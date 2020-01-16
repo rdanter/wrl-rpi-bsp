@@ -1,0 +1,65 @@
+From 10c2ce88024ae5cd8b4725325f2131d7f1a6973a Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Wed, 21 Feb 2018 15:37:11 +0000
+Subject: [PATCH 213/587] staging: bcm2835-camera: Fix brace style issues.
+
+Fix mismatched or missing brace issues flagged by checkpatch.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c | 3 ++-
+ drivers/staging/vc04_services/bcm2835-camera/controls.c       | 3 ++-
+ drivers/staging/vc04_services/bcm2835-camera/mmal-vchiq.c     | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c b/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
+index 0dbecb5d9f6f..67ba634d3e44 100644
+--- a/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
++++ b/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
+@@ -569,10 +569,11 @@ static int start_streaming(struct vb2_queue *vq, unsigned int count)
+ 
+ 		/* Flag to indicate just to rely on kernel timestamps */
+ 		dev->capture.vc_start_timestamp = -1;
+-	} else
++	} else {
+ 		v4l2_dbg(1, bcm2835_v4l2_debug, &dev->v4l2_dev,
+ 			 "Start time %lld size %d\n",
+ 			 dev->capture.vc_start_timestamp, parameter_size);
++	}
+ 
+ 	dev->capture.kernel_start_ts = ktime_get();
+ 	dev->capture.last_timestamp = 0;
+diff --git a/drivers/staging/vc04_services/bcm2835-camera/controls.c b/drivers/staging/vc04_services/bcm2835-camera/controls.c
+index 837b98ac0a38..dab1e1064517 100644
+--- a/drivers/staging/vc04_services/bcm2835-camera/controls.c
++++ b/drivers/staging/vc04_services/bcm2835-camera/controls.c
+@@ -406,8 +406,9 @@ static int ctrl_set_metering_mode(struct bm2835_mmal_dev *dev,
+ 		return vchiq_mmal_port_parameter_set(dev->instance, control,
+ 					     mmal_ctrl->mmal_id,
+ 					     &u32_value, sizeof(u32_value));
+-	} else
++	} else {
+ 		return 0;
++	}
+ }
+ 
+ static int ctrl_set_flicker_avoidance(struct bm2835_mmal_dev *dev,
+diff --git a/drivers/staging/vc04_services/bcm2835-camera/mmal-vchiq.c b/drivers/staging/vc04_services/bcm2835-camera/mmal-vchiq.c
+index 1f3f0d4ef593..7c371569673a 100644
+--- a/drivers/staging/vc04_services/bcm2835-camera/mmal-vchiq.c
++++ b/drivers/staging/vc04_services/bcm2835-camera/mmal-vchiq.c
+@@ -1267,9 +1267,10 @@ static int port_parameter_get(struct vchiq_mmal_instance *instance,
+ 		memcpy(value, &rmsg->u.port_parameter_get_reply.value,
+ 		       *value_size);
+ 		*value_size = rmsg->u.port_parameter_get_reply.size;
+-	} else
++	} else {
+ 		memcpy(value, &rmsg->u.port_parameter_get_reply.value,
+ 		       rmsg->u.port_parameter_get_reply.size);
++	}
+ 
+ 	pr_debug("%s:result:%d component:0x%x port:%d parameter:%d\n", __func__,
+ 		 ret, port->component->handle, port->handle, parameter_id);
+-- 
+2.17.1
+

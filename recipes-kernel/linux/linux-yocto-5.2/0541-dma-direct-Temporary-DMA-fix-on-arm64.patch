@@ -1,0 +1,28 @@
+From 370e6f18b566f7880f538f5d9e9ca2953389b446 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 25 Sep 2019 09:49:58 +0100
+Subject: [PATCH 541/587] dma-direct: Temporary DMA fix on arm64
+
+See: https://github.com/raspberrypi/linux/issues/3251
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ kernel/dma/direct.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
+index 9912be7a970d..bf1846a3b760 100644
+--- a/kernel/dma/direct.c
++++ b/kernel/dma/direct.c
+@@ -379,7 +379,7 @@ int dma_direct_supported(struct device *dev, u64 mask)
+ 	if (IS_ENABLED(CONFIG_ZONE_DMA))
+ 		min_mask = DMA_BIT_MASK(ARCH_ZONE_DMA_BITS);
+ 	else
+-		min_mask = DMA_BIT_MASK(32);
++		min_mask = DMA_BIT_MASK(30);
+ 
+ 	min_mask = min_t(u64, min_mask, (max_pfn - 1) << PAGE_SHIFT);
+ 
+-- 
+2.17.1
+

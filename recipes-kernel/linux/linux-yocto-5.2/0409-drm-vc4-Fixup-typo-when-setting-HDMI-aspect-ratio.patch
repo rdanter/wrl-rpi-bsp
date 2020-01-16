@@ -1,0 +1,44 @@
+From 8c542fc19906b1a8c2acc5567d2742eaa8e1af3f Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Tue, 7 May 2019 15:00:02 +0100
+Subject: [PATCH 409/587] drm: vc4: Fixup typo when setting HDMI aspect ratio
+
+Assignment was to the wrong structure.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/gpu/drm/vc4/vc4_firmware_kms.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_firmware_kms.c b/drivers/gpu/drm/vc4/vc4_firmware_kms.c
+index 8c2fc4d1df8a..b95fb25d13f4 100644
+--- a/drivers/gpu/drm/vc4/vc4_firmware_kms.c
++++ b/drivers/gpu/drm/vc4/vc4_firmware_kms.c
+@@ -716,19 +716,19 @@ static void vc4_crtc_mode_set_nofb(struct drm_crtc *crtc)
+ 	switch (frame.avi.picture_aspect) {
+ 	default:
+ 	case HDMI_PICTURE_ASPECT_NONE:
+-		mode->flags |= TIMINGS_FLAGS_ASPECT_NONE;
++		mb.timings.flags |= TIMINGS_FLAGS_ASPECT_NONE;
+ 		break;
+ 	case HDMI_PICTURE_ASPECT_4_3:
+-		mode->flags |= TIMINGS_FLAGS_ASPECT_4_3;
++		mb.timings.flags |= TIMINGS_FLAGS_ASPECT_4_3;
+ 		break;
+ 	case HDMI_PICTURE_ASPECT_16_9:
+-		mode->flags |= TIMINGS_FLAGS_ASPECT_16_9;
++		mb.timings.flags |= TIMINGS_FLAGS_ASPECT_16_9;
+ 		break;
+ 	case HDMI_PICTURE_ASPECT_64_27:
+-		mode->flags |= TIMINGS_FLAGS_ASPECT_64_27;
++		mb.timings.flags |= TIMINGS_FLAGS_ASPECT_64_27;
+ 		break;
+ 	case HDMI_PICTURE_ASPECT_256_135:
+-		mode->flags |= TIMINGS_FLAGS_ASPECT_256_135;
++		mb.timings.flags |= TIMINGS_FLAGS_ASPECT_256_135;
+ 		break;
+ 	}
+ 
+-- 
+2.17.1
+

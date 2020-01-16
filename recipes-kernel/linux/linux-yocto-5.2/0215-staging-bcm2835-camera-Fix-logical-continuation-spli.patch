@@ -1,0 +1,32 @@
+From c3f0bee8178111baa978ce5eb85ce8e8e224b4f9 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.org>
+Date: Wed, 21 Feb 2018 15:48:54 +0000
+Subject: [PATCH 215/587] staging: bcm2835-camera: Fix logical continuation
+ splits
+
+Fix checkpatch errors for "Logical continuations should be
+on the previous line".
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.org>
+---
+ drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c b/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
+index 67ba634d3e44..bda393ecdba1 100644
+--- a/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
++++ b/drivers/staging/vc04_services/bcm2835-camera/bcm2835-camera.c
+@@ -1114,8 +1114,8 @@ static int mmal_setup_components(struct bm2835_mmal_dev *dev,
+ 
+ 	ret = vchiq_mmal_port_set_format(dev->instance, camera_port);
+ 
+-	if (!ret
+-	    && camera_port ==
++	if (!ret &&
++	    camera_port ==
+ 	    &dev->component[COMP_CAMERA]->output[CAM_PORT_VIDEO]) {
+ 		bool overlay_enabled =
+ 		    !!dev->component[COMP_PREVIEW]->enabled;
+-- 
+2.17.1
+

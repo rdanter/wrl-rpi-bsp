@@ -1,0 +1,217 @@
+From 88d61e227b2cd7db3914d9bb9d59039c21a53e59 Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Tue, 17 Sep 2019 19:16:17 +0200
+Subject: [PATCH 549/587] ARM: dts: bcm283x: Define MMC interfaces at board
+ level
+
+commit e7774049ff255c8ba72bcee9c7ab307a95e8d7bc upstream.
+
+Starting with RPi 4 this is the first board, which doesn't use sdhost
+as default SD interface. So the MMC interfaces should be defined finally at
+board level. Since all boards using sdhci already does this, we can drop the
+pinctrl part from bcm2835-rpi.dtsi.
+
+Signed-off-by: Stefan Wahren <wahrenst@gmx.net>
+Acked-by: Eric Anholt <eric@anholt.net>
+---
+ arch/arm/boot/dts/bcm2835-rpi-a-plus.dts  |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-a.dts       |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-b-plus.dts  |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts  |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-b.dts       |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-zero-w.dts  |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi-zero.dts    |  7 +++++++
+ arch/arm/boot/dts/bcm2835-rpi.dtsi        | 13 -------------
+ arch/arm/boot/dts/bcm2836-rpi-2-b.dts     |  7 +++++++
+ 10 files changed, 63 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
+index 31ce7f87f004..b3f83e586c08 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-a-plus.dts
+@@ -108,6 +108,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-a.dts b/arch/arm/boot/dts/bcm2835-rpi-a.dts
+index 1f2b9a1bf44a..01e3d3ad1b4a 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-a.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-a.dts
+@@ -103,6 +103,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
+index 7cbf0db6735b..eb3a67f2cdc8 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b-plus.dts
+@@ -110,6 +110,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
+index a94a5b878886..7eb317af1e1a 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b-rev2.dts
+@@ -103,6 +103,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-b.dts b/arch/arm/boot/dts/bcm2835-rpi-b.dts
+index a49bf6c96c06..d709bbbf26f6 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-b.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-b.dts
+@@ -98,6 +98,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts b/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
+index 4764a25585ab..41afea4f1da2 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-cm1-io1.dts
+@@ -81,6 +81,13 @@
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts b/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
+index ba0167df6c5f..5ecc4032beb6 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-zero-w.dts
+@@ -116,6 +116,13 @@
+ 	};
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio32 &uart0_ctsrts_gpio30>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi-zero.dts b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
+index 014416ad265f..b89eefa57c0c 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi-zero.dts
++++ b/arch/arm/boot/dts/bcm2835-rpi-zero.dts
+@@ -99,6 +99,13 @@
+ 	hpd-gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+diff --git a/arch/arm/boot/dts/bcm2835-rpi.dtsi b/arch/arm/boot/dts/bcm2835-rpi.dtsi
+index bb7b59f43b67..302e7bc72888 100644
+--- a/arch/arm/boot/dts/bcm2835-rpi.dtsi
++++ b/arch/arm/boot/dts/bcm2835-rpi.dtsi
+@@ -84,19 +84,6 @@
+ 	status = "okay";
+ };
+ 
+-&sdhci {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&emmc_gpio48>;
+-	bus-width = <4>;
+-};
+-
+-&sdhost {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&sdhost_gpio48>;
+-	status = "okay";
+-	bus-width = <4>;
+-};
+-
+ &usb {
+ 	power-domains = <&power RPI_POWER_DOMAIN_USB>;
+ };
+diff --git a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
+index fcd575fa54d7..e970444df3bb 100644
+--- a/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
++++ b/arch/arm/boot/dts/bcm2836-rpi-2-b.dts
+@@ -114,6 +114,13 @@
+ 	status = "okay";
+ };
+ 
++&sdhost {
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdhost_gpio48>;
++	bus-width = <4>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_gpio14>;
+-- 
+2.17.1
+

@@ -1,0 +1,36 @@
+From 675fbade29972336ca2655743c44a9d9a1fcf2b4 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Wed, 12 Jun 2019 20:45:17 +0100
+Subject: [PATCH 297/587] bcm2835-sdhost: Fix DMA channel leak on error/remove
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ drivers/mmc/host/bcm2835-sdhost.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/mmc/host/bcm2835-sdhost.c b/drivers/mmc/host/bcm2835-sdhost.c
+index 86ba8e4333c5..566cb6f65d11 100644
+--- a/drivers/mmc/host/bcm2835-sdhost.c
++++ b/drivers/mmc/host/bcm2835-sdhost.c
+@@ -2148,6 +2148,8 @@ static int bcm2835_sdhost_probe(struct platform_device *pdev)
+ 
+ err:
+ 	pr_debug("bcm2835_sdhost_probe -> err %d\n", ret);
++	if (host->dma_chan_rxtx)
++		dma_release_channel(host->dma_chan_rxtx);
+ 	mmc_free_host(mmc);
+ 
+ 	return ret;
+@@ -2168,7 +2170,8 @@ static int bcm2835_sdhost_remove(struct platform_device *pdev)
+ 	del_timer_sync(&host->timer);
+ 
+ 	tasklet_kill(&host->finish_tasklet);
+-
++	if (host->dma_chan_rxtx)
++		dma_release_channel(host->dma_chan_rxtx);
+ 	mmc_free_host(host->mmc);
+ 	platform_set_drvdata(pdev, NULL);
+ 
+-- 
+2.17.1
+

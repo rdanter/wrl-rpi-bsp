@@ -1,0 +1,38 @@
+From 0d8e7b1a8a120b865fb6b10a526f3aae7843c2ef Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.org>
+Date: Fri, 5 Jul 2019 09:22:10 +0100
+Subject: [PATCH 430/587] overlays: Add real parameters to the rpi-poe overlay
+
+As a result of being loaded by the POE HAT EEPROM, the rpi-poe overlay
+doesn't expose parameters in the usual way; instead it adds them to
+the base Device Tree, and the user is expected to use "dtparam=..."
+to access them.
+
+To make the documentation correct and to protect users who load the
+overlay explicitly, expecting to be able to use the parameters, add
+real parameters to the overlay as well.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.org>
+---
+ arch/arm/boot/dts/overlays/rpi-poe-overlay.dts | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
+index 75e2f2ed5a47..21f8fe6f1229 100644
+--- a/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
++++ b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
+@@ -60,4 +60,11 @@
+ 			poe_fan_temp1_hyst =	<&trip1>,"hysteresis:0";
+ 		};
+ 	};
++
++	__overrides__ {
++		poe_fan_temp0 =		<&trip0>,"temperature:0";
++		poe_fan_temp0_hyst =	<&trip0>,"hysteresis:0";
++		poe_fan_temp1 =		<&trip1>,"temperature:0";
++		poe_fan_temp1_hyst =	<&trip1>,"hysteresis:0";
++	};
+ };
+-- 
+2.17.1
+
