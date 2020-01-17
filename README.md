@@ -5,9 +5,9 @@ Raspberry Pi BSP
 ---------------------
 
 Use the following steps to configure a platform project for this BSP with
-Wind River Linux LTS 18:
+Wind River Linux LTS 19:
 
-    $ git clone --branch WRLINUX_10_18_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_19_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
     $ . oe-init-build-env
@@ -28,13 +28,13 @@ for the original Raspberry Pi.
 
 Build the platform with:
 
-    $ bitbake wrlinux-image-glibc-std
+    $ bitbake wrlinux-image-std
 
 and finally, if required, build and install the SDK:
 
-    $ bitbake -c populate_sdk wrlinux-image-glibc-std
+    $ bitbake -c populate_sdk wrlinux-image-std
     $ cd tmp-glibc/deploy/sdk/
-    $ ./wrlinux-10.18.44.0-glibc-x86_64-rpi-wrlinux-image-glibc-std-sdk.sh
+    $ ./wrlinux-10.19.45.0-glibc-x86_64-rpi-wrlinux-image-std-sdk.sh
 
 If you will be building kernel modules with the SDK then the following
 additional steps should be taken before building:
@@ -154,7 +154,7 @@ following commit id:
 
     $ sudo mount -t ext4 /dev/mmcblk0p2 /mnt
     $ cd /mnt
-    $ sudo tar jxpf <prjDir>/build/tmp-glibc/deploy/images/rpi/wrlinux-image-glibc-std-rpi.tar.bz2
+    $ sudo tar jxpf <prjDir>/build/tmp-glibc/deploy/images/rpi/wrlinux-image-std-rpi.tar.bz2
 
 Optionally, enable mount of the boot partition on /boot of the rootfs:
 
