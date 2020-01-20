@@ -595,3 +595,6 @@ SRC_URI += "file://0584-staging-bcm2835-codec-Set-default-and-error-check-ti.pat
 SRC_URI += "file://0585-staging-bcm2835-codec-Fix-imbalance-in-dma_buf_get-d.patch"
 SRC_URI += "file://0586-drm-vc4-Added-calls-for-firmware-display-blank-unbla.patch"
 SRC_URI += "file://0587-configs-Add-CGROUP_BPF-and-BPF_SYSCALL.patch"
+
+# Additional patches
+SRC_URI += "file://0001-Fix-compile-error-caused-by-incorrect-include-path.patch"
