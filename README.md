@@ -20,6 +20,8 @@ Set `MACHINE` to the required board variant, one of:
   * rpi3
   * rpi3-64 (64-bit)
 
+**NOTE**: The rpi3 does not yet boot and the rpi3-64 does not build.
+
 for example:
 
     $ echo "MACHINE = \"rpi\"" >> conf/local.conf

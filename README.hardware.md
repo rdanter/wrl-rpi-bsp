@@ -8,6 +8,9 @@ This BSP has been tested on the following boards:
 
   * Raspberry Pi Model B Rev 1
   * Raspberry Pi 2 Model B Rev 1.1
+
+The following are not yet working:
+
   * Raspberry Pi 3 Model B Rev 1.2
   * Raspberry Pi 3 Model B Plus Rev 1.3
 
@@ -55,16 +58,11 @@ The following table lists the major changes to the BSP.
 
 Date       | Description
 -----------|-------------
-2019-01-24 | Updated to LTS 18 RCPL 3.
+2020-01-20 | Ported to WRL LTS 19 RCPL 2.
 2018-11-14 | Ported to WRL LTS 18.
 2018-04-05 | Add Raspberry Pi 3 support.
 2018-04-02 | Add Raspberry Pi 2 support.
-2018-03-30 | Updated to LTS 17 RCPL 5.
-2018-02-13 | Updated to LTS 17 RCPL 4.
-2018-02-11 | Updated to LTS 17 RCPL 3.
-2018-01-10 | Updated to LTS 17 RCPL 2.
 2017-11-27 | Ported to WRL LTS 17 RCPL 1.
-2017-11-25 | Updated to WRL 9 RCPL 12.
 2017-10-02 | Initial version for WRL 9 RCPL 11.
 
 
