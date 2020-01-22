@@ -144,7 +144,8 @@ SRC_URI += "file://0137-drivers-thermal-step_wise-add-support-for-hysteresis.pat
 SRC_URI += "file://0138-drivers-thermal-step_wise-avoid-throttling-at-hyster.patch"
 SRC_URI += "file://0139-Update-issue-templates-2736.patch"
 SRC_URI += "file://0140-gpiolib-Don-t-prevent-IRQ-usage-of-output-GPIOs.patch"
-SRC_URI += "file://0141-lan78xx-disable-interrupts-for-PHY-irqs.patch"
+# Not needed since RCPL 3
+#SRC_URI += "file://0141-lan78xx-disable-interrupts-for-PHY-irqs.patch"
 SRC_URI += "file://0142-rpi-wm8804-soundcard-drop-PWRDN-register-writes.patch"
 SRC_URI += "file://0143-rpi-wm8804-soundcard-configure-wm8804-clocks-only-on.patch"
 SRC_URI += "file://0144-net-lan78xx-Support-auto-downshift-to-100Mb-s.patch"
@@ -588,7 +589,8 @@ SRC_URI += "file://0577-configs-Add-CONFIG_VIDEO_IRS1125-to-the-defconfigs.patch
 SRC_URI += "file://0578-dtoverlays-Add-an-overlay-for-the-Infineon-IRS1125.patch"
 SRC_URI += "file://0579-rpi-wm8804-soundcard-Fixed-MCLKDIV-for-Allo-Digione.patch"
 SRC_URI += "file://0580-dts-bcm2838-Disable-DWC-OTG-block-by-default.patch"
-SRC_URI += "file://0581-ALSA-usb-audio-Add-DSD-support-for-Gustard-U16-X26-U.patch"
+# Not needed since RCPL 3
+#SRC_URI += "file://0581-ALSA-usb-audio-Add-DSD-support-for-Gustard-U16-X26-U.patch"
 SRC_URI += "file://0582-staging-bcm2835-codec-Add-support-for-ENUM_FRAMESIZE.patch"
 SRC_URI += "file://0583-staging-bcm2835-codec-Correct-buffer-type-check-on-G.patch"
 SRC_URI += "file://0584-staging-bcm2835-codec-Set-default-and-error-check-ti.patch"
