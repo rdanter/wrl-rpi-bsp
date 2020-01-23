@@ -8,9 +8,6 @@ This BSP has been tested on the following boards:
 
   * Raspberry Pi Model B Rev 1
   * Raspberry Pi 2 Model B Rev 1.1
-
-The following are not yet working:
-
   * Raspberry Pi 3 Model B Rev 1.2
   * Raspberry Pi 3 Model B Plus Rev 1.3
 
