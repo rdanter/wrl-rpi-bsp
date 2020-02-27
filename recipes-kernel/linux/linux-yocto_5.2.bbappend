@@ -441,7 +441,9 @@ SRC_URI += "file://0431-overlays-Rename-pi3-overlays-to-be-less-model-specif.pat
 SRC_URI += "file://0432-i2c-bcm2835-Move-IRQ-request-after-clock-code-in-pro.patch"
 SRC_URI += "file://0433-i2c-bcm2835-Ensure-clock-exists-when-probing.patch"
 SRC_URI += "file://0434-overlays-i2c-gpio-Fix-the-bus-parameter.patch"
-SRC_URI += "file://0435-tty-amba-pl011-Make-TX-optimisation-conditional.patch"
+# Patch rework needed for RCPL 4
+#SRC_URI += "file://0435-tty-amba-pl011-Make-TX-optimisation-conditional.patch"
+SRC_URI += "file://0001-tty-amba-pl011-Make-TX-optimisation-conditional.patch"
 SRC_URI += "file://0436-xhci-add-quirk-for-host-controllers-that-don-t-updat.patch"
 SRC_URI += "file://0437-i2c-bcm2835-Set-clock-stretch-timeout-to-35ms.patch"
 SRC_URI += "file://0438-overlays-Add-PCF2129-RTC.patch"
