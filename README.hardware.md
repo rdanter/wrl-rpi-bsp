@@ -34,6 +34,7 @@ The following features have been tested:
   + On-board wired Ethernet (`eth0`)
   + External USB storage devices (`sd`)
 * On-board wireless Ethernet (`wlan0`)
+* On-board Bluetooth (`hid0`)
 * I2C bus
 
 
@@ -46,6 +47,11 @@ The following problems have been identified with this BSP:
   The drivers for these devices require binary firmware blobs which are not
   free, therefore they have not been included in this BSP.
   See docs/Wireless.md for more details.
+
+* The hardware address of the Bluetooth controller appears as AA:AA:AA:AA:AA:AA
+  which seems to be an issue with bluez. See:
+
+    https://raspberrypi.stackexchange.com/questions/69222/why-is-bluetooth-address-now-showing-up-as-aaaaaaaaaaaa
 
 
 4. Change History
