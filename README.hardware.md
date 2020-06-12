@@ -50,11 +50,6 @@ The following problems have been identified with this BSP:
   free, therefore they have not been included in this BSP.
   See docs/Wireless.md for more details.
 
-* The hardware address of the Bluetooth controller appears as AA:AA:AA:AA:AA:AA
-  which seems to be an issue with bluez. See:
-
-    https://raspberrypi.stackexchange.com/questions/69222/why-is-bluetooth-address-now-showing-up-as-aaaaaaaaaaaa
-
 
 4. Change History
 -----------------
