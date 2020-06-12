@@ -8,6 +8,13 @@ following steps are required to enable the adapters with this BSP.
 -------------------
 See `Wireless.md` for details of where to find and how to install the firmware.
 
+In addition, the following Bluez firmware files are needed:
+
+  * BCM43430A1.hcd - for the RPi 3B
+  * BCM4345C0.hcd  - for the RPi 3B Plus
+
+These resolve issues with the hardware address being read as all AA's.
+
 2. Test Bluetooth
 -----------------
 The following steps may be used to quickly test Bluetooth functionality using a
