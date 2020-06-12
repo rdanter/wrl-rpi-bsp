@@ -18,6 +18,8 @@ Untested, but these should also work using the "rpi" configuration:
   * Raspberry Pi Zero Wireless
   * Compute Module
 
+NOTE: There is an official Wind River BSP for the Raspberry Pi 4.
+
 Further details of the Raspberry Pi hardware variations can be found on the
 [RaspberryPi.org][1] web site.
 
