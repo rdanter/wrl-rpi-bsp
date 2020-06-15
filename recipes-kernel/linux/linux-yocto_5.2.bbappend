@@ -551,7 +551,9 @@ SRC_URI += "file://0536-configs-Update-arm64-bcm2711_defconfig-based-on-the-.pat
 SRC_URI += "file://0537-dts-Add-DTS-for-Pi-2B-rev-1.2-with-BCM2837-3235.patch"
 SRC_URI += "file://0538-drm-v3d-Fix-merge-error-memory-leak.patch"
 SRC_URI += "file://0539-drm-v3d-clean-caches-at-the-end-of-render-jobs-on-re.patch"
-SRC_URI += "file://0540-kbuild-Allow-.dtbo-overlays-to-be-built-piecemeal.patch"
+# Patch rework needed for RCPL 8
+#SRC_URI += "file://0540-kbuild-Allow-.dtbo-overlays-to-be-built-piecemeal.patch"
+SRC_URI += "file://0001-kbuild-Allow-.dtbo-overlays-to-be-built-piecemeal.patch"
 SRC_URI += "file://0541-dma-direct-Temporary-DMA-fix-on-arm64.patch"
 SRC_URI += "file://0542-configs-Enable-CONFIG_NET_VRF-m.patch"
 SRC_URI += "file://0543-configs-Update-bcm2711-arm64-USB-options-to-match-ar.patch"
