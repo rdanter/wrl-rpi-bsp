@@ -6,7 +6,8 @@ Raspberry Pi BSP
 
 This BSP has been tested on the following boards:
 
-  * Raspberry Pi Model B Rev 1
+  * Raspberry Pi Zero W Rev 1.1
+  * Raspberry Pi 1 Model B Rev 1
   * Raspberry Pi 2 Model B Rev 1.1
   * Raspberry Pi 3 Model B Rev 1.2
   * Raspberry Pi 3 Model B Plus Rev 1.3
@@ -15,7 +16,6 @@ Untested, but these should also work using the "rpi" configuration:
 
   * Raspberry Pi Model A/A+/B+
   * Raspberry Pi Zero
-  * Raspberry Pi Zero Wireless
   * Compute Module
 
 NOTE: There is an official Wind River BSP for the Raspberry Pi 4.

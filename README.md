@@ -24,7 +24,7 @@ for example:
 
     $ echo "MACHINE = \"rpi\"" >> conf/local.conf
 
-for the original Raspberry Pi.
+for the original Raspberry Pi or the Pi Zero.
 
 Build the platform with:
 
@@ -145,8 +145,9 @@ The version used for testing comes from the 'stable' branch.
   * As above, the rpi kernel image file should be called `kernel.img`.
   * The rpi2 and rpi3 kernel image file should be called `kernel7.img`.
   * The rpi3-64 kernel image file should be called `kernel8.img`.
-  * For the rpi3 and rpi3-64, enable the micro-UART in `config.txt` and use
-    `ttyS0` instead of `ttyAMA0` in `cmdline.txt` for a serial console.
+  * For the rpi3, rpi3-64 and rpi on the Pi Zero W, enable the micro-UART in
+    `config.txt` and use `ttyS0` instead of `ttyAMA0` in `cmdline.txt` for a
+    serial console.
   * Alternatively, for any target, use `tty1` to have the console displayed
     via the HDMI output. A USB keyboard can be used for entering commands.
 
