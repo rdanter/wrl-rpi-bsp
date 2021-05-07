@@ -1,8 +1,8 @@
 Raspberry Pi BSP
 ================
 
-1. Supported Boards
--------------------
+Supported Boards
+----------------
 
 This BSP has been tested on the following boards:
 
@@ -24,8 +24,8 @@ Further details of the Raspberry Pi hardware variations can be found on the
 [RaspberryPi.org][1] web site.
 
 
-2. Features
------------
+Features
+--------
 
 The following features have been tested:
 
@@ -40,8 +40,8 @@ The following features have been tested:
 * I2C bus
 
 
-3. Known Issues
----------------
+Known Issues
+------------
 
 The following problems have been identified with this BSP:
 
@@ -51,13 +51,14 @@ The following problems have been identified with this BSP:
   See docs/Wireless.md for more details.
 
 
-4. Change History
------------------
+Change History
+--------------
 
 The following table lists the major changes to the BSP.
 
 Date       | Description
 -----------|-------------
+2021-05-06 | Ported to WRL CI 21.13.
 2020-01-20 | Ported to WRL LTS 19 RCPL 2.
 2018-11-14 | Ported to WRL LTS 18.
 2018-04-05 | Add Raspberry Pi 3 support.

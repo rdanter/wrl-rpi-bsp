@@ -1,8 +1,8 @@
 Raspberry Pi BSP
 ================
 
-1. Build Instructions
----------------------
+Build Instructions
+------------------
 
 Use the following steps to configure a platform project for this BSP with
 Wind River Linux CI:
@@ -50,16 +50,17 @@ userspace applications.
 See the User Guide for further SDK usage instructions.
 
 
-2. Boot Instructions
---------------------
+Boot Instructions
+-----------------
 
-### 2.1. SD Card Boot
+### SD Card Boot
 
 The original Raspberry Pi has an SD card reader which can be used to boot the
 device. Newer models use a microSD instead. The following instructions are
 suitable for both.
 
-#### 2.1.1. Partition and Format SD Card
+
+#### Partition and Format SD Card
 
     $ sudo fdisk /dev/mmcblk0
 
@@ -120,7 +121,8 @@ suitable for both.
     Creating journal (8192 blocks): done
     Writing superblocks and filesystem accounting information: done
 
-#### 2.1.2. Install Bootloader and Kernel
+
+#### Install Bootloader and Kernel
 
 The Broadcom bootloader is closed source (binary only) and therefore not
 included in this BSP layer. However, it can be obtained from here:
@@ -151,7 +153,8 @@ The version used for testing comes from the 'stable' branch.
   * Alternatively, for any target, use `tty1` to have the console displayed
     via the HDMI output. A USB keyboard can be used for entering commands.
 
-#### 2.1.3. Install rootfs
+
+#### Install rootfs
 
     $ sudo mount -t ext4 /dev/mmcblk0p2 /mnt
     $ cd /mnt
