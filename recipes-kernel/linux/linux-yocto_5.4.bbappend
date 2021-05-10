@@ -9,3 +9,5 @@ KBRANCH_rpi = "v5.4/standard/bcm-2xxx-rpi"
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto-5.4:"
 
 SRC_URI += "file://tmp-kernel-config-v5.4.cfg"
+SRC_URI += "file://0001-bcm-2xxx-rpi-fix-build-issue.patch"
+
