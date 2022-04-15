@@ -1,0 +1,10 @@
+define KMACHINE rpi3-64
+define KTYPE    standard
+define KARCH    arm64
+
+# Import the standard kernel config options, but
+# skip the patches as they are already applied
+include ktypes/standard/standard.scc nopatch
+
+# Add our BSP-specific config options
+kconf non-hardware rpi3-64-standard.cfg
