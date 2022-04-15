@@ -1,0 +1,35 @@
+From a2224f9777778965ff76049548ba483a23d7933e Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Thu, 6 May 2021 16:37:26 +0200
+Subject: [PATCH 0699/2201] drm/vc4: hdmi: Switch to pm_runtime_resume_and_get
+
+pm_runtime_get_sync increases the PM usage counter even if it fails, and
+forgetting to do so will result in a reference leak. We can't really do
+anything in atomic_enable in case of a failure though, and we probably
+can't recover either, but at least switching to
+pm_runtime_resume_and_get makes us play nice with the PM subsystem.
+
+Fixes: 4f6e3d66ac52 ("drm/vc4: Add runtime PM support to the HDMI encoder driver")
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 0a786803c320..2db4af7a1cb3 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1203,8 +1203,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 	unsigned long bvb_rate, pixel_rate, hsm_rate;
+ 	int ret;
+ 
+-	ret = pm_runtime_get_sync(&vc4_hdmi->pdev->dev);
+-	if (ret < 0) {
++	ret = pm_runtime_resume_and_get(&vc4_hdmi->pdev->dev);
++	if (ret) {
+ 		DRM_ERROR("Failed to retain power domain: %d\n", ret);
+ 		return;
+ 	}
+-- 
+2.17.1
+

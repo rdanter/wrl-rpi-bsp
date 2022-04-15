@@ -1,0 +1,49 @@
+From f6d9b869bc77c7780edbd600d12de988f9ea3e6d Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Mon, 14 Sep 2020 11:25:46 +0300
+Subject: [PATCH 1209/2201] ARM: head.S: use PC relative insn sequence to
+ calculate PHYS_OFFSET
+
+commit 3bcf906b194cebb6817cbb2f07b69e12aa5d7f51 upstream.
+
+Replace the open coded arithmetic with a simple adr_l/sub pair. This
+removes some open coded arithmetic involving virtual addresses, avoids
+literal pools on v7+, and slightly reduces the footprint of the code.
+
+Reviewed-by: Nicolas Pitre <nico@fluxnic.net>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/kernel/head.S | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/kernel/head.S b/arch/arm/kernel/head.S
+index 7adab03a31bc..7f62c5eccdf3 100644
+--- a/arch/arm/kernel/head.S
++++ b/arch/arm/kernel/head.S
+@@ -103,10 +103,8 @@ ENTRY(stext)
+ #endif
+ 
+ #ifndef CONFIG_XIP_KERNEL
+-	adr	r3, 2f
+-	ldmia	r3, {r4, r8}
+-	sub	r4, r3, r4			@ (PHYS_OFFSET - PAGE_OFFSET)
+-	add	r8, r8, r4			@ PHYS_OFFSET
++	adr_l	r8, _text			@ __pa(_text)
++	sub	r8, r8, #TEXT_OFFSET		@ PHYS_OFFSET
+ #else
+ 	ldr	r8, =PLAT_PHYS_OFFSET		@ always constant in this case
+ #endif
+@@ -158,10 +156,6 @@ ENTRY(stext)
+ 1:	b	__enable_mmu
+ ENDPROC(stext)
+ 	.ltorg
+-#ifndef CONFIG_XIP_KERNEL
+-2:	.long	.
+-	.long	PAGE_OFFSET
+-#endif
+ 
+ /*
+  * Setup the initial page tables.  We only setup the barest
+-- 
+2.17.1
+

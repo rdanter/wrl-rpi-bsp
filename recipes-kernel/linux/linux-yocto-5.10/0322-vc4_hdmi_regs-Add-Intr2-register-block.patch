@@ -1,0 +1,103 @@
+From 7245ff6dd5fc5c919777c18bf45205f79c30105f Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Thu, 7 May 2020 18:16:07 +0100
+Subject: [PATCH 0322/2201] vc4_hdmi_regs: Add Intr2 register block
+
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c      |  8 ++++++++
+ drivers/gpu/drm/vc4/vc4_hdmi.h      |  2 ++
+ drivers/gpu/drm/vc4/vc4_hdmi_regs.h | 17 +++++++++++++++++
+ 3 files changed, 27 insertions(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 1538a9f7cbac..697b5bdd5896 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1653,6 +1653,14 @@ static int vc5_hdmi_init_resources(struct vc4_hdmi *vc4_hdmi)
+ 	if (!vc4_hdmi->dvp_regs)
+ 		return -ENOMEM;
+ 
++	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "intr2");
++	if (!res)
++		return -ENODEV;
++
++	vc4_hdmi->intr2_regs = devm_ioremap(dev, res->start, resource_size(res));
++	if (IS_ERR(vc4_hdmi->intr2_regs))
++		return PTR_ERR(vc4_hdmi->intr2_regs);
++
+ 	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "phy");
+ 	if (!res)
+ 		return -ENODEV;
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index 32d09132fb44..1142f332b300 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -141,6 +141,8 @@ struct vc4_hdmi {
+ 	void __iomem *ram_regs;
+ 	/* VC5 Only */
+ 	void __iomem *rm_regs;
++	/* VC5 Only */
++	void __iomem *intr2_regs;
+ 
+ 	int hpd_gpio;
+ 	bool hpd_active_low;
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi_regs.h b/drivers/gpu/drm/vc4/vc4_hdmi_regs.h
+index 0548b7bb5006..2081287c7e2d 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi_regs.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi_regs.h
+@@ -15,6 +15,7 @@ enum vc4_hdmi_regs {
+ 	VC5_PHY,
+ 	VC5_RAM,
+ 	VC5_RM,
++	VC5_INTR2,
+ };
+ 
+ enum vc4_hdmi_field {
+@@ -139,6 +140,7 @@ struct vc4_hdmi_register {
+ #define VC5_CEC_REG(reg, offset)	_VC4_REG(VC5_CEC, reg, offset)
+ #define VC5_CSC_REG(reg, offset)	_VC4_REG(VC5_CSC, reg, offset)
+ #define VC5_DVP_REG(reg, offset)	_VC4_REG(VC5_DVP, reg, offset)
++#define VC5_INTR2_REG(reg, offset)	_VC4_REG(VC5_INTR2, reg, offset)
+ #define VC5_PHY_REG(reg, offset)	_VC4_REG(VC5_PHY, reg, offset)
+ #define VC5_RAM_REG(reg, offset)	_VC4_REG(VC5_RAM, reg, offset)
+ #define VC5_RM_REG(reg, offset)		_VC4_REG(VC5_RM, reg, offset)
+@@ -271,6 +273,12 @@ static const struct vc4_hdmi_register vc5_hdmi_hdmi0_fields[] = {
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_2, 0x03c),
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_3, 0x040),
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_4, 0x044),
++	VC5_INTR2_REG(HDMI_CEC_CPU_STATUS, 0x0000),
++	VC5_INTR2_REG(HDMI_CEC_CPU_SET, 0x0004),
++	VC5_INTR2_REG(HDMI_CEC_CPU_CLEAR, 0x0008),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_STATUS, 0x000c),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_SET, 0x0010),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_CLEAR, 0x0014),
+ 
+ 	VC5_CSC_REG(HDMI_CSC_CTL, 0x000),
+ 	VC5_CSC_REG(HDMI_CSC_12_11, 0x004),
+@@ -347,6 +355,12 @@ static const struct vc4_hdmi_register vc5_hdmi_hdmi1_fields[] = {
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_2, 0x03c),
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_3, 0x040),
+ 	VC5_CEC_REG(HDMI_CEC_RX_DATA_4, 0x044),
++	VC5_INTR2_REG(HDMI_CEC_CPU_STATUS, 0x0000),
++	VC5_INTR2_REG(HDMI_CEC_CPU_SET, 0x0004),
++	VC5_INTR2_REG(HDMI_CEC_CPU_CLEAR, 0x0008),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_STATUS, 0x000c),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_SET, 0x0010),
++	VC5_INTR2_REG(HDMI_CEC_CPU_MASK_CLEAR, 0x0014),
+ 
+ 	VC5_CSC_REG(HDMI_CSC_CTL, 0x000),
+ 	VC5_CSC_REG(HDMI_CSC_12_11, 0x004),
+@@ -377,6 +391,9 @@ void __iomem *__vc4_hdmi_get_field_base(struct vc4_hdmi *hdmi,
+ 	case VC5_DVP:
+ 		return hdmi->dvp_regs;
+ 
++	case VC5_INTR2:
++		return hdmi->intr2_regs;
++
+ 	case VC5_PHY:
+ 		return hdmi->phy_regs;
+ 
+-- 
+2.17.1
+

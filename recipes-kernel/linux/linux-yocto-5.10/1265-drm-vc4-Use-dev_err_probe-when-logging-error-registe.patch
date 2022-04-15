@@ -1,0 +1,30 @@
+From 6505412df625959baa490226f5d8cfada138b93f Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Mon, 29 Nov 2021 14:42:05 +0000
+Subject: [PATCH 1265/2201] drm/vc4: Use dev_err_probe when logging error
+ registering HDMI audio
+
+Avoid logging a spurious error message with error -517
+(-EPROBE_DEFER) whilst trying to load HDMI audio.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 96a731b5cdac..f673c04dad12 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1848,7 +1848,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+ 	snd_soc_card_set_drvdata(card, vc4_hdmi);
+ 	ret = devm_snd_soc_register_card(dev, card);
+ 	if (ret)
+-		dev_err(dev, "Could not register sound card: %d\n", ret);
++		dev_err_probe(dev, ret, "Could not register sound card: %d\n");
+ 
+ 	return ret;
+ 
+-- 
+2.17.1
+

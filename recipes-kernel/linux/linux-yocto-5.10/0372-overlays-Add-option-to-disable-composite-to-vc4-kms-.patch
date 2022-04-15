@@ -1,0 +1,43 @@
+From 49cb5907d87215c59cff0a80097d4b7a31e60bf8 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Fri, 23 Oct 2020 14:15:41 +0100
+Subject: [PATCH 0372/2201] overlays: Add option to disable composite to
+ vc4-kms-v3d
+
+Composite gets enabled automatically if HDMI isn't detected,
+which can cause some grief in X should it be not connected
+and touchscreens are in use.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/README                  | 2 ++
+ arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts | 1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index eff90baed406..626469826e0a 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -2949,6 +2949,8 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
+         cma-default             Use upstream's default value
+         audio                   Enable or disable audio over HDMI (default "on")
+         noaudio                 Disable all HDMI audio (default "off")
++        nocomposite             Disable the composite video output (default
++                                "off")
+ 
+ 
+ Name:   vc4-kms-v3d-pi4
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts
+index 6d34a2bff49b..5a4efdeed663 100644
+--- a/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts
++++ b/arch/arm/boot/dts/overlays/vc4-kms-v3d-overlay.dts
+@@ -118,5 +118,6 @@
+ 	__overrides__ {
+ 		audio   = <0>,"!13", <0>,"=14";
+ 		noaudio = <0>,"=13", <0>,"!14";
++		nocomposite = <0>, "!11";
+ 	};
+ };
+-- 
+2.17.1
+

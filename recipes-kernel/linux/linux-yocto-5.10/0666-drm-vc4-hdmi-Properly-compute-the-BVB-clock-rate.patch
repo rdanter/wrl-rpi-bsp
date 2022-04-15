@@ -1,0 +1,60 @@
+From e259821935a603369be12ddcf425a9c56d8d2943 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Thu, 8 Oct 2020 16:06:08 +0200
+Subject: [PATCH 0666/2201] drm/vc4: hdmi: Properly compute the BVB clock rate
+
+The BVB clock rate computation doesn't take into account a mode clock of
+594MHz that we're going to need to support 4k60.
+
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 3a0ac5a9c027..ca6651607acd 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -93,7 +93,6 @@
+ # define VC4_HD_M_ENABLE			BIT(0)
+ 
+ #define CEC_CLOCK_FREQ 40000
+-#define VC4_HSM_MID_CLOCK 149985000
+ 
+ #define HDMI_CODEC_CHMAP_IDX_UNKNOWN  -1
+ 
+@@ -1120,7 +1119,7 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 		conn_state_to_vc4_hdmi_conn_state(conn_state);
+ 	struct drm_display_mode *mode = &encoder->crtc->state->adjusted_mode;
+ 	struct vc4_hdmi *vc4_hdmi = encoder_to_vc4_hdmi(encoder);
+-	unsigned long pixel_rate, hsm_rate;
++	unsigned long bvb_rate, pixel_rate, hsm_rate;
+ 	int ret;
+ 
+ 	ret = pm_runtime_get_sync(&vc4_hdmi->pdev->dev);
+@@ -1174,12 +1173,14 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 
+ 	vc4_hdmi_cec_update_clk_div(vc4_hdmi);
+ 
+-	/*
+-	 * FIXME: When the pixel freq is 594MHz (4k60), this needs to be setup
+-	 * at 300MHz.
+-	 */
+-	vc4_hdmi->bvb_req = clk_request_start(vc4_hdmi->pixel_bvb_clock,
+-					      (hsm_rate > VC4_HSM_MID_CLOCK ? 150000000 : 75000000));
++	if (pixel_rate > 297000000)
++		bvb_rate = 300000000;
++	else if (pixel_rate > 148500000)
++		bvb_rate = 150000000;
++	else
++		bvb_rate = 75000000;
++
++	vc4_hdmi->bvb_req = clk_request_start(vc4_hdmi->pixel_bvb_clock, bvb_rate);
+ 	if (IS_ERR(vc4_hdmi->bvb_req)) {
+ 		DRM_ERROR("Failed to set pixel bvb clock rate: %ld\n", PTR_ERR(vc4_hdmi->bvb_req));
+ 		clk_request_done(vc4_hdmi->hsm_req);
+-- 
+2.17.1
+

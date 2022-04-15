@@ -1,0 +1,33 @@
+From 6fc5285c3968d2ab656ff645d390333f4e08eb03 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Fri, 17 Sep 2021 19:10:29 +0100
+Subject: [PATCH 0953/2201] Revert "firmware: Updated mailbox header"
+
+This reverts commit 02038a75fb5ae9e0b8dac3de3f30f37ea613201e.
+---
+ include/soc/bcm2835/raspberrypi-firmware.h | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/include/soc/bcm2835/raspberrypi-firmware.h b/include/soc/bcm2835/raspberrypi-firmware.h
+index cc0a0bc8d1e6..bcfb81e812f2 100644
+--- a/include/soc/bcm2835/raspberrypi-firmware.h
++++ b/include/soc/bcm2835/raspberrypi-firmware.h
+@@ -9,8 +9,6 @@
+ #include <linux/types.h>
+ #include <linux/of_device.h>
+ 
+-#define RPI_FIRMWARE_CHAN_FB		1
+-
+ struct rpi_firmware;
+ 
+ enum rpi_firmware_property_status {
+@@ -188,6 +186,5 @@ static inline struct rpi_firmware *rpi_firmware_get(struct device_node *firmware
+ 	return NULL;
+ }
+ #endif
+-int rpi_firmware_transaction(struct rpi_firmware *fw, u32 chan, u32 data);
+ 
+ #endif /* __SOC_RASPBERRY_FIRMWARE_H__ */
+-- 
+2.17.1
+

@@ -1,0 +1,24 @@
+From 1f482158fc3c4e5f855c424e1d46c6ba541b1982 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Thu, 16 Dec 2021 12:11:54 +0000
+Subject: [PATCH 1302/2201] Revert "kbuild: Disable gcc plugins"
+
+This reverts commit d62b4f2f5742bf39892acf8c6804fffee174d371.
+---
+ scripts/gcc-plugin.sh | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/scripts/gcc-plugin.sh b/scripts/gcc-plugin.sh
+index c3d0c8fedbdd..b79fd0bea838 100755
+--- a/scripts/gcc-plugin.sh
++++ b/scripts/gcc-plugin.sh
+@@ -1,6 +1,5 @@
+ #!/bin/sh
+ # SPDX-License-Identifier: GPL-2.0
+-exit 1 # Disable plugins
+ 
+ set -e
+ 
+-- 
+2.17.1
+

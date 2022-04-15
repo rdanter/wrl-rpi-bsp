@@ -1,0 +1,112 @@
+From 40200bce21cd66dea10ecb9bc6af366e3a59354d Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sun, 20 Sep 2020 18:23:35 +0200
+Subject: [PATCH 1199/2201] ARM: p2v: use relative references in patch site
+ arrays
+
+commit 2730e8eaa4f2baccc03296e0c5ee109c0673fe5f upstream.
+
+Free up a register in the p2v patching code by switching to relative
+references, which don't require keeping the phys-to-virt displacement
+live in a register.
+
+Acked-by: Nicolas Pitre <nico@fluxnic.net>
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/include/asm/memory.h |  6 +++---
+ arch/arm/kernel/phys2virt.S   | 18 +++++++-----------
+ 2 files changed, 10 insertions(+), 14 deletions(-)
+
+diff --git a/arch/arm/include/asm/memory.h b/arch/arm/include/asm/memory.h
+index 20bd5d66dcc0..761b5aaba742 100644
+--- a/arch/arm/include/asm/memory.h
++++ b/arch/arm/include/asm/memory.h
+@@ -192,7 +192,7 @@ extern const void *__pv_table_begin, *__pv_table_end;
+ 	__asm__("@ __pv_stub\n"				\
+ 	"1:	" instr "	%0, %1, %2\n"		\
+ 	"	.pushsection .pv_table,\"a\"\n"		\
+-	"	.long	1b\n"				\
++	"	.long	1b - .\n"			\
+ 	"	.popsection\n"				\
+ 	: "=r" (to)					\
+ 	: "r" (from), "I" (__PV_BITS_31_24))
+@@ -201,7 +201,7 @@ extern const void *__pv_table_begin, *__pv_table_end;
+ 	__asm__ volatile("@ __pv_stub_mov\n"		\
+ 	"1:	mov	%R0, %1\n"			\
+ 	"	.pushsection .pv_table,\"a\"\n"		\
+-	"	.long	1b\n"				\
++	"	.long	1b - .\n"			\
+ 	"	.popsection\n"				\
+ 	: "=r" (t)					\
+ 	: "I" (__PV_BITS_7_0))
+@@ -211,7 +211,7 @@ extern const void *__pv_table_begin, *__pv_table_end;
+ 	"1:	adds	%Q0, %1, %2\n"			\
+ 	"	adc	%R0, %R0, #0\n"			\
+ 	"	.pushsection .pv_table,\"a\"\n"		\
+-	"	.long	1b\n"				\
++	"	.long	1b - .\n"			\
+ 	"	.popsection\n"				\
+ 	: "+r" (y)					\
+ 	: "r" (x), "I" (__PV_BITS_31_24)		\
+diff --git a/arch/arm/kernel/phys2virt.S b/arch/arm/kernel/phys2virt.S
+index 5031e5a2e78b..8e4be15e1559 100644
+--- a/arch/arm/kernel/phys2virt.S
++++ b/arch/arm/kernel/phys2virt.S
+@@ -58,9 +58,7 @@ ENDPROC(__fixup_pv_table)
+ 
+ 	.text
+ __fixup_a_pv_table:
+-	adr	r0, 3f
+-	ldr	r6, [r0]
+-	add	r6, r6, r3
++	adr_l	r6, __pv_offset
+ 	ldr	r0, [r6, #HIGH_OFFSET]	@ pv_offset high word
+ 	ldr	r6, [r6, #LOW_OFFSET]	@ pv_offset low word
+ 	mov	r6, r6, lsr #24
+@@ -78,7 +76,8 @@ __fixup_a_pv_table:
+ 	orr	r6, r6, r7, lsl #12
+ 	orr	r6, #0x4000
+ 	b	.Lnext
+-.Lloop:	add	r7, r3
++.Lloop:	add	r7, r4
++	adds	r4, #4
+ 	ldrh	ip, [r7, #2]
+ ARM_BE8(rev16	ip, ip)
+ 	tst	ip, #0x4000
+@@ -108,28 +107,25 @@ ARM_BE8(rev16	ip, ip)
+ 
+ 	moveq	r0, #0x400000		@ set bit 22, mov to mvn instruction
+ 	b	.Lnext
+-.Lloop:	ldr	ip, [r7, r3]
++.Lloop:	ldr	ip, [r7, r4]
+ 	bic	ip, ip, #PV_IMM8_MASK
+ 	tst	ip, #PV_ROT_MASK		@ check the rotation field
+ 	orrne	ip, ip, r6 ARM_BE8(, lsl #24)	@ mask in offset bits 31-24
+ 	biceq	ip, ip, #PV_BIT22		@ clear bit 22
+ 	orreq	ip, ip, r0 ARM_BE8(, ror #8)	@ mask in offset bits 7-0 (or bit 22)
+-	str	ip, [r7, r3]
++	str	ip, [r7, r4]
++	add	r4, r4, #4
+ #endif
+ 
+ .Lnext:
+ 	cmp	r4, r5
+-	ldrcc	r7, [r4], #4		@ use branch for delay slot
++	ldrcc	r7, [r4]		@ use branch for delay slot
+ 	bcc	.Lloop
+ 	ret	lr
+ ENDPROC(__fixup_a_pv_table)
+ 
+-	.align
+-3:	.long __pv_offset
+-
+ ENTRY(fixup_pv_table)
+ 	stmfd	sp!, {r4 - r7, lr}
+-	mov	r3, #0			@ no offset
+ 	mov	r4, r0			@ r0 = table start
+ 	add	r5, r0, r1		@ r1 = table size
+ 	bl	__fixup_a_pv_table
+-- 
+2.17.1
+

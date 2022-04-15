@@ -1,0 +1,51 @@
+From 5843c2e404b5b4995f4e3f532dcecd1908df2f8c Mon Sep 17 00:00:00 2001
+From: Aaron Shaw <shawaj@gmail.com>
+Date: Sat, 26 Dec 2020 03:13:14 +0000
+Subject: [PATCH 0476/2201] overlays: add spi override to merus-amp overlay
+
+adds an override to the merus-amp overlay to turn the spi bus off
+
+Change-type: patch
+Signed-off-by: Aaron Shaw <shawaj@gmail.com>
+---
+ arch/arm/boot/dts/overlays/README                |  4 ++--
+ arch/arm/boot/dts/overlays/merus-amp-overlay.dts | 10 ++++++++++
+ 2 files changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 2a4ec1623518..5076ca440742 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -1914,8 +1914,8 @@ Params: speed                   Display SPI bus speed
+ 
+ Name:   merus-amp
+ Info:   Configures the merus-amp audio card
+-Load:   dtoverlay=merus-amp
+-Params: <None>
++Load:   dtoverlay=merus-amp,<param>=<val>
++Params: spioff                  Turn SPI bus off
+ 
+ 
+ Name:   midi-uart0
+diff --git a/arch/arm/boot/dts/overlays/merus-amp-overlay.dts b/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
+index 4501fbdc253d..bbffd7d26324 100644
+--- a/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
++++ b/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
+@@ -57,4 +57,14 @@
+ 			status = "okay";
+ 		};
+ 	};
++
++	fragment@4 {
++		target = <&spi0>;
++		frag4: __overlay__ {
++		};
++	};
++
++	__overrides__ {
++		spioff = <&frag4>, "status=disabled";
++	};
+ };
+-- 
+2.17.1
+

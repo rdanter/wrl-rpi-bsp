@@ -1,0 +1,37 @@
+From 84121840fd1147290da0e0752ab1b4eb1066a141 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Tue, 8 Dec 2020 17:11:26 +0100
+Subject: [PATCH 0508/2201] Revert "vc4_hdmi: Move hdmi reset to bind"
+
+This reverts commit fdb112d44c1b0659aec1ef841939dff0f0dee49e.
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 17934259ab5a..5f2c83694a44 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1099,6 +1099,9 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 		return;
+ 	}
+ 
++	if (vc4_hdmi->variant->reset)
++		vc4_hdmi->variant->reset(vc4_hdmi);
++
+ 	if (vc4_hdmi->variant->phy_init)
+ 		vc4_hdmi->variant->phy_init(vc4_hdmi, vc4_conn_state);
+ 
+@@ -2492,9 +2495,6 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+ 	vc4_hdmi->disable_wifi_frequencies =
+ 		of_property_read_bool(dev->of_node, "wifi-2.4ghz-coexistence");
+ 
+-	if (vc4_hdmi->variant->reset)
+-		vc4_hdmi->variant->reset(vc4_hdmi);
+-
+ 	pm_runtime_enable(dev);
+ 
+ 	drm_simple_encoder_init(drm, encoder, DRM_MODE_ENCODER_TMDS);
+-- 
+2.17.1
+

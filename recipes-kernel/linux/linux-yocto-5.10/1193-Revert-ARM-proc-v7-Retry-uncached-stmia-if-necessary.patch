@@ -1,0 +1,42 @@
+From 9bca33d570dd76c85655343d25e716215c86a36f Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 28 Oct 2021 12:16:00 +0100
+Subject: [PATCH 1193/2201] Revert "ARM: proc-v7: Retry uncached stmia if
+ necessary"
+
+This reverts commit 3e1698ed5013c1054e3dbf8a9fcd3a8549a95ece.
+---
+ arch/arm/mm/proc-v7.S | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/arch/arm/mm/proc-v7.S b/arch/arm/mm/proc-v7.S
+index 950ceb970470..28c9d32fa99a 100644
+--- a/arch/arm/mm/proc-v7.S
++++ b/arch/arm/mm/proc-v7.S
+@@ -288,11 +288,7 @@ __v7_ca17mp_setup:
+ 1:	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+ 	add	r12, r12, r0			@ the local stack
+-1:
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
+-	ldr	r0, [r12, #(6 * 4)]		@ read back the return address
+-	teq	r0, lr				@ confirm it is correct
+-	bne	1b				@ retrying if not
+ 	bl      v7_invalidate_l1
+ 	ldmia	r12, {r1-r6, lr}
+ #ifdef CONFIG_SMP
+@@ -478,11 +474,7 @@ __v7_setup:
+ 	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+ 	add	r12, r12, r0			@ the local stack
+-1:
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
+-	ldr	r0, [r12, #(6 * 4)]		@ read back the return address
+-	teq	r0, lr				@ confirm it is correct
+-	bne	1b				@ retrying if not
+ 	bl      v7_invalidate_l1
+ 	ldmia	r12, {r1-r6, lr}
+ 
+-- 
+2.17.1
+

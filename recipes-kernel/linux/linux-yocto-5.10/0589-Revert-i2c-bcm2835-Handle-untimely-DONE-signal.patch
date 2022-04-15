@@ -1,0 +1,66 @@
+From 13c43880f2ee6db7d26949cb6a3e8db1a4b76736 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 17 Mar 2021 09:13:28 +0000
+Subject: [PATCH 0589/2201] Revert "i2c: bcm2835: Handle untimely DONE signal"
+
+This reverts commit 431ac1d21b5e842c5a564bc0bab31d7dc11611f5.
+
+Reverting this patch because it appears to have caused a regression
+when used with an MPU-9250 IMU.
+
+See: https://github.com/Hexxeh/rpi-firmware/issues/261
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ drivers/i2c/busses/i2c-bcm2835.c | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/i2c/busses/i2c-bcm2835.c b/drivers/i2c/busses/i2c-bcm2835.c
+index 90ca593d8ae3..5b2589b6b9cc 100644
+--- a/drivers/i2c/busses/i2c-bcm2835.c
++++ b/drivers/i2c/busses/i2c-bcm2835.c
+@@ -373,10 +373,6 @@ static irqreturn_t bcm2835_i2c_isr(int this_irq, void *data)
+ 	u32 val, err;
+ 
+ 	val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
+-	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_S,
+-			   BCM2835_I2C_S_CLKT |
+-			   BCM2835_I2C_S_ERR |
+-			   BCM2835_I2C_S_DONE);
+ 	bcm2835_debug_add(i2c_dev, val);
+ 
+ 	err = val & (BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR);
+@@ -386,9 +382,6 @@ static irqreturn_t bcm2835_i2c_isr(int this_irq, void *data)
+ 	}
+ 
+ 	if (val & BCM2835_I2C_S_DONE) {
+-		if (val & BCM2835_I2C_S_TA)
+-			return IRQ_HANDLED;
+-
+ 		if (!i2c_dev->curr_msg) {
+ 			dev_err(i2c_dev->dev, "Got unexpected interrupt (from firmware?)\n");
+ 		} else if (i2c_dev->curr_msg->flags & I2C_M_RD) {
+@@ -396,10 +389,7 @@ static irqreturn_t bcm2835_i2c_isr(int this_irq, void *data)
+ 			val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
+ 		}
+ 
+-		if (i2c_dev->msg_buf_remaining)
+-			return IRQ_HANDLED;
+-
+-		if (val & BCM2835_I2C_S_RXD)
++		if ((val & BCM2835_I2C_S_RXD) || i2c_dev->msg_buf_remaining)
+ 			i2c_dev->msg_err = BCM2835_I2C_S_LEN;
+ 		else
+ 			i2c_dev->msg_err = 0;
+@@ -436,6 +426,8 @@ static irqreturn_t bcm2835_i2c_isr(int this_irq, void *data)
+ 
+ complete:
+ 	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, BCM2835_I2C_C_CLEAR);
++	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_S, BCM2835_I2C_S_CLKT |
++			   BCM2835_I2C_S_ERR | BCM2835_I2C_S_DONE);
+ 	complete(&i2c_dev->completion);
+ 
+ 	return IRQ_HANDLED;
+-- 
+2.17.1
+

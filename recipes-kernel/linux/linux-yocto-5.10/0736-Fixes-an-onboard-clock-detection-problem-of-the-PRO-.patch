@@ -1,0 +1,45 @@
+From 6b0f228ba15ade487ed4adc50fb7f460195c38db Mon Sep 17 00:00:00 2001
+From: Joerg Schambacher <joerg@i2audio.com>
+Date: Thu, 10 Jun 2021 13:14:05 +0200
+Subject: [PATCH 0736/2201] Fixes an onboard clock detection problem of the PRO
+ versions
+
+Increasing the sleep time after clock selection to 3-4ms
+allows the correct detection of all combinations of DAC+ Pro
+and DAC+ADC Pro sound cards and the various PI revisions.
+
+Signed-off-by: Joerg Schambacher <joerg@hifiberry.com>
+---
+ sound/soc/bcm/hifiberry_dacplus.c       | 2 +-
+ sound/soc/bcm/hifiberry_dacplusadcpro.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sound/soc/bcm/hifiberry_dacplus.c b/sound/soc/bcm/hifiberry_dacplus.c
+index bdcac1b6992c..1d8985468be4 100644
+--- a/sound/soc/bcm/hifiberry_dacplus.c
++++ b/sound/soc/bcm/hifiberry_dacplus.c
+@@ -111,7 +111,7 @@ static void snd_rpi_hifiberry_dacplus_select_clk(struct snd_soc_component *compo
+ 		snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x24, 0x04);
+ 		break;
+ 	}
+-	usleep_range(2000, 2100);
++	usleep_range(3000, 4000);
+ }
+ 
+ static void snd_rpi_hifiberry_dacplus_clk_gpio(struct snd_soc_component *component)
+diff --git a/sound/soc/bcm/hifiberry_dacplusadcpro.c b/sound/soc/bcm/hifiberry_dacplusadcpro.c
+index 8b04d30bcbee..79eccdb4dc8c 100644
+--- a/sound/soc/bcm/hifiberry_dacplusadcpro.c
++++ b/sound/soc/bcm/hifiberry_dacplusadcpro.c
+@@ -190,7 +190,7 @@ static void snd_rpi_hifiberry_dacplusadcpro_select_clk(
+ 				PCM512x_GPIO_CONTROL_1, 0x24, 0x04);
+ 		break;
+ 	}
+-	usleep_range(2000, 2100);
++	usleep_range(3000, 4000);
+ }
+ 
+ static void snd_rpi_hifiberry_dacplusadcpro_clk_gpio(struct snd_soc_component *component)
+-- 
+2.17.1
+

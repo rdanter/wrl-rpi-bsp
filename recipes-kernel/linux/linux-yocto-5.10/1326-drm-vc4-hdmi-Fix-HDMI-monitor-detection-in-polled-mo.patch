@@ -1,0 +1,51 @@
+From 470383679a1c1c459b461944624383717e50dab5 Mon Sep 17 00:00:00 2001
+From: Matthias Reichl <hias@horus.com>
+Date: Thu, 30 Dec 2021 14:28:37 +0100
+Subject: [PATCH 1326/2201] drm/vc4: hdmi: Fix HDMI monitor detection in polled
+ mode
+
+When vc4_hdmi_connector_detect() was called in
+connector_status_connected state it incorrectly cleared the
+hdmi_monitor flag, leading to no audio on RPi3.
+
+Fix this by clearing hdmi_monitor only when the hpd check
+indicated no connection or if reading the edid failed.
+
+Signed-off-by: Matthias Reichl <hias@horus.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 8489e1e1fe44..4539ec145328 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -245,7 +245,6 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 			connected = true;
+ 	}
+ 
+-	vc4_hdmi->encoder.hdmi_monitor = false;
+ 	if (connected) {
+ 		if (connector->status != connector_status_connected) {
+ 			struct edid *edid = drm_get_edid(connector, vc4_hdmi->ddc);
+@@ -254,6 +253,8 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 				cec_s_phys_addr_from_edid(vc4_hdmi->cec_adap, edid);
+ 				vc4_hdmi->encoder.hdmi_monitor = drm_detect_hdmi_monitor(edid);
+ 				kfree(edid);
++			} else {
++				vc4_hdmi->encoder.hdmi_monitor = false;
+ 			}
+ 		}
+ 
+@@ -263,6 +264,8 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 		goto out;
+ 	}
+ 
++	vc4_hdmi->encoder.hdmi_monitor = false;
++
+ 	cec_phys_addr_invalidate(vc4_hdmi->cec_adap);
+ 
+ out:
+-- 
+2.17.1
+

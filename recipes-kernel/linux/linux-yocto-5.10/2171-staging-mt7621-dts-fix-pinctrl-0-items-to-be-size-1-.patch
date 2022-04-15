@@ -1,0 +1,40 @@
+From d3f786b7cf81284e5c13dabaf94bab2d0602a8af Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ar=C4=B1n=C3=A7=20=C3=9CNAL?= <arinc.unal@arinc9.com>
+Date: Tue, 15 Feb 2022 11:17:24 +0300
+Subject: [PATCH 2171/2201] staging: mt7621-dts: fix pinctrl-0 items to be
+ size-1 items on ethernet
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+commit 25e4f5220efead592c83200241e098e757d37e1f upstream.
+
+Fix pinctrl-0 items under the ethernet node to be size-1 items.
+Current notation would be used on specifications with non-zero cells.
+
+Fixes: 0a93c0d75809 ("staging: mt7621-dts: fix pinctrl properties for ethernet")
+Reported-by: Sander Vanheule <sander@svanheule.net>
+Signed-off-by: Arınç ÜNAL <arinc.unal@arinc9.com>
+Link: https://lore.kernel.org/r/20220215081725.3463-1-arinc.unal@arinc9.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/staging/mt7621-dts/mt7621.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/mt7621-dts/mt7621.dtsi b/drivers/staging/mt7621-dts/mt7621.dtsi
+index 51c0061daa37..91a7fa748296 100644
+--- a/drivers/staging/mt7621-dts/mt7621.dtsi
++++ b/drivers/staging/mt7621-dts/mt7621.dtsi
+@@ -413,7 +413,7 @@
+ 		mediatek,ethsys = <&ethsys>;
+ 
+ 		pinctrl-names = "default";
+-		pinctrl-0 = <&rgmii1_pins &rgmii2_pins &mdio_pins>;
++		pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>, <&rgmii2_pins>;
+ 
+ 		gmac0: mac@0 {
+ 			compatible = "mediatek,eth-mac";
+-- 
+2.17.1
+

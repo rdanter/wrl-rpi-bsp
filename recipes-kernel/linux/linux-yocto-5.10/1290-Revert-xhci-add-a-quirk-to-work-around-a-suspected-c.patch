@@ -1,0 +1,72 @@
+From add55da0fb56d28c01013495aa8c2c5638b270f9 Mon Sep 17 00:00:00 2001
+From: Jonathan Bell <jonathan@raspberrypi.com>
+Date: Fri, 10 Dec 2021 16:29:49 +0000
+Subject: [PATCH 1290/2201] Revert "xhci: add a quirk to work around a
+ suspected cache bug on VLI controllers"
+
+This reverts commit a1d0f808d4a0b7f7053095cd4ab97a4276bed9ff.
+---
+ drivers/usb/host/xhci-mem.c | 7 +------
+ drivers/usb/host/xhci-pci.c | 1 -
+ drivers/usb/host/xhci.h     | 1 -
+ 3 files changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
+index f6507be7ccd8..0d336f7451c7 100644
+--- a/drivers/usb/host/xhci-mem.c
++++ b/drivers/usb/host/xhci-mem.c
+@@ -1445,7 +1445,6 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+ 	unsigned int mult;
+ 	unsigned int avg_trb_len;
+ 	unsigned int err_count = 0;
+-	unsigned int nsegs = 2;
+ 
+ 	ep_index = xhci_get_endpoint_index(&ep->desc);
+ 	ep_ctx = xhci_get_ep_ctx(xhci, virt_dev->in_ctx, ep_index);
+@@ -1456,10 +1455,6 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+ 
+ 	ring_type = usb_endpoint_type(&ep->desc);
+ 
+-	if (xhci->quirks & XHCI_VLI_TRB_CACHE_BUG &&
+-	    udev->speed != USB_SPEED_SUPER) {
+-		nsegs = 1;
+-	}
+ 	/*
+ 	 * Get values to fill the endpoint context, mostly from ep descriptor.
+ 	 * The average TRB buffer lengt for bulk endpoints is unclear as we
+@@ -1507,7 +1502,7 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+ 
+ 	/* Set up the endpoint ring */
+ 	virt_dev->eps[ep_index].new_ring =
+-		xhci_ring_alloc(xhci, nsegs, 1, ring_type, max_packet, mem_flags);
++		xhci_ring_alloc(xhci, 2, 1, ring_type, max_packet, mem_flags);
+ 	if (!virt_dev->eps[ep_index].new_ring)
+ 		return -ENOMEM;
+ 
+diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
+index 8de4ed0ae4eb..0880f5a42726 100644
+--- a/drivers/usb/host/xhci-pci.c
++++ b/drivers/usb/host/xhci-pci.c
+@@ -287,7 +287,6 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+ 		xhci->quirks |= XHCI_LPM_SUPPORT;
+ 		xhci->quirks |= XHCI_EP_CTX_BROKEN_DCS;
+ 		xhci->quirks |= XHCI_AVOID_DQ_ON_LINK;
+-		xhci->quirks |= XHCI_VLI_TRB_CACHE_BUG;
+ 	}
+ 
+ 	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
+diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
+index c47f756339e5..38650e4a99d2 100644
+--- a/drivers/usb/host/xhci.h
++++ b/drivers/usb/host/xhci.h
+@@ -1886,7 +1886,6 @@ struct xhci_hcd {
+ #define XHCI_NO_SOFT_RETRY	BIT_ULL(40)
+ #define XHCI_EP_CTX_BROKEN_DCS	BIT_ULL(41)
+ #define XHCI_AVOID_DQ_ON_LINK	BIT_ULL(42)
+-#define XHCI_VLI_TRB_CACHE_BUG	BIT_ULL(43)
+ 
+ 	unsigned int		num_active_eps;
+ 	unsigned int		limit_active_eps;
+-- 
+2.17.1
+

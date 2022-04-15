@@ -1,0 +1,74 @@
+From 03e8e5dd25bf8fce4e06d4c15b1172af49377872 Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sun, 20 Sep 2020 19:19:32 +0200
+Subject: [PATCH 1200/2201] ARM: p2v: simplify __fixup_pv_table()
+
+commit 0e3db6c9d7f6fd0ee263325027e8d3fdac5a4c9e upstream.
+
+Declutter the code in __fixup_pv_table() by using the new adr_l/str_l
+macros to take PC relative references to external symbols, and by
+using the value of PHYS_OFFSET passed in r8 to calculate the p2v
+offset.
+
+Acked-by: Nicolas Pitre <nico@fluxnic.net>
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/kernel/phys2virt.S | 34 ++++++++++++++--------------------
+ 1 file changed, 14 insertions(+), 20 deletions(-)
+
+diff --git a/arch/arm/kernel/phys2virt.S b/arch/arm/kernel/phys2virt.S
+index 8e4be15e1559..be8fb0d89877 100644
+--- a/arch/arm/kernel/phys2virt.S
++++ b/arch/arm/kernel/phys2virt.S
+@@ -29,33 +29,27 @@
+  */
+ 	__HEAD
+ ENTRY(__fixup_pv_table)
+-	adr	r0, 1f
+-	ldmia	r0, {r3-r7}
+-	mvn	ip, #0
+-	subs	r3, r0, r3		@ PHYS_OFFSET - PAGE_OFFSET
+-	add	r4, r4, r3		@ adjust table start address
+-	add	r5, r5, r3		@ adjust table end address
+-	add	r6, r6, r3		@ adjust __pv_phys_pfn_offset address
+-	add	r7, r7, r3		@ adjust __pv_offset address
+ 	mov	r0, r8, lsr #PAGE_SHIFT	@ convert to PFN
+-	str	r0, [r6]		@ save computed PHYS_OFFSET to __pv_phys_pfn_offset
+-	strcc	ip, [r7, #HIGH_OFFSET]	@ save to __pv_offset high bits
+-	mov	r6, r3, lsr #24		@ constant for add/sub instructions
+-	teq	r3, r6, lsl #24 	@ must be 16MiB aligned
++	str_l	r0, __pv_phys_pfn_offset, r3
++
++	adr_l	r0, __pv_offset
++	subs	r3, r8, #PAGE_OFFSET	@ PHYS_OFFSET - PAGE_OFFSET
++	mvn	ip, #0
++	strcc	ip, [r0, #HIGH_OFFSET]	@ save to __pv_offset high bits
++	str	r3, [r0, #LOW_OFFSET]	@ save to __pv_offset low bits
++
++	mov	r0, r3, lsr #24		@ constant for add/sub instructions
++	teq	r3, r0, lsl #24 	@ must be 16MiB aligned
+ 	bne	0f
+-	str	r3, [r7, #LOW_OFFSET]	@ save to __pv_offset low bits
++
++	adr_l	r4, __pv_table_begin
++	adr_l	r5, __pv_table_end
+ 	b	__fixup_a_pv_table
++
+ 0:	mov	r0, r0			@ deadloop on error
+ 	b	0b
+ ENDPROC(__fixup_pv_table)
+ 
+-	.align
+-1:	.long	.
+-	.long	__pv_table_begin
+-	.long	__pv_table_end
+-2:	.long	__pv_phys_pfn_offset
+-	.long	__pv_offset
+-
+ 	.text
+ __fixup_a_pv_table:
+ 	adr_l	r6, __pv_offset
+-- 
+2.17.1
+

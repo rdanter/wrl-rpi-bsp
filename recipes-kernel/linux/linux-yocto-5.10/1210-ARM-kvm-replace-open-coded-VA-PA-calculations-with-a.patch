@@ -1,0 +1,135 @@
+From 462a5e2a994c6bce92f956f076a11ea546b9bc82 Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Mon, 14 Sep 2020 11:25:52 +0300
+Subject: [PATCH 1210/2201] ARM: kvm: replace open coded VA->PA calculations
+ with adr_l call
+
+commit aaac3733171fca948c4fb66b78257620e3885339 upstream.
+
+Replace the open coded calculations of the actual physical address
+of the KVM stub vector table with a single adr_l invocation.
+
+Reviewed-by: Nicolas Pitre <nico@fluxnic.net>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/boot/compressed/head.S | 15 ++-------------
+ arch/arm/kernel/hyp-stub.S      | 27 ++++++++++++---------------
+ 2 files changed, 14 insertions(+), 28 deletions(-)
+
+diff --git a/arch/arm/boot/compressed/head.S b/arch/arm/boot/compressed/head.S
+index 247ce9055990..538c2b08b7e5 100644
+--- a/arch/arm/boot/compressed/head.S
++++ b/arch/arm/boot/compressed/head.S
+@@ -468,15 +468,10 @@ dtb_check_done:
+ 
+ 		/*
+ 		 * Compute the address of the hyp vectors after relocation.
+-		 * This requires some arithmetic since we cannot directly
+-		 * reference __hyp_stub_vectors in a PC-relative way.
+ 		 * Call __hyp_set_vectors with the new address so that we
+ 		 * can HVC again after the copy.
+ 		 */
+-0:		adr	r0, 0b
+-		movw	r1, #:lower16:__hyp_stub_vectors - 0b
+-		movt	r1, #:upper16:__hyp_stub_vectors - 0b
+-		add	r0, r0, r1
++		adr_l	r0, __hyp_stub_vectors
+ 		sub	r0, r0, r5
+ 		add	r0, r0, r10
+ 		bl	__hyp_set_vectors
+@@ -627,17 +622,11 @@ not_relocated:	mov	r0, #0
+ 		cmp	r0, #HYP_MODE		@ if not booted in HYP mode...
+ 		bne	__enter_kernel		@ boot kernel directly
+ 
+-		adr	r12, .L__hyp_reentry_vectors_offset
+-		ldr	r0, [r12]
+-		add	r0, r0, r12
+-
++		adr_l	r0, __hyp_reentry_vectors
+ 		bl	__hyp_set_vectors
+ 		__HVC(0)			@ otherwise bounce to hyp mode
+ 
+ 		b	.			@ should never be reached
+-
+-		.align	2
+-.L__hyp_reentry_vectors_offset:	.long	__hyp_reentry_vectors - .
+ #else
+ 		b	__enter_kernel
+ #endif
+diff --git a/arch/arm/kernel/hyp-stub.S b/arch/arm/kernel/hyp-stub.S
+index 26d8e03b1dd3..103d0bdb2b7e 100644
+--- a/arch/arm/kernel/hyp-stub.S
++++ b/arch/arm/kernel/hyp-stub.S
+@@ -24,41 +24,38 @@ ENTRY(__boot_cpu_mode)
+ .text
+ 
+ 	/*
+-	 * Save the primary CPU boot mode. Requires 3 scratch registers.
++	 * Save the primary CPU boot mode. Requires 2 scratch registers.
+ 	 */
+-	.macro	store_primary_cpu_mode	reg1, reg2, reg3
++	.macro	store_primary_cpu_mode	reg1, reg2
+ 	mrs	\reg1, cpsr
+ 	and	\reg1, \reg1, #MODE_MASK
+-	adr	\reg2, .L__boot_cpu_mode_offset
+-	ldr	\reg3, [\reg2]
+-	str	\reg1, [\reg2, \reg3]
++	str_l	\reg1, __boot_cpu_mode, \reg2
+ 	.endm
+ 
+ 	/*
+ 	 * Compare the current mode with the one saved on the primary CPU.
+ 	 * If they don't match, record that fact. The Z bit indicates
+ 	 * if there's a match or not.
+-	 * Requires 3 additionnal scratch registers.
++	 * Requires 2 additional scratch registers.
+ 	 */
+-	.macro	compare_cpu_mode_with_primary mode, reg1, reg2, reg3
+-	adr	\reg2, .L__boot_cpu_mode_offset
+-	ldr	\reg3, [\reg2]
+-	ldr	\reg1, [\reg2, \reg3]
++	.macro	compare_cpu_mode_with_primary mode, reg1, reg2
++	adr_l	\reg2, __boot_cpu_mode
++	ldr	\reg1, [\reg2]
+ 	cmp	\mode, \reg1		@ matches primary CPU boot mode?
+ 	orrne	\reg1, \reg1, #BOOT_CPU_MODE_MISMATCH
+-	strne	\reg1, [\reg2, \reg3]	@ record what happened and give up
++	strne	\reg1, [\reg2]		@ record what happened and give up
+ 	.endm
+ 
+ #else	/* ZIMAGE */
+ 
+-	.macro	store_primary_cpu_mode	reg1:req, reg2:req, reg3:req
++	.macro	store_primary_cpu_mode	reg1:req, reg2:req
+ 	.endm
+ 
+ /*
+  * The zImage loader only runs on one CPU, so we don't bother with mult-CPU
+  * consistency checking:
+  */
+-	.macro	compare_cpu_mode_with_primary mode, reg1, reg2, reg3
++	.macro	compare_cpu_mode_with_primary mode, reg1, reg2
+ 	cmp	\mode, \mode
+ 	.endm
+ 
+@@ -73,7 +70,7 @@ ENTRY(__boot_cpu_mode)
+  */
+ @ Call this from the primary CPU
+ ENTRY(__hyp_stub_install)
+-	store_primary_cpu_mode	r4, r5, r6
++	store_primary_cpu_mode	r4, r5
+ ENDPROC(__hyp_stub_install)
+ 
+ 	@ fall through...
+@@ -87,7 +84,7 @@ ENTRY(__hyp_stub_install_secondary)
+ 	 * If the secondary has booted with a different mode, give up
+ 	 * immediately.
+ 	 */
+-	compare_cpu_mode_with_primary	r4, r5, r6, r7
++	compare_cpu_mode_with_primary	r4, r5, r6
+ 	retne	lr
+ 
+ 	/*
+-- 
+2.17.1
+

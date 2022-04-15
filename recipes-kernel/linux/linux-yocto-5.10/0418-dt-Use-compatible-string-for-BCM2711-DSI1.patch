@@ -1,0 +1,28 @@
+From d7b68dd790f01cd4b5414978b081e374174f7bc7 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 12 Nov 2020 18:42:30 +0000
+Subject: [PATCH 0418/2201] dt: Use compatible string for BCM2711 DSI1
+
+Updates the compatible string for DSI1 on BCM2711 to
+differentiate it from BCM2835.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2711.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/bcm2711.dtsi b/arch/arm/boot/dts/bcm2711.dtsi
+index 8ad6c3012fe3..7c2d374cb749 100644
+--- a/arch/arm/boot/dts/bcm2711.dtsi
++++ b/arch/arm/boot/dts/bcm2711.dtsi
+@@ -554,6 +554,7 @@
+ 
+ &dsi1 {
+ 	interrupts = <GIC_SPI 108 IRQ_TYPE_LEVEL_HIGH>;
++	compatible = "brcm,bcm2711-dsi1";
+ };
+ 
+ &gpio {
+-- 
+2.17.1
+

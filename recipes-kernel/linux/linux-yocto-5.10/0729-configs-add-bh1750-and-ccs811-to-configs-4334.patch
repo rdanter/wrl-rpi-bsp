@@ -1,0 +1,115 @@
+From 58f672b8da4a4094283a7fcb29dc63f3eb7ddb62 Mon Sep 17 00:00:00 2001
+From: Mart Lubbers <mart@martlubbers.net>
+Date: Tue, 11 May 2021 11:51:59 +0200
+Subject: [PATCH 0729/2201] configs: add bh1750 and ccs811 to configs (#4334)
+
+See: https://github.com/raspberrypi/linux/pull/4334
+---
+ arch/arm/configs/bcm2709_defconfig   | 2 ++
+ arch/arm/configs/bcm2711_defconfig   | 2 ++
+ arch/arm/configs/bcmrpi_defconfig    | 2 ++
+ arch/arm64/configs/bcm2711_defconfig | 2 ++
+ arch/arm64/configs/bcmrpi3_defconfig | 2 ++
+ 5 files changed, 10 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 1bf5e715e52d..4e9e2be025db 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1329,6 +1329,7 @@ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_TI_ADS1015=m
+ CONFIG_BME680=m
++CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
+ CONFIG_DHT11=m
+@@ -1336,6 +1337,7 @@ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+ CONFIG_INV_MPU6050_I2C=m
+ CONFIG_APDS9960=m
++CONFIG_BH1750=m
+ CONFIG_TSL4531=m
+ CONFIG_VEML6070=m
+ CONFIG_BMP280=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 0db4a4f097fe..b14f4eeab389 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -1366,6 +1366,7 @@ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_TI_ADS1015=m
+ CONFIG_BME680=m
++CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
+ CONFIG_DHT11=m
+@@ -1373,6 +1374,7 @@ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+ CONFIG_INV_MPU6050_I2C=m
+ CONFIG_APDS9960=m
++CONFIG_BH1750=m
+ CONFIG_TSL4531=m
+ CONFIG_VEML6070=m
+ CONFIG_BMP280=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 91e7f493f1c2..dc0bcc4d17fd 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1340,6 +1340,7 @@ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_TI_ADS1015=m
+ CONFIG_BME680=m
++CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
+ CONFIG_DHT11=m
+@@ -1347,6 +1348,7 @@ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+ CONFIG_INV_MPU6050_I2C=m
+ CONFIG_APDS9960=m
++CONFIG_BH1750=m
+ CONFIG_TSL4531=m
+ CONFIG_VEML6070=m
+ CONFIG_BMP280=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index a7d737c55e0f..71c1fc8c3f7a 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -1368,6 +1368,7 @@ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_TI_ADS1015=m
+ CONFIG_BME680=m
++CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
+ CONFIG_DHT11=m
+@@ -1375,6 +1376,7 @@ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+ CONFIG_INV_MPU6050_I2C=m
+ CONFIG_APDS9960=m
++CONFIG_BH1750=m
+ CONFIG_TSL4531=m
+ CONFIG_VEML6070=m
+ CONFIG_BMP280=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 869cb55cbf75..3200cc4c7225 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1224,11 +1224,13 @@ CONFIG_IIO_BUFFER_CB=m
+ CONFIG_MCP320X=m
+ CONFIG_MCP3422=m
+ CONFIG_BME680=m
++CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
+ CONFIG_DHT11=m
+ CONFIG_HTU21=m
+ CONFIG_APDS9960=m
++CONFIG_BH1750=m
+ CONFIG_MAXIM_THERMOCOUPLE=m
+ CONFIG_MAX31856=m
+ CONFIG_PWM_BCM2835=m
+-- 
+2.17.1
+

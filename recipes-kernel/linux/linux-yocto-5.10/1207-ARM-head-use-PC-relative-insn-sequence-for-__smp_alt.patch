@@ -1,0 +1,49 @@
+From a50f65b892da3a231d7bee31cd8da38a13744599 Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Mon, 14 Sep 2020 11:25:29 +0300
+Subject: [PATCH 1207/2201] ARM: head: use PC-relative insn sequence for
+ __smp_alt
+
+commit 59d2f2827dfdccf8911d5e51465136b52ba623c4 upstream.
+
+Now that calling __do_fixup_smp_on_up() can be done without passing
+the physical-to-virtual offset in r3, we can replace the open coded
+PC relative offset calculations with a pair of adr_l invocations. This
+removes some open coded arithmetic involving virtual addresses, avoids
+literal pools on v7+, and slightly reduces the footprint of the code.
+
+Reviewed-by: Nicolas Pitre <nico@fluxnic.net>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/kernel/head.S | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/kernel/head.S b/arch/arm/kernel/head.S
+index e87e0878b8f2..7adab03a31bc 100644
+--- a/arch/arm/kernel/head.S
++++ b/arch/arm/kernel/head.S
+@@ -519,19 +519,11 @@ ARM_BE8(rev	r0, r0)			@ byteswap if big endian
+ 	retne	lr
+ 
+ __fixup_smp_on_up:
+-	adr	r0, 1f
+-	ldmia	r0, {r3 - r5}
+-	sub	r3, r0, r3
+-	add	r4, r4, r3
+-	add	r5, r5, r3
++	adr_l	r4, __smpalt_begin
++	adr_l	r5, __smpalt_end
+ 	b	__do_fixup_smp_on_up
+ ENDPROC(__fixup_smp)
+ 
+-	.align
+-1:	.word	.
+-	.word	__smpalt_begin
+-	.word	__smpalt_end
+-
+ 	.pushsection .data
+ 	.align	2
+ 	.globl	smp_on_up
+-- 
+2.17.1
+

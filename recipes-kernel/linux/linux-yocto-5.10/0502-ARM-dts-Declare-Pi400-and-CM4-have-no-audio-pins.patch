@@ -1,0 +1,48 @@
+From f943c26bb838ef807216e1f3b41732c5195a7de7 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 3 Feb 2021 16:23:43 +0000
+Subject: [PATCH 0502/2201] ARM: dts: Declare Pi400 and CM4 have no audio pins
+
+The audio_pins node is left as a placeholder for the audremap overlay,
+and it must have (empty) brcm,function and brcm,pins properties
+otherwise it will be rejected by the pinctrl driver.
+
+See: https://www.raspberrypi.org/forums/viewtopic.php?f=98&t=301891
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2711-rpi-400.dts | 4 ++--
+ arch/arm/boot/dts/bcm2711-rpi-cm4.dts | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-400.dts b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+index b75591df87b1..2aab685dfc1a 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-400.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+@@ -565,8 +565,8 @@
+ 
+ &gpio {
+ 	audio_pins: audio_pins {
+-		brcm,pins = <40 41>;
+-		brcm,function = <4>;
++		brcm,pins = <>;
++		brcm,function = <>;
+ 	};
+ };
+ 
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+index 7ab0aba5f1a3..9ab2feb4424f 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+@@ -556,6 +556,8 @@
+ 
+ &gpio {
+ 	audio_pins: audio_pins {
++		brcm,pins = <>;
++		brcm,function = <>;
+ 	};
+ };
+ 
+-- 
+2.17.1
+

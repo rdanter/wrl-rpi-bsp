@@ -1,0 +1,36 @@
+From 4c8814277b5dc2b9d2745c6493614b1ce10cef09 Mon Sep 17 00:00:00 2001
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Sat, 19 Mar 2022 13:44:47 +0100
+Subject: [PATCH 1532/2201] Linux 5.10.107
+
+Link: https://lore.kernel.org/r/20220317124525.955110315@linuxfoundation.org
+Tested-by: Salvatore Bonaccorso <carnil@debian.org>
+Tested-by: Fox Chen <foxhlchen@gmail.com>
+Tested-by: Pavel Machek (CIP) <pavel@denx.de>
+Tested-by: Florian Fainelli <f.fainelli@gmail.com>
+Tested-by: Guenter Roeck <linux@roeck-us.net>
+Tested-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
+Tested-by: Jon Hunter <jonathanh@nvidia.com>
+Tested-by: Sudip Mukherjee <sudip.mukherjee@codethink.co.uk>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 7b0dffadf6a8..c0be46391057 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
+ VERSION = 5
+ PATCHLEVEL = 10
+-SUBLEVEL = 106
++SUBLEVEL = 107
+ EXTRAVERSION =
+ NAME = Dare mighty things
+ 
+-- 
+2.17.1
+

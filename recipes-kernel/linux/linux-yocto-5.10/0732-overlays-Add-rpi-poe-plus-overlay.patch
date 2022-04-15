@@ -1,0 +1,85 @@
+From 131a6abaac64b638dbfab44a92f4403fc89ba569 Mon Sep 17 00:00:00 2001
+From: Serge Schneider <serge@raspberrypi.com>
+Date: Mon, 2 Dec 2019 14:48:05 +0000
+Subject: [PATCH 0732/2201] overlays: Add rpi-poe-plus overlay
+
+Signed-off-by: Serge Schneider <serge@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/Makefile           |  1 +
+ arch/arm/boot/dts/overlays/README             | 21 +++++++++++++++++++
+ .../dts/overlays/rpi-poe-plus-overlay.dts     | 19 +++++++++++++++++
+ 3 files changed, 41 insertions(+)
+ create mode 100644 arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index 823f14ee96ff..cc5728568a08 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -156,6 +156,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	rpi-display.dtbo \
+ 	rpi-ft5406.dtbo \
+ 	rpi-poe.dtbo \
++	rpi-poe-plus.dtbo \
+ 	rpi-proto.dtbo \
+ 	rpi-sense.dtbo \
+ 	rpi-tv.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 4ec61a83f032..84960aa52fd8 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -2505,6 +2505,27 @@ Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
+                                 the fan slows down (default 5000)
+ 
+ 
++Name:   rpi-poe-plus
++Info:   Raspberry Pi PoE+ HAT fan
++Load:   dtoverlay=rpi-poe-plus,<param>[=<val>]
++Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
++                                turns on (default 40000)
++        poe_fan_temp0_hyst      Temperature delta (in millicelcius) at which
++                                the fan turns off (default 2000)
++        poe_fan_temp1           Temperature (in millicelcius) at which the fan
++                                speeds up (default 45000)
++        poe_fan_temp1_hyst      Temperature delta (in millicelcius) at which
++                                the fan slows down (default 2000)
++        poe_fan_temp2           Temperature (in millicelcius) at which the fan
++                                speeds up (default 50000)
++        poe_fan_temp2_hyst      Temperature delta (in millicelcius) at which
++                                the fan slows down (default 2000)
++        poe_fan_temp3           Temperature (in millicelcius) at which the fan
++                                speeds up (default 55000)
++        poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
++                                the fan slows down (default 5000)
++
++
+ Name:   rpi-proto
+ Info:   Configures the RPi Proto audio card
+ Load:   dtoverlay=rpi-proto
+diff --git a/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts b/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts
+new file mode 100644
+index 000000000000..e0138847093b
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++// Overlay for the Raspberry Pi PoE+ HAT.
++
++#include "rpi-poe-overlay.dts"
++
++/ {
++	compatible = "brcm,bcm2835";
++
++	fragment@3 {
++		target-path = "/";
++		__overlay__ {
++			rpi_poe_power_supply: rpi-poe-power-supply@0 {
++				compatible = "raspberrypi,rpi-poe-power-supply";
++				firmware = <&firmware>;
++				status = "okay";
++			};
++		};
++	};
++};
+-- 
+2.17.1
+

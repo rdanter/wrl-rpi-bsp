@@ -1,0 +1,53 @@
+From e2b644c025a0b8102356253fd9b1db95b5dd5647 Mon Sep 17 00:00:00 2001
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Mon, 14 Sep 2020 11:25:16 +0300
+Subject: [PATCH 1204/2201] ARM: head-common.S: use PC-relative insn sequence
+ for idmap creation
+
+commit 172c34c9ff0144c3e1d96a9b54d6fecfe5d17c3c upstream.
+
+Replace the open coded PC relative offset calculations involving
+__turn_mmu_on and __turn_mmu_on_end with a pair of adr_l invocations.
+This removes some open coded arithmetic involving virtual addresses,
+avoids literal pools on v7+, and slightly reduces the footprint of the
+code.
+
+Reviewed-by: Nicolas Pitre <nico@fluxnic.net>
+Signed-off-by: Ard Biesheuvel <ardb@kernel.org>
+---
+ arch/arm/kernel/head.S | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/kernel/head.S b/arch/arm/kernel/head.S
+index dbc409a66555..205881bb0919 100644
+--- a/arch/arm/kernel/head.S
++++ b/arch/arm/kernel/head.S
+@@ -224,11 +224,8 @@ __create_page_tables:
+ 	 * Create identity mapping to cater for __enable_mmu.
+ 	 * This identity mapping will be removed by paging_init().
+ 	 */
+-	adr	r0, __turn_mmu_on_loc
+-	ldmia	r0, {r3, r5, r6}
+-	sub	r0, r0, r3			@ virt->phys offset
+-	add	r5, r5, r0			@ phys __turn_mmu_on
+-	add	r6, r6, r0			@ phys __turn_mmu_on_end
++	adr_l	r5, __turn_mmu_on		@ _pa(__turn_mmu_on)
++	adr_l	r6, __turn_mmu_on_end		@ _pa(__turn_mmu_on_end)
+ 	mov	r5, r5, lsr #SECTION_SHIFT
+ 	mov	r6, r6, lsr #SECTION_SHIFT
+ 
+@@ -350,11 +347,6 @@ __create_page_tables:
+ 	ret	lr
+ ENDPROC(__create_page_tables)
+ 	.ltorg
+-	.align
+-__turn_mmu_on_loc:
+-	.long	.
+-	.long	__turn_mmu_on
+-	.long	__turn_mmu_on_end
+ 
+ #if defined(CONFIG_SMP)
+ 	.text
+-- 
+2.17.1
+

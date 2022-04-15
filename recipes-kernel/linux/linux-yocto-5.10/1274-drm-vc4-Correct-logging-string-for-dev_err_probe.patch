@@ -1,0 +1,31 @@
+From 7dda14521f1cb9705c9e68434a57dbc8b14b1176 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 30 Nov 2021 17:35:06 +0000
+Subject: [PATCH 1274/2201] drm/vc4: Correct logging string for dev_err_probe
+
+The commit that changed from dev_err to dev_err_probe left the %d in the
+format string, but removed the parameter, leading to a compile
+warning.
+
+Fixes: "6505412df625 drm/vc4: Use dev_err_probe when logging error registering HDMI audio"
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index f673c04dad12..807cf15e2130 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1848,7 +1848,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+ 	snd_soc_card_set_drvdata(card, vc4_hdmi);
+ 	ret = devm_snd_soc_register_card(dev, card);
+ 	if (ret)
+-		dev_err_probe(dev, ret, "Could not register sound card: %d\n");
++		dev_err_probe(dev, ret, "Could not register sound card.\n");
+ 
+ 	return ret;
+ 
+-- 
+2.17.1
+

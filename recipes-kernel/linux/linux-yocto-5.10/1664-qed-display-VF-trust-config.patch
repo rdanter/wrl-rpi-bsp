@@ -1,0 +1,35 @@
+From a3af3d431920ad423503fc32751446b463a4af42 Mon Sep 17 00:00:00 2001
+From: Manish Chopra <manishc@marvell.com>
+Date: Wed, 2 Mar 2022 02:52:21 -0800
+Subject: [PATCH 1664/2201] qed: display VF trust config
+
+commit 4e6e6bec7440b9b76f312f28b1f4e944eebb3abc upstream.
+
+Driver does support SR-IOV VFs trust configuration but
+it does not display it when queried via ip link utility.
+
+Cc: stable@vger.kernel.org
+Fixes: f990c82c385b ("qed*: Add support for ndo_set_vf_trust")
+Signed-off-by: Manish Chopra <manishc@marvell.com>
+Signed-off-by: Ariel Elior <aelior@marvell.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/net/ethernet/qlogic/qed/qed_sriov.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/net/ethernet/qlogic/qed/qed_sriov.c b/drivers/net/ethernet/qlogic/qed/qed_sriov.c
+index ef0ad4cf82e6..d6b79caf9d8e 100644
+--- a/drivers/net/ethernet/qlogic/qed/qed_sriov.c
++++ b/drivers/net/ethernet/qlogic/qed/qed_sriov.c
+@@ -4691,6 +4691,7 @@ static int qed_get_vf_config(struct qed_dev *cdev,
+ 	tx_rate = vf_info->tx_rate;
+ 	ivi->max_tx_rate = tx_rate ? tx_rate : link.speed;
+ 	ivi->min_tx_rate = qed_iov_get_vf_min_rate(hwfn, vf_id);
++	ivi->trusted = vf_info->is_trusted_request;
+ 
+ 	return 0;
+ }
+-- 
+2.17.1
+

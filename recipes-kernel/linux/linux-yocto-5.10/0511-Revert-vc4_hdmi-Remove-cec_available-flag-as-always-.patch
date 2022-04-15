@@ -1,0 +1,51 @@
+From 4568384fb09732824fd5811f09deffe1c1595bd1 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Tue, 8 Dec 2020 17:12:54 +0100
+Subject: [PATCH 0511/2201] Revert "vc4_hdmi: Remove cec_available flag as
+ always supported"
+
+This reverts commit 855cef03d18c9bc023a2787f9feac5476dbb4179.
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 4 ++++
+ drivers/gpu/drm/vc4/vc4_hdmi.h | 3 +++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 6ba26f929bf7..4d6d88e21b08 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -2146,6 +2146,9 @@ static int vc4_hdmi_cec_init(struct vc4_hdmi *vc4_hdmi)
+ 	u32 clk_cnt;
+ 	int ret;
+ 
++	if (!vc4_hdmi->variant->cec_available)
++		return 0;
++
+ 	vc4_hdmi->cec_adap = cec_allocate_adapter(&vc4_hdmi_cec_adap_ops,
+ 						  vc4_hdmi, "vc4",
+ 						  CEC_CAP_DEFAULTS |
+@@ -2581,6 +2584,7 @@ static const struct vc4_hdmi_variant bcm2835_variant = {
+ 	.card_name		= "vc4-hdmi",
+ 	.max_pixel_clock	= 162000000,
+ 	.cec_input_clock	= VC4_HSM_CLOCK,
++	.cec_available		= true,
+ 	.registers		= vc4_hdmi_fields,
+ 	.num_registers		= ARRAY_SIZE(vc4_hdmi_fields),
+ 
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index 8682d8bbf839..988b672c7de8 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -42,6 +42,9 @@ struct vc4_hdmi_variant {
+ 	/* Filename to expose the registers in debugfs */
+ 	const char *debugfs_name;
+ 
++	/* Set to true when the CEC support is available */
++	bool cec_available;
++
+ 	/* Maximum pixel clock supported by the controller (in Hz) */
+ 	unsigned long long max_pixel_clock;
+ 
+-- 
+2.17.1
+

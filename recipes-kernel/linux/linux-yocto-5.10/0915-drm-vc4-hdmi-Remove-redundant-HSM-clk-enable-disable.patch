@@ -1,0 +1,42 @@
+From 235ecb54316f40548743409af2db23283c39cf35 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Tue, 14 Sep 2021 15:21:23 +0200
+Subject: [PATCH 0915/2201] drm/vc4: hdmi: Remove redundant HSM clk
+ enable/disable in detect
+
+Our detect function calls pm_runtime_resume_and_get() and
+pm_runtime_put() to make sure the device is properly powered before
+trying to access the controller.
+
+However, it also makes sure the HSM clock is properly enabled (and
+disabled), which is redundant with what runtime_pm is doing already.
+Let's just remove it.
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 463407154e6b..8995c1830776 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -182,7 +182,6 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 	bool connected = false;
+ 
+ 	WARN_ON(pm_runtime_resume_and_get(&vc4_hdmi->pdev->dev));
+-	WARN_ON(clk_prepare_enable(vc4_hdmi->hsm_clock));
+ 
+ 	if (vc4_hdmi->hpd_gpio) {
+ 		if (gpio_get_value_cansleep(vc4_hdmi->hpd_gpio) ^
+@@ -212,7 +211,6 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 	cec_phys_addr_invalidate(vc4_hdmi->cec_adap);
+ 
+ out:
+-	clk_disable_unprepare(vc4_hdmi->hsm_clock);
+ 	pm_runtime_put(&vc4_hdmi->pdev->dev);
+ 	return ret;
+ }
+-- 
+2.17.1
+

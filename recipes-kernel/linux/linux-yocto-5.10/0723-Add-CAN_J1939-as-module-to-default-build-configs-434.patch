@@ -1,0 +1,85 @@
+From b657cd2f27d9171b75c846f21e7b4bb581b3ed29 Mon Sep 17 00:00:00 2001
+From: menschel <menschel.p@posteo.de>
+Date: Fri, 14 May 2021 14:49:29 +0200
+Subject: [PATCH 0723/2201] Add CAN_J1939 as module to default build configs
+ (#4346)
+
+There is a CAN protocol named J1939 which is supported by Linux Kernel
+since v5.4. Recently J1939 header file turned up in
+raspberrypi-kernel-headers but the module is not built for kernel
+v5.10.y due to the missing flag. Therefore set it to build as module:
+
+CONFIG_CAN_J1939=m
+
+Signed-off-by: Patrick Menschel <menschel.p@posteo.de>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index dd718c111532..63c6f88af89d 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -411,6 +411,7 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_J1939=m
+ CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 01ef252e33a5..1fee136ac1e5 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -412,6 +412,7 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_J1939=m
+ CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index e625ac03f354..373e064e8a42 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -405,6 +405,7 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_J1939=m
+ CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index ad3c5538483a..9c7d2552bf4d 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -409,6 +409,7 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_J1939=m
+ CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index e10614d666dd..f8e5eac69f34 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -405,6 +405,7 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_J1939=m
+ CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_MCP251X=m
+-- 
+2.17.1
+

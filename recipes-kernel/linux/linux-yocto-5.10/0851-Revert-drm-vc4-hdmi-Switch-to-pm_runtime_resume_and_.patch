@@ -1,0 +1,29 @@
+From b0fd93c085ba97442fe320d5f18e8d8301115128 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Thu, 22 Jul 2021 15:26:28 +0100
+Subject: [PATCH 0851/2201] Revert "drm/vc4: hdmi: Switch to
+ pm_runtime_resume_and_get"
+
+This reverts commit a2224f9777778965ff76049548ba483a23d7933e.
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 5401b6a6f440..e84f8aa8bfb9 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -918,8 +918,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 	unsigned long bvb_rate, pixel_rate, hsm_rate;
+ 	int ret;
+ 
+-	ret = pm_runtime_resume_and_get(&vc4_hdmi->pdev->dev);
+-	if (ret) {
++	ret = pm_runtime_get_sync(&vc4_hdmi->pdev->dev);
++	if (ret < 0) {
+ 		DRM_ERROR("Failed to retain power domain: %d\n", ret);
+ 		pm_runtime_put(&vc4_hdmi->pdev->dev);
+ 		return;
+-- 
+2.17.1
+

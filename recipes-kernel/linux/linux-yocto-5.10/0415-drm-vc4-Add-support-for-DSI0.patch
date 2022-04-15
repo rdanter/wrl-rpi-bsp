@@ -1,0 +1,80 @@
+From d704a3c965783ed51476031206b2120676418672 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Wed, 11 Nov 2020 17:18:01 +0000
+Subject: [PATCH 0415/2201] drm/vc4: Add support for DSI0
+
+DSI0 was partially supported, but didn't register with the main
+driver, and the code was inconsistent as to whether it checked
+port == 0 or port == 1.
+
+Add compatible string and other support to make it consistent.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_drv.h |  1 +
+ drivers/gpu/drm/vc4/vc4_dsi.c | 15 ++++++++++-----
+ 2 files changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
+index 35b0dfb08be4..cd5076e5006b 100644
+--- a/drivers/gpu/drm/vc4/vc4_drv.h
++++ b/drivers/gpu/drm/vc4/vc4_drv.h
+@@ -81,6 +81,7 @@ struct vc4_dev {
+ 	struct vc4_hvs *hvs;
+ 	struct vc4_v3d *v3d;
+ 	struct vc4_dpi *dpi;
++	struct vc4_dsi *dsi0;
+ 	struct vc4_dsi *dsi1;
+ 	struct vc4_vec *vec;
+ 	struct vc4_txp *txp;
+diff --git a/drivers/gpu/drm/vc4/vc4_dsi.c b/drivers/gpu/drm/vc4/vc4_dsi.c
+index eaf276978ee7..1680adf9fe31 100644
+--- a/drivers/gpu/drm/vc4/vc4_dsi.c
++++ b/drivers/gpu/drm/vc4/vc4_dsi.c
+@@ -1306,6 +1306,7 @@ static const struct drm_encoder_helper_funcs vc4_dsi_encoder_helper_funcs = {
+ };
+ 
+ static const struct of_device_id vc4_dsi_dt_match[] = {
++	{ .compatible = "brcm,bcm2835-dsi0", (void *)(uintptr_t)0 },
+ 	{ .compatible = "brcm,bcm2835-dsi1", (void *)(uintptr_t)1 },
+ 	{}
+ };
+@@ -1429,10 +1430,10 @@ vc4_dsi_init_phy_clocks(struct vc4_dsi *dsi)
+ 		memset(&init, 0, sizeof(init));
+ 		init.parent_names = &parent_name;
+ 		init.num_parents = 1;
+-		if (dsi->port == 1)
+-			init.name = phy_clocks[i].dsi1_name;
+-		else
++		if (dsi->port == 0)
+ 			init.name = phy_clocks[i].dsi0_name;
++		else
++			init.name = phy_clocks[i].dsi1_name;
+ 		init.ops = &clk_fixed_factor_ops;
+ 
+ 		ret = devm_clk_hw_register(dev, &fix->hw);
+@@ -1604,7 +1605,9 @@ static int vc4_dsi_bind(struct device *dev, struct device *master, void *data)
+ 	if (ret)
+ 		return ret;
+ 
+-	if (dsi->port == 1)
++	if (dsi->port == 0)
++		vc4->dsi0 = dsi;
++	else
+ 		vc4->dsi1 = dsi;
+ 
+ 	drm_simple_encoder_init(drm, dsi->encoder, DRM_MODE_ENCODER_DSI);
+@@ -1649,7 +1652,9 @@ static void vc4_dsi_unbind(struct device *dev, struct device *master,
+ 	list_splice_init(&dsi->bridge_chain, &dsi->encoder->bridge_chain);
+ 	drm_encoder_cleanup(dsi->encoder);
+ 
+-	if (dsi->port == 1)
++	if (dsi->port == 0)
++		vc4->dsi0 = NULL;
++	else
+ 		vc4->dsi1 = NULL;
+ }
+ 
+-- 
+2.17.1
+

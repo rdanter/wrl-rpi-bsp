@@ -1,0 +1,50 @@
+From 36d449a94f35622737b08fb10a40b8f3e5255ba2 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 20 Sep 2021 11:18:41 +0100
+Subject: [PATCH 0931/2201] Revert "ARM: proc-v7: Force misalignment of early
+ stmia"
+
+This reverts commit fe4cc0ed5923d3b91d4cb25f8f6cbbf5a6f8c06f.
+
+The speculative patch that this commit reverts is proving to not be
+effective any more, so revert it and try a new approach.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/mm/proc-v7.S | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/arch/arm/mm/proc-v7.S b/arch/arm/mm/proc-v7.S
+index 3e77e8982df3..28c9d32fa99a 100644
+--- a/arch/arm/mm/proc-v7.S
++++ b/arch/arm/mm/proc-v7.S
+@@ -287,8 +287,6 @@ __v7_ca17mp_setup:
+ 	mov	r10, #0
+ 1:	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+-	tst	r12, #0x1f
+-	addeq	r12, r12, #4
+ 	add	r12, r12, r0			@ the local stack
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
+ 	bl      v7_invalidate_l1
+@@ -476,8 +474,6 @@ __v7_setup:
+ 	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+ 	add	r12, r12, r0			@ the local stack
+-	tst	r12, #0x1f
+-	addeq	r12, r12, #4
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
+ 	bl      v7_invalidate_l1
+ 	ldmia	r12, {r1-r6, lr}
+@@ -561,7 +557,7 @@ ENDPROC(__v7_setup)
+ 	.bss
+ 	.align	2
+ __v7_setup_stack:
+-	.space	4 * 8				@ 7 registers + 1 spare
++	.space	4 * 7				@ 7 registers
+ 
+ 	__INITDATA
+ 
+-- 
+2.17.1
+

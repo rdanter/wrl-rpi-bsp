@@ -1,0 +1,153 @@
+From a42fea7158f87b835c586db2e3779fd89416573f Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 26 Oct 2020 21:51:29 +0000
+Subject: [PATCH 0383/2201] configs: Set RASPBERRYPI_FIRMWARE for arm64 bcm2711
+
+RASPBERRYPI_FIRMWARE was missing from the arm64 bcm2711_defconfig.
+bcmrpi3_defconfig was also missing a few options. Add the misssing
+settings and regenerate all the Pi defconfigs.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 3 ---
+ arch/arm/configs/bcmrpi_defconfig    | 3 ---
+ arch/arm64/configs/bcm2711_defconfig | 4 +---
+ arch/arm64/configs/bcmrpi3_defconfig | 6 +++---
+ 4 files changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 4feabd59d6f2..78c54066cff3 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -39,7 +39,6 @@ CONFIG_SMP=y
+ CONFIG_VMSPLIT_2G=y
+ # CONFIG_CPU_SW_DOMAIN_PAN is not set
+ CONFIG_UACCESS_WITH_MEMCPY=y
+-CONFIG_SECCOMP=y
+ # CONFIG_ATAGS is not set
+ CONFIG_CMDLINE="console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
+ CONFIG_CPU_FREQ=y
+@@ -63,7 +62,6 @@ CONFIG_CRYPTO_SHA1_ARM_NEON=m
+ CONFIG_CRYPTO_AES_ARM=m
+ CONFIG_CRYPTO_AES_ARM_BS=m
+ CONFIG_OPROFILE=m
+-CONFIG_KPROBES=y
+ CONFIG_JUMP_LABEL=y
+ CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
+@@ -1261,7 +1259,6 @@ CONFIG_R8712U=m
+ CONFIG_R8188EU=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+-CONFIG_VIDEO_USBVISION=m
+ CONFIG_FB_TFT=m
+ CONFIG_FB_TFT_AGM1264K_FL=m
+ CONFIG_FB_TFT_BD663474=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 2ce4330b86ab..ce6617d44e0e 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -37,7 +37,6 @@ CONFIG_ARCH_BCM2835=y
+ # CONFIG_CACHE_L2X0 is not set
+ # CONFIG_CPU_SW_DOMAIN_PAN is not set
+ CONFIG_UACCESS_WITH_MEMCPY=y
+-CONFIG_SECCOMP=y
+ # CONFIG_ATAGS is not set
+ CONFIG_CMDLINE="console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
+ CONFIG_CPU_FREQ=y
+@@ -57,7 +56,6 @@ CONFIG_ARM_CRYPTO=y
+ CONFIG_CRYPTO_SHA1_ARM=m
+ CONFIG_CRYPTO_AES_ARM=m
+ CONFIG_OPROFILE=m
+-CONFIG_KPROBES=y
+ CONFIG_JUMP_LABEL=y
+ CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
+@@ -1271,7 +1269,6 @@ CONFIG_R8712U=m
+ CONFIG_R8188EU=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+-CONFIG_VIDEO_USBVISION=m
+ CONFIG_FB_TFT=m
+ CONFIG_FB_TFT_AGM1264K_FL=m
+ CONFIG_FB_TFT_BD663474=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 4d938ccaa277..c1b046e78069 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -34,7 +34,6 @@ CONFIG_ARCH_BCM2835=y
+ # CONFIG_CAVIUM_ERRATUM_22375 is not set
+ # CONFIG_CAVIUM_ERRATUM_23154 is not set
+ # CONFIG_CAVIUM_ERRATUM_27456 is not set
+-CONFIG_SECCOMP=y
+ CONFIG_COMPAT=y
+ CONFIG_ARMV8_DEPRECATED=y
+ CONFIG_SWP_EMULATION=y
+@@ -55,10 +54,10 @@ CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
+ CONFIG_CPU_FREQ_GOV_SCHEDUTIL=y
+ CONFIG_CPUFREQ_DT=y
+ CONFIG_ARM_RASPBERRYPI_CPUFREQ=y
++CONFIG_RASPBERRYPI_FIRMWARE=y
+ CONFIG_VIRTUALIZATION=y
+ CONFIG_KVM=y
+ CONFIG_CRYPTO_AES_ARM64_BS=m
+-CONFIG_KPROBES=y
+ CONFIG_JUMP_LABEL=y
+ CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
+@@ -1295,7 +1294,6 @@ CONFIG_R8188EU=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_VIDEO_RPIVID=m
+-CONFIG_VIDEO_USBVISION=m
+ CONFIG_FB_TFT=m
+ CONFIG_FB_TFT_AGM1264K_FL=m
+ CONFIG_FB_TFT_BD663474=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index d542d2522076..6247c74639f7 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -38,7 +38,6 @@ CONFIG_ARCH_BCM2835=y
+ CONFIG_SCHED_MC=y
+ CONFIG_NR_CPUS=4
+ CONFIG_HZ_1000=y
+-CONFIG_SECCOMP=y
+ CONFIG_COMPAT=y
+ CONFIG_ARMV8_DEPRECATED=y
+ CONFIG_SWP_EMULATION=y
+@@ -62,7 +61,6 @@ CONFIG_CPUFREQ_DT=y
+ CONFIG_ARM_RASPBERRYPI_CPUFREQ=y
+ CONFIG_RASPBERRYPI_FIRMWARE=y
+ CONFIG_CRYPTO_AES_ARM64_BS=m
+-CONFIG_KPROBES=y
+ CONFIG_JUMP_LABEL=y
+ CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
+@@ -685,6 +683,8 @@ CONFIG_BATTERY_DS2760=m
+ CONFIG_BATTERY_MAX17040=m
+ CONFIG_SENSORS_IIO_HWMON=m
+ CONFIG_SENSORS_LM75=m
++CONFIG_SENSORS_RASPBERRYPI_HWMON=m
++CONFIG_SENSORS_RPI_POE_FAN=m
+ CONFIG_SENSORS_SHT21=m
+ CONFIG_SENSORS_SHTC1=m
+ CONFIG_SENSORS_INA2XX=m
+@@ -1156,7 +1156,6 @@ CONFIG_R8712U=m
+ CONFIG_R8188EU=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+-CONFIG_VIDEO_USBVISION=m
+ CONFIG_FB_TFT=m
+ CONFIG_FB_TFT_AGM1264K_FL=m
+ CONFIG_FB_TFT_BD663474=m
+@@ -1186,6 +1185,7 @@ CONFIG_FB_TFT_TLS8204=m
+ CONFIG_FB_TFT_UC1701=m
+ CONFIG_FB_TFT_UPD161704=m
+ CONFIG_FB_TFT_WATTEROTT=m
++CONFIG_BCM2835_VCHIQ=y
+ CONFIG_SND_BCM2835=m
+ CONFIG_VIDEO_BCM2835=m
+ CONFIG_VIDEO_CODEC_BCM2835=m
+-- 
+2.17.1
+

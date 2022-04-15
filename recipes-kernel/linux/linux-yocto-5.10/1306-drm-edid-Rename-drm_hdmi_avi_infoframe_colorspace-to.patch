@@ -1,0 +1,99 @@
+From 1d82e2f0e10d39268ac3ec31e9e6bd55fcfd6ec4 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Wed, 14 Apr 2021 16:21:08 +0200
+Subject: [PATCH 1306/2201] drm/edid: Rename drm_hdmi_avi_infoframe_colorspace
+ to _colorimetry
+
+The drm_hdmi_avi_infoframe_colorspace() function actually sets the
+colorimetry and extended_colorimetry fields in the hdmi_avi_infoframe
+structure with DRM_MODE_COLORIMETRY_* values.
+
+To make things worse, the hdmi_avi_infoframe structure also has a
+colorspace field used to signal whether an RGB or YUV output is being
+used.
+
+Let's remove the inconsistency and allow for the colorspace usage by
+renaming the function.
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/drm_edid.c                | 8 ++++----
+ drivers/gpu/drm/i915/display/intel_hdmi.c | 2 +-
+ drivers/gpu/drm/vc4/vc4_hdmi.c            | 2 +-
+ include/drm/drm_edid.h                    | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
+index 30b52a3c8f36..46e41ad5e44f 100644
+--- a/drivers/gpu/drm/drm_edid.c
++++ b/drivers/gpu/drm/drm_edid.c
+@@ -5711,13 +5711,13 @@ static const u32 hdmi_colorimetry_val[] = {
+ #undef ACE
+ 
+ /**
+- * drm_hdmi_avi_infoframe_colorspace() - fill the HDMI AVI infoframe
+- *                                       colorspace information
++ * drm_hdmi_avi_infoframe_colorimetry() - fill the HDMI AVI infoframe
++ *                                       colorimetry information
+  * @frame: HDMI AVI infoframe
+  * @conn_state: connector state
+  */
+ void
+-drm_hdmi_avi_infoframe_colorspace(struct hdmi_avi_infoframe *frame,
++drm_hdmi_avi_infoframe_colorimetry(struct hdmi_avi_infoframe *frame,
+ 				  const struct drm_connector_state *conn_state)
+ {
+ 	u32 colorimetry_val;
+@@ -5736,7 +5736,7 @@ drm_hdmi_avi_infoframe_colorspace(struct hdmi_avi_infoframe *frame,
+ 	frame->extended_colorimetry = (colorimetry_val >> 2) &
+ 					EXTENDED_COLORIMETRY_MASK;
+ }
+-EXPORT_SYMBOL(drm_hdmi_avi_infoframe_colorspace);
++EXPORT_SYMBOL(drm_hdmi_avi_infoframe_colorimetry);
+ 
+ /**
+  * drm_hdmi_avi_infoframe_quant_range() - fill the HDMI AVI infoframe
+diff --git a/drivers/gpu/drm/i915/display/intel_hdmi.c b/drivers/gpu/drm/i915/display/intel_hdmi.c
+index bf4da68260b9..030b4d5ab829 100644
+--- a/drivers/gpu/drm/i915/display/intel_hdmi.c
++++ b/drivers/gpu/drm/i915/display/intel_hdmi.c
+@@ -746,7 +746,7 @@ intel_hdmi_compute_avi_infoframe(struct intel_encoder *encoder,
+ 	else
+ 		frame->colorspace = HDMI_COLORSPACE_RGB;
+ 
+-	drm_hdmi_avi_infoframe_colorspace(frame, conn_state);
++	drm_hdmi_avi_infoframe_colorimetry(frame, conn_state);
+ 
+ 	/* nonsense combination */
+ 	drm_WARN_ON(encoder->base.dev, crtc_state->limited_color_range &&
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index b621fc3b1750..09ec4c1d1ac7 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -521,7 +521,7 @@ static void vc4_hdmi_set_avi_infoframe(struct drm_encoder *encoder)
+ 					   vc4_encoder->limited_rgb_range ?
+ 					   HDMI_QUANTIZATION_RANGE_LIMITED :
+ 					   HDMI_QUANTIZATION_RANGE_FULL);
+-	drm_hdmi_avi_infoframe_colorspace(&frame.avi, cstate);
++	drm_hdmi_avi_infoframe_colorimetry(&frame.avi, cstate);
+ 	drm_hdmi_avi_infoframe_bars(&frame.avi, cstate);
+ 
+ 	vc4_hdmi_write_infoframe(encoder, &frame);
+diff --git a/include/drm/drm_edid.h b/include/drm/drm_edid.h
+index e97daf6ffbb1..1d0ace87a6e8 100644
+--- a/include/drm/drm_edid.h
++++ b/include/drm/drm_edid.h
+@@ -371,8 +371,8 @@ drm_hdmi_vendor_infoframe_from_display_mode(struct hdmi_vendor_infoframe *frame,
+ 					    const struct drm_display_mode *mode);
+ 
+ void
+-drm_hdmi_avi_infoframe_colorspace(struct hdmi_avi_infoframe *frame,
+-				  const struct drm_connector_state *conn_state);
++drm_hdmi_avi_infoframe_colorimetry(struct hdmi_avi_infoframe *frame,
++				   const struct drm_connector_state *conn_state);
+ 
+ void
+ drm_hdmi_avi_infoframe_bars(struct hdmi_avi_infoframe *frame,
+-- 
+2.17.1
+

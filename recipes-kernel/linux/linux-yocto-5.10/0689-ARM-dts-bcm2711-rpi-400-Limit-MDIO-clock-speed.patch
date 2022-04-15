@@ -1,0 +1,28 @@
+From d12a22439a6721c06f54a2d4c7406fae23649a85 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Fri, 23 Apr 2021 15:02:58 +0100
+Subject: [PATCH 0689/2201] ARM: dts: bcm2711-rpi-400: Limit MDIO clock speed
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2711-rpi-400.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-400.dts b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+index 1bb8854e69d6..4ffd5e04ccf1 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-400.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+@@ -616,6 +616,10 @@
+ 	brcm,disable-headphones = <1>;
+ };
+ 
++&genet_mdio {
++	clock-frequency = <1950000>;
++};
++
+ / {
+ 	__overrides__ {
+ 		act_led_gpio = <&act_led>,"gpios:4";
+-- 
+2.17.1
+

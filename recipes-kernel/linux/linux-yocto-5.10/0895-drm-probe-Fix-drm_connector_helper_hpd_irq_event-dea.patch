@@ -1,0 +1,73 @@
+From 12a3b2ba688051148f7225de40972becc5d553e2 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Wed, 8 Sep 2021 13:32:31 +0200
+Subject: [PATCH 0895/2201] drm/probe: Fix drm_connector_helper_hpd_irq_event
+ deadlock
+
+drm_connector_helper_hpd_irq_event() calls
+drm_kms_helper_hotplug_event() with the mode-setting lock taken while
+it's supposed to be called without that lock taken.
+
+This results in a lockdep warning, and a deadlock if we were to wake up
+a TV through CEC (and possibly other cases).
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/drm_probe_helper.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_probe_helper.c b/drivers/gpu/drm/drm_probe_helper.c
+index 0a4c7581b510..f8eb1061a55f 100644
+--- a/drivers/gpu/drm/drm_probe_helper.c
++++ b/drivers/gpu/drm/drm_probe_helper.c
+@@ -795,8 +795,7 @@ void drm_kms_helper_poll_fini(struct drm_device *dev)
+ EXPORT_SYMBOL(drm_kms_helper_poll_fini);
+ 
+ static bool
+-_drm_connector_helper_hpd_irq_event(struct drm_connector *connector,
+-				    bool notify)
++_drm_connector_helper_hpd_irq_event(struct drm_connector *connector)
+ {
+ 	struct drm_device *dev = connector->dev;
+ 	enum drm_connector_status old_status;
+@@ -836,11 +835,6 @@ _drm_connector_helper_hpd_irq_event(struct drm_connector *connector,
+ 	if (old_epoch_counter != connector->epoch_counter)
+ 		changed = true;
+ 
+-	if (changed && notify) {
+-		drm_kms_helper_hotplug_event(dev);
+-		DRM_DEBUG_KMS("Sent hotplug event\n");
+-	}
+-
+ 	return changed;
+ }
+ 
+@@ -866,9 +860,14 @@ bool drm_connector_helper_hpd_irq_event(struct drm_connector *connector)
+ 	bool changed;
+ 
+ 	mutex_lock(&dev->mode_config.mutex);
+-	changed = _drm_connector_helper_hpd_irq_event(connector, true);
++	changed = _drm_connector_helper_hpd_irq_event(connector);
+ 	mutex_unlock(&dev->mode_config.mutex);
+ 
++	if (changed) {
++		drm_kms_helper_hotplug_event(dev);
++		DRM_DEBUG_KMS("Sent hotplug event\n");
++	}
++
+ 	return changed;
+ }
+ EXPORT_SYMBOL(drm_connector_helper_hpd_irq_event);
+@@ -908,8 +907,7 @@ bool drm_helper_hpd_irq_event(struct drm_device *dev)
+ 	mutex_lock(&dev->mode_config.mutex);
+ 	drm_connector_list_iter_begin(dev, &conn_iter);
+ 	drm_for_each_connector_iter(connector, &conn_iter) {
+-		if (_drm_connector_helper_hpd_irq_event(connector,
+-							false))
++		if (_drm_connector_helper_hpd_irq_event(connector))
+ 			changed = true;
+ 	}
+ 	drm_connector_list_iter_end(&conn_iter);
+-- 
+2.17.1
+

@@ -1,0 +1,53 @@
+From a99f44489439524c8a6a86d79b2d21f734ddb201 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 1 Feb 2022 12:24:51 +0000
+Subject: [PATCH 1368/2201] drm/panel: simple: Remove custom handling of
+ orientation
+
+Panel orientation is now handled by the drm_panel and
+panel_bridge frameworks, so remove the custom handling.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/panel/panel-simple.c | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/drivers/gpu/drm/panel/panel-simple.c b/drivers/gpu/drm/panel/panel-simple.c
+index c1d6052f2ace..08d26e81cbfb 100644
+--- a/drivers/gpu/drm/panel/panel-simple.c
++++ b/drivers/gpu/drm/panel/panel-simple.c
+@@ -112,8 +112,6 @@ struct panel_simple {
+ 	struct gpio_desc *hpd_gpio;
+ 
+ 	struct drm_display_mode override_mode;
+-
+-	enum drm_panel_orientation orientation;
+ };
+ 
+ static inline struct panel_simple *to_panel_simple(struct drm_panel *panel)
+@@ -373,9 +371,6 @@ static int panel_simple_get_modes(struct drm_panel *panel,
+ 	/* add hard-coded panel modes */
+ 	num += panel_simple_get_non_edid_modes(p, connector);
+ 
+-	/* set up connector's "panel orientation" property */
+-	drm_connector_set_panel_orientation(connector, p->orientation);
+-
+ 	return num;
+ }
+ 
+@@ -540,12 +535,6 @@ static int panel_simple_probe(struct device *dev, const struct panel_desc *desc)
+ 		return err;
+ 	}
+ 
+-	err = of_drm_get_panel_orientation(dev->of_node, &panel->orientation);
+-	if (err) {
+-		dev_err(dev, "%pOF: failed to get orientation %d\n", dev->of_node, err);
+-		return err;
+-	}
+-
+ 	ddc = of_parse_phandle(dev->of_node, "ddc-i2c-bus", 0);
+ 	if (ddc) {
+ 		panel->ddc = of_find_i2c_adapter_by_node(ddc);
+-- 
+2.17.1
+

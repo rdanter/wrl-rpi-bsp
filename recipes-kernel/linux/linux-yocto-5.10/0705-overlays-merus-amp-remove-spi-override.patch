@@ -1,0 +1,32 @@
+From 6867d7fa52e18525c79df3708e7ff05af10fd250 Mon Sep 17 00:00:00 2001
+From: AMuszkat <ariel.muszkat@gmail.com>
+Date: Sun, 28 Mar 2021 21:46:09 +0200
+Subject: [PATCH 0705/2201] overlays: merus-amp: remove spi override
+
+Signed-off-by: AMuszkat <ariel.muszkat@gmail.com>
+---
+ arch/arm/boot/dts/overlays/merus-amp-overlay.dts | 10 ----------
+ 1 file changed, 10 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/merus-amp-overlay.dts b/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
+index bbffd7d26324..4501fbdc253d 100644
+--- a/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
++++ b/arch/arm/boot/dts/overlays/merus-amp-overlay.dts
+@@ -57,14 +57,4 @@
+ 			status = "okay";
+ 		};
+ 	};
+-
+-	fragment@4 {
+-		target = <&spi0>;
+-		frag4: __overlay__ {
+-		};
+-	};
+-
+-	__overrides__ {
+-		spioff = <&frag4>, "status=disabled";
+-	};
+ };
+-- 
+2.17.1
+

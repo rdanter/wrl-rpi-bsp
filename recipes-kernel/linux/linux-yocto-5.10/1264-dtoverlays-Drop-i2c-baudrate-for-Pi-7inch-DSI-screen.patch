@@ -1,0 +1,33 @@
+From 0c41710df564f76275c2868beaa0c316553e8247 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Mon, 29 Nov 2021 13:11:56 +0000
+Subject: [PATCH 1264/2201] dtoverlays: Drop i2c baudrate for Pi 7inch DSI
+ screen to 50kHz
+
+Whilst investigations continue as to why the 7" DSI screen doesn't
+work on Pi3 with KMS, drop the I2C baudrate to 50kHz as that seems
+to be a reliable workaround.
+This will be reverted once the full issue is understood.
+
+https://github.com/raspberrypi/linux/issues/4686
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
+index 5e1700d0367a..5b6f82aaa6fb 100644
+--- a/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
++++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
+@@ -95,6 +95,7 @@
+ 		target = <&i2c0if>;
+ 		__overlay__ {
+ 			status = "okay";
++			clock-frequency = <50000>;
+ 		};
+ 	};
+ 
+-- 
+2.17.1
+

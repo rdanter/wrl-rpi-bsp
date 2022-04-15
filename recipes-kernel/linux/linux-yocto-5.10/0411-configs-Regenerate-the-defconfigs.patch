@@ -1,0 +1,114 @@
+From b11cc7f377a5f128c9a50671cefc8f96a31b6896 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 23 Nov 2020 14:53:14 +0000
+Subject: [PATCH 0411/2201] configs: Regenerate the defconfigs
+
+The CAN_ISOTP setting was in the wrong position, and it's better for
+bisecting and reverting if this doesn't get rolled into the next
+config-changing commit.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 2 +-
+ arch/arm/configs/bcm2711_defconfig   | 2 +-
+ arch/arm/configs/bcmrpi_defconfig    | 2 +-
+ arch/arm64/configs/bcm2711_defconfig | 2 +-
+ arch/arm64/configs/bcmrpi3_defconfig | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 065f78d95046..448e6a977722 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -402,13 +402,13 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
+ CONFIG_CAN_MCP251XFD=m
+ CONFIG_CAN_EMS_USB=m
+ CONFIG_CAN_GS_USB=m
+-CONFIG_CAN_ISOTP=m
+ CONFIG_BT=m
+ CONFIG_BT_RFCOMM=m
+ CONFIG_BT_RFCOMM_TTY=y
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 155c65bb013a..632dc6fea796 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -403,13 +403,13 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
+ CONFIG_CAN_MCP251XFD=m
+ CONFIG_CAN_EMS_USB=m
+ CONFIG_CAN_GS_USB=m
+-CONFIG_CAN_ISOTP=m
+ CONFIG_BT=m
+ CONFIG_BT_RFCOMM=m
+ CONFIG_BT_RFCOMM_TTY=y
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 49be0cde7095..5c50471631ea 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -396,13 +396,13 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
+ CONFIG_CAN_MCP251XFD=m
+ CONFIG_CAN_EMS_USB=m
+ CONFIG_CAN_GS_USB=m
+-CONFIG_CAN_ISOTP=m
+ CONFIG_BT=m
+ CONFIG_BT_RFCOMM=m
+ CONFIG_BT_RFCOMM_TTY=y
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index c6f4a955e000..ef57bab9cf39 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -399,13 +399,13 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_SLCAN=m
+ CONFIG_CAN_MCP251X=m
+ CONFIG_CAN_MCP251XFD=m
+ CONFIG_CAN_EMS_USB=m
+ CONFIG_CAN_GS_USB=m
+-CONFIG_CAN_ISOTP=m
+ CONFIG_BT=m
+ CONFIG_BT_RFCOMM=m
+ CONFIG_BT_RFCOMM_TTY=y
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index ff74c23ef24e..6939accc59bf 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -395,11 +395,11 @@ CONFIG_BAYCOM_SER_FDX=m
+ CONFIG_BAYCOM_SER_HDX=m
+ CONFIG_YAM=m
+ CONFIG_CAN=m
++CONFIG_CAN_ISOTP=m
+ CONFIG_CAN_VCAN=m
+ CONFIG_CAN_MCP251X=m
+ CONFIG_CAN_MCP251XFD=m
+ CONFIG_CAN_EMS_USB=m
+-CONFIG_CAN_ISOTP=m
+ CONFIG_BT=m
+ CONFIG_BT_RFCOMM=m
+ CONFIG_BT_RFCOMM_TTY=y
+-- 
+2.17.1
+

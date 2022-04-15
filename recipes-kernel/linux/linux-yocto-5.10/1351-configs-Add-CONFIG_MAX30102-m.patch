@@ -1,0 +1,79 @@
+From f0106617d0daf32616cbbb1565c60dece23fecaa Mon Sep 17 00:00:00 2001
+From: coldspark29 <jan.claussen10@web.de>
+Date: Wed, 18 Aug 2021 14:42:22 +0200
+Subject: [PATCH 1351/2201] configs: Add CONFIG_MAX30102=m
+
+See: https://github.com/raspberrypi/linux/pull/4535
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 04a38fe4c6d9..f2074da8a80d 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1366,6 +1366,7 @@ CONFIG_BME680=m
+ CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
++CONFIG_MAX30102=m
+ CONFIG_DHT11=m
+ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 77cccb33de2a..8f4ae82cade4 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -1388,6 +1388,7 @@ CONFIG_BME680=m
+ CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
++CONFIG_MAX30102=m
+ CONFIG_DHT11=m
+ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index f2a474cdad56..b3ea44509d98 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1359,6 +1359,7 @@ CONFIG_BME680=m
+ CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
++CONFIG_MAX30102=m
+ CONFIG_DHT11=m
+ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index b8e434797aa9..75333e69ef74 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -1395,6 +1395,7 @@ CONFIG_BME680=m
+ CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
++CONFIG_MAX30102=m
+ CONFIG_DHT11=m
+ CONFIG_HDC100X=m
+ CONFIG_HTU21=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 57073001891c..419813140a52 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1250,6 +1250,7 @@ CONFIG_BME680=m
+ CONFIG_CCS811=m
+ CONFIG_SENSIRION_SGP30=m
+ CONFIG_SPS30=m
++CONFIG_MAX30102=m
+ CONFIG_DHT11=m
+ CONFIG_HTU21=m
+ CONFIG_APDS9960=m
+-- 
+2.17.1
+

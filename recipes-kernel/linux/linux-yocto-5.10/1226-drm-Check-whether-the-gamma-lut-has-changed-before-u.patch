@@ -1,0 +1,37 @@
+From 9cca26674a2b7cc03fec7015a2df1f329b1aecdb Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 2 Nov 2021 16:01:36 +0000
+Subject: [PATCH 1226/2201] drm: Check whether the gamma lut has changed before
+ updating
+
+drm_crtc_legacy_gamma_set updates the gamma_lut blob unconditionally,
+which leads to unnecessary reprogramming of hardware.
+
+Check whether the blob contents has actually changed before
+signalling that it has been updated.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/drm_color_mgmt.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/drm_color_mgmt.c b/drivers/gpu/drm/drm_color_mgmt.c
+index 8c225fb7441d..ec4a9a00a298 100644
+--- a/drivers/gpu/drm/drm_color_mgmt.c
++++ b/drivers/gpu/drm/drm_color_mgmt.c
+@@ -313,7 +313,11 @@ static int drm_crtc_legacy_gamma_set(struct drm_crtc *crtc,
+ 	/* Set GAMMA_LUT and reset DEGAMMA_LUT and CTM */
+ 	replaced = drm_property_replace_blob(&crtc_state->degamma_lut, NULL);
+ 	replaced |= drm_property_replace_blob(&crtc_state->ctm, NULL);
+-	replaced |= drm_property_replace_blob(&crtc_state->gamma_lut, blob);
++	if (!crtc_state->gamma_lut || !crtc_state->gamma_lut->data ||
++	    memcmp(crtc_state->gamma_lut->data, blob_data, blob->length))
++		replaced |= drm_property_replace_blob(&crtc_state->gamma_lut, blob);
++	else
++		drm_property_blob_put(blob);
+ 	crtc_state->color_mgmt_changed |= replaced;
+ 
+ 	ret = drm_atomic_commit(state);
+-- 
+2.17.1
+

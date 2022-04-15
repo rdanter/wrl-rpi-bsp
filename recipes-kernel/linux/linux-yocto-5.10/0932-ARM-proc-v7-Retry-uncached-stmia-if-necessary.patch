@@ -1,0 +1,65 @@
+From 3e1698ed5013c1054e3dbf8a9fcd3a8549a95ece Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 20 Sep 2021 11:59:23 +0100
+Subject: [PATCH 0932/2201] ARM: proc-v7: Retry uncached stmia if necessary
+
+A failure of some CPU cores to come online has been traced to the
+failure of a stm instruction while the cache is disabled. The symptom
+is that the saved values read back as zeroes, a catastrophic error since
+one of the values is a return address.
+
+This patch forces a readback and retry until the correct value is
+returned,
+
+Notes:
+
+At this stage in the boot process the core is running with its cache
+disabled. Before enabling the cache its contents must be explicitly
+invalidated, a process that requires quite a few registers that the
+caller must preserve. Evidence suggests that something is writing a
+block of zeroes over that space at a time when all other cores should
+be idle, possibly some kind of write-combiner, and retrying is an
+attempt to avoid the problem.
+
+The previous attempted fix (forcing the accesses to only be 4-byte
+aligned) appears to have only worked for a while and likely for less
+obvious reasons such as a change in code alignment.
+
+See: https://github.com/Hexxeh/rpi-firmware/issues/232
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/mm/proc-v7.S | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/mm/proc-v7.S b/arch/arm/mm/proc-v7.S
+index 28c9d32fa99a..950ceb970470 100644
+--- a/arch/arm/mm/proc-v7.S
++++ b/arch/arm/mm/proc-v7.S
+@@ -288,7 +288,11 @@ __v7_ca17mp_setup:
+ 1:	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+ 	add	r12, r12, r0			@ the local stack
++1:
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
++	ldr	r0, [r12, #(6 * 4)]		@ read back the return address
++	teq	r0, lr				@ confirm it is correct
++	bne	1b				@ retrying if not
+ 	bl      v7_invalidate_l1
+ 	ldmia	r12, {r1-r6, lr}
+ #ifdef CONFIG_SMP
+@@ -474,7 +478,11 @@ __v7_setup:
+ 	adr	r0, __v7_setup_stack_ptr
+ 	ldr	r12, [r0]
+ 	add	r12, r12, r0			@ the local stack
++1:
+ 	stmia	r12, {r1-r6, lr}		@ v7_invalidate_l1 touches r0-r6
++	ldr	r0, [r12, #(6 * 4)]		@ read back the return address
++	teq	r0, lr				@ confirm it is correct
++	bne	1b				@ retrying if not
+ 	bl      v7_invalidate_l1
+ 	ldmia	r12, {r1-r6, lr}
+ 
+-- 
+2.17.1
+

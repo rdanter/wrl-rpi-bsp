@@ -1,0 +1,31 @@
+From 9d8389f9eae2e995cf5522033601a8e2a96d89dc Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 13 Jan 2021 21:25:38 +0000
+Subject: [PATCH 0480/2201] SQUASH: Revert: "overlays: Make the i2c-gpio
+ overlay safe again"
+
+This revert and its neighbour are opposites. When squashing, delete
+the original commits as well.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
+index 63231b5d7c0c..2323a61edf07 100644
+--- a/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
+@@ -11,6 +11,9 @@
+ 		target-path = "/";
+ 
+ 		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
+ 			i2c_gpio: i2c@0 {
+ 				reg = <0xffffffff>;
+ 				compatible = "i2c-gpio";
+-- 
+2.17.1
+

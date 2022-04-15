@@ -1,0 +1,103 @@
+From f5faa7469ab2dde2c69e855caac41624c66e3bd1 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Fri, 26 Nov 2021 16:41:23 +0000
+Subject: [PATCH 1261/2201] ARM: dts: Update rpi-400 and cm4 dts to match 4-b
+
+The Pi 4B dts file has had numerous updates since the Pi 400 and CM4
+dts files were written. Apply those updates to the other files to
+minimise the differences. The change is largely cosmetic, except for
+the PCI "device-type" to "device_type" rename, and the correction of
+the labels on the Pi 400 GPIO expander pins.
+
+Also set the wifi-2.4ghz-coexistence property on RPi 4 B, which appears
+to have been missed.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2711-rpi-4-b.dts |  2 ++
+ arch/arm/boot/dts/bcm2711-rpi-400.dts | 11 ++++++-----
+ arch/arm/boot/dts/bcm2711-rpi-cm4.dts |  7 ++++---
+ 3 files changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+index 2fdeba0b95d7..44da9fc870be 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+@@ -181,12 +181,14 @@
+ &hdmi0 {
+ 	clocks = <&firmware_clocks 13>, <&firmware_clocks 14>, <&dvp 0>, <&clk_27MHz>;
+ 	clock-names = "hdmi", "bvb", "audio", "cec";
++	wifi-2.4ghz-coexistence;
+ 	status = "okay";
+ };
+ 
+ &hdmi1 {
+ 	clocks = <&firmware_clocks 13>, <&firmware_clocks 14>, <&dvp 1>, <&clk_27MHz>;
+ 	clock-names = "hdmi", "bvb", "audio", "cec";
++	wifi-2.4ghz-coexistence;
+ 	status = "okay";
+ };
+ 
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-400.dts b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+index c25a97465d2b..ec0c75810754 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-400.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-400.dts
+@@ -93,9 +93,9 @@
+ 				  "PWR_LED_OFF",
+ 				  "GLOBAL_RESET",
+ 				  "VDD_SD_IO_SEL",
+-				  "CAM_GPIO",
++				  "GLOBAL_SHUTDOWN",
+ 				  "SD_PWR_ON",
+-				  "SD_OC_N";
++				  "SHUTDOWN_REQUEST";
+ 		status = "okay";
+ 	};
+ 
+@@ -273,15 +273,16 @@
+ };
+ 
+ &pcie0 {
+-	pci@1,0 {
++	pci@0,0 {
++		device_type = "pci";
+ 		#address-cells = <3>;
+ 		#size-cells = <2>;
+ 		ranges;
+ 
+ 		reg = <0 0 0 0 0>;
+ 
+-		usb@1,0 {
+-			reg = <0x10000 0 0 0 0>;
++		usb@0,0 {
++			reg = <0 0 0 0 0>;
+ 			resets = <&reset RASPBERRYPI_FIRMWARE_RESET_ID_USB>;
+ 		};
+ 	};
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+index 1dcbb2173f5d..bc256aebab65 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+@@ -286,15 +286,16 @@
+ };
+ 
+ &pcie0 {
+-	pci@1,0 {
++	pci@0,0 {
++		device_type = "pci";
+ 		#address-cells = <3>;
+ 		#size-cells = <2>;
+ 		ranges;
+ 
+ 		reg = <0 0 0 0 0>;
+ 
+-		usb@1,0 {
+-			reg = <0x10000 0 0 0 0>;
++		usb@0,0 {
++			reg = <0 0 0 0 0>;
+ 			resets = <&reset RASPBERRYPI_FIRMWARE_RESET_ID_USB>;
+ 		};
+ 	};
+-- 
+2.17.1
+

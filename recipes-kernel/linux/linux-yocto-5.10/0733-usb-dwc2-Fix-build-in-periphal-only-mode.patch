@@ -1,0 +1,35 @@
+From 5f69d9305998e4e0385fe84d1516de17a2499b94 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Fri, 28 May 2021 09:03:34 +0100
+Subject: [PATCH 0733/2201] usb: dwc2: Fix build in periphal-only mode
+
+The bus_suspended member of struct dwc2_hsotg is only present in builds
+that support host-mode.
+
+See: https://github.com/raspberrypi/linux/issues/4368
+
+Fixes: 62bb46f51f91 ("usb: dwc2: Fix hibernation between host and device modes.")
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ drivers/usb/dwc2/core_intr.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/usb/dwc2/core_intr.c b/drivers/usb/dwc2/core_intr.c
+index 510fd0572feb..e3f429f1575e 100644
+--- a/drivers/usb/dwc2/core_intr.c
++++ b/drivers/usb/dwc2/core_intr.c
+@@ -707,7 +707,11 @@ static inline void dwc_handle_gpwrdn_disc_det(struct dwc2_hsotg *hsotg,
+ 	dwc2_writel(hsotg, gpwrdn_tmp, GPWRDN);
+ 
+ 	hsotg->hibernated = 0;
++
++#if IS_ENABLED(CONFIG_USB_DWC2_HOST) ||	\
++	IS_ENABLED(CONFIG_USB_DWC2_DUAL_ROLE)
+ 	hsotg->bus_suspended = 0;
++#endif
+ 
+ 	if (gpwrdn & GPWRDN_IDSTS) {
+ 		hsotg->op_state = OTG_STATE_B_PERIPHERAL;
+-- 
+2.17.1
+

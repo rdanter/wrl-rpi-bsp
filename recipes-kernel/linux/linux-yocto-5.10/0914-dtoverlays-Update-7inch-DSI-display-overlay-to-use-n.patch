@@ -1,0 +1,295 @@
+From ff347b33d67f031d5e2116418ef8d2d8c64b0fee Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Fri, 26 Mar 2021 17:14:44 +0000
+Subject: [PATCH 0914/2201] dtoverlays: Update 7inch DSI display overlay to use
+ newer drivers
+
+The older panel-raspberrypi-touchscreen driver had issues in
+that it also controlled the power for the touchscreen without
+having an appropriate hook for the touchscreen driver to control
+that.
+
+Mainline has now added a Toshiba TC358762 bridge driver, and
+a regulator/backlight driver for the ATTiny microcontroller on
+the board. That allows clean integration with the touchscreen
+driver.
+
+Switch the overlays over to using newer drivers.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/README             | 11 ++-
+ .../boot/dts/overlays/edt-ft5406-overlay.dts  | 38 +-------
+ arch/arm/boot/dts/overlays/edt-ft5406.dtsi    | 55 ++++++++++++
+ .../overlays/vc4-kms-dsi-7inch-overlay.dts    | 88 ++++++++++++++++---
+ 4 files changed, 141 insertions(+), 51 deletions(-)
+ create mode 100644 arch/arm/boot/dts/overlays/edt-ft5406.dtsi
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 890e926636b7..eb2c9adfb1a8 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -3365,10 +3365,15 @@ Params: <None>
+ 
+ Name:   vc4-kms-dsi-7inch
+ Info:   Enable the Raspberry Pi DSI 7" screen.
+-        Use edt-ft5406 for the touchscreen element.
++        Includes the edt-ft5406 for the touchscreen element.
+         Requires vc4-kms-v3d to be loaded.
+-Load:   dtoverlay=vc4-kms-dsi-7inch
+-Params: <None>
++Load:   dtoverlay=vc4-kms-dsi-7inch,<param>=<val>
++Params: sizex                   Touchscreen size x (default 800)
++        sizey                   Touchscreen size y (default 480)
++        invx                    Touchscreen inverted x axis
++        invy                    Touchscreen inverted y axis
++        swapxy                  Touchscreen swapped x y axis
++        disable_touch           Disables the touch screen overlay driver
+ 
+ 
+ Name:   vc4-kms-dsi-lt070me05000
+diff --git a/arch/arm/boot/dts/overlays/edt-ft5406-overlay.dts b/arch/arm/boot/dts/overlays/edt-ft5406-overlay.dts
+index 407af59bf468..f82b4d0e5047 100644
+--- a/arch/arm/boot/dts/overlays/edt-ft5406-overlay.dts
++++ b/arch/arm/boot/dts/overlays/edt-ft5406-overlay.dts
+@@ -1,42 +1,10 @@
+ /*
+- * Device Tree overlay for RaspberryPi 7" Touchscreen panel
++ * Device Tree overlay for EDT 5406 touchscreen controller, as used on the
++ * Raspberry Pi 7" panel
+  *
+  */
+ 
+ /dts-v1/;
+ /plugin/;
+ 
+-/ {
+-	compatible = "brcm,bcm2835";
+-
+-	fragment@0 {
+-		target = <&i2c_csi_dsi>;
+-		__overlay__ {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			status = "okay";
+-			ft5406: ts@38 {
+-				compatible = "edt,edt-ft5406";
+-				reg = <0x38>;
+-
+-				touchscreen-size-x = < 800 >;
+-				touchscreen-size-y = < 480 >;
+-			};
+-		};
+-	};
+-
+-	fragment@1 {
+-		target = <&i2c0if>;
+-		__overlay__ {
+-			status = "okay";
+-		};
+-	};
+-
+-	__overrides__ {
+-		sizex = <&ft5406>,"touchscreen-size-x:0";
+-		sizey = <&ft5406>,"touchscreen-size-y:0";
+-		invx = <&ft5406>,"touchscreen-inverted-x?";
+-		invy = <&ft5406>,"touchscreen-inverted-y?";
+-		swapxy = <&ft5406>,"touchscreen-swapped-x-y?";
+-	};
+-};
++#include "edt-ft5406.dtsi"
+diff --git a/arch/arm/boot/dts/overlays/edt-ft5406.dtsi b/arch/arm/boot/dts/overlays/edt-ft5406.dtsi
+new file mode 100644
+index 000000000000..0473ff17f19f
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/edt-ft5406.dtsi
+@@ -0,0 +1,55 @@
++/*
++ * Device Tree overlay for an EDT FT5406 touchscreen
++ *
++ * Note that this is included from vc4-kms-dsi-7inch, hence the
++ * fragment numbers not starting at 0.
++ */
++
++/ {
++	compatible = "brcm,bcm2835";
++
++	fragment@10 {
++		target = <&ft5406>;
++		__overlay__ {
++			touchscreen-inverted-x;
++		};
++	};
++
++	fragment@11 {
++		target = <&ft5406>;
++		__overlay__ {
++			touchscreen-inverted-y;
++		};
++	};
++
++	fragment@12 {
++		target = <&i2c_csi_dsi>;
++		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "okay";
++			ft5406: ts@38 {
++				compatible = "edt,edt-ft5406";
++				reg = <0x38>;
++
++				touchscreen-size-x = < 800 >;
++				touchscreen-size-y = < 480 >;
++			};
++		};
++	};
++
++	fragment@13 {
++		target = <&i2c0if>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	__overrides__ {
++		sizex = <&ft5406>,"touchscreen-size-x:0";
++		sizey = <&ft5406>,"touchscreen-size-y:0";
++		invx = <0>, "-10";
++		invy = <0>, "-11";
++		swapxy = <&ft5406>,"touchscreen-swapped-x-y?";
++	};
++};
+diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
+index 086f4ffd633a..ecd3bef3d65a 100644
+--- a/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
++++ b/arch/arm/boot/dts/overlays/vc4-kms-dsi-7inch-overlay.dts
+@@ -6,51 +6,113 @@
+ /dts-v1/;
+ /plugin/;
+ 
++#include "edt-ft5406.dtsi"
++
+ / {
+-	compatible = "brcm,bcm2835";
++	/* No compatible as it will have come from edt-ft5406.dtsi */
+ 
+ 	fragment@0 {
+ 		target = <&dsi1>;
+ 		__overlay__ {
+-			#address-cells = <1>; size-cells = <0>;
++			#address-cells = <1>;
++			#size-cells = <0>;
+ 			status = "okay";
+ 			port {
+-				dsi_out_port: endpoint {
+-					remote-endpoint = <&panel_dsi_port>;
++				dsi_out: endpoint {
++					remote-endpoint = <&bridge_in>;
++				};
++			};
++			bridge@0 {
++				reg = <0>;
++				compatible = "toshiba,tc358762";
++				vddc-supply = <&reg_bridge>;
++				ports {
++					#address-cells = <1>;
++					#size-cells = <0>;
++
++					port@0 {
++						reg = <0>;
++						bridge_in: endpoint {
++							remote-endpoint = <&dsi_out>;
++						};
++					};
++
++					port@1 {
++						reg = <1>;
++						bridge_out: endpoint {
++							remote-endpoint = <&panel_in>;
++						};
++					};
+ 				};
+ 			};
+ 		};
+ 	};
+ 
+ 	fragment@1 {
++		target-path = "/";
++		__overlay__ {
++			panel_disp1: panel_disp1@0 {
++				reg = <0>;
++				compatible = "raspberrypi,7inch-dsi", "simple-panel";
++				backlight = <&reg_display>;
++				power-supply = <&reg_display>;
++
++				port {
++					panel_in: endpoint {
++						remote-endpoint = <&bridge_out>;
++					};
++				};
++			};
++
++			reg_bridge: reg_bridge@0 {
++				reg = <0>;
++				compatible = "regulator-fixed";
++				regulator-name = "bridge_reg";
++				gpio = <&reg_display 0 0>;
++				vin-supply = <&reg_display>;
++				enable-active-high;
++			};
++		};
++	};
++
++	fragment@2 {
+ 		target = <&i2c_csi_dsi>;
+ 		__overlay__ {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			status = "okay";
+-			lcd@45 {
+-				compatible = "raspberrypi,7inch-touchscreen-panel";
++
++			reg_display: reg_display@45 {
++				compatible = "raspberrypi,7inch-touchscreen-panel-regulator";
+ 				reg = <0x45>;
+-				port {
+-					panel_dsi_port: endpoint {
+-						remote-endpoint = <&dsi_out_port>;
+-					};
+-				};
++				gpio-controller;
++				#gpio-cells = <2>;
+ 			};
+ 		};
+ 	};
+ 
+-	fragment@2 {
++	fragment@3 {
+ 		target = <&i2c0if>;
+ 		__overlay__ {
+ 			status = "okay";
+ 		};
+ 	};
+ 
+-	fragment@3 {
++	fragment@4 {
+ 		target = <&i2c0mux>;
+ 		__overlay__ {
+ 			status = "okay";
+ 		};
+ 	};
++	fragment@5 {
++		target = <&ft5406>;
++		__overlay__ {
++			vcc-supply = <&reg_display>;
++			reset-gpio = <&reg_display 1 1>;
++		};
++	};
++
++	__overrides__ {
++		disable_touch = <0>, "-10-11-12-13";
++	};
+ };
+-- 
+2.17.1
+

@@ -1,0 +1,92 @@
+From 6a58cb8ce5d120a717c150cc29bc61c02a159056 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Fri, 19 Nov 2021 16:16:40 +0000
+Subject: [PATCH 1259/2201] drm/vc4: Ensure vc4_hdmi doesn't use 2711 HPD
+ registers on Pi0-3
+
+The existing logic was flawed in that it could try reading the
+2711 specific registers for HPD on a CM1/3 where the HPD GPIO
+hadn't been defined in DT.
+
+Ensure we don't do the 2711 register read on invalid hardware,
+and then
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 24 ++++++++++++++++--------
+ drivers/gpu/drm/vc4/vc4_hdmi.h |  3 +++
+ 2 files changed, 19 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index d121aca14439..96a731b5cdac 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -208,14 +208,8 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 		    vc4_hdmi->hpd_active_low)
+ 			connected = true;
+ 	} else {
+-		unsigned long flags;
+-		u32 hotplug;
+-
+-		spin_lock_irqsave(&vc4_hdmi->hw_lock, flags);
+-		hotplug = HDMI_READ(HDMI_HOTPLUG);
+-		spin_unlock_irqrestore(&vc4_hdmi->hw_lock, flags);
+-
+-		if (hotplug & VC4_HDMI_HOTPLUG_CONNECTED)
++		if (vc4_hdmi->variant->hp_detect &&
++		    vc4_hdmi->variant->hp_detect(vc4_hdmi))
+ 			connected = true;
+ 	}
+ 
+@@ -1388,6 +1382,18 @@ static u32 vc5_hdmi_channel_map(struct vc4_hdmi *vc4_hdmi, u32 channel_mask)
+ 	return channel_map;
+ }
+ 
++static bool vc5_hdmi_hp_detect(struct vc4_hdmi *vc4_hdmi)
++{
++	unsigned long flags;
++	u32 hotplug;
++
++	spin_lock_irqsave(&vc4_hdmi->hw_lock, flags);
++	hotplug = HDMI_READ(HDMI_HOTPLUG);
++	spin_unlock_irqrestore(&vc4_hdmi->hw_lock, flags);
++
++	return !!(hotplug & VC4_HDMI_HOTPLUG_CONNECTED);
++}
++
+ /* HDMI audio codec callbacks */
+ static void vc4_hdmi_audio_set_mai_clock(struct vc4_hdmi *vc4_hdmi,
+ 					 unsigned int samplerate)
+@@ -2851,6 +2857,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
+ 	.calc_hsm_clock		= vc5_hdmi_calc_hsm_clock,
+ 	.channel_map		= vc5_hdmi_channel_map,
+ 	.supports_hdr		= true,
++	.hp_detect		= vc5_hdmi_hp_detect,
+ };
+ 
+ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+@@ -2880,6 +2887,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+ 	.calc_hsm_clock		= vc5_hdmi_calc_hsm_clock,
+ 	.channel_map		= vc5_hdmi_channel_map,
+ 	.supports_hdr		= true,
++	.hp_detect		= vc5_hdmi_hp_detect,
+ };
+ 
+ static const struct of_device_id vc4_hdmi_dt_match[] = {
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index ad7d4b275ed8..d49c6f3a98ed 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -105,6 +105,9 @@ struct vc4_hdmi_variant {
+ 
+ 	/* Enables HDR metadata */
+ 	bool supports_hdr;
++
++	/* Callback for hardware specific hotplug detect */
++	bool (*hp_detect)(struct vc4_hdmi *vc4_hdmi);
+ };
+ 
+ /* HDMI audio information */
+-- 
+2.17.1
+
