@@ -1,0 +1,35 @@
+From eb37e87a3ad5c504373b78a3d89a7f7e160b2997 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 26 Apr 2021 09:58:14 +0100
+Subject: [PATCH] overlays: README - improve the gpio-poweroff guide
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/README | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 17521568cee5..b9be3bece19b 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -987,8 +987,15 @@ Params: <None>
+ 
+ 
+ Name:   gpio-poweroff
+-Info:   Drives a GPIO high or low on poweroff (including halt). Enabling this
+-        overlay will prevent the ability to boot by driving GPIO3 low.
++Info:   Drives a GPIO high or low on poweroff (including halt). Using this
++        overlay interferes with the normal power-down sequence, preventing the
++        kernel from resetting the SoC (a necessary step in a normal power-off
++        or reboot). This also disables the ability to triger a boot by driving
++        GPIO3 low.
++
++        Users of this overlay are required to provide an external mechanism to
++        switch off the power supply when signalled - failure to do so results
++        in a kernel BUG, increased power consumption and undefined behaviour.
+ Load:   dtoverlay=gpio-poweroff,<param>=<val>
+ Params: gpiopin                 GPIO for signalling (default 26)
+ 
+-- 
+2.17.1
+

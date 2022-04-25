@@ -1,0 +1,31 @@
+From f4fed2307ca944cef7b7b2a89ecc35bc807d29d8 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 17 Feb 2021 09:29:26 +0000
+Subject: [PATCH] overlays: fsm-demo: Ensure all LEDs are turned off
+
+If the shutdown process is delayed enough to trigger the shutdown
+timeout then one or more states in the shutdown sequence might be
+skipped. Ensure that all LEDs are turned off regardless by explicitly
+doing so in the shutdown state, as an example of good practices.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/fsm-demo-overlay.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/overlays/fsm-demo-overlay.dts b/arch/arm/boot/dts/overlays/fsm-demo-overlay.dts
+index 9b5da179914f..e9944f5cd258 100644
+--- a/arch/arm/boot/dts/overlays/fsm-demo-overlay.dts
++++ b/arch/arm/boot/dts/overlays/fsm-demo-overlay.dts
+@@ -92,7 +92,7 @@
+ 
+ 				shutdown4 {
+ 					shutdown_state;
+-					set = <RED 0>;
++					set = <RED 0>, <AMBER 0>, <GREEN 0>;
+ 				};
+ 			};
+ 	       };
+-- 
+2.17.1
+

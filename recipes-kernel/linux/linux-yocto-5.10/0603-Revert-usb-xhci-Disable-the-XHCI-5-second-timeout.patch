@@ -1,0 +1,28 @@
+From 64ca5346af97156d0d717574f32896de26087fdd Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 31 Mar 2021 10:33:35 +0100
+Subject: [PATCH] Revert "usb: xhci: Disable the XHCI 5 second timeout"
+
+This reverts commit 0b387d58aacc006b3cb24415c7c62baa99edf743.
+---
+ drivers/usb/host/xhci.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 2c31bfbf6b93..10547411cb44 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -196,9 +196,8 @@ int xhci_reset(struct xhci_hcd *xhci)
+ 	if (xhci->quirks & XHCI_INTEL_HOST)
+ 		udelay(1000);
+ 
+-	// Hack: reduce handshake timeout from 10s 0.5s due to unprogrammed vl805
+ 	ret = xhci_handshake(&xhci->op_regs->command,
+-			CMD_RESET, 0, 500 * 1000);
++			CMD_RESET, 0, 10 * 1000 * 1000);
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.17.1
+

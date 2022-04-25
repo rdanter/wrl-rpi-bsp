@@ -1,0 +1,31 @@
+From 0a5be4906874b5382909cafc94b99bbd3bf5c99e Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Mon, 20 Apr 2020 11:01:21 +0100
+Subject: [PATCH] media: i2c: imx219: Declare that the driver can create events
+
+The flag V4L2_SUBDEV_FL_HAS_EVENTS is required if the subdev can
+generate events. It can create events from the ctrl handler, therefore
+this is required.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/media/i2c/imx219.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/imx219.c b/drivers/media/i2c/imx219.c
+index aec43b602649..473134c1e40f 100644
+--- a/drivers/media/i2c/imx219.c
++++ b/drivers/media/i2c/imx219.c
+@@ -1582,7 +1582,8 @@ static int imx219_probe(struct i2c_client *client)
+ 
+ 	/* Initialize subdev */
+ 	imx219->sd.internal_ops = &imx219_internal_ops;
+-	imx219->sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
++	imx219->sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE |
++			    V4L2_SUBDEV_FL_HAS_EVENTS;
+ 	imx219->sd.entity.function = MEDIA_ENT_F_CAM_SENSOR;
+ 
+ 	/* Initialize source pads */
+-- 
+2.17.1
+

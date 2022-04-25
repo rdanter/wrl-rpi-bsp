@@ -1,0 +1,26 @@
+From 7d9d9693c2935bdb6af0089c16d39d91334ea182 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Fri, 7 May 2021 17:22:53 +0100
+Subject: [PATCH] vc4/drm: hdmi: Fix missing declaration
+
+Fixes: 671a8068ee5feae1d92e6d48027fa8de062e2af2
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index f84c8257bd7e..f75c176dde09 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -2178,6 +2178,7 @@ static int vc4_hdmi_hotplug_init(struct vc4_hdmi *vc4_hdmi)
+ {
+ 	struct platform_device *pdev = vc4_hdmi->pdev;
+ 	struct device *dev = &pdev->dev;
++	struct drm_connector *connector = &vc4_hdmi->connector;
+ 	int ret;
+ 
+ 	if (vc4_hdmi->variant->external_irq_controller) {
+-- 
+2.17.1
+

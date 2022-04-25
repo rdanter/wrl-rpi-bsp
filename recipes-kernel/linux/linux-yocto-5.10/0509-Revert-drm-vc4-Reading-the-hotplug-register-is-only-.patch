@@ -1,0 +1,29 @@
+From 4235553fdcf451d1327199acc1b94001a7846242 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Tue, 8 Dec 2020 17:12:17 +0100
+Subject: [PATCH] Revert "drm/vc4: Reading the hotplug register is only valid
+ if no GPIO defined"
+
+This reverts commit 266fd375dab37b8421671f6315ed261e59076bfb.
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 5f2c83694a44..93351245c77e 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -460,9 +460,8 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 			connected = true;
+ 	} else if (drm_probe_ddc(vc4_hdmi->ddc))
+ 		connected = true;
+-	else if (HDMI_READ(HDMI_HOTPLUG) & VC4_HDMI_HOTPLUG_CONNECTED)
++	if (HDMI_READ(HDMI_HOTPLUG) & VC4_HDMI_HOTPLUG_CONNECTED)
+ 		connected = true;
+-
+ 	if (connected) {
+ 		if (connector->status != connector_status_connected) {
+ 			struct edid *edid = drm_get_edid(connector, vc4_hdmi->ddc);
+-- 
+2.17.1
+

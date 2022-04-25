@@ -1,0 +1,33 @@
+From d05d565ecf780a631181577dde41b07bf9d5905c Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 4 Jan 2021 11:06:51 +0000
+Subject: [PATCH] staging: vchiq: Fix bulk transfers on 64-bit builds
+
+The recent change to the bulk transfer compat function missed the fact
+the relevant ioctl command is VCHIQ_IOC_QUEUE_BULK_TRANSMIT32, not
+VCHIQ_IOC_QUEUE_BULK_TRANSMIT, as any attempt to send a bulk block
+to the VPU would have shown.
+
+Fixes: a4367cd2b231 ("staging: vchiq: convert compat bulk transfer")
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
+index e8e2e70ba314..a936102dbc34 100644
+--- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
++++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
+@@ -1722,7 +1722,7 @@ vchiq_compat_ioctl_queue_bulk(struct file *file,
+ {
+ 	struct vchiq_queue_bulk_transfer32 args32;
+ 	struct vchiq_queue_bulk_transfer args;
+-	enum vchiq_bulk_dir dir = (cmd == VCHIQ_IOC_QUEUE_BULK_TRANSMIT) ?
++	enum vchiq_bulk_dir dir = (cmd == VCHIQ_IOC_QUEUE_BULK_TRANSMIT32) ?
+ 				  VCHIQ_BULK_TRANSMIT : VCHIQ_BULK_RECEIVE;
+ 
+ 	if (copy_from_user(&args32, argp, sizeof(args32)))
+-- 
+2.17.1
+

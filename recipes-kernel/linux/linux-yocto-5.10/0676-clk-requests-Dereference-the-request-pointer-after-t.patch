@@ -1,0 +1,35 @@
+From ad7f86c5b960dda07d4653a8485aaa67a780a81f Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Thu, 22 Apr 2021 10:45:37 +0200
+Subject: [PATCH] clk: requests: Dereference the request pointer after the
+ check
+
+The current code will first dereference the req pointer and then test if
+it's NULL, resulting in a NULL pointer dereference if req is indeed
+NULL. Reorder the test and derefence to avoid the issue
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/clk/clk.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index af0f638d1769..1b9a76c7dafa 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -2496,10 +2496,11 @@ EXPORT_SYMBOL_GPL(clk_request_start);
+  */
+ void clk_request_done(struct clk_request *req)
+ {
+-	struct clk_core *core = req->clk->core;
++	struct clk_core *core;
+ 
+ 	if (!req)
+ 		return;
++	core = req->clk->core;
+ 
+ 	clk_prepare_lock();
+ 
+-- 
+2.17.1
+

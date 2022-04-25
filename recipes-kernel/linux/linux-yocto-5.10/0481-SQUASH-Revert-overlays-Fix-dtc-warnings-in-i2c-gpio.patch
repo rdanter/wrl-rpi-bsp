@@ -1,0 +1,32 @@
+From c85050e061ea4c0f42777e6c3f5cff0b9a4fe7fb Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 13 Jan 2021 21:27:56 +0000
+Subject: [PATCH] SQUASH: Revert "overlays: Fix dtc warnings in i2c-gpio"
+
+This reverts commit 1c15edc0dca002c8536e9f1f5e1ec43017815018.
+
+This revert and its neighbour are opposites. When squashing, delete
+the original commits as well.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
+index 2323a61edf07..63231b5d7c0c 100644
+--- a/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c-gpio-overlay.dts
+@@ -11,9 +11,6 @@
+ 		target-path = "/";
+ 
+ 		__overlay__ {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+ 			i2c_gpio: i2c@0 {
+ 				reg = <0xffffffff>;
+ 				compatible = "i2c-gpio";
+-- 
+2.17.1
+

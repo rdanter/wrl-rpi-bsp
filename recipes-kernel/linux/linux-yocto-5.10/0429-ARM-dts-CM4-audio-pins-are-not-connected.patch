@@ -1,0 +1,26 @@
+From b912ecb3683dff4fb98559b1fbe48ad518a3b6a0 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 7 Dec 2020 09:35:57 +0000
+Subject: [PATCH] ARM: dts: CM4 audio pins are not connected
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2711-rpi-cm4.dts | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+index 49c69fdaef49..dbe8afe9ac5f 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-cm4.dts
+@@ -548,8 +548,6 @@
+ 
+ &gpio {
+ 	audio_pins: audio_pins {
+-		brcm,pins = <40 41>;
+-		brcm,function = <4>;
+ 	};
+ };
+ 
+-- 
+2.17.1
+

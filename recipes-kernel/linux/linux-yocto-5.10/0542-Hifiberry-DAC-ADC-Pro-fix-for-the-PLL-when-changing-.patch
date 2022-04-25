@@ -1,0 +1,61 @@
+From 656dc8295f67e3c4c475f76f10426fc358a952d0 Mon Sep 17 00:00:00 2001
+From: Joerg Schambacher <joerg@i2audio.com>
+Date: Mon, 1 Feb 2021 16:53:46 +0100
+Subject: [PATCH] Hifiberry DAC+ADC Pro fix for the PLL when changing sample
+ rates
+
+Adds 2 msecs delay when switching between oscillators to allow
+correct PLL settling.
+Thanks to Clive Messer for the support!
+
+Signed-off-by: Joerg Schambacher <joerg@hifiberry.com>
+---
+ sound/soc/bcm/hifiberry_dacplusadcpro.c | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
+
+diff --git a/sound/soc/bcm/hifiberry_dacplusadcpro.c b/sound/soc/bcm/hifiberry_dacplusadcpro.c
+index 4c03927107e3..8b04d30bcbee 100644
+--- a/sound/soc/bcm/hifiberry_dacplusadcpro.c
++++ b/sound/soc/bcm/hifiberry_dacplusadcpro.c
+@@ -190,6 +190,7 @@ static void snd_rpi_hifiberry_dacplusadcpro_select_clk(
+ 				PCM512x_GPIO_CONTROL_1, 0x24, 0x04);
+ 		break;
+ 	}
++	usleep_range(2000, 2100);
+ }
+ 
+ static void snd_rpi_hifiberry_dacplusadcpro_clk_gpio(struct snd_soc_component *component)
+@@ -207,13 +208,6 @@ static bool snd_rpi_hifiberry_dacplusadcpro_is_sclk(struct snd_soc_component *co
+ 	return (!(sck & 0x40));
+ }
+ 
+-static bool snd_rpi_hifiberry_dacplusadcpro_is_sclk_sleep(
+-	struct snd_soc_component *component)
+-{
+-	msleep(2);
+-	return snd_rpi_hifiberry_dacplusadcpro_is_sclk(component);
+-}
+-
+ static bool snd_rpi_hifiberry_dacplusadcpro_is_pro_card(struct snd_soc_component *component)
+ {
+ 	bool isClk44EN, isClk48En, isNoClk;
+@@ -221,13 +215,13 @@ static bool snd_rpi_hifiberry_dacplusadcpro_is_pro_card(struct snd_soc_component
+ 	snd_rpi_hifiberry_dacplusadcpro_clk_gpio(component);
+ 
+ 	snd_rpi_hifiberry_dacplusadcpro_select_clk(component, HIFIBERRY_DACPRO_CLK44EN);
+-	isClk44EN = snd_rpi_hifiberry_dacplusadcpro_is_sclk_sleep(component);
++	isClk44EN = snd_rpi_hifiberry_dacplusadcpro_is_sclk(component);
+ 
+ 	snd_rpi_hifiberry_dacplusadcpro_select_clk(component, HIFIBERRY_DACPRO_NOCLOCK);
+-	isNoClk = snd_rpi_hifiberry_dacplusadcpro_is_sclk_sleep(component);
++	isNoClk = snd_rpi_hifiberry_dacplusadcpro_is_sclk(component);
+ 
+ 	snd_rpi_hifiberry_dacplusadcpro_select_clk(component, HIFIBERRY_DACPRO_CLK48EN);
+-	isClk48En = snd_rpi_hifiberry_dacplusadcpro_is_sclk_sleep(component);
++	isClk48En = snd_rpi_hifiberry_dacplusadcpro_is_sclk(component);
+ 
+ 	return (isClk44EN && isClk48En && !isNoClk);
+ }
+-- 
+2.17.1
+

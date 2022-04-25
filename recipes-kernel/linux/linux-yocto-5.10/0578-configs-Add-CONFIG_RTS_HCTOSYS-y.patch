@@ -1,0 +1,83 @@
+From 4413b6e0a939a0713bb647571d1e537bd12294a2 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 11 Mar 2021 16:59:05 +0000
+Subject: [PATCH] configs: Add CONFIG_RTS_HCTOSYS=y
+
+The recently improved RTC_HCTOSYS option now works with RTC drivers in
+modules, making it much more useful in that it removes the need to run
+hwclock -s in order to synchronise the system clock.
+
+See: https://github.com/raspberrypi/linux/issues/4205
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 -
+ arch/arm/configs/bcm2711_defconfig   | 1 -
+ arch/arm/configs/bcmrpi_defconfig    | 1 -
+ arch/arm64/configs/bcm2711_defconfig | 1 -
+ arch/arm64/configs/bcmrpi3_defconfig | 1 -
+ 5 files changed, 5 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index ac3090040c48..f4da60298fae 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1223,7 +1223,6 @@ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+ CONFIG_SPEAKUP_SYNTH_SOFT=m
+ CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_HCTOSYS is not set
+ CONFIG_RTC_DRV_ABX80X=m
+ CONFIG_RTC_DRV_DS1307=m
+ CONFIG_RTC_DRV_DS1374=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 4b5dc70da6f4..b3a4441748e8 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -1257,7 +1257,6 @@ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+ CONFIG_SPEAKUP_SYNTH_SOFT=m
+ CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_HCTOSYS is not set
+ CONFIG_RTC_DRV_ABX80X=m
+ CONFIG_RTC_DRV_DS1307=m
+ CONFIG_RTC_DRV_DS1374=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 6d19d0ff49db..fcc63ee8b578 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1234,7 +1234,6 @@ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+ CONFIG_SPEAKUP_SYNTH_SOFT=m
+ CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_HCTOSYS is not set
+ CONFIG_RTC_DRV_ABX80X=m
+ CONFIG_RTC_DRV_DS1307=m
+ CONFIG_RTC_DRV_DS1374=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 8a643571a458..73bb908fc4e9 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -1257,7 +1257,6 @@ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+ CONFIG_SPEAKUP_SYNTH_SOFT=m
+ CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_HCTOSYS is not set
+ CONFIG_RTC_DRV_ABX80X=m
+ CONFIG_RTC_DRV_DS1307=m
+ CONFIG_RTC_DRV_DS1374=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 60bda75b6965..584e82f7de99 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1122,7 +1122,6 @@ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+ CONFIG_SPEAKUP_SYNTH_SOFT=m
+ CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_HCTOSYS is not set
+ CONFIG_RTC_DRV_ABX80X=m
+ CONFIG_RTC_DRV_DS1307=m
+ CONFIG_RTC_DRV_DS1374=m
+-- 
+2.17.1
+

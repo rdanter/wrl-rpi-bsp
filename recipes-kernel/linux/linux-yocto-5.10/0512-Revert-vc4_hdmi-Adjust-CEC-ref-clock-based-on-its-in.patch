@@ -1,0 +1,99 @@
+From 9056a3603e68326ee0c6a9c6c4d389029b6aae5c Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Tue, 8 Dec 2020 17:13:30 +0100
+Subject: [PATCH] Revert "vc4_hdmi: Adjust CEC ref clock based on its input
+ clock"
+
+This reverts commit 7269a05437b3157a842f57bcb665a0801225702b.
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 14 +++-----------
+ drivers/gpu/drm/vc4/vc4_hdmi.h |  3 ---
+ 2 files changed, 3 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 4d6d88e21b08..251b03382ae4 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -93,12 +93,8 @@
+ # define VC4_HD_M_ENABLE			BIT(0)
+ 
+ #define CEC_CLOCK_FREQ 40000
+-/* Threshold for adjusting the BVB clock */
+ #define VC4_HSM_MID_CLOCK 149985000
+ 
+-/* Fixed HVS4 HSM clock rate */
+-#define VC4_HSM_CLOCK 163682864
+-
+ #define HDMI_CODEC_CHMAP_IDX_UNKNOWN  -1
+ 
+ /*
+@@ -1272,7 +1268,8 @@ static u32 vc4_hdmi_calc_hsm_clock(struct vc4_hdmi *vc4_hdmi, unsigned long pixe
+ 	 * clock, so make it constant to avoid having to reconfigure CEC on
+ 	 * every mode change.
+ 	 */
+-	return VC4_HSM_CLOCK;
++
++	return 163682864;
+ }
+ 
+ static u32 vc5_hdmi_calc_hsm_clock(struct vc4_hdmi *vc4_hdmi, unsigned long pixel_rate)
+@@ -2143,7 +2140,6 @@ static int vc4_hdmi_cec_init(struct vc4_hdmi *vc4_hdmi)
+ 	struct cec_connector_info conn_info;
+ 	struct platform_device *pdev = vc4_hdmi->pdev;
+ 	u32 value;
+-	u32 clk_cnt;
+ 	int ret;
+ 
+ 	if (!vc4_hdmi->variant->cec_available)
+@@ -2168,9 +2164,8 @@ static int vc4_hdmi_cec_init(struct vc4_hdmi *vc4_hdmi)
+ 	 * divider: the hsm_clock rate and this divider setting will
+ 	 * give a 40 kHz CEC clock.
+ 	 */
+-	clk_cnt = vc4_hdmi->variant->cec_input_clock / CEC_CLOCK_FREQ;
+ 	value |= VC4_HDMI_CEC_ADDR_MASK |
+-		 ((clk_cnt - 1) << VC4_HDMI_CEC_DIV_CLK_CNT_SHIFT);
++		 (4091 << VC4_HDMI_CEC_DIV_CLK_CNT_SHIFT);
+ 	HDMI_WRITE(HDMI_CEC_CNTRL_1, value);
+ 	ret = devm_request_threaded_irq(&pdev->dev, platform_get_irq(pdev, 0),
+ 					vc4_cec_irq_handler,
+@@ -2583,7 +2578,6 @@ static const struct vc4_hdmi_variant bcm2835_variant = {
+ 	.debugfs_name		= "hdmi_regs",
+ 	.card_name		= "vc4-hdmi",
+ 	.max_pixel_clock	= 162000000,
+-	.cec_input_clock	= VC4_HSM_CLOCK,
+ 	.cec_available		= true,
+ 	.registers		= vc4_hdmi_fields,
+ 	.num_registers		= ARRAY_SIZE(vc4_hdmi_fields),
+@@ -2607,7 +2601,6 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
+ 	.debugfs_name		= "hdmi0_regs",
+ 	.card_name		= "vc4-hdmi-0",
+ 	.max_pixel_clock	= 297000000,
+-	.cec_input_clock	= 27000000,
+ 	.registers		= vc5_hdmi_hdmi0_fields,
+ 	.num_registers		= ARRAY_SIZE(vc5_hdmi_hdmi0_fields),
+ 	.phy_lane_mapping	= {
+@@ -2637,7 +2630,6 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+ 	.debugfs_name		= "hdmi1_regs",
+ 	.card_name		= "vc4-hdmi-1",
+ 	.max_pixel_clock	= 297000000,
+-	.cec_input_clock	= 27000000,
+ 	.registers		= vc5_hdmi_hdmi1_fields,
+ 	.num_registers		= ARRAY_SIZE(vc5_hdmi_hdmi1_fields),
+ 	.phy_lane_mapping	= {
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index 988b672c7de8..b0baed2e1a78 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -48,9 +48,6 @@ struct vc4_hdmi_variant {
+ 	/* Maximum pixel clock supported by the controller (in Hz) */
+ 	unsigned long long max_pixel_clock;
+ 
+-	/* Input clock frequency of CEC block (in Hz) */
+-	unsigned long cec_input_clock;
+-
+ 	/* List of the registers available on that variant */
+ 	const struct vc4_hdmi_register *registers;
+ 
+-- 
+2.17.1
+

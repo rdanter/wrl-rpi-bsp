@@ -1,0 +1,25 @@
+From 0bda5bf289b589a23af4b1e2efefe8a72bacdaa8 Mon Sep 17 00:00:00 2001
+From: hdoverobinson <hdoverobinson@gmail.com>
+Date: Tue, 13 Mar 2018 06:58:39 -0400
+Subject: [PATCH] added capture_clear option to pps-gpio via dtoverlay (#2433)
+
+---
+ drivers/pps/clients/pps-gpio.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/pps/clients/pps-gpio.c b/drivers/pps/clients/pps-gpio.c
+index e0de1df2ede0..ee7d8f4e7f2e 100644
+--- a/drivers/pps/clients/pps-gpio.c
++++ b/drivers/pps/clients/pps-gpio.c
+@@ -145,6 +145,8 @@ static int pps_gpio_setup(struct platform_device *pdev)
+ 
+ 	if (of_property_read_bool(np, "assert-falling-edge"))
+ 		data->assert_falling_edge = true;
++        if (of_property_read_bool(np, "capture-clear"))
++                data->capture_clear = true;
+ 	return 0;
+ }
+ 
+-- 
+2.17.1
+

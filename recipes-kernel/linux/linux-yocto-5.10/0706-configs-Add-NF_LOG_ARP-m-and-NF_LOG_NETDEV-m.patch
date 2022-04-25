@@ -1,0 +1,119 @@
+From ad26fd4e03cd2add0b63b86467a76b373b7f28ca Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 10 May 2021 22:04:44 +0100
+Subject: [PATCH] configs: Add NF_LOG_ARP=m and NF_LOG_NETDEV=m
+
+See: https://github.com/raspberrypi/linux/issues/3615
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 2 ++
+ arch/arm/configs/bcm2711_defconfig   | 2 ++
+ arch/arm/configs/bcmrpi_defconfig    | 2 ++
+ arch/arm64/configs/bcm2711_defconfig | 2 ++
+ arch/arm64/configs/bcmrpi3_defconfig | 2 ++
+ 5 files changed, 10 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 073877ae2974..dd718c111532 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -123,6 +123,7 @@ CONFIG_IPV6_PIMSM_V2=y
+ CONFIG_NETFILTER=y
+ CONFIG_BRIDGE_NETFILTER=m
+ CONFIG_NF_CONNTRACK=m
++CONFIG_NF_LOG_NETDEV=m
+ CONFIG_NF_CONNTRACK_ZONES=y
+ CONFIG_NF_CONNTRACK_EVENTS=y
+ CONFIG_NF_CONNTRACK_TIMESTAMP=y
+@@ -258,6 +259,7 @@ CONFIG_NFT_DUP_IPV4=m
+ CONFIG_NFT_FIB_IPV4=m
+ CONFIG_NF_TABLES_ARP=y
+ CONFIG_NF_FLOW_TABLE_IPV4=m
++CONFIG_NF_LOG_ARP=m
+ CONFIG_IP_NF_IPTABLES=m
+ CONFIG_IP_NF_MATCH_AH=m
+ CONFIG_IP_NF_MATCH_ECN=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index ca0c73831827..01ef252e33a5 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -124,6 +124,7 @@ CONFIG_IPV6_PIMSM_V2=y
+ CONFIG_NETFILTER=y
+ CONFIG_BRIDGE_NETFILTER=m
+ CONFIG_NF_CONNTRACK=m
++CONFIG_NF_LOG_NETDEV=m
+ CONFIG_NF_CONNTRACK_ZONES=y
+ CONFIG_NF_CONNTRACK_EVENTS=y
+ CONFIG_NF_CONNTRACK_TIMESTAMP=y
+@@ -259,6 +260,7 @@ CONFIG_NFT_DUP_IPV4=m
+ CONFIG_NFT_FIB_IPV4=m
+ CONFIG_NF_TABLES_ARP=y
+ CONFIG_NF_FLOW_TABLE_IPV4=m
++CONFIG_NF_LOG_ARP=m
+ CONFIG_IP_NF_IPTABLES=m
+ CONFIG_IP_NF_MATCH_AH=m
+ CONFIG_IP_NF_MATCH_ECN=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index c71640dd0ce2..e625ac03f354 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -117,6 +117,7 @@ CONFIG_IPV6_PIMSM_V2=y
+ CONFIG_NETFILTER=y
+ CONFIG_BRIDGE_NETFILTER=m
+ CONFIG_NF_CONNTRACK=m
++CONFIG_NF_LOG_NETDEV=m
+ CONFIG_NF_CONNTRACK_ZONES=y
+ CONFIG_NF_CONNTRACK_EVENTS=y
+ CONFIG_NF_CONNTRACK_TIMESTAMP=y
+@@ -252,6 +253,7 @@ CONFIG_NFT_DUP_IPV4=m
+ CONFIG_NFT_FIB_IPV4=m
+ CONFIG_NF_TABLES_ARP=y
+ CONFIG_NF_FLOW_TABLE_IPV4=m
++CONFIG_NF_LOG_ARP=m
+ CONFIG_IP_NF_IPTABLES=m
+ CONFIG_IP_NF_MATCH_AH=m
+ CONFIG_IP_NF_MATCH_ECN=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 23d951e4034f..ad3c5538483a 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -121,6 +121,7 @@ CONFIG_IPV6_PIMSM_V2=y
+ CONFIG_NETFILTER=y
+ CONFIG_BRIDGE_NETFILTER=m
+ CONFIG_NF_CONNTRACK=m
++CONFIG_NF_LOG_NETDEV=m
+ CONFIG_NF_CONNTRACK_ZONES=y
+ CONFIG_NF_CONNTRACK_EVENTS=y
+ CONFIG_NF_CONNTRACK_TIMESTAMP=y
+@@ -256,6 +257,7 @@ CONFIG_NFT_DUP_IPV4=m
+ CONFIG_NFT_FIB_IPV4=m
+ CONFIG_NF_TABLES_ARP=y
+ CONFIG_NF_FLOW_TABLE_IPV4=m
++CONFIG_NF_LOG_ARP=m
+ CONFIG_IP_NF_IPTABLES=m
+ CONFIG_IP_NF_MATCH_AH=m
+ CONFIG_IP_NF_MATCH_ECN=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index c38726720f27..e10614d666dd 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -120,6 +120,7 @@ CONFIG_IPV6_PIMSM_V2=y
+ CONFIG_NETFILTER=y
+ CONFIG_BRIDGE_NETFILTER=m
+ CONFIG_NF_CONNTRACK=m
++CONFIG_NF_LOG_NETDEV=m
+ CONFIG_NF_CONNTRACK_ZONES=y
+ CONFIG_NF_CONNTRACK_EVENTS=y
+ CONFIG_NF_CONNTRACK_TIMESTAMP=y
+@@ -255,6 +256,7 @@ CONFIG_NFT_DUP_IPV4=m
+ CONFIG_NFT_FIB_IPV4=m
+ CONFIG_NF_TABLES_ARP=y
+ CONFIG_NF_FLOW_TABLE_IPV4=m
++CONFIG_NF_LOG_ARP=m
+ CONFIG_IP_NF_IPTABLES=m
+ CONFIG_IP_NF_MATCH_AH=m
+ CONFIG_IP_NF_MATCH_ECN=m
+-- 
+2.17.1
+

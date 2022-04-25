@@ -1,0 +1,30 @@
+From e13a7a09796f2cee5c3f836cf0770ab4651015b8 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Wed, 12 May 2021 16:44:11 +0100
+Subject: [PATCH] dtoverlays: Add pinctrl-names to i2c0 overlay.
+
+Using dtoverlay=i2c0 failed to set up the pinctrl nodes as
+pinctrl-name = "default"; was missing from the i2c0if node.
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=107&t=311686&p=1864112
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/i2c0-overlay.dts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/overlays/i2c0-overlay.dts b/arch/arm/boot/dts/overlays/i2c0-overlay.dts
+index 7c6771f84d8e..058f1cb76c69 100644
+--- a/arch/arm/boot/dts/overlays/i2c0-overlay.dts
++++ b/arch/arm/boot/dts/overlays/i2c0-overlay.dts
+@@ -8,6 +8,7 @@
+ 		target = <&i2c0if>;
+ 		__overlay__ {
+ 			status = "okay";
++			pinctrl-names = "default";
+ 			pinctrl-0 = <&i2c0_pins>;
+ 		};
+ 	};
+-- 
+2.17.1
+

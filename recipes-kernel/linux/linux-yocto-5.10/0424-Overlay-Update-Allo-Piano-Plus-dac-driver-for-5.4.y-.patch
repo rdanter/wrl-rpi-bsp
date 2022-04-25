@@ -1,0 +1,34 @@
+From 18360d282d7e0105e3b1d11c9499b1124b9ceb5f Mon Sep 17 00:00:00 2001
+From: paul-1 <6473457+paul-1@users.noreply.github.com>
+Date: Wed, 4 Nov 2020 19:17:48 -0500
+Subject: [PATCH] Overlay: Update Allo Piano Plus dac driver for 5.4.y kernels.
+
+Create unique names for the two instances of the codec driver.
+
+Signed-off-by: Paul Hermann <paul@picoreplayer.org>
+---
+ .../dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts  | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts b/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts
+index 374c553db062..d47a35def4f7 100644
+--- a/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts
++++ b/arch/arm/boot/dts/overlays/allo-piano-dac-plus-pcm512x-audio-overlay.dts
+@@ -23,12 +23,14 @@
+ 				#sound-dai-cells = <0>;
+ 				compatible = "ti,pcm5122";
+ 				reg = <0x4c>;
++				sound-name-prefix = "Main";
+ 				status = "okay";
+ 			};
+ 			allo_pcm5122_4d: pcm5122@4d {
+ 				#sound-dai-cells = <0>;
+ 				compatible = "ti,pcm5122";
+ 				reg = <0x4d>;
++				sound-name-prefix = "Sub";
+ 				status = "okay";
+ 			};
+ 		};
+-- 
+2.17.1
+
