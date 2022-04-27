@@ -1,4 +1,4 @@
-From dbe897f55b17ecacb6f1ce951535570fa6e49b6a Mon Sep 17 00:00:00 2001
+From 888ca9522faf51c4efa3829741a9e281aaf7fda6 Mon Sep 17 00:00:00 2001
 From: Jonathan Bell <jonathan@raspberrypi.org>
 Date: Thu, 11 Jul 2019 17:55:43 +0100
 Subject: [PATCH] xhci: add quirk for host controllers that don't update
@@ -22,10 +22,10 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.org>
  3 files changed, 29 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-index 84da8406d5b4..551ef6445c6b 100644
+index 5bbccc9a0179..96e37f60c7c2 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
-@@ -269,8 +269,10 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+@@ -270,8 +270,10 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  			pdev->device == 0x3432)
  		xhci->quirks |= XHCI_BROKEN_STREAMS;
  
@@ -38,7 +38,7 @@ index 84da8406d5b4..551ef6445c6b 100644
  	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
  		pdev->device == PCI_DEVICE_ID_ASMEDIA_1042_XHCI)
 diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index db8612ec82d3..6cf0b04d2f6f 100644
+index 054840a69eb4..a9bd2e340ead 100644
 --- a/drivers/usb/host/xhci-ring.c
 +++ b/drivers/usb/host/xhci-ring.c
 @@ -533,7 +533,10 @@ void xhci_find_new_dequeue_state(struct xhci_hcd *xhci,
@@ -83,17 +83,17 @@ index db8612ec82d3..6cf0b04d2f6f 100644
  
  	/*
 diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
-index d90c0d5df3b3..0aa1ccede6b1 100644
+index d01241f1daf3..03e4280dbb5a 100644
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
-@@ -1879,6 +1879,7 @@ struct xhci_hcd {
- #define XHCI_SKIP_PHY_INIT	BIT_ULL(37)
+@@ -1880,6 +1880,7 @@ struct xhci_hcd {
  #define XHCI_DISABLE_SPARSE	BIT_ULL(38)
  #define XHCI_SG_TRB_CACHE_SIZE_QUIRK	BIT_ULL(39)
-+#define XHCI_EP_CTX_BROKEN_DCS	BIT_ULL(40)
+ #define XHCI_NO_SOFT_RETRY	BIT_ULL(40)
++#define XHCI_EP_CTX_BROKEN_DCS	BIT_ULL(41)
  
  	unsigned int		num_active_eps;
  	unsigned int		limit_active_eps;
 -- 
-2.17.1
+2.29.2
 
