@@ -776,6 +776,7 @@ SRC_URI += "file://0709-media-i2c-ov5647-Fix-v4l2-compliance-failure-subscri.pat
 SRC_URI += "file://0710-dtoverlays-Add-pinctrl-names-to-i2c0-overlay.patch"
 SRC_URI += "file://0711-dtoverlays-Update-__symbols__-i2c0-from-i2c0-overlay.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0712-media-v4l2-ctrls.c-fix-race-condition-in-hdl-request.patch"
 
 SRC_URI += "file://0713-media-rpivid-Remove-the-need-to-have-num_entry_point.patch"
