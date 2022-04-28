@@ -670,6 +670,7 @@ SRC_URI += "file://0606-dwc-otg-fix-clang-Wsometimes-uninitialized-warning.patch
 SRC_URI += "file://0607-dwc-otg-fix-clang-Wpointer-bool-conversion-warning.patch"
 SRC_URI += "file://0608-Update-Allo-Piano-Dac-Driver.patch"
 
+# The following three patches are already included in the WR kernel
 #SRC_URI += "file://0609-sc16is7xx-Defer-probe-if-device-read-fails.patch"
 #SRC_URI += "file://0610-ASoC-tlv320aic32x4-Register-clocks-before-registerin.patch"
 #SRC_URI += "file://0611-ASoC-tlv320aic32x4-Increase-maximum-register-in-regm.patch"
@@ -681,9 +682,7 @@ SRC_URI += "file://0615-drm-connector-Add-a-helper-to-attach-the-colorspace-.pat
 SRC_URI += "file://0616-drm-vc4-hdmi-Signal-the-proper-colorimetry-info-in-t.patch"
 SRC_URI += "file://0617-staging-vcsm-cma-Fix-memory-leak-from-not-detaching-.patch"
 SRC_URI += "file://0618-vc4-kms-vc4_plane-Support-2020-colourspace-for-yuv-p.patch"
-
-#SRC_URI += "file://0619-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
-
+SRC_URI += "file://0619-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
 SRC_URI += "file://0620-sound-usb-call-usb_autopm_get_interface-for-devices-.patch"
 SRC_URI += "file://0621-overlays-ghost-amp-Add-DAC-mute-control.patch"
 SRC_URI += "file://0622-clk-Introduce-a-clock-request-API.patch"
