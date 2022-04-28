@@ -323,11 +323,14 @@ SRC_URI += "file://0316-dwc_otg-whitelist_table-is-now-productlist_table.patch"
 SRC_URI += "file://0317-vchiq_2835_arm-Implement-a-DMA-pool-for-small-bulk-t.patch"
 SRC_URI += "file://0318-include-firmware-Add-enum-for-RPI_FIRMWARE_FRAMEBUFF.patch"
 SRC_URI += "file://0319-vc4_hdmi-BCM2835-requires-a-fixed-hsm-clock-for-CEC-.patch"
+# The following two patches are already included in WR kernel
 #SRC_URI += "file://0320-vc4_hdmi-Fix-register-offset-when-sending-longer-CEC.patch"
 #SRC_URI += "file://0321-vc4_hdmi-Fix-up-CEC-registers.patch"
 SRC_URI += "file://0322-vc4_hdmi_regs-Add-Intr2-register-block.patch"
 SRC_URI += "file://0323-vc4_hdmi_regs-Make-interrupt-mask-variant-specific.patch"
 SRC_URI += "file://0324-vc4_hdmi-Make-irq-shared.patch"
+# The following two patches don't apply, but are reverted by patches 0511 and
+# 0512 anyway, so no need to fix them
 #SRC_URI += "file://0325-vc4_hdmi-Adjust-CEC-ref-clock-based-on-its-input-clo.patch"
 #SRC_URI += "file://0326-vc4_hdmi-Remove-cec_available-flag-as-always-support.patch"
 SRC_URI += "file://0327-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
@@ -339,6 +342,7 @@ SRC_URI += "file://0332-drm-vc4-enable-HBR-MAI-format-on-HBR-streams.patch"
 SRC_URI += "file://0333-vc4_hdmi-Remove-firmware-logic-for-MAI-threshold-set.patch"
 SRC_URI += "file://0334-vc_hdmi-Set-VC4_HDMI_MAI_CONFIG_FORMAT_REVERSE.patch"
 SRC_URI += "file://0335-vc4-Report-channel-mapping-back-to-userspace.patch"
+# The following patch does not apply on the WR kernel but is reverted by 0510 anyway
 #SRC_URI += "file://0336-vc4-cec-Restore-cec-physical-address-on-reconnect.patch"
 SRC_URI += "file://0337-drm-vc4-Add-support-for-DRM_FORMAT_P030-to-vc4-plane.patch"
 SRC_URI += "file://0338-drm-vc4-Add-support-for-YUV-color-encodings-and-rang.patch"
@@ -372,6 +376,7 @@ SRC_URI += "file://0365-staging-vc04_services-ISP-Add-a-more-complex-ISP-pro.pat
 SRC_URI += "file://0366-drm-vc4-A-present-but-empty-dmas-disables-audio.patch"
 SRC_URI += "file://0367-drm-vc4-Add-debugfs-node-that-dumps-the-current-disp.patch"
 SRC_URI += "file://0368-gpio-Add-gpio-fsm-driver.patch"
+# The following patch does not apply on the WR kernel but is reverted by 0509 anyway
 #SRC_URI += "file://0369-drm-vc4-Reading-the-hotplug-register-is-only-valid-i.patch"
 SRC_URI += "file://0370-drm-vc4-Add-all-the-HDMI-registers-into-the-debugfs-.patch"
 SRC_URI += "file://0371-ARM-dts-bcm271x-Use-a53-pmu-drop-RPI364.patch"
@@ -437,6 +442,7 @@ SRC_URI += "file://0430-configs-Add-RTC_DRV_PCF85063-m.patch"
 SRC_URI += "file://0431-overlays-Add-PCF85063-and-PCF85063A-to-i2c-rtc.patch"
 SRC_URI += "file://0432-overlays-Fix-cut-and-paste-error-in-README.patch"
 SRC_URI += "file://0433-staging-bcm2835-codec-Ensure-OUTPUT-timestamps-are-a.patch"
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0434-Revert-media-videobuf2-Fix-length-check-for-single-p.patch"
 SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
 SRC_URI += "file://0436-overlays-mpu6050-Add-addr-parameter.patch"
@@ -455,6 +461,8 @@ SRC_URI += "file://0448-drm-vc4-hdmi-Don-t-access-the-connector-state-in-res.pat
 SRC_URI += "file://0449-drm-vc4-hdmi-Create-a-custom-connector-state.patch"
 SRC_URI += "file://0450-drm-vc4-hdmi-Store-pixel-frequency-in-the-connector-.patch"
 SRC_URI += "file://0451-drm-vc4-hdmi-Use-the-connector-state-pixel-rate-for-.patch"
+# The following patch does not apply on the WR kernel, but is reverted by 0507
+# anyway, so no need to fix it
 #SRC_URI += "file://0452-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-without-sc.patch"
 SRC_URI += "file://0453-drm-vc4-hdmi-Enable-10-12-bpc-output.patch"
 SRC_URI += "file://0454-drm-vc4-Fixup-fkms-for-API-change.patch"
@@ -510,8 +518,11 @@ SRC_URI += "file://0503-media-i2c-imx290-Replace-V4L2_CID_GAIN-with-V4L2_CID.pat
 SRC_URI += "file://0504-media-i2c-imx290-Fix-number-of-controls-in-v4l2_ctrl.patch"
 SRC_URI += "file://0505-i2c-bcm2835-Handle-untimely-DONE-signal.patch"
 SRC_URI += "file://0506-configs-Add-MICREL_PHY-y.patch"
+# The following reverts patch 0452, which does not apply on the WR kernel
 #SRC_URI += "file://0507-Revert-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-wit.patch"
 SRC_URI += "file://0508-Revert-vc4_hdmi-Move-hdmi-reset-to-bind.patch"
+# The following patches revert patches 0325, 0326, 0336 and 0369 which don't
+# apply on the WR kernel anyway
 #SRC_URI += "file://0509-Revert-drm-vc4-Reading-the-hotplug-register-is-only-.patch"
 #SRC_URI += "file://0510-Revert-vc4-cec-Restore-cec-physical-address-on-recon.patch"
 #SRC_URI += "file://0511-Revert-vc4_hdmi-Remove-cec_available-flag-as-always-.patch"
