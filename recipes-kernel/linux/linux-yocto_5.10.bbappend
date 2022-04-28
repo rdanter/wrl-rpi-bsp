@@ -562,15 +562,18 @@ SRC_URI += "file://0513-Revert-vc4_hdmi-Make-irq-shared.patch"
 SRC_URI += "file://0514-Revert-vc4_hdmi_regs-Make-interrupt-mask-variant-spe.patch"
 SRC_URI += "file://0515-Revert-vc4_hdmi_regs-Add-Intr2-register-block.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0516-Revert-vc4_hdmi-Fix-register-offset-when-sending-lon.patch"
 
 SRC_URI += "file://0517-Revert-vc4_hdmi-BCM2835-requires-a-fixed-hsm-clock-f.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0518-Revert-vc4_hdmi-Fix-up-CEC-registers.patch"
 
 SRC_URI += "file://0519-ARM-bcm-Select-BRCMSTB_L2_IRQ-for-bcm2835.patch"
 SRC_URI += "file://0520-drm-vc4-hdmi-Move-hdmi-reset-to-bind.patch"
 
+# The following five patches are already included in the WR kernel
 #SRC_URI += "file://0521-drm-vc4-hdmi-Fix-register-offset-with-longer-CEC-mes.patch"
 #SRC_URI += "file://0522-drm-vc4-hdmi-Fix-up-CEC-registers.patch"
 #SRC_URI += "file://0523-drm-vc4-hdmi-Restore-cec-physical-address-on-reconne.patch"
@@ -589,6 +592,7 @@ SRC_URI += "file://0534-bcm2711-Disable-bsc_intr-and-aon_intr-by-default-and.pat
 SRC_URI += "file://0535-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-without-sc.patch"
 SRC_URI += "file://0536-bcm2711-Remove-old-GIC-interrupt.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0537-w1-w1_therm-Fix-conversion-result-for-negative-tempe.patch"
 
 SRC_URI += "file://0538-staging-bcm2835-camera-Fix-the-cherry-pick-of-AWB-Gr.patch"
@@ -640,6 +644,7 @@ SRC_URI += "file://0583-staging-bcm2835-codec-Add-VC-1-support.patch"
 SRC_URI += "file://0584-vc4-drm-Avoid-full-hdmi-audio-fifo-writes.patch"
 SRC_URI += "file://0585-vc4-drm-Increase-hdmi-audio-axi-priority-to-avoid-lo.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0586-drm-vc4-crtc-Reduce-PV-fifo-threshold-on-hvs4.patch"
 
 SRC_URI += "file://0587-overlays-gpio-led-new-overlay.patch"
