@@ -1,4 +1,4 @@
-From b104c9feebe346c5acf3cda98299601739674255 Mon Sep 17 00:00:00 2001
+From 8cfe2ff285c12faeb53f382094537086cae58c5f Mon Sep 17 00:00:00 2001
 From: Jonathan Bell <jonathan@raspberrypi.org>
 Date: Mon, 26 Oct 2020 14:03:35 +0000
 Subject: [PATCH] xhci: quirks: add link TRB quirk for VL805
@@ -21,10 +21,10 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  3 files changed, 12 insertions(+)
 
 diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-index 551ef6445c6b..f8e397962909 100644
+index 96e37f60c7c2..d4e3941bfee9 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
-@@ -272,6 +272,7 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+@@ -273,6 +273,7 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  	if (pdev->vendor == PCI_VENDOR_ID_VIA && pdev->device == 0x3483) {
  		xhci->quirks |= XHCI_LPM_SUPPORT;
  		xhci->quirks |= XHCI_EP_CTX_BROKEN_DCS;
@@ -33,7 +33,7 @@ index 551ef6445c6b..f8e397962909 100644
  
  	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
 diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index 6cf0b04d2f6f..6637f3c2562e 100644
+index a9bd2e340ead..35b246aeb902 100644
 --- a/drivers/usb/host/xhci-ring.c
 +++ b/drivers/usb/host/xhci-ring.c
 @@ -630,6 +630,16 @@ void xhci_find_new_dequeue_state(struct xhci_hcd *xhci,
@@ -54,17 +54,17 @@ index 6cf0b04d2f6f..6637f3c2562e 100644
  	state->new_deq_ptr = new_deq;
  
 diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
-index b814cf58b39b..2f5996fd8709 100644
+index 4f24ad7eccd9..2cc777f66cdf 100644
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
-@@ -1880,6 +1880,7 @@ struct xhci_hcd {
- #define XHCI_DISABLE_SPARSE	BIT_ULL(38)
+@@ -1881,6 +1881,7 @@ struct xhci_hcd {
  #define XHCI_SG_TRB_CACHE_SIZE_QUIRK	BIT_ULL(39)
- #define XHCI_EP_CTX_BROKEN_DCS	BIT_ULL(40)
-+#define XHCI_AVOID_DQ_ON_LINK	BIT_ULL(41)
+ #define XHCI_NO_SOFT_RETRY	BIT_ULL(40)
+ #define XHCI_EP_CTX_BROKEN_DCS	BIT_ULL(41)
++#define XHCI_AVOID_DQ_ON_LINK	BIT_ULL(42)
  
  	unsigned int		num_active_eps;
  	unsigned int		limit_active_eps;
 -- 
-2.17.1
+2.29.2
 
