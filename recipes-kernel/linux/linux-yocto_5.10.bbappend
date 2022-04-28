@@ -323,16 +323,20 @@ SRC_URI += "file://0316-dwc_otg-whitelist_table-is-now-productlist_table.patch"
 SRC_URI += "file://0317-vchiq_2835_arm-Implement-a-DMA-pool-for-small-bulk-t.patch"
 SRC_URI += "file://0318-include-firmware-Add-enum-for-RPI_FIRMWARE_FRAMEBUFF.patch"
 SRC_URI += "file://0319-vc4_hdmi-BCM2835-requires-a-fixed-hsm-clock-for-CEC-.patch"
+
 # The following two patches are already included in WR kernel
 #SRC_URI += "file://0320-vc4_hdmi-Fix-register-offset-when-sending-longer-CEC.patch"
 #SRC_URI += "file://0321-vc4_hdmi-Fix-up-CEC-registers.patch"
+
 SRC_URI += "file://0322-vc4_hdmi_regs-Add-Intr2-register-block.patch"
 SRC_URI += "file://0323-vc4_hdmi_regs-Make-interrupt-mask-variant-specific.patch"
 SRC_URI += "file://0324-vc4_hdmi-Make-irq-shared.patch"
+
 # The following two patches don't apply, but are reverted by patches 0511 and
 # 0512 anyway, so no need to fix them
 #SRC_URI += "file://0325-vc4_hdmi-Adjust-CEC-ref-clock-based-on-its-input-clo.patch"
 #SRC_URI += "file://0326-vc4_hdmi-Remove-cec_available-flag-as-always-support.patch"
+
 SRC_URI += "file://0327-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
 SRC_URI += "file://0328-vc4_hdmi-Set-HD_CTL_WHOLSMP-and-HD_CTL_CHALIGN_SET.patch"
 SRC_URI += "file://0329-vc4_hdmi-Set-HDMI_MAI_FMT.patch"
@@ -342,8 +346,10 @@ SRC_URI += "file://0332-drm-vc4-enable-HBR-MAI-format-on-HBR-streams.patch"
 SRC_URI += "file://0333-vc4_hdmi-Remove-firmware-logic-for-MAI-threshold-set.patch"
 SRC_URI += "file://0334-vc_hdmi-Set-VC4_HDMI_MAI_CONFIG_FORMAT_REVERSE.patch"
 SRC_URI += "file://0335-vc4-Report-channel-mapping-back-to-userspace.patch"
+
 # The following patch does not apply on the WR kernel but is reverted by 0510 anyway
 #SRC_URI += "file://0336-vc4-cec-Restore-cec-physical-address-on-reconnect.patch"
+
 SRC_URI += "file://0337-drm-vc4-Add-support-for-DRM_FORMAT_P030-to-vc4-plane.patch"
 SRC_URI += "file://0338-drm-vc4-Add-support-for-YUV-color-encodings-and-rang.patch"
 SRC_URI += "file://0339-drm-vc4-Add-firmware-kms-mode.patch"
@@ -376,8 +382,10 @@ SRC_URI += "file://0365-staging-vc04_services-ISP-Add-a-more-complex-ISP-pro.pat
 SRC_URI += "file://0366-drm-vc4-A-present-but-empty-dmas-disables-audio.patch"
 SRC_URI += "file://0367-drm-vc4-Add-debugfs-node-that-dumps-the-current-disp.patch"
 SRC_URI += "file://0368-gpio-Add-gpio-fsm-driver.patch"
+
 # The following patch does not apply on the WR kernel but is reverted by 0509 anyway
 #SRC_URI += "file://0369-drm-vc4-Reading-the-hotplug-register-is-only-valid-i.patch"
+
 SRC_URI += "file://0370-drm-vc4-Add-all-the-HDMI-registers-into-the-debugfs-.patch"
 SRC_URI += "file://0371-ARM-dts-bcm271x-Use-a53-pmu-drop-RPI364.patch"
 SRC_URI += "file://0372-overlays-Add-option-to-disable-composite-to-vc4-kms-.patch"
@@ -427,7 +435,10 @@ SRC_URI += "file://0415-drm-vc4-Add-support-for-DSI0.patch"
 SRC_URI += "file://0416-dt-bindings-Add-compatible-for-BCM2711-DSI1.patch"
 SRC_URI += "file://0417-drm-vc4-Add-configuration-for-BCM2711-DSI1.patch"
 SRC_URI += "file://0418-dt-Use-compatible-string-for-BCM2711-DSI1.patch"
+
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0419-vc4_hdmi-Move-hdmi-reset-to-bind.patch"
+
 SRC_URI += "file://0420-drm-vc4-Correct-DSI-register-definition.patch"
 SRC_URI += "file://0421-Allo-boss2-driver.patch"
 SRC_URI += "file://0422-Add-allo-boss2-overlay.patch"
@@ -442,8 +453,10 @@ SRC_URI += "file://0430-configs-Add-RTC_DRV_PCF85063-m.patch"
 SRC_URI += "file://0431-overlays-Add-PCF85063-and-PCF85063A-to-i2c-rtc.patch"
 SRC_URI += "file://0432-overlays-Fix-cut-and-paste-error-in-README.patch"
 SRC_URI += "file://0433-staging-bcm2835-codec-Ensure-OUTPUT-timestamps-are-a.patch"
+
 # The following patch is already included in the WR kernel
 #SRC_URI += "file://0434-Revert-media-videobuf2-Fix-length-check-for-single-p.patch"
+
 SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
 SRC_URI += "file://0436-overlays-mpu6050-Add-addr-parameter.patch"
 SRC_URI += "file://0437-drm-vc4-Make-normalize_zpos-conditional-on-using-fkm.patch"
@@ -461,16 +474,24 @@ SRC_URI += "file://0448-drm-vc4-hdmi-Don-t-access-the-connector-state-in-res.pat
 SRC_URI += "file://0449-drm-vc4-hdmi-Create-a-custom-connector-state.patch"
 SRC_URI += "file://0450-drm-vc4-hdmi-Store-pixel-frequency-in-the-connector-.patch"
 SRC_URI += "file://0451-drm-vc4-hdmi-Use-the-connector-state-pixel-rate-for-.patch"
+
 # The following patch does not apply on the WR kernel, but is reverted by 0507
 # anyway, so no need to fix it
 #SRC_URI += "file://0452-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-without-sc.patch"
+
 SRC_URI += "file://0453-drm-vc4-hdmi-Enable-10-12-bpc-output.patch"
 SRC_URI += "file://0454-drm-vc4-Fixup-fkms-for-API-change.patch"
+
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0455-staging-vchiq-Fix-bulk-userdata-handling.patch"
+
 SRC_URI += "file://0456-overlays-Rebuild-upstream-with-latest-ovmerge.patch"
 SRC_URI += "file://0457-Add-overlay-for-Seeed-Studio-CAN-BUS-FD-HAT-4034.patch"
 SRC_URI += "file://0458-vc-sm-cma-fixed-kbuild-problem.patch"
+
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0459-staging-vchiq-Fix-bulk-transfers-on-64-bit-builds.patch"
+
 SRC_URI += "file://0460-staging-vc04-services-codec-Fix-logical-precedence-i.patch"
 SRC_URI += "file://0461-staging-mmal-vchiq-Fix-incorrect-static-vchiq_instan.patch"
 SRC_URI += "file://0462-staging-vc04_services-Add-additional-unpacked-raw-fo.patch"
@@ -493,7 +514,9 @@ SRC_URI += "file://0478-dtoverlays-Update-sensor-overlays-to-use-cam1_reg-wh.pat
 SRC_URI += "file://0479-overlays-seeed-can-fd-hat-clarify-how-to-identify-HA.patch"
 SRC_URI += "file://0480-SQUASH-Revert-overlays-Make-the-i2c-gpio-overlay-saf.patch"
 SRC_URI += "file://0481-SQUASH-Revert-overlays-Fix-dtc-warnings-in-i2c-gpio.patch"
+
 #SRC_URI += "file://0482-vc4-Correct-lbm-size-and-calculation.patch"
+
 SRC_URI += "file://0483-vc4-Correct-POS1_SCL-for-hvs5.patch"
 SRC_URI += "file://0484-configs-Enable-BCM2835-thermal-driver-in-kernel8.patch"
 SRC_URI += "file://0485-uapi-bcm2835-isp-Add-colour-denoise-configuration.patch"
@@ -509,7 +532,9 @@ SRC_URI += "file://0494-configs-Add-NVMEM_RMEM-m-for-2711.patch"
 SRC_URI += "file://0495-configs-Add-CRYPTO_ADIANTUM-m.patch"
 SRC_URI += "file://0496-spi-bcm2835-Workaround-fix-for-zero-length-transfers.patch"
 SRC_URI += "file://0497-kbuild-Silence-unavoidable-dtc-overlay-warnings.patch"
+
 #SRC_URI += "file://0498-drm-vc4-hvs-Fix-buffer-overflow-with-the-dlist-handl.patch"
+
 SRC_URI += "file://0499-configs-Enable-CONFIG_MEDIA_CEC_RC.patch"
 SRC_URI += "file://0500-Adds-the-DT-overlays-to-support-Hifiberry-AMP100.patch"
 SRC_URI += "file://0501-Enhances-the-Hifiberry-DAC-driver-for-Hifiberry-AMP1.patch"
@@ -518,28 +543,38 @@ SRC_URI += "file://0503-media-i2c-imx290-Replace-V4L2_CID_GAIN-with-V4L2_CID.pat
 SRC_URI += "file://0504-media-i2c-imx290-Fix-number-of-controls-in-v4l2_ctrl.patch"
 SRC_URI += "file://0505-i2c-bcm2835-Handle-untimely-DONE-signal.patch"
 SRC_URI += "file://0506-configs-Add-MICREL_PHY-y.patch"
+
 # The following reverts patch 0452, which does not apply on the WR kernel
 #SRC_URI += "file://0507-Revert-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-wit.patch"
+
 SRC_URI += "file://0508-Revert-vc4_hdmi-Move-hdmi-reset-to-bind.patch"
+
 # The following patches revert patches 0325, 0326, 0336 and 0369 which don't
 # apply on the WR kernel anyway
 #SRC_URI += "file://0509-Revert-drm-vc4-Reading-the-hotplug-register-is-only-.patch"
 #SRC_URI += "file://0510-Revert-vc4-cec-Restore-cec-physical-address-on-recon.patch"
 #SRC_URI += "file://0511-Revert-vc4_hdmi-Remove-cec_available-flag-as-always-.patch"
 #SRC_URI += "file://0512-Revert-vc4_hdmi-Adjust-CEC-ref-clock-based-on-its-in.patch"
+
 SRC_URI += "file://0513-Revert-vc4_hdmi-Make-irq-shared.patch"
 SRC_URI += "file://0514-Revert-vc4_hdmi_regs-Make-interrupt-mask-variant-spe.patch"
 SRC_URI += "file://0515-Revert-vc4_hdmi_regs-Add-Intr2-register-block.patch"
+
 #SRC_URI += "file://0516-Revert-vc4_hdmi-Fix-register-offset-when-sending-lon.patch"
+
 SRC_URI += "file://0517-Revert-vc4_hdmi-BCM2835-requires-a-fixed-hsm-clock-f.patch"
+
 #SRC_URI += "file://0518-Revert-vc4_hdmi-Fix-up-CEC-registers.patch"
+
 SRC_URI += "file://0519-ARM-bcm-Select-BRCMSTB_L2_IRQ-for-bcm2835.patch"
 SRC_URI += "file://0520-drm-vc4-hdmi-Move-hdmi-reset-to-bind.patch"
+
 #SRC_URI += "file://0521-drm-vc4-hdmi-Fix-register-offset-with-longer-CEC-mes.patch"
 #SRC_URI += "file://0522-drm-vc4-hdmi-Fix-up-CEC-registers.patch"
 #SRC_URI += "file://0523-drm-vc4-hdmi-Restore-cec-physical-address-on-reconne.patch"
 #SRC_URI += "file://0524-drm-vc4-hdmi-Compute-the-CEC-clock-divider-from-the-.patch"
 #SRC_URI += "file://0525-drm-vc4-hdmi-Update-the-CEC-clock-divider-on-HSM-rat.patch"
+
 SRC_URI += "file://0526-drm-vc4-hdmi-Introduce-a-CEC-clock.patch"
 SRC_URI += "file://0527-drm-vc4-hdmi-Split-the-interrupt-handlers.patch"
 SRC_URI += "file://0528-drm-vc4-hdmi-Support-BCM2711-CEC-interrupt-setup.patch"
@@ -551,7 +586,9 @@ SRC_URI += "file://0533-ARM-dts-bcm2711-Add-the-CEC-interrupt-controller.patch"
 SRC_URI += "file://0534-bcm2711-Disable-bsc_intr-and-aon_intr-by-default-and.patch"
 SRC_URI += "file://0535-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-without-sc.patch"
 SRC_URI += "file://0536-bcm2711-Remove-old-GIC-interrupt.patch"
+
 #SRC_URI += "file://0537-w1-w1_therm-Fix-conversion-result-for-negative-tempe.patch"
+
 SRC_URI += "file://0538-staging-bcm2835-camera-Fix-the-cherry-pick-of-AWB-Gr.patch"
 SRC_URI += "file://0539-Overlays-for-PiFi-Mini-amp.patch"
 SRC_URI += "file://0540-Added-PiFi-Mini-to-rpi-simple-soundcard.c.patch"
@@ -600,7 +637,9 @@ SRC_URI += "file://0582-staging-bcm2835-codec-Implement-additional-g_selecti.pat
 SRC_URI += "file://0583-staging-bcm2835-codec-Add-VC-1-support.patch"
 SRC_URI += "file://0584-vc4-drm-Avoid-full-hdmi-audio-fifo-writes.patch"
 SRC_URI += "file://0585-vc4-drm-Increase-hdmi-audio-axi-priority-to-avoid-lo.patch"
+
 #SRC_URI += "file://0586-drm-vc4-crtc-Reduce-PV-fifo-threshold-on-hvs4.patch"
+
 SRC_URI += "file://0587-overlays-gpio-led-new-overlay.patch"
 SRC_URI += "file://0588-overlays-Add-pcie-32bit-dma-overlay.patch"
 SRC_URI += "file://0589-Revert-i2c-bcm2835-Handle-untimely-DONE-signal.patch"
@@ -623,9 +662,11 @@ SRC_URI += "file://0605-dwc-otg-fix-clang-Wignored-attributes-warning.patch"
 SRC_URI += "file://0606-dwc-otg-fix-clang-Wsometimes-uninitialized-warning.patch"
 SRC_URI += "file://0607-dwc-otg-fix-clang-Wpointer-bool-conversion-warning.patch"
 SRC_URI += "file://0608-Update-Allo-Piano-Dac-Driver.patch"
+
 #SRC_URI += "file://0609-sc16is7xx-Defer-probe-if-device-read-fails.patch"
 #SRC_URI += "file://0610-ASoC-tlv320aic32x4-Register-clocks-before-registerin.patch"
 #SRC_URI += "file://0611-ASoC-tlv320aic32x4-Increase-maximum-register-in-regm.patch"
+
 SRC_URI += "file://0612-drm-connector-Create-a-helper-to-attach-the-hdr_outp.patch"
 SRC_URI += "file://0613-drm-connector-Add-helper-to-compare-HDR-metadata.patch"
 SRC_URI += "file://0614-drm-vc4-Use-the-new-helpers.patch"
@@ -633,7 +674,9 @@ SRC_URI += "file://0615-drm-connector-Add-a-helper-to-attach-the-colorspace-.pat
 SRC_URI += "file://0616-drm-vc4-hdmi-Signal-the-proper-colorimetry-info-in-t.patch"
 SRC_URI += "file://0617-staging-vcsm-cma-Fix-memory-leak-from-not-detaching-.patch"
 SRC_URI += "file://0618-vc4-kms-vc4_plane-Support-2020-colourspace-for-yuv-p.patch"
+
 #SRC_URI += "file://0619-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
+
 SRC_URI += "file://0620-sound-usb-call-usb_autopm_get_interface-for-devices-.patch"
 SRC_URI += "file://0621-overlays-ghost-amp-Add-DAC-mute-control.patch"
 SRC_URI += "file://0622-clk-Introduce-a-clock-request-API.patch"
@@ -726,7 +769,9 @@ SRC_URI += "file://0708-media-i2c-ov5647-Correct-minimum-VBLANK-value.patch"
 SRC_URI += "file://0709-media-i2c-ov5647-Fix-v4l2-compliance-failure-subscri.patch"
 SRC_URI += "file://0710-dtoverlays-Add-pinctrl-names-to-i2c0-overlay.patch"
 SRC_URI += "file://0711-dtoverlays-Update-__symbols__-i2c0-from-i2c0-overlay.patch"
+
 #SRC_URI += "file://0712-media-v4l2-ctrls.c-fix-race-condition-in-hdl-request.patch"
+
 SRC_URI += "file://0713-media-rpivid-Remove-the-need-to-have-num_entry_point.patch"
 SRC_URI += "file://0714-media-rpivid-Convert-to-MPLANE.patch"
 SRC_URI += "file://0715-media-rpivid-Add-an-enable-count-to-irq-claim-Qs.patch"
