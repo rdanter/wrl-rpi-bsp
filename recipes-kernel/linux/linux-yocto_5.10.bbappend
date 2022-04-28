@@ -515,6 +515,7 @@ SRC_URI += "file://0479-overlays-seeed-can-fd-hat-clarify-how-to-identify-HA.pat
 SRC_URI += "file://0480-SQUASH-Revert-overlays-Make-the-i2c-gpio-overlay-saf.patch"
 SRC_URI += "file://0481-SQUASH-Revert-overlays-Fix-dtc-warnings-in-i2c-gpio.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0482-vc4-Correct-lbm-size-and-calculation.patch"
 
 SRC_URI += "file://0483-vc4-Correct-POS1_SCL-for-hvs5.patch"
@@ -533,6 +534,7 @@ SRC_URI += "file://0495-configs-Add-CRYPTO_ADIANTUM-m.patch"
 SRC_URI += "file://0496-spi-bcm2835-Workaround-fix-for-zero-length-transfers.patch"
 SRC_URI += "file://0497-kbuild-Silence-unavoidable-dtc-overlay-warnings.patch"
 
+# The following patch is already included in the WR kernel
 #SRC_URI += "file://0498-drm-vc4-hvs-Fix-buffer-overflow-with-the-dlist-handl.patch"
 
 SRC_URI += "file://0499-configs-Enable-CONFIG_MEDIA_CEC_RC.patch"
