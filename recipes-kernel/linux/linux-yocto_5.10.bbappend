@@ -75,7 +75,9 @@ SRC_URI += "file://0068-ARM64-Round-Robin-dispatch-IRQs-between-CPUs.patch"
 SRC_URI += "file://0069-ARM64-Force-hardware-emulation-of-deprecated-instruc.patch"
 SRC_URI += "file://0070-cache-export-clean-and-invalidate.patch"
 SRC_URI += "file://0071-AXI-performance-monitor-driver-2222.patch"
-SRC_URI += "file://0072-cgroup-Disable-cgroup-memory-by-default.patch"
+
+##SRC_URI += "file://0072-cgroup-Disable-cgroup-memory-by-default.patch"
+
 SRC_URI += "file://0073-ARM-bcm2835-Set-Serial-number-and-Revision.patch"
 SRC_URI += "file://0074-dwc-otg-FIQ-Fix-bad-mode-in-data-abort-handler.patch"
 SRC_URI += "file://0075-ARM-Activate-FIQs-to-avoid-__irq_startup-warnings.patch"
@@ -686,7 +688,9 @@ SRC_URI += "file://0619-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.pat
 SRC_URI += "file://0620-sound-usb-call-usb_autopm_get_interface-for-devices-.patch"
 SRC_URI += "file://0621-overlays-ghost-amp-Add-DAC-mute-control.patch"
 SRC_URI += "file://0622-clk-Introduce-a-clock-request-API.patch"
-SRC_URI += "file://0623-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
+
+##SRC_URI += "file://0623-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
+
 SRC_URI += "file://0624-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
 SRC_URI += "file://0625-bcm2835-unicam-Switch-to-new-clock-api.patch"
 SRC_URI += "file://0626-rpivid-Switch-to-new-clock-api.patch"
@@ -729,11 +733,15 @@ SRC_URI += "file://0662-drm-vc4-crtc-Skip-the-TXP.patch"
 SRC_URI += "file://0663-drm-vc4-Rework-the-encoder-retrieval-code.patch"
 SRC_URI += "file://0664-drm-vc4-hdmi-Prevent-clock-unbalance.patch"
 SRC_URI += "file://0665-drm-vc4-hvs-Make-the-HVS-bind-first.patch"
-SRC_URI += "file://0666-drm-vc4-hdmi-Properly-compute-the-BVB-clock-rate.patch"
+
+##SRC_URI += "file://0666-drm-vc4-hdmi-Properly-compute-the-BVB-clock-rate.patch"
+
 SRC_URI += "file://0667-drm-vc4-hdmi-Check-and-warn-if-we-can-t-reach-4kp60-.patch"
 SRC_URI += "file://0668-drm-vc4-hdmi-Enable-the-scrambler.patch"
 SRC_URI += "file://0669-drm-vc4-hdmi-Raise-the-maximum-clock-rate.patch"
-SRC_URI += "file://0670-vc4-drm-hdmi-Handle-case-when-bvb-clock-is-null.patch"
+
+##SRC_URI += "file://0670-vc4-drm-hdmi-Handle-case-when-bvb-clock-is-null.patch"
+
 SRC_URI += "file://0671-overlays-spi-rtc-Add-ds3232-and-ds3234.patch"
 SRC_URI += "file://0672-drm-vc4-Fix-VEC-address-for-BCM2711-in-the-devicetre.patch"
 SRC_URI += "file://0673-drm-vc4-Fix-clock-source-for-VEC-PixelValve-on-BCM27.patch"
@@ -753,18 +761,24 @@ SRC_URI += "file://0686-gpio-poweroff-Remember-the-old-poweroff-handler.patch"
 SRC_URI += "file://0687-drm-vc4-Allow-DBLCLK-modes-even-if-horz-timing-is-od.patch"
 SRC_URI += "file://0688-overlays-Add-ugreen-dabboard-overlay.patch"
 SRC_URI += "file://0689-ARM-dts-bcm2711-rpi-400-Limit-MDIO-clock-speed.patch"
-SRC_URI += "file://0690-spi-bcm2835-Increase-the-CS-limit-to-24.patch"
+
+##SRC_URI += "file://0690-spi-bcm2835-Increase-the-CS-limit-to-24.patch"
+
 SRC_URI += "file://0691-configs-Regenerate-defconfigs.patch"
 SRC_URI += "file://0692-configs-add-CONFIG_QCA7000_UART-m-4322.patch"
-SRC_URI += "file://0693-usb-dwc2-Fix-gadget-DMA-unmap-direction.patch"
+
+##SRC_URI += "file://0693-usb-dwc2-Fix-gadget-DMA-unmap-direction.patch"
+
 SRC_URI += "file://0694-clk-Always-clamp-the-rounded-rate.patch"
 SRC_URI += "file://0695-Revert-drm-vc4-Rework-the-encoder-retrieval-code.patch"
 SRC_URI += "file://0696-drm-vc4-crtc-Pass-the-drm_atomic_state-to-config_pv.patch"
 SRC_URI += "file://0697-drm-vc4-crtc-Fix-vc4_get_crtc_encoder-logic.patch"
 SRC_URI += "file://0698-drm-vc4-crtc-Lookup-the-encoder-from-the-register-at.patch"
 SRC_URI += "file://0699-drm-vc4-hdmi-Switch-to-pm_runtime_resume_and_get.patch"
-SRC_URI += "file://0700-drm-vc4-hdmi-Make-sure-the-controller-is-powered-in-.patch"
-SRC_URI += "file://0701-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
+
+##SRC_URI += "file://0700-drm-vc4-hdmi-Make-sure-the-controller-is-powered-in-.patch"
+##SRC_URI += "file://0701-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
+
 SRC_URI += "file://0702-drm-vc4-hdmi-Rely-on-interrupts-to-handle-hotplug.patch"
 SRC_URI += "file://0703-drm-vc4-hdmi-Add-a-workqueue-to-set-scrambling.patch"
 SRC_URI += "file://0704-vc4-drm-hdmi-Fix-missing-declaration.patch"
