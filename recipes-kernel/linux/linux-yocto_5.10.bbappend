@@ -738,9 +738,7 @@ SRC_URI += "file://0666-drm-vc4-hdmi-Properly-compute-the-BVB-clock-rate.patch"
 SRC_URI += "file://0667-drm-vc4-hdmi-Check-and-warn-if-we-can-t-reach-4kp60-.patch"
 SRC_URI += "file://0668-drm-vc4-hdmi-Enable-the-scrambler.patch"
 SRC_URI += "file://0669-drm-vc4-hdmi-Raise-the-maximum-clock-rate.patch"
-
-##SRC_URI += "file://0670-vc4-drm-hdmi-Handle-case-when-bvb-clock-is-null.patch"
-
+SRC_URI += "file://0670-vc4-drm-hdmi-Handle-case-when-bvb-clock-is-null.patch"
 SRC_URI += "file://0671-overlays-spi-rtc-Add-ds3232-and-ds3234.patch"
 SRC_URI += "file://0672-drm-vc4-Fix-VEC-address-for-BCM2711-in-the-devicetre.patch"
 SRC_URI += "file://0673-drm-vc4-Fix-clock-source-for-VEC-PixelValve-on-BCM27.patch"

@@ -1,4 +1,4 @@
-From 01a6d727b407ed064bdd72e3a6611101102a2228 Mon Sep 17 00:00:00 2001
+From 40e8648d224f5f732b1f761b6040ad33abf40a82 Mon Sep 17 00:00:00 2001
 From: Dom Cobley <popcornmix@gmail.com>
 Date: Wed, 21 Apr 2021 15:15:42 +0100
 Subject: [PATCH] vc4/drm: hdmi: Handle case when bvb clock is null
@@ -12,20 +12,20 @@ Signed-off-by: Dom Cobley <popcornmix@gmail.com>
  1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
-index 7d0d1da47609..c785923f2294 100644
+index 86b43988c8cc..eb52a6125f32 100644
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -931,7 +931,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
+@@ -935,7 +935,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
  		   HDMI_READ(HDMI_VID_CTL) & ~VC4_HD_VID_CTL_ENABLE);
  
  	clk_disable_unprepare(vc4_hdmi->pixel_bvb_clock);
 -	clk_request_done(vc4_hdmi->bvb_req);
 +	if (vc4_hdmi->bvb_req)
 +		clk_request_done(vc4_hdmi->bvb_req);
- 	clk_disable_unprepare(vc4_hdmi->hsm_clock);
- 	clk_request_done(vc4_hdmi->hsm_req);
  	clk_disable_unprepare(vc4_hdmi->pixel_clock);
-@@ -1260,7 +1261,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 
+ 	ret = pm_runtime_put(&vc4_hdmi->pdev->dev);
+@@ -1255,7 +1256,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  	else
  		bvb_rate = 75000000;
  
@@ -35,7 +35,7 @@ index 7d0d1da47609..c785923f2294 100644
  	if (IS_ERR(vc4_hdmi->bvb_req)) {
  		DRM_ERROR("Failed to set pixel bvb clock rate: %ld\n", PTR_ERR(vc4_hdmi->bvb_req));
  		clk_request_done(vc4_hdmi->hsm_req);
-@@ -1272,7 +1274,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+@@ -1266,7 +1268,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  	ret = clk_prepare_enable(vc4_hdmi->pixel_bvb_clock);
  	if (ret) {
  		DRM_ERROR("Failed to turn on pixel bvb clock: %d\n", ret);
@@ -43,8 +43,8 @@ index 7d0d1da47609..c785923f2294 100644
 +		if (vc4_hdmi->bvb_req)
 +			clk_request_done(vc4_hdmi->bvb_req);
  		clk_request_done(vc4_hdmi->hsm_req);
- 		clk_disable_unprepare(vc4_hdmi->hsm_clock);
  		clk_disable_unprepare(vc4_hdmi->pixel_clock);
+ 		return;
 -- 
-2.17.1
+2.29.2
 
