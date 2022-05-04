@@ -691,9 +691,7 @@ SRC_URI += "file://0619-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.pat
 SRC_URI += "file://0620-sound-usb-call-usb_autopm_get_interface-for-devices-.patch"
 SRC_URI += "file://0621-overlays-ghost-amp-Add-DAC-mute-control.patch"
 SRC_URI += "file://0622-clk-Introduce-a-clock-request-API.patch"
-
-##SRC_URI += "file://0623-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
-
+SRC_URI += "file://0623-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
 SRC_URI += "file://0624-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
 SRC_URI += "file://0625-bcm2835-unicam-Switch-to-new-clock-api.patch"
 SRC_URI += "file://0626-rpivid-Switch-to-new-clock-api.patch"

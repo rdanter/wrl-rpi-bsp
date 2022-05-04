@@ -1,4 +1,4 @@
-From 9e081a7bf69c75d5e9cb05add07eaf4cb4ee4dc9 Mon Sep 17 00:00:00 2001
+From 1d39ba860301889156e2962e028203e89a160979 Mon Sep 17 00:00:00 2001
 From: Maxime Ripard <maxime@cerno.tech>
 Date: Tue, 13 Apr 2021 11:55:55 +0200
 Subject: [PATCH] drm/vc4: hdmi: Convert to the new clock request API
@@ -9,25 +9,23 @@ we're done, resulting in a better power-efficiency.
 
 Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 ---
- drivers/gpu/drm/vc4/vc4_hdmi.c | 19 ++++++++++++-------
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 18 +++++++++++-------
  drivers/gpu/drm/vc4/vc4_hdmi.h |  3 +++
- 2 files changed, 15 insertions(+), 7 deletions(-)
+ 2 files changed, 14 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
-index 2816a1d3ee24..1872b3a2bb51 100644
+index 1b037ebda54a..35049b9766ad 100644
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
-@@ -852,7 +852,9 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
+@@ -856,6 +856,7 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
  		   HDMI_READ(HDMI_VID_CTL) & ~VC4_HD_VID_CTL_ENABLE);
  
  	clk_disable_unprepare(vc4_hdmi->pixel_bvb_clock);
 +	clk_request_done(vc4_hdmi->bvb_req);
- 	clk_disable_unprepare(vc4_hdmi->hsm_clock);
-+	clk_request_done(vc4_hdmi->hsm_req);
  	clk_disable_unprepare(vc4_hdmi->pixel_clock);
  
  	ret = pm_runtime_put(&vc4_hdmi->pdev->dev);
-@@ -1157,9 +1159,9 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+@@ -1160,9 +1161,9 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  	 * pixel clock, but HSM ends up being the limiting factor.
  	 */
  	hsm_rate = max_t(unsigned long, 120000000, (pixel_rate / 100) * 101);
@@ -40,7 +38,7 @@ index 2816a1d3ee24..1872b3a2bb51 100644
  		return;
  	}
  
-@@ -1176,10 +1178,11 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+@@ -1172,10 +1173,11 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  	 * FIXME: When the pixel freq is 594MHz (4k60), this needs to be setup
  	 * at 300MHz.
  	 */
@@ -48,23 +46,23 @@ index 2816a1d3ee24..1872b3a2bb51 100644
 -			       (hsm_rate > VC4_HSM_MID_CLOCK ? 150000000 : 75000000));
 -	if (ret) {
 -		DRM_ERROR("Failed to set pixel bvb clock rate: %d\n", ret);
-+	vc4_hdmi->bvb_req = clk_request_start(vc4_hdmi->pixel_bvb_clock,
-+					      (hsm_rate > VC4_HSM_MID_CLOCK ? 150000000 : 75000000));
++	 vc4_hdmi->bvb_req = clk_request_start(vc4_hdmi->pixel_bvb_clock,
++	 					(hsm_rate > VC4_HSM_MID_CLOCK ? 150000000 : 75000000));
 +	if (IS_ERR(vc4_hdmi->bvb_req)) {
 +		DRM_ERROR("Failed to set pixel bvb clock rate: %ld\n", PTR_ERR(vc4_hdmi->bvb_req));
 +		clk_request_done(vc4_hdmi->hsm_req);
- 		clk_disable_unprepare(vc4_hdmi->hsm_clock);
  		clk_disable_unprepare(vc4_hdmi->pixel_clock);
  		return;
-@@ -1188,6 +1191,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+ 	}
+@@ -1183,6 +1185,8 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  	ret = clk_prepare_enable(vc4_hdmi->pixel_bvb_clock);
  	if (ret) {
  		DRM_ERROR("Failed to turn on pixel bvb clock: %d\n", ret);
 +		clk_request_done(vc4_hdmi->bvb_req);
 +		clk_request_done(vc4_hdmi->hsm_req);
- 		clk_disable_unprepare(vc4_hdmi->hsm_clock);
  		clk_disable_unprepare(vc4_hdmi->pixel_clock);
  		return;
+ 	}
 diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
 index 33b5f120bbeb..11a4b737d0ab 100644
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.h
@@ -80,5 +78,5 @@ index 33b5f120bbeb..11a4b737d0ab 100644
  	struct debugfs_regset32 hdmi_regset;
  	struct debugfs_regset32 hd_regset;
 -- 
-2.17.1
+2.29.2
 
