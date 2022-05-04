@@ -762,7 +762,8 @@ SRC_URI += "file://0690-spi-bcm2835-Increase-the-CS-limit-to-24.patch"
 SRC_URI += "file://0691-configs-Regenerate-defconfigs.patch"
 SRC_URI += "file://0692-configs-add-CONFIG_QCA7000_UART-m-4322.patch"
 
-##SRC_URI += "file://0693-usb-dwc2-Fix-gadget-DMA-unmap-direction.patch"
+# The following patch is already included from RCPL 3
+#SRC_URI += "file://0693-usb-dwc2-Fix-gadget-DMA-unmap-direction.patch"
 
 SRC_URI += "file://0694-clk-Always-clamp-the-rounded-rate.patch"
 SRC_URI += "file://0695-Revert-drm-vc4-Rework-the-encoder-retrieval-code.patch"
