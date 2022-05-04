@@ -76,7 +76,10 @@ SRC_URI += "file://0069-ARM64-Force-hardware-emulation-of-deprecated-instruc.pat
 SRC_URI += "file://0070-cache-export-clean-and-invalidate.patch"
 SRC_URI += "file://0071-AXI-performance-monitor-driver-2222.patch"
 
-##SRC_URI += "file://0072-cgroup-Disable-cgroup-memory-by-default.patch"
+# The following patch does mnot apply since RCPL 3. Commit
+# 5ca472d40e2daebbfd926701902debcab0bbd15c changes how dis/enable is done.
+# If this is a problem in future then this may need reworking.
+#SRC_URI += "file://0072-cgroup-Disable-cgroup-memory-by-default.patch"
 
 SRC_URI += "file://0073-ARM-bcm2835-Set-Serial-number-and-Revision.patch"
 SRC_URI += "file://0074-dwc-otg-FIQ-Fix-bad-mode-in-data-abort-handler.patch"
