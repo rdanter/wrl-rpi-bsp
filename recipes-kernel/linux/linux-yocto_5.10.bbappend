@@ -772,9 +772,7 @@ SRC_URI += "file://0697-drm-vc4-crtc-Fix-vc4_get_crtc_encoder-logic.patch"
 SRC_URI += "file://0698-drm-vc4-crtc-Lookup-the-encoder-from-the-register-at.patch"
 SRC_URI += "file://0699-drm-vc4-hdmi-Switch-to-pm_runtime_resume_and_get.patch"
 SRC_URI += "file://0700-drm-vc4-hdmi-Make-sure-the-controller-is-powered-in-.patch"
-
-##SRC_URI += "file://0701-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
-
+SRC_URI += "file://0701-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
 SRC_URI += "file://0702-drm-vc4-hdmi-Rely-on-interrupts-to-handle-hotplug.patch"
 SRC_URI += "file://0703-drm-vc4-hdmi-Add-a-workqueue-to-set-scrambling.patch"
 SRC_URI += "file://0704-vc4-drm-hdmi-Fix-missing-declaration.patch"
