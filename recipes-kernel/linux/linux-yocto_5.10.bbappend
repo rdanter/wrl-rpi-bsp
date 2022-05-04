@@ -734,9 +734,7 @@ SRC_URI += "file://0662-drm-vc4-crtc-Skip-the-TXP.patch"
 SRC_URI += "file://0663-drm-vc4-Rework-the-encoder-retrieval-code.patch"
 SRC_URI += "file://0664-drm-vc4-hdmi-Prevent-clock-unbalance.patch"
 SRC_URI += "file://0665-drm-vc4-hvs-Make-the-HVS-bind-first.patch"
-
-##SRC_URI += "file://0666-drm-vc4-hdmi-Properly-compute-the-BVB-clock-rate.patch"
-
+SRC_URI += "file://0666-drm-vc4-hdmi-Properly-compute-the-BVB-clock-rate.patch"
 SRC_URI += "file://0667-drm-vc4-hdmi-Check-and-warn-if-we-can-t-reach-4kp60-.patch"
 SRC_URI += "file://0668-drm-vc4-hdmi-Enable-the-scrambler.patch"
 SRC_URI += "file://0669-drm-vc4-hdmi-Raise-the-maximum-clock-rate.patch"
