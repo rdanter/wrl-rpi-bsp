@@ -758,9 +758,7 @@ SRC_URI += "file://0686-gpio-poweroff-Remember-the-old-poweroff-handler.patch"
 SRC_URI += "file://0687-drm-vc4-Allow-DBLCLK-modes-even-if-horz-timing-is-od.patch"
 SRC_URI += "file://0688-overlays-Add-ugreen-dabboard-overlay.patch"
 SRC_URI += "file://0689-ARM-dts-bcm2711-rpi-400-Limit-MDIO-clock-speed.patch"
-
-##SRC_URI += "file://0690-spi-bcm2835-Increase-the-CS-limit-to-24.patch"
-
+SRC_URI += "file://0690-spi-bcm2835-Increase-the-CS-limit-to-24.patch"
 SRC_URI += "file://0691-configs-Regenerate-defconfigs.patch"
 SRC_URI += "file://0692-configs-add-CONFIG_QCA7000_UART-m-4322.patch"
 

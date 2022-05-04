@@ -1,4 +1,4 @@
-From 05f8d5826e28e9d82485c03b65c18d5013ba13bd Mon Sep 17 00:00:00 2001
+From d00910b85d6c14aa91cec5a6fdc4dea455b13d29 Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Fri, 30 Apr 2021 08:34:36 +0100
 Subject: [PATCH] spi: bcm2835: Increase the CS limit to 24
@@ -11,11 +11,11 @@ See: https://github.com/raspberrypi/linux/pull/4281
 Suggested-by: Joe Burmeister <joe.burmeister@devtank.co.uk>
 Signed-off-by: Phil Elwell <phil@raspberrypi.com>
 ---
- drivers/spi/spi-bcm2835.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/spi/spi-bcm2835.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/drivers/spi/spi-bcm2835.c b/drivers/spi/spi-bcm2835.c
-index aab6c7e5c114..ae74d86b2ee8 100644
+index 9a47313cab46..536935abb79d 100644
 --- a/drivers/spi/spi-bcm2835.c
 +++ b/drivers/spi/spi-bcm2835.c
 @@ -28,6 +28,7 @@
@@ -26,16 +26,7 @@ index aab6c7e5c114..ae74d86b2ee8 100644
  #include <linux/of_irq.h>
  #include <linux/spi/spi.h>
  
-@@ -68,7 +69,7 @@
- #define BCM2835_SPI_FIFO_SIZE		64
- #define BCM2835_SPI_FIFO_SIZE_3_4	48
- #define BCM2835_SPI_DMA_MIN_LENGTH	96
--#define BCM2835_SPI_NUM_CS		4   /* raise as necessary */
-+#define BCM2835_SPI_NUM_CS		24  /* more than enough */
- #define BCM2835_SPI_MODE_BITS	(SPI_CPOL | SPI_CPHA | SPI_CS_HIGH \
- 				| SPI_NO_CS | SPI_3WIRE)
- 
-@@ -1292,6 +1293,11 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
+@@ -1298,6 +1299,11 @@ static int bcm2835_spi_probe(struct platform_device *pdev)
  	struct bcm2835_spi *bs;
  	int err;
  
@@ -48,5 +39,5 @@ index aab6c7e5c114..ae74d86b2ee8 100644
  						  dma_get_cache_alignment()));
  	if (!ctlr)
 -- 
-2.17.1
+2.29.2
 
