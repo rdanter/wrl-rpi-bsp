@@ -210,7 +210,10 @@ SRC_URI += "file://0198-bcmgenet-Disable-skip_umac_reset-by-default.patch"
 SRC_URI += "file://0199-drm-fourcc-Add-packed-10bit-YUV-4-2-0-format.patch"
 SRC_URI += "file://0200-media-uapi-hevc-Add-scaling-matrix-control.patch"
 SRC_URI += "file://0201-media-uapi-hevc-Add-segment-address-field.patch"
-SRC_URI += "file://0202-media-hevc_ctrls-Add-slice-param-dependent-slice-seg.patch"
+
+# The following patch is not needed since RCPL 4
+#SRC_URI += "file://0202-media-hevc_ctrls-Add-slice-param-dependent-slice-seg.patch"
+
 SRC_URI += "file://0203-media-uapi-Add-hevc-ctrls-for-WPP-decoding.patch"
 SRC_URI += "file://0204-media-videodev2.h-Add-a-format-for-column-YUV4-2-0-m.patch"
 SRC_URI += "file://0205-media-v4l2-mem2mem-allow-request-job-buffer-processi.patch"
@@ -498,7 +501,10 @@ SRC_URI += "file://0458-vc-sm-cma-fixed-kbuild-problem.patch"
 #SRC_URI += "file://0459-staging-vchiq-Fix-bulk-transfers-on-64-bit-builds.patch"
 
 SRC_URI += "file://0460-staging-vc04-services-codec-Fix-logical-precedence-i.patch"
-SRC_URI += "file://0461-staging-mmal-vchiq-Fix-incorrect-static-vchiq_instan.patch"
+
+# The following patch is not needed since RCPL 4
+#SRC_URI += "file://0461-staging-mmal-vchiq-Fix-incorrect-static-vchiq_instan.patch"
+
 SRC_URI += "file://0462-staging-vc04_services-Add-additional-unpacked-raw-fo.patch"
 SRC_URI += "file://0463-staging-bcm2835-codec-Add-the-unpacked-16bpp-raw-for.patch"
 SRC_URI += "file://0464-staging-bcm2835-codec-Log-the-number-of-excess-suppo.patch"
@@ -554,7 +560,8 @@ SRC_URI += "file://0506-configs-Add-MICREL_PHY-y.patch"
 # The following reverts patch 0452, which does not apply on the WR kernel
 #SRC_URI += "file://0507-Revert-drm-vc4-hdmi-Limit-the-BCM2711-to-the-max-wit.patch"
 
-SRC_URI += "file://0508-Revert-vc4_hdmi-Move-hdmi-reset-to-bind.patch"
+# The following patch and 0520 are no longer needed since RCPL 4
+#SRC_URI += "file://0508-Revert-vc4_hdmi-Move-hdmi-reset-to-bind.patch"
 
 # The following patches revert patches 0325, 0326, 0336 and 0369 which don't
 # apply on the WR kernel anyway
@@ -576,7 +583,9 @@ SRC_URI += "file://0517-Revert-vc4_hdmi-BCM2835-requires-a-fixed-hsm-clock-f.pat
 #SRC_URI += "file://0518-Revert-vc4_hdmi-Fix-up-CEC-registers.patch"
 
 SRC_URI += "file://0519-ARM-bcm-Select-BRCMSTB_L2_IRQ-for-bcm2835.patch"
-SRC_URI += "file://0520-drm-vc4-hdmi-Move-hdmi-reset-to-bind.patch"
+
+# The following patch and 0508 are no longer needed since RCPL 4
+#SRC_URI += "file://0520-drm-vc4-hdmi-Move-hdmi-reset-to-bind.patch"
 
 # The following five patches are already included in the WR kernel
 #SRC_URI += "file://0521-drm-vc4-hdmi-Fix-register-offset-with-longer-CEC-mes.patch"
@@ -729,7 +738,10 @@ SRC_URI += "file://0657-drm-panel-jdi-lt070me05000-Use-gpiod_set_value_cansl.pat
 SRC_URI += "file://0658-defconfigs-Add-PANEL_JDI_LT070ME05000-DSI-panel.patch"
 SRC_URI += "file://0659-dtoverlays-Add-overlays-for-JDI-LT070ME05000-1200x19.patch"
 SRC_URI += "file://0660-clk-requests-Ignore-if-the-pointer-is-null.patch"
-SRC_URI += "file://0661-drm-vc4-txp-Properly-set-the-possible_crtcs-mask.patch"
+
+# The following patch is no longer needed since RCPL 4
+#SRC_URI += "file://0661-drm-vc4-txp-Properly-set-the-possible_crtcs-mask.patch"
+
 SRC_URI += "file://0662-drm-vc4-crtc-Skip-the-TXP.patch"
 SRC_URI += "file://0663-drm-vc4-Rework-the-encoder-retrieval-code.patch"
 SRC_URI += "file://0664-drm-vc4-hdmi-Prevent-clock-unbalance.patch"
@@ -741,7 +753,10 @@ SRC_URI += "file://0669-drm-vc4-hdmi-Raise-the-maximum-clock-rate.patch"
 SRC_URI += "file://0670-vc4-drm-hdmi-Handle-case-when-bvb-clock-is-null.patch"
 SRC_URI += "file://0671-overlays-spi-rtc-Add-ds3232-and-ds3234.patch"
 SRC_URI += "file://0672-drm-vc4-Fix-VEC-address-for-BCM2711-in-the-devicetre.patch"
-SRC_URI += "file://0673-drm-vc4-Fix-clock-source-for-VEC-PixelValve-on-BCM27.patch"
+
+# The following patch is no longer needed since RCPL 4
+#SRC_URI += "file://0673-drm-vc4-Fix-clock-source-for-VEC-PixelValve-on-BCM27.patch"
+
 SRC_URI += "file://0674-drm-vc4-Separate-VEC-compatible-variants.patch"
 SRC_URI += "file://0675-configs-Enable-ATA-and-AHCI-for-SATA-drive-support.patch"
 SRC_URI += "file://0676-clk-requests-Dereference-the-request-pointer-after-t.patch"
@@ -770,7 +785,10 @@ SRC_URI += "file://0695-Revert-drm-vc4-Rework-the-encoder-retrieval-code.patch"
 SRC_URI += "file://0696-drm-vc4-crtc-Pass-the-drm_atomic_state-to-config_pv.patch"
 SRC_URI += "file://0697-drm-vc4-crtc-Fix-vc4_get_crtc_encoder-logic.patch"
 SRC_URI += "file://0698-drm-vc4-crtc-Lookup-the-encoder-from-the-register-at.patch"
-SRC_URI += "file://0699-drm-vc4-hdmi-Switch-to-pm_runtime_resume_and_get.patch"
+
+# The following patch is not needed since RCPL 4
+#SRC_URI += "file://0699-drm-vc4-hdmi-Switch-to-pm_runtime_resume_and_get.patch"
+
 SRC_URI += "file://0700-drm-vc4-hdmi-Make-sure-the-controller-is-powered-in-.patch"
 SRC_URI += "file://0701-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
 SRC_URI += "file://0702-drm-vc4-hdmi-Rely-on-interrupts-to-handle-hotplug.patch"
