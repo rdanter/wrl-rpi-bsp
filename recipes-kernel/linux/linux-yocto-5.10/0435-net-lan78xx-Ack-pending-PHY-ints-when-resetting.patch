@@ -1,4 +1,4 @@
-From 2cc41cfc79323d90b7fd8f28b22e77db2a0c3360 Mon Sep 17 00:00:00 2001
+From fa2fae5b86373cb6bbd9190cfae42565d249a50d Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Tue, 15 Dec 2020 16:38:37 +0000
 Subject: [PATCH] net: lan78xx: Ack pending PHY ints when resetting
@@ -19,7 +19,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/drivers/net/usb/lan78xx.c b/drivers/net/usb/lan78xx.c
-index 58f5b90f11d4..3cf5ad0bf0c1 100644
+index acfbda466d2f..2c54e4eadde6 100644
 --- a/drivers/net/usb/lan78xx.c
 +++ b/drivers/net/usb/lan78xx.c
 @@ -1181,6 +1181,9 @@ static int lan78xx_link_reset(struct lan78xx_net *dev)
@@ -29,9 +29,9 @@ index 58f5b90f11d4..3cf5ad0bf0c1 100644
 +	/* Acknowledge any pending PHY interrupt, lest it be the last */
 +	phy_read(phydev, LAN88XX_INT_STS);
 +
+ 	mutex_lock(&phydev->lock);
  	phy_read_status(phydev);
- 
- 	if (!phydev->link && dev->link_on) {
+ 	link = phydev->link;
 -- 
-2.17.1
+2.31.1
 

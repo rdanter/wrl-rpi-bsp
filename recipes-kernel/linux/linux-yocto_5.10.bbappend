@@ -474,8 +474,7 @@ SRC_URI += "file://0433-staging-bcm2835-codec-Ensure-OUTPUT-timestamps-are-a.pat
 # The following patch is already included in the WR kernel
 #SRC_URI += "file://0434-Revert-media-videobuf2-Fix-length-check-for-single-p.patch"
 
-##SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
-
+SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
 SRC_URI += "file://0436-overlays-mpu6050-Add-addr-parameter.patch"
 SRC_URI += "file://0437-drm-vc4-Make-normalize_zpos-conditional-on-using-fkm.patch"
 SRC_URI += "file://0438-overlays-Add-missing-addresses-to-ads1015-ads1115.patch"
