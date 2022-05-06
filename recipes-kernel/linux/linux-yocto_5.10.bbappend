@@ -4,6 +4,9 @@ require linux-yocto-rpi.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto-5.10:"
 
+# Extra patch needed since RCPL 5 to keep compatibility with RPi drivers
+SRC_URI += "file://0001-Revert-OF-DT-Overlay-configfs-interface-v7.patch"
+
 SRC_URI += "file://0001-arm-partially-revert-702b94bff3c50542a6e4ab9a4f4cef0.patch"
 SRC_URI += "file://0002-Revert-rtc-pcf8523-properly-handle-oscillator-stop-b.patch"
 SRC_URI += "file://0003-Revert-staging-bcm2835-audio-Drop-DT-dependency.patch"
@@ -67,10 +70,7 @@ SRC_URI += "file://0060-Add-support-for-all-the-downstream-rpi-sound-card-dr.pat
 SRC_URI += "file://0061-Fixes-a-problem-when-module-probes-before-i2c-module.patch"
 SRC_URI += "file://0062-rpi_display-add-backlight-driver-and-overlay.patch"
 SRC_URI += "file://0063-bcm2835-virtgpio-Virtual-GPIO-driver.patch"
-
-# A newer version of the following patch is included since RCPL 5
-#SRC_URI += "file://0064-OF-DT-Overlay-configfs-interface.patch"
-
+SRC_URI += "file://0064-OF-DT-Overlay-configfs-interface.patch"
 SRC_URI += "file://0065-brcm-adds-support-for-BCM43341-wifi.patch"
 SRC_URI += "file://0066-hci_h5-Don-t-send-conf_req-when-ACTIVE.patch"
 SRC_URI += "file://0067-config-Add-default-configs.patch"
@@ -95,10 +95,7 @@ SRC_URI += "file://0080-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch"
 SRC_URI += "file://0081-Add-ability-to-export-gpio-used-by-gpio-poweroff.patch"
 SRC_URI += "file://0082-firmware-raspberrypi-Notify-firmware-of-a-reboot.patch"
 SRC_URI += "file://0083-irqchip-irq-bcm2835-Calc.-FIQ_START-at-boot-time.patch"
-
-# Since RCPL 5 we have a newer version of configfs, so this does not apply
-#SRC_URI += "file://0084-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
-
+SRC_URI += "file://0084-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
 SRC_URI += "file://0085-net-lan78xx-Disable-TCP-Segmentation-Offload-TSO.patch"
 SRC_URI += "file://0086-brcmfmac-Re-enable-firmware-roaming-support.patch"
 SRC_URI += "file://0087-lan78xx-Move-enabling-of-EEE-into-PHY-init-code.patch"
