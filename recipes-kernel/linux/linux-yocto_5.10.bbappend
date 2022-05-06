@@ -67,7 +67,10 @@ SRC_URI += "file://0060-Add-support-for-all-the-downstream-rpi-sound-card-dr.pat
 SRC_URI += "file://0061-Fixes-a-problem-when-module-probes-before-i2c-module.patch"
 SRC_URI += "file://0062-rpi_display-add-backlight-driver-and-overlay.patch"
 SRC_URI += "file://0063-bcm2835-virtgpio-Virtual-GPIO-driver.patch"
-SRC_URI += "file://0064-OF-DT-Overlay-configfs-interface.patch"
+
+# A newer version of the following patch is included since RCPL 5
+#SRC_URI += "file://0064-OF-DT-Overlay-configfs-interface.patch"
+
 SRC_URI += "file://0065-brcm-adds-support-for-BCM43341-wifi.patch"
 SRC_URI += "file://0066-hci_h5-Don-t-send-conf_req-when-ACTIVE.patch"
 SRC_URI += "file://0067-config-Add-default-configs.patch"
@@ -92,7 +95,10 @@ SRC_URI += "file://0080-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch"
 SRC_URI += "file://0081-Add-ability-to-export-gpio-used-by-gpio-poweroff.patch"
 SRC_URI += "file://0082-firmware-raspberrypi-Notify-firmware-of-a-reboot.patch"
 SRC_URI += "file://0083-irqchip-irq-bcm2835-Calc.-FIQ_START-at-boot-time.patch"
-SRC_URI += "file://0084-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
+
+# Since RCPL 5 we have a newer version of configfs, so this does not apply
+#SRC_URI += "file://0084-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
+
 SRC_URI += "file://0085-net-lan78xx-Disable-TCP-Segmentation-Offload-TSO.patch"
 SRC_URI += "file://0086-brcmfmac-Re-enable-firmware-roaming-support.patch"
 SRC_URI += "file://0087-lan78xx-Move-enabling-of-EEE-into-PHY-init-code.patch"
@@ -376,7 +382,10 @@ SRC_URI += "file://0351-brcmfmac-Increase-power-saving-delay-to-2s.patch"
 SRC_URI += "file://0352-rpivid_h265-Fix-width-height-typo.patch"
 SRC_URI += "file://0353-net-bcmgenet-Reset-RBUF-on-first-open.patch"
 SRC_URI += "file://0354-char-Add-broadcom-char-drivers-back-to-build-files.patch"
-SRC_URI += "file://0355-USB-gadget-f_hid-avoid-crashes-and-log-spam.patch"
+
+# The following patch is not needed since RCPL 5
+#SRC_URI += "file://0355-USB-gadget-f_hid-avoid-crashes-and-log-spam.patch"
+
 SRC_URI += "file://0356-dwc_otg-initialise-sched_frame-for-periodic-QHs-that.patch"
 SRC_URI += "file://0357-staging-bcm2835-camera-Replace-deprecated-V4L2_PIX_F.patch"
 SRC_URI += "file://0358-staging-vc04_services-Add-new-vc-sm-cma-driver.patch"
@@ -465,7 +474,8 @@ SRC_URI += "file://0433-staging-bcm2835-codec-Ensure-OUTPUT-timestamps-are-a.pat
 # The following patch is already included in the WR kernel
 #SRC_URI += "file://0434-Revert-media-videobuf2-Fix-length-check-for-single-p.patch"
 
-SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
+##SRC_URI += "file://0435-net-lan78xx-Ack-pending-PHY-ints-when-resetting.patch"
+
 SRC_URI += "file://0436-overlays-mpu6050-Add-addr-parameter.patch"
 SRC_URI += "file://0437-drm-vc4-Make-normalize_zpos-conditional-on-using-fkm.patch"
 SRC_URI += "file://0438-overlays-Add-missing-addresses-to-ads1015-ads1115.patch"
