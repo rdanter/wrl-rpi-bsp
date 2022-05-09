@@ -354,7 +354,8 @@ SRC_URI += "file://0324-vc4_hdmi-Make-irq-shared.patch"
 
 SRC_URI += "file://0327-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
 
-##SRC_URI += "file://0328-vc4_hdmi-Set-HD_CTL_WHOLSMP-and-HD_CTL_CHALIGN_SET.patch"
+# The following patch is not needed since RCPL 6
+#SRC_URI += "file://0328-vc4_hdmi-Set-HD_CTL_WHOLSMP-and-HD_CTL_CHALIGN_SET.patch"
 
 SRC_URI += "file://0329-vc4_hdmi-Set-HDMI_MAI_FMT.patch"
 SRC_URI += "file://0330-drm-vc4-add-iec958-controls-to-vc4_hdmi.patch"
