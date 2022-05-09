@@ -11,6 +11,7 @@ SRC_URI += "file://0002-Revert-firmware-raspberrypi-Keep-count-of-all-consum.pat
 # Extra patch needed since RCPL 5 to keep compatibility with RPi drivers
 SRC_URI += "file://0001-Revert-OF-DT-Overlay-configfs-interface-v7.patch"
 
+# Patches from upstream RPi kernel
 SRC_URI += "file://0001-arm-partially-revert-702b94bff3c50542a6e4ab9a4f4cef0.patch"
 SRC_URI += "file://0002-Revert-rtc-pcf8523-properly-handle-oscillator-stop-b.patch"
 SRC_URI += "file://0003-Revert-staging-bcm2835-audio-Drop-DT-dependency.patch"
