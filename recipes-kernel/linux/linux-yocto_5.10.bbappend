@@ -4,6 +4,10 @@ require linux-yocto-rpi.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto-5.10:"
 
+# Extra patches needed since RCPL 6 for compatibility with RPi older patches
+SRC_URI += "file://0001-Revert-firmware-raspberrypi-Fix-a-leak-in-rpi_firmwa.patch"
+SRC_URI += "file://0002-Revert-firmware-raspberrypi-Keep-count-of-all-consum.patch"
+
 # Extra patch needed since RCPL 5 to keep compatibility with RPi drivers
 SRC_URI += "file://0001-Revert-OF-DT-Overlay-configfs-interface-v7.patch"
 
@@ -59,9 +63,7 @@ SRC_URI += "file://0049-Add-dev-gpiomem-device-for-rootless-user-GPIO-access.pat
 SRC_URI += "file://0050-Add-SMI-driver.patch"
 SRC_URI += "file://0051-Add-Chris-Boot-s-i2c-driver.patch"
 SRC_URI += "file://0052-char-broadcom-Add-vcio-module.patch"
-
-##SRC_URI += "file://0053-firmware-bcm2835-Support-ARCH_BCM270x.patch"
-
+SRC_URI += "file://0053-firmware-bcm2835-Support-ARCH_BCM270x.patch"
 SRC_URI += "file://0054-BCM2708-Add-core-Device-Tree-support.patch"
 SRC_URI += "file://0055-BCM270x_DT-Add-pwr_led-and-the-required-input-trigge.patch"
 SRC_URI += "file://0056-Added-Device-IDs-for-August-DVB-T-205.patch"
@@ -95,9 +97,7 @@ SRC_URI += "file://0078-added-capture_clear-option-to-pps-gpio-via-dtoverlay.pat
 SRC_URI += "file://0079-lan78xx-Read-initial-EEE-status-from-DT.patch"
 SRC_URI += "file://0080-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch"
 SRC_URI += "file://0081-Add-ability-to-export-gpio-used-by-gpio-poweroff.patch"
-
-##SRC_URI += "file://0082-firmware-raspberrypi-Notify-firmware-of-a-reboot.patch"
-
+SRC_URI += "file://0082-firmware-raspberrypi-Notify-firmware-of-a-reboot.patch"
 SRC_URI += "file://0083-irqchip-irq-bcm2835-Calc.-FIQ_START-at-boot-time.patch"
 SRC_URI += "file://0084-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
 SRC_URI += "file://0085-net-lan78xx-Disable-TCP-Segmentation-Offload-TSO.patch"
@@ -106,9 +106,7 @@ SRC_URI += "file://0087-lan78xx-Move-enabling-of-EEE-into-PHY-init-code.patch"
 SRC_URI += "file://0088-Add-rpi-poe-fan-driver.patch"
 SRC_URI += "file://0089-cxd2880-CXD2880_SPI_DRV-should-select-DVB_CXD2880-wi.patch"
 SRC_URI += "file://0090-hwmon-raspberrypi-Prevent-voltage-low-warnings-from-.patch"
-
-##SRC_URI += "file://0091-firmware-raspberrypi-Add-backward-compatible-get_thr.patch"
-
+SRC_URI += "file://0091-firmware-raspberrypi-Add-backward-compatible-get_thr.patch"
 SRC_URI += "file://0092-sc16is7xx-Don-t-spin-if-no-data-received.patch"
 SRC_URI += "file://0093-drivers-thermal-step_wise-add-support-for-hysteresis.patch"
 SRC_URI += "file://0094-drivers-thermal-step_wise-avoid-throttling-at-hyster.patch"
@@ -205,9 +203,7 @@ SRC_URI += "file://0184-drm-v3d-Set-dma_mask-as-well-as-coherent_dma_mask.patch"
 SRC_URI += "file://0185-staging-vchiq_arm-Set-up-dma-ranges-on-child-devices.patch"
 SRC_URI += "file://0186-staging-vchiq-Use-the-old-dma-controller-for-OF-conf.patch"
 SRC_URI += "file://0187-ARM-bcm-Backport-BCM2711-support-from-upstream.patch"
-
-##SRC_URI += "file://0188-Initialise-rpi-firmware-before-clk-bcm2835.patch"
-
+SRC_URI += "file://0188-Initialise-rpi-firmware-before-clk-bcm2835.patch"
 SRC_URI += "file://0189-staging-vchiq_arm-Give-vchiq-children-DT-nodes.patch"
 SRC_URI += "file://0190-pinctrl-bcm2835-Remove-gpiochip-on-error.patch"
 SRC_URI += "file://0191-pinctrl-bcm2835-Change-init-order-for-gpio-hogs.patch"
@@ -433,9 +429,7 @@ SRC_URI += "file://0389-PiFi-40-Devicetree-files.patch"
 SRC_URI += "file://0390-PiFi-40-driver-Makefile-and-Kconfig.patch"
 SRC_URI += "file://0391-bcm2835-pcm-Fix-up-multichannel-pcm-audio.patch"
 SRC_URI += "file://0392-watchdog-bcm2835-Ignore-params-after-the-partition-n.patch"
-
-##SRC_URI += "file://0393-firmware-raspberrypi-Add-support-for-tryonce-reboot-.patch"
-
+SRC_URI += "file://0393-firmware-raspberrypi-Add-support-for-tryonce-reboot-.patch"
 SRC_URI += "file://0394-phy-broadcom-split-out-the-BCM54213PE-from-the-BCM54.patch"
 SRC_URI += "file://0395-phy-broadcom-Add-bcm54213pe-configuration.patch"
 SRC_URI += "file://0396-configs-Add-CONFIG_MAX31856-m.patch"
