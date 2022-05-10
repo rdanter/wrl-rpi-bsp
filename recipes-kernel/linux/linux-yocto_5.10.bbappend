@@ -210,7 +210,10 @@ SRC_URI += "file://0187-ARM-bcm-Backport-BCM2711-support-from-upstream.patch"
 SRC_URI += "file://0188-Initialise-rpi-firmware-before-clk-bcm2835.patch"
 SRC_URI += "file://0189-staging-vchiq_arm-Give-vchiq-children-DT-nodes.patch"
 SRC_URI += "file://0190-pinctrl-bcm2835-Remove-gpiochip-on-error.patch"
-SRC_URI += "file://0191-pinctrl-bcm2835-Change-init-order-for-gpio-hogs.patch"
+
+# The following patch is no needed since RCPL 9
+#SRC_URI += "file://0191-pinctrl-bcm2835-Change-init-order-for-gpio-hogs.patch"
+
 SRC_URI += "file://0192-pinctrl-bcm2835-Accept-fewer-than-expected-IRQs.patch"
 SRC_URI += "file://0193-drivers-char-vcio-Use-common-compat-header.patch"
 SRC_URI += "file://0194-video-fbdev-bcm2708_fb-Use-common-compat-header.patch"
