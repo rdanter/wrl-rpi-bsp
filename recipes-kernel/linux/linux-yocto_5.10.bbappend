@@ -278,7 +278,10 @@ SRC_URI += "file://0252-media-bcm2835-unicam-Always-service-interrupts.patch"
 SRC_URI += "file://0253-sc16is7xx-Fix-for-hardware-flow-control.patch"
 SRC_URI += "file://0254-staging-vc04_services-mmal-vchiq-Update-parameters-l.patch"
 SRC_URI += "file://0255-staging-vc04_services-bcm2835-camera-Request-headers.patch"
-SRC_URI += "file://0256-kbuild-Disable-gcc-plugins.patch"
+
+# The following patch is not needed as the gcc-plugins.sh was removed in RCPL 8
+#SRC_URI += "file://0256-kbuild-Disable-gcc-plugins.patch"
+
 SRC_URI += "file://0257-media-bcm2835-unicam-Retain-packing-information-on-G.patch"
 SRC_URI += "file://0258-zswap-Defer-zswap-initialisation.patch"
 SRC_URI += "file://0259-SQUASH-pinctrl-bcm2835-Set-base-for-bcm2711-GPIO-to-.patch"
