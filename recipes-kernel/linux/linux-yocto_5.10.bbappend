@@ -153,7 +153,10 @@ SRC_URI += "file://0133-bcm2835-pcm.c-Support-multichannel-audio.patch"
 SRC_URI += "file://0134-bcmgenet-constrain-max-DMA-burst-length.patch"
 SRC_URI += "file://0135-bcmgenet-Better-coalescing-parameter-defaults.patch"
 SRC_URI += "file://0136-net-genet-enable-link-energy-detect-powerdown-for-ex.patch"
-SRC_URI += "file://0137-usb-xhci-Disable-the-XHCI-5-second-timeout.patch"
+
+# The following patch is not needed since RCPL 12
+#SRC_URI += "file://0137-usb-xhci-Disable-the-XHCI-5-second-timeout.patch"
+
 SRC_URI += "file://0138-spi-bcm2835-enable-shared-interrupt-support.patch"
 SRC_URI += "file://0139-clk-bcm2835-Don-t-wait-for-pllh-lock.patch"
 SRC_URI += "file://0140-soc-bcm-bcm2835-pm-Add-support-for-2711.patch"
@@ -700,7 +703,10 @@ SRC_URI += "file://0599-overlays-Add-minipitft13-overlay.patch"
 SRC_URI += "file://0600-overlays-ghost-amp-Minor-tweaks.patch"
 SRC_URI += "file://0601-overlays-Add-README-entry-for-minipitft13.patch"
 SRC_URI += "file://0602-ARM-dts-update-bcm2711-rpi-cm4.dts-and-400.patch"
-SRC_URI += "file://0603-Revert-usb-xhci-Disable-the-XHCI-5-second-timeout.patch"
+
+# The following patch is not needed since RCPL 12
+#SRC_URI += "file://0603-Revert-usb-xhci-Disable-the-XHCI-5-second-timeout.patch"
+
 SRC_URI += "file://0604-vc4-drm-SQUASH-Fix-source-offsets-with-DRM_FORMAT_P0.patch"
 SRC_URI += "file://0605-dwc-otg-fix-clang-Wignored-attributes-warning.patch"
 SRC_URI += "file://0606-dwc-otg-fix-clang-Wsometimes-uninitialized-warning.patch"
