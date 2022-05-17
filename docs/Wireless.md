@@ -84,14 +84,14 @@ Network manager is not included in the rootfs by default, so first it should
 be added to a build. One method to do that is to add it to the local.conf file
 before building the rootfs.
 
-    $ echo "IMAGE_INSTALL_append = \" networkmanager\"" >> conf/local.conf
+    $ echo "IMAGE_INSTALL_append = \" networkmanager-nmcli\"" >> conf/local.conf
 
 The use bitbake to build as usual.
 
 On the target, once booted with the firmware in place (as above), the following
 commands can be used:
 
-    # nmcli c add type wifi con-name <NAME> ifname wlan0 ssid <SSID>
+    # nmcli con add type wifi con-name <NAME> ifname wlan0 ssid <SSID>
     # nmcli con modify <NAME> wifi-sec.key-mgmt wpa-psk
     # nmcli con modify <NAME> wifi-sec.psk <PASSWORD>
     # nmcli con up <NAME>
