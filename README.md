@@ -8,23 +8,26 @@ Use the following steps to configure a platform project for this BSP with
 Wind River Linux LTS 21:
 
     $ git clone --branch WRLINUX_10_21_LTS /path/to/wrlinux-x
+    $ ./wrlinux-x/setup.sh --machine rpi --distro wrlinux \
+        --layers /path/to/wrl-rpi-bsp --dl-layers --accept-eula yes
+    $ . environment-setup-x86_64-wrlinuxsdk-linux
+    $ . oe-init-build-env
+
+or, as in previous versions:
+
+    $ git clone --branch WRLINUX_10_21_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
     $ . oe-init-build-env
     $ bitbake-layers add-layer /path/to/wrl-rpi-bsp/
+    $ echo "MACHINE = \"rpi\"" >> conf/local.conf
 
-Set `MACHINE` to the required board variant, one of:
+Where the `MACHINE` in either case is the required board variant, one of:
 
   * rpi
   * rpi2
   * rpi3
   * rpi3-64 (64-bit)
-
-for example:
-
-    $ echo "MACHINE = \"rpi\"" >> conf/local.conf
-
-for the original Raspberry Pi or the Pi Zero.
 
 Build the platform with:
 
