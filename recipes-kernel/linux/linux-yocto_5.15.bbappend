@@ -2,5 +2,5 @@
 
 require linux-yocto-rpi.inc
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto-5.15:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/linux-yocto-5.15:"
 
