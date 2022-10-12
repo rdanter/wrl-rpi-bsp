@@ -1,0 +1,33 @@
+From 999f4a19b15f4ccbdb998a8a2da09c4ad25fffab Mon Sep 17 00:00:00 2001
+From: David Plowman <david.plowman@raspberrypi.com>
+Date: Mon, 30 May 2022 10:10:37 +0100
+Subject: [PATCH] media: i2c: imx477: Correct minimum exposure lines
+
+The minimum number of exposure lines value (IMX477_EXPOSURE_MIN) was
+previously 20 but this is not correct. The datasheet is not completely
+explicit, however the new value of 4 has been tested with all the
+sensor modes supported by this driver, and matches the lowest exposure
+value of 114us that could be achieved wtih Raspberry Pi's legacy
+firmware driver.
+
+Signed-off-by: David Plowman <david.plowman@raspberrypi.com>
+---
+ drivers/media/i2c/imx477.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/imx477.c b/drivers/media/i2c/imx477.c
+index 2b4dfdd7975a..ac79c57292b3 100644
+--- a/drivers/media/i2c/imx477.c
++++ b/drivers/media/i2c/imx477.c
+@@ -61,7 +61,7 @@ MODULE_PARM_DESC(trigger_mode, "Set vsync trigger mode: 1=source, 2=sink");
+ /* Exposure control */
+ #define IMX477_REG_EXPOSURE		0x0202
+ #define IMX477_EXPOSURE_OFFSET		22
+-#define IMX477_EXPOSURE_MIN		20
++#define IMX477_EXPOSURE_MIN		4
+ #define IMX477_EXPOSURE_STEP		1
+ #define IMX477_EXPOSURE_DEFAULT		0x640
+ #define IMX477_EXPOSURE_MAX		(IMX477_FRAME_LENGTH_MAX - \
+-- 
+2.32.0
+

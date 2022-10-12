@@ -1,0 +1,33 @@
+From 8fb06e480de36567c6865872309526d047c046eb Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 19 Apr 2022 19:57:29 +0100
+Subject: [PATCH] ARM: dts: Add i2c0mux node to Model B rev 1
+
+The lack of an i2c0mux label prevents the i2c-rtc overlay from
+being applied.
+
+See: https://github.com/raspberrypi/linux/issues/4999
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2708-rpi-b-rev1.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/bcm2708-rpi-b-rev1.dts b/arch/arm/boot/dts/bcm2708-rpi-b-rev1.dts
+index c2d83b61a63c..9bea71078d5f 100644
+--- a/arch/arm/boot/dts/bcm2708-rpi-b-rev1.dts
++++ b/arch/arm/boot/dts/bcm2708-rpi-b-rev1.dts
+@@ -154,6 +154,10 @@ aliases {
+ 		i2c0 = &i2c0;
+ 	};
+ 
++	/* Provide an i2c0mux label to avoid undefined symbols in overlays */
++	i2c0mux: i2c0mux {
++	};
++
+ 	__overrides__ {
+ 		i2c0 = <&i2c0>, "status";
+ 	};
+-- 
+2.32.0
+

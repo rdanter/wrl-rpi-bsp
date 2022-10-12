@@ -1,0 +1,29 @@
+From b3862e259ab054a3ec4a00226adf83d68d0e1932 Mon Sep 17 00:00:00 2001
+From: Naushir Patuck <naush@raspberrypi.com>
+Date: Fri, 20 May 2022 09:56:11 +0100
+Subject: [PATCH] media: imx296: Only advertise the full resolution mode
+
+The 1/4 resolution derived mode does not stream correctly, so remove it from
+the advertised mode list.
+
+Signed-off-by: Naushir Patuck <naush@raspberrypi.com>
+---
+ drivers/media/i2c/imx296.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/imx296.c b/drivers/media/i2c/imx296.c
+index c0da6f841d8f..c565f319be94 100644
+--- a/drivers/media/i2c/imx296.c
++++ b/drivers/media/i2c/imx296.c
+@@ -626,7 +626,7 @@ static int imx296_enum_frame_size(struct v4l2_subdev *sd,
+ {
+ 	struct imx296 *sensor = to_imx296(sd);
+ 
+-	if (fse->index >= 2 || fse->code != sensor->format.code)
++	if (fse->index >= 1 || fse->code != sensor->format.code)
+ 		return -EINVAL;
+ 
+ 	fse->min_width = IMX296_PIXEL_ARRAY_WIDTH / (fse->index + 1);
+-- 
+2.32.0
+

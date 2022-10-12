@@ -1,0 +1,38 @@
+From c0ba150ce468738f550d5626974eebeebba9fd37 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 17 May 2022 17:32:04 +0100
+Subject: [PATCH] drm/vc4: Correct HDMI timing registers for interlaced modes
+
+For interlaced modes the timings were not being correctly
+programmed into the HDMI block, so correct them.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index b0f9ca6b5edf..d809a4db70c3 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1241,13 +1241,13 @@ static void vc5_hdmi_set_timings(struct vc4_hdmi *vc4_hdmi,
+ 		     VC4_SET_FIELD(mode->crtc_vsync_start - mode->crtc_vdisplay,
+ 				   VC5_HDMI_VERTA_VFP) |
+ 		     VC4_SET_FIELD(mode->crtc_vdisplay, VC5_HDMI_VERTA_VAL));
+-	u32 vertb = (VC4_SET_FIELD(0, VC5_HDMI_VERTB_VSPO) |
+-		     VC4_SET_FIELD(mode->crtc_vtotal - mode->crtc_vsync_end +
+-				   interlaced,
++	u32 vertb = (VC4_SET_FIELD(mode->htotal >> (2 - pixel_rep),
++				   VC5_HDMI_VERTB_VSPO) |
++		     VC4_SET_FIELD(mode->crtc_vtotal - mode->crtc_vsync_end,
+ 				   VC4_HDMI_VERTB_VBP));
+ 	u32 vertb_even = (VC4_SET_FIELD(0, VC5_HDMI_VERTB_VSPO) |
+ 			  VC4_SET_FIELD(mode->crtc_vtotal -
+-					mode->crtc_vsync_end,
++					mode->crtc_vsync_end - interlaced,
+ 					VC4_HDMI_VERTB_VBP));
+ 	unsigned long flags;
+ 	unsigned char gcp;
+-- 
+2.32.0
+

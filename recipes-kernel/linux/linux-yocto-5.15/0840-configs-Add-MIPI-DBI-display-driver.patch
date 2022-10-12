@@ -1,0 +1,82 @@
+From 82f2214359a38c5e699044941cec896fd7818908 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Noralf=20Tr=C3=B8nnes?= <noralf@tronnes.org>
+Date: Wed, 2 Mar 2022 18:17:44 +0100
+Subject: [PATCH] configs: Add MIPI DBI display driver
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Enable DRM_PANEL_MIPI_DBI as a module.
+
+Signed-off-by: Noralf Trønnes <noralf@tronnes.org>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 5be34206ec5c..64c5bb2eb0fe 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -895,6 +895,7 @@ CONFIG_DRM_SIMPLE_BRIDGE=m
+ CONFIG_DRM_TOSHIBA_TC358762=m
+ CONFIG_DRM_VC4=m
+ CONFIG_DRM_VC4_HDMI_CEC=y
++CONFIG_DRM_PANEL_MIPI_DBI=m
+ CONFIG_TINYDRM_HX8357D=m
+ CONFIG_TINYDRM_ILI9225=m
+ CONFIG_TINYDRM_ILI9341=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index be7a837cc2d6..7ff4cbb956e6 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -912,6 +912,7 @@ CONFIG_DRM_TOSHIBA_TC358762=m
+ CONFIG_DRM_V3D=m
+ CONFIG_DRM_VC4=m
+ CONFIG_DRM_VC4_HDMI_CEC=y
++CONFIG_DRM_PANEL_MIPI_DBI=m
+ CONFIG_TINYDRM_HX8357D=m
+ CONFIG_TINYDRM_ILI9225=m
+ CONFIG_TINYDRM_ILI9341=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 1b00ef0c9a60..0a35c07880c6 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -888,6 +888,7 @@ CONFIG_DRM_SIMPLE_BRIDGE=m
+ CONFIG_DRM_TOSHIBA_TC358762=m
+ CONFIG_DRM_VC4=m
+ CONFIG_DRM_VC4_HDMI_CEC=y
++CONFIG_DRM_PANEL_MIPI_DBI=m
+ CONFIG_TINYDRM_HX8357D=m
+ CONFIG_TINYDRM_ILI9225=m
+ CONFIG_TINYDRM_ILI9341=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 16d756cacc38..111d63fbda94 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -917,6 +917,7 @@ CONFIG_DRM_TOSHIBA_TC358762=m
+ CONFIG_DRM_V3D=m
+ CONFIG_DRM_VC4=m
+ CONFIG_DRM_VC4_HDMI_CEC=y
++CONFIG_DRM_PANEL_MIPI_DBI=m
+ CONFIG_TINYDRM_HX8357D=m
+ CONFIG_TINYDRM_ILI9225=m
+ CONFIG_TINYDRM_ILI9341=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index c98578ac5de0..a24f2c241ed9 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -836,6 +836,7 @@ CONFIG_DRM_SIMPLE_BRIDGE=m
+ CONFIG_DRM_TOSHIBA_TC358762=m
+ CONFIG_DRM_VC4=m
+ CONFIG_DRM_VC4_HDMI_CEC=y
++CONFIG_DRM_PANEL_MIPI_DBI=m
+ CONFIG_TINYDRM_HX8357D=m
+ CONFIG_DRM_GUD=m
+ CONFIG_FB=y
+-- 
+2.32.0
+

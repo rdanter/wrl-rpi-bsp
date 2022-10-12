@@ -1,0 +1,40 @@
+From 7e1ebcfd14535cfc0da4fc31205ade31ba9a2b17 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Tue, 15 Jun 2021 19:01:46 +0100
+Subject: [PATCH] media: i2c: imx258: Register the ctrls from fwnode properties
+
+Use v4l2_ctrl_new_fwnode_properties to register the standard
+fwnode properties for the driver.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/media/i2c/imx258.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/imx258.c b/drivers/media/i2c/imx258.c
+index e21a2eadf48a..8f80ec208e4f 100644
+--- a/drivers/media/i2c/imx258.c
++++ b/drivers/media/i2c/imx258.c
+@@ -1201,7 +1201,7 @@ static int imx258_init_controls(struct imx258 *imx258)
+ 	int ret;
+ 
+ 	ctrl_hdlr = &imx258->ctrl_handler;
+-	ret = v4l2_ctrl_handler_init(ctrl_hdlr, 10);
++	ret = v4l2_ctrl_handler_init(ctrl_hdlr, 12);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -1270,6 +1270,10 @@ static int imx258_init_controls(struct imx258 *imx258)
+ 	ret = v4l2_fwnode_device_parse(&client->dev, &props);
+ 	if (ret)
+ 		goto error;
++	ret = v4l2_ctrl_new_fwnode_properties(ctrl_hdlr, &imx258_ctrl_ops,
++					      &props);
++	if (ret)
++		goto error;
+ 
+ 	imx258->hflip = v4l2_ctrl_new_std(ctrl_hdlr, &imx258_ctrl_ops,
+ 					  V4L2_CID_HFLIP, 0, 1, 1,
+-- 
+2.32.0
+

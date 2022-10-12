@@ -1,0 +1,60 @@
+From 10aaaecddda5ff530bc5bf8f2872b789555e7fee Mon Sep 17 00:00:00 2001
+From: Stefan Wahren <wahrenst@gmx.net>
+Date: Wed, 13 Jul 2022 18:00:21 +0200
+Subject: [PATCH] pinctrl: bcm2835: drop irq_enable/disable callbacks
+
+commit db1b3ecee9dbb010f0ac951e3953167f5e088c6f upstream.
+
+The commit b8a19382ac62 ("pinctrl: bcm2835: Fix support for threaded level
+triggered IRQs") assigned the irq_mask/unmask callbacks with the
+already existing functions for irq_enable/disable. The wasn't completely
+the right way (tm) to fix the issue, because these callbacks shouldn't
+be identical. So fix this by rename the functions to represent their
+intension and drop the unnecessary irq_enable/disable assigment.
+
+Suggested-by: Marc Zyngier <maz@kernel.org>
+Signed-off-by: Stefan Wahren <stefan.wahren@i2se.com>
+---
+ drivers/pinctrl/bcm/pinctrl-bcm2835.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/pinctrl/bcm/pinctrl-bcm2835.c b/drivers/pinctrl/bcm/pinctrl-bcm2835.c
+index fc2cc1966041..822e37fc9483 100644
+--- a/drivers/pinctrl/bcm/pinctrl-bcm2835.c
++++ b/drivers/pinctrl/bcm/pinctrl-bcm2835.c
+@@ -500,7 +500,7 @@ static void bcm2835_gpio_irq_config(struct bcm2835_pinctrl *pc,
+ 	}
+ }
+ 
+-static void bcm2835_gpio_irq_enable(struct irq_data *data)
++static void bcm2835_gpio_irq_unmask(struct irq_data *data)
+ {
+ 	struct gpio_chip *chip = irq_data_get_irq_chip_data(data);
+ 	struct bcm2835_pinctrl *pc = gpiochip_get_data(chip);
+@@ -515,7 +515,7 @@ static void bcm2835_gpio_irq_enable(struct irq_data *data)
+ 	raw_spin_unlock_irqrestore(&pc->irq_lock[bank], flags);
+ }
+ 
+-static void bcm2835_gpio_irq_disable(struct irq_data *data)
++static void bcm2835_gpio_irq_mask(struct irq_data *data)
+ {
+ 	struct gpio_chip *chip = irq_data_get_irq_chip_data(data);
+ 	struct bcm2835_pinctrl *pc = gpiochip_get_data(chip);
+@@ -688,12 +688,10 @@ static int bcm2835_gpio_irq_set_wake(struct irq_data *data, unsigned int on)
+ 
+ static struct irq_chip bcm2835_gpio_irq_chip = {
+ 	.name = MODULE_NAME,
+-	.irq_enable = bcm2835_gpio_irq_enable,
+-	.irq_disable = bcm2835_gpio_irq_disable,
+ 	.irq_set_type = bcm2835_gpio_irq_set_type,
+ 	.irq_ack = bcm2835_gpio_irq_ack,
+-	.irq_mask = bcm2835_gpio_irq_disable,
+-	.irq_unmask = bcm2835_gpio_irq_enable,
++	.irq_mask = bcm2835_gpio_irq_mask,
++	.irq_unmask = bcm2835_gpio_irq_unmask,
+ 	.irq_set_wake = bcm2835_gpio_irq_set_wake,
+ 	.flags = IRQCHIP_MASK_ON_SUSPEND,
+ };
+-- 
+2.32.0
+

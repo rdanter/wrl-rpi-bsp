@@ -1,0 +1,117 @@
+From 9714200a1c9d9c1ba62adf98d33765f197a2502a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 17 May 2022 13:39:00 +0100
+Subject: [PATCH] configs: Regenerate defconfigs
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 2 +-
+ arch/arm/configs/bcm2711_defconfig   | 2 +-
+ arch/arm/configs/bcmrpi_defconfig    | 2 +-
+ arch/arm64/configs/bcm2711_defconfig | 2 +-
+ arch/arm64/configs/bcmrpi3_defconfig | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index d83321c8a2cc..3615a53cef18 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -915,7 +915,6 @@ CONFIG_RADIO_TEF6862=m
+ CONFIG_RADIO_WL1273=m
+ CONFIG_RADIO_WL128X=m
+ CONFIG_V4L_PLATFORM_DRIVERS=y
+-CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_BCM2835_UNICAM=m
+ CONFIG_VIDEO_UDA1342=m
+ CONFIG_VIDEO_SONY_BTF_MPX=m
+@@ -925,6 +924,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 5f3c4f5e4a2c..923eb2a0d641 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -931,7 +931,6 @@ CONFIG_RADIO_TEF6862=m
+ CONFIG_RADIO_WL1273=m
+ CONFIG_RADIO_WL128X=m
+ CONFIG_V4L_PLATFORM_DRIVERS=y
+-CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_BCM2835_UNICAM=m
+ CONFIG_VIDEO_UDA1342=m
+ CONFIG_VIDEO_SONY_BTF_MPX=m
+@@ -941,6 +940,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 398837601a92..d853915dad64 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -908,7 +908,6 @@ CONFIG_RADIO_TEF6862=m
+ CONFIG_RADIO_WL1273=m
+ CONFIG_RADIO_WL128X=m
+ CONFIG_V4L_PLATFORM_DRIVERS=y
+-CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_BCM2835_UNICAM=m
+ CONFIG_VIDEO_UDA1342=m
+ CONFIG_VIDEO_SONY_BTF_MPX=m
+@@ -918,6 +917,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index f4025a671581..f8a0aee199c3 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -932,7 +932,6 @@ CONFIG_RADIO_TEF6862=m
+ CONFIG_RADIO_WL1273=m
+ CONFIG_RADIO_WL128X=m
+ CONFIG_V4L_PLATFORM_DRIVERS=y
+-CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_BCM2835_UNICAM=m
+ CONFIG_V4L_TEST_DRIVERS=y
+ CONFIG_VIDEO_VIMC=m
+@@ -947,6 +946,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index f1910ae088c8..95885c250f30 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -874,7 +874,6 @@ CONFIG_RADIO_TEF6862=m
+ CONFIG_RADIO_WL1273=m
+ CONFIG_RADIO_WL128X=m
+ CONFIG_V4L_PLATFORM_DRIVERS=y
+-CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_BCM2835_UNICAM=m
+ CONFIG_V4L_TEST_DRIVERS=y
+ CONFIG_VIDEO_VIMC=m
+@@ -889,6 +888,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+-- 
+2.32.0
+

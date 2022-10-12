@@ -1,0 +1,79 @@
+From 8526954ce0b72da0fef0c96e8343ee922ced29d8 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Wed, 19 Jan 2022 17:33:14 +0000
+Subject: [PATCH] defconfigs: Add MFD_RASPBERRYPI_POE_HAT to Pi defconfigs.
+
+Required for PoE HAT when driven from Linux over I2C.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index b9ecfbfc77b5..fbfab695f316 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -737,6 +737,7 @@ CONFIG_BCM2835_THERMAL=y
+ CONFIG_WATCHDOG=y
+ CONFIG_GPIO_WATCHDOG=m
+ CONFIG_BCM2835_WDT=y
++CONFIG_MFD_RASPBERRYPI_POE_HAT=m
+ CONFIG_MFD_STMPE=y
+ CONFIG_STMPE_SPI=y
+ CONFIG_MFD_ARIZONA_I2C=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 8d7d94db74b6..16509f59f100 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -751,6 +751,7 @@ CONFIG_BCM2711_THERMAL=y
+ CONFIG_WATCHDOG=y
+ CONFIG_GPIO_WATCHDOG=m
+ CONFIG_BCM2835_WDT=y
++CONFIG_MFD_RASPBERRYPI_POE_HAT=m
+ CONFIG_MFD_STMPE=y
+ CONFIG_STMPE_SPI=y
+ CONFIG_MFD_ARIZONA_I2C=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index cbe446265a28..e5b07e8da7c3 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -730,6 +730,7 @@ CONFIG_BCM2835_THERMAL=y
+ CONFIG_WATCHDOG=y
+ CONFIG_GPIO_WATCHDOG=m
+ CONFIG_BCM2835_WDT=y
++CONFIG_MFD_RASPBERRYPI_POE_HAT=m
+ CONFIG_MFD_STMPE=y
+ CONFIG_STMPE_SPI=y
+ CONFIG_MFD_ARIZONA_I2C=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 0dc48142447e..ccec4c93c1d9 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -750,6 +750,7 @@ CONFIG_BCM2835_THERMAL=y
+ CONFIG_WATCHDOG=y
+ CONFIG_GPIO_WATCHDOG=m
+ CONFIG_BCM2835_WDT=y
++CONFIG_MFD_RASPBERRYPI_POE_HAT=m
+ CONFIG_MFD_STMPE=y
+ CONFIG_STMPE_SPI=y
+ CONFIG_MFD_SYSCON=y
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index c741bcbb0c4a..19cba51847c7 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -711,6 +711,7 @@ CONFIG_THERMAL=y
+ CONFIG_BCM2835_THERMAL=y
+ CONFIG_WATCHDOG=y
+ CONFIG_BCM2835_WDT=y
++CONFIG_MFD_RASPBERRYPI_POE_HAT=m
+ CONFIG_MFD_STMPE=y
+ CONFIG_STMPE_SPI=y
+ CONFIG_MFD_ARIZONA_I2C=m
+-- 
+2.32.0
+

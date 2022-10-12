@@ -1,0 +1,47 @@
+From fdadcc0ae87af76aedfa14ae2f925282cef6d80a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Sun, 24 Apr 2022 20:25:34 +0100
+Subject: [PATCH] overlays: Fix pitft28/35-resistive rotate params
+
+The drm drivers uses the property name "rotation", not "rotate" as used
+by the fbtft drivers. Fix suggested by notro.
+
+See: https://forums.raspberrypi.com/viewtopic.php?p=1996785#p1996785
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts | 3 ++-
+ arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
+index 9e9f90ad51e0..cfe7d2f39732 100644
+--- a/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
++++ b/arch/arm/boot/dts/overlays/pitft28-resistive-overlay.dts
+@@ -112,7 +112,8 @@ backlight {
+ 
+ 	__overrides__ {
+ 		speed =   <&pitft>,"spi-max-frequency:0";
+-		rotate =  <&pitft>,"rotate:0";
++		rotate =  <&pitft>,"rotate:0", /* fbtft */
++			  <&pitft>,"rotation:0"; /* drm */
+ 		fps =     <&pitft>,"fps:0";
+ 		debug =   <&pitft>,"debug:0";
+ 		drm =     <&pitft>,"compatible=multi-inno,mi0283qt";
+diff --git a/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
+index e11e1920024a..fc0f5e5446ee 100644
+--- a/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
++++ b/arch/arm/boot/dts/overlays/pitft35-resistive-overlay.dts
+@@ -112,7 +112,8 @@ backlight: backlight {
+ 
+ 	__overrides__ {
+ 		speed =   <&pitft>,"spi-max-frequency:0";
+-		rotate =  <&pitft>,"rotate:0";
++		rotate =  <&pitft>,"rotate:0", /* fbtft */
++			  <&pitft>,"rotation:0"; /* drm */
+ 		fps =     <&pitft>,"fps:0";
+ 		debug =   <&pitft>,"debug:0";
+ 		drm =     <&pitft>,"compatible=adafruit,yx350hv15",
+-- 
+2.32.0
+

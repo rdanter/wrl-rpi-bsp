@@ -1,0 +1,28 @@
+From b4023f12028062258a26bf076209e4739e55f0cd Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Tue, 5 Apr 2016 19:40:12 +0100
+Subject: [PATCH] reboot: Use power off rather than busy spinning when halt is
+ requested
+
+---
+ arch/arm/kernel/reboot.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/arch/arm/kernel/reboot.c b/arch/arm/kernel/reboot.c
+index 3044fcb8d073..fe22c46d9943 100644
+--- a/arch/arm/kernel/reboot.c
++++ b/arch/arm/kernel/reboot.c
+@@ -101,9 +101,7 @@ void machine_shutdown(void)
+  */
+ void machine_halt(void)
+ {
+-	local_irq_disable();
+-	smp_send_stop();
+-	while (1);
++	machine_power_off();
+ }
+ 
+ /*
+-- 
+2.32.0
+

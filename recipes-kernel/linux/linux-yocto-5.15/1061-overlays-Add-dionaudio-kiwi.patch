@@ -1,0 +1,92 @@
+From 21ad450e7826a3e2b97db97ddfb30bad8ac4ef8f Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 13 Jul 2022 09:37:38 +0100
+Subject: [PATCH] overlays: Add dionaudio-kiwi
+
+Add support for the Dion Audio KIWI streamer.
+
+Signed-off-by: Miquel Blauw <miquelblauw@hotmail.com>
+---
+ arch/arm/boot/dts/overlays/Makefile           |  1 +
+ arch/arm/boot/dts/overlays/README             |  6 +++
+ .../dts/overlays/dionaudio-kiwi-overlay.dts   | 39 +++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+ create mode 100644 arch/arm/boot/dts/overlays/dionaudio-kiwi-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index 1fdbdad771e5..e73249383d7a 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -39,6 +39,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	cma.dtbo \
+ 	cutiepi-panel.dtbo \
+ 	dht11.dtbo \
++	dionaudio-kiwi.dtbo \
+ 	dionaudio-loco.dtbo \
+ 	dionaudio-loco-v2.dtbo \
+ 	disable-bt.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 942230f257ff..66219591c867 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -729,6 +729,12 @@ Params: gpiopin                 GPIO connected to the sensor's DATA output.
+                                 (default 4)
+ 
+ 
++Name:   dionaudio-kiwi
++Info:   Configures the Dion Audio KIWI STREAMER
++Load:   dtoverlay=dionaudio-kiwi
++Params: <None>
++
++
+ Name:   dionaudio-loco
+ Info:   Configures the Dion Audio LOCO DAC-AMP
+ Load:   dtoverlay=dionaudio-loco
+diff --git a/arch/arm/boot/dts/overlays/dionaudio-kiwi-overlay.dts b/arch/arm/boot/dts/overlays/dionaudio-kiwi-overlay.dts
+new file mode 100644
+index 000000000000..128ef54eb89f
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/dionaudio-kiwi-overlay.dts
+@@ -0,0 +1,39 @@
++// Definitions for Dion Audio KIWI streamer
++
++/*
++ * PCM1794 DAC (in hardware mode).
++ */
++
++/dts-v1/;
++/plugin/;
++
++/ {
++	compatible = "brcm,bcm2835";
++
++	fragment@0 {
++		target = <&i2s>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@1 {
++		target-path = "/";
++		__overlay__ {
++			pcm1794a-codec {
++				#sound-dai-cells = <0>;
++				compatible = "ti,pcm1794a";
++				status = "okay";
++			};
++		};
++	};
++
++	fragment@2 {
++		target = <&sound>;
++		__overlay__ {
++			compatible = "dionaudio,dionaudio-kiwi";
++			i2s-controller = <&i2s>;
++			status = "okay";
++		};
++	};
++};
+-- 
+2.32.0
+

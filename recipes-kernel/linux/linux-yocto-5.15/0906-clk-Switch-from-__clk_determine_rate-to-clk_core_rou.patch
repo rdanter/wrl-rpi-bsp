@@ -1,0 +1,65 @@
+From 004ce0158b9a741f2d3613f0de5c542e51390063 Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Sat, 2 Apr 2022 13:52:55 +0200
+Subject: [PATCH] clk: Switch from __clk_determine_rate to
+ clk_core_round_rate_nolock
+
+clk_mux_determine_rate_flags() will call into __clk_determine_rate()
+with a clk_hw pointer, while it has access to the clk_core pointer
+already.
+
+This leads to back and forth between clk_hw and clk_core, while
+__clk_determine_rate will only call clk_core_round_rate_nolock() with
+the clk_core pointer it retrieved from the clk_hw.
+
+Let's simplify things a bit by calling into clk_core_round_rate_nolock
+directly.
+
+Tested-by: Alexander Stein <alexander.stein@ew.tq-group.com> # imx8mp
+Tested-by: Marek Szyprowski <m.szyprowski@samsung.com> # exynos4210, meson g12b
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/clk/clk.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index 30b7d299f238..c4f85073348b 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -550,6 +550,9 @@ static bool mux_is_better_rate(unsigned long rate, unsigned long now,
+ 	return now <= rate && now > best;
+ }
+ 
++static int clk_core_round_rate_nolock(struct clk_core *core,
++				      struct clk_rate_request *req);
++
+ int clk_mux_determine_rate_flags(struct clk_hw *hw,
+ 				 struct clk_rate_request *req,
+ 				 unsigned long flags)
+@@ -563,8 +566,12 @@ int clk_mux_determine_rate_flags(struct clk_hw *hw,
+ 	if (core->flags & CLK_SET_RATE_NO_REPARENT) {
+ 		parent = core->parent;
+ 		if (core->flags & CLK_SET_RATE_PARENT) {
+-			ret = __clk_determine_rate(parent ? parent->hw : NULL,
+-						   &parent_req);
++			if (!parent) {
++				req->rate = 0;
++				return 0;
++			}
++
++			ret = clk_core_round_rate_nolock(parent, &parent_req);
+ 			if (ret)
+ 				return ret;
+ 
+@@ -587,7 +594,7 @@ int clk_mux_determine_rate_flags(struct clk_hw *hw,
+ 
+ 		if (core->flags & CLK_SET_RATE_PARENT) {
+ 			parent_req = *req;
+-			ret = __clk_determine_rate(parent->hw, &parent_req);
++			ret = clk_core_round_rate_nolock(parent, &parent_req);
+ 			if (ret)
+ 				continue;
+ 		} else {
+-- 
+2.32.0
+

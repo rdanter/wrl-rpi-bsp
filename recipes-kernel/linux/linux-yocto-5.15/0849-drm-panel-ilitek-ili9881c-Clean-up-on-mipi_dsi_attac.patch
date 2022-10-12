@@ -1,0 +1,36 @@
+From 2eeb3b385ff1fe03ca1b21b3d31b0a912c595505 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 31 Mar 2022 12:03:36 +0100
+Subject: [PATCH] drm/panel: ilitek-ili9881c: Clean up on mipi_dsi_attach
+ failure
+
+mipi_dsi_attach is allowed to fail, and currently the probe
+code doesn't clean up (mainly drm_panel_remove) if this happens.
+
+Add cleanup code on failure.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/panel/panel-ilitek-ili9881c.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+index 6e03d9b0be60..5446b07439f4 100644
+--- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
++++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
+@@ -913,7 +913,11 @@ static int ili9881c_dsi_probe(struct mipi_dsi_device *dsi)
+ 	dsi->format = MIPI_DSI_FMT_RGB888;
+ 	dsi->lanes = 4;
+ 
+-	return mipi_dsi_attach(dsi);
++	ret = mipi_dsi_attach(dsi);
++	if (ret)
++		drm_panel_remove(&ctx->panel);
++
++	return ret;
+ }
+ 
+ static int ili9881c_dsi_remove(struct mipi_dsi_device *dsi)
+-- 
+2.32.0
+

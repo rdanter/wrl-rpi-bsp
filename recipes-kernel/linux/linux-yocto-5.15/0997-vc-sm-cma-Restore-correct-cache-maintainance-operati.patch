@@ -1,0 +1,36 @@
+From 08bca69a7aa3d245c5137a461bdd7e70101733c9 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Wed, 25 May 2022 15:57:40 +0100
+Subject: [PATCH] vc-sm-cma: Restore correct cache maintainance operations
+
+We have been using the more expensive flush operations rather than
+invalidate and clean since kernel rpi-5.9.y
+
+These are exposed with:
+52f1453513ba95084ab811a030032fe605b0cbe2 Re-expose some dmi APIs for use in VCSM
+
+But I believe that commit was dropped when (non-cma) vc-sm was dropped,
+and didn't get updated when the commit was restored
+
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/staging/vc04_services/vc-sm-cma/vc_sm.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c b/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
+index 82a9c6e7f277..268f97ee8673 100644
+--- a/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
++++ b/drivers/staging/vc04_services/vc-sm-cma/vc_sm.c
+@@ -1247,7 +1247,9 @@ static void (*cache_op_to_func(const unsigned int cache_op))
+ 		return NULL;
+ 
+ 	case VC_SM_CACHE_OP_INV:
++		return dmac_inv_range;
+ 	case VC_SM_CACHE_OP_CLEAN:
++		return dmac_clean_range;
+ 	case VC_SM_CACHE_OP_FLUSH:
+ 		return dmac_flush_range;
+ 
+-- 
+2.32.0
+

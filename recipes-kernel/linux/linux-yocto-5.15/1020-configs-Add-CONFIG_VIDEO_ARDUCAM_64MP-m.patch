@@ -1,0 +1,79 @@
+From 69cc1e5a32f9e73f5a9760930fbb548e6c2628a2 Mon Sep 17 00:00:00 2001
+From: Lee Jackson <info@arducam.com>
+Date: Mon, 16 May 2022 10:03:23 +0800
+Subject: [PATCH] configs: Add CONFIG_VIDEO_ARDUCAM_64MP=m
+
+Include the driver module for the Arducam 64MP.
+
+Signed-off-by: Lee Jackson <info@arducam.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 8f01cc9a9ac6..40a9471136cc 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -924,6 +924,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_64MP=m
+ CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 4905fbccd259..fdad8d7e62d2 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -940,6 +940,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_64MP=m
+ CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index b3c7df2bcc00..42773075f20d 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -917,6 +917,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_64MP=m
+ CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index c02f0b7f5602..4d463f9c86e6 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -946,6 +946,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_64MP=m
+ CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 092e7b6b100b..7fffb6eaabb2 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -888,6 +888,7 @@ CONFIG_VIDEO_TVP5150=m
+ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
++CONFIG_VIDEO_ARDUCAM_64MP=m
+ CONFIG_VIDEO_ARDUCAM_PIVARIETY=m
+ CONFIG_VIDEO_IMX219=m
+ CONFIG_VIDEO_IMX258=m
+-- 
+2.32.0
+

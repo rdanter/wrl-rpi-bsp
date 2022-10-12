@@ -1,0 +1,41 @@
+From 4c757673acfabe87d1a7fbb85b6381d8a8afcd3a Mon Sep 17 00:00:00 2001
+From: Florian Fainelli <f.fainelli@gmail.com>
+Date: Mon, 20 Sep 2021 14:54:16 -0700
+Subject: [PATCH] net: phy: broadcom: Utilize appropriate suspend for
+ BCM54810/11
+
+Since we enable APD and DLL/RXC/TXC disable we need to use
+bcm54xx_suspend() in order not to do a read/modify/write of the BMCR
+register which is incompatible with the desired settings.
+
+Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+---
+ drivers/net/phy/broadcom.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/phy/broadcom.c b/drivers/net/phy/broadcom.c
+index 80ce421ffcd7..7beae63d6daa 100644
+--- a/drivers/net/phy/broadcom.c
++++ b/drivers/net/phy/broadcom.c
+@@ -944,7 +944,7 @@ static struct phy_driver broadcom_drivers[] = {
+ 	.config_aneg    = bcm5481_config_aneg,
+ 	.config_intr    = bcm_phy_config_intr,
+ 	.handle_interrupt = bcm_phy_handle_interrupt,
+-	.suspend	= genphy_suspend,
++	.suspend	= bcm54xx_suspend,
+ 	.resume		= bcm54xx_resume,
+ 	.link_change_notify	= bcm54xx_link_change_notify,
+ }, {
+@@ -960,7 +960,7 @@ static struct phy_driver broadcom_drivers[] = {
+ 	.config_aneg    = bcm5481_config_aneg,
+ 	.config_intr    = bcm_phy_config_intr,
+ 	.handle_interrupt = bcm_phy_handle_interrupt,
+-	.suspend	= genphy_suspend,
++	.suspend	= bcm54xx_suspend,
+ 	.resume		= bcm54xx_resume,
+ 	.link_change_notify	= bcm54xx_link_change_notify,
+ }, {
+-- 
+2.32.0
+

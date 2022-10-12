@@ -1,0 +1,35 @@
+From 83bb3768c8823ec294e4a7f30d1c9e1b308b7e96 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 7 Jun 2022 13:37:38 +0100
+Subject: [PATCH] ARM: dts: zero-2-w: Better names for GPIOs 14 & 15
+
+GPIOs 14 and 15 are currently labelled TXD0 and RXD0, which matches
+comments on the schematic but 1) doesn't reflect their likely usage
+(i.e. UART1) and 2) clashes with GPIOs 32 and 33. Adopt the common
+naming for those two pins on BT-equipped Pis - TXD1 and RXD1.
+
+See: https://github.com/raspberrypi/linux/issues/5058
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2710-rpi-zero-2-w.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2710-rpi-zero-2-w.dts b/arch/arm/boot/dts/bcm2710-rpi-zero-2-w.dts
+index 601b0573c7a7..c0d7bd733278 100644
+--- a/arch/arm/boot/dts/bcm2710-rpi-zero-2-w.dts
++++ b/arch/arm/boot/dts/bcm2710-rpi-zero-2-w.dts
+@@ -45,8 +45,8 @@ &gpio {
+ 			  "GPIO12",
+ 			  "GPIO13",
+ 			  /* Serial port */
+-			  "TXD0",
+-			  "RXD0",
++			  "TXD1",
++			  "RXD1",
+ 			  "GPIO16",
+ 			  "GPIO17",
+ 			  "GPIO18",
+-- 
+2.32.0
+

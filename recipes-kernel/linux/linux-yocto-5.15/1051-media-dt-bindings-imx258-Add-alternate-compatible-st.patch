@@ -1,0 +1,34 @@
+From 6810391248226f959ce112f5073ba3ef6c8a15e6 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Mon, 4 Jul 2022 11:48:57 +0100
+Subject: [PATCH] media: dt-bindings: imx258: Add alternate compatible strings
+
+There are a number of variants of the imx258 modules that can not
+be differentiated at runtime, so add compatible strings for them.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ Documentation/devicetree/bindings/media/i2c/imx258.yaml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/media/i2c/imx258.yaml b/Documentation/devicetree/bindings/media/i2c/imx258.yaml
+index cde0f7383b2a..3fc30a79c538 100644
+--- a/Documentation/devicetree/bindings/media/i2c/imx258.yaml
++++ b/Documentation/devicetree/bindings/media/i2c/imx258.yaml
+@@ -14,10 +14,13 @@ description: |-
+   type stacked image sensor with a square pixel array of size 4208 x 3120. It
+   is programmable through I2C interface.  Image data is sent through MIPI
+   CSI-2.
++  There are a number of variants of the sensor which cannot be detected at
++  runtime, so multiple compatible strings are required to differentiate these.
+ 
+ properties:
+   compatible:
+     const: sony,imx258
++    const: sony,imx258-pdaf
+ 
+   assigned-clocks: true
+   assigned-clock-parents: true
+-- 
+2.32.0
+

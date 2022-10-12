@@ -1,0 +1,374 @@
+From 7c2808e56506f3192f817c36c57ec644979299f4 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 21 Jul 2022 18:15:33 +0100
+Subject: [PATCH] overlays: Make more overlays runtime-capable
+
+The kernel now rejects the creation of a DT node with the same name as
+an existing node, so take care not to do that.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm270x-rpi.dtsi            |  1 +
+ .../boot/dts/overlays/apds9960-overlay.dts    | 22 +++++++---------
+ .../boot/dts/overlays/balena-fin-overlay.dts  |  2 +-
+ arch/arm/boot/dts/overlays/gc9a01-overlay.dts |  8 +++---
+ .../dts/overlays/media-center-overlay.dts     | 26 +++++++++----------
+ .../boot/dts/overlays/minipitft13-overlay.dts | 22 ++++++++--------
+ .../arm/boot/dts/overlays/papirus-overlay.dts | 21 ++++++---------
+ .../arm/boot/dts/overlays/pitft22-overlay.dts | 22 ++++++++--------
+ .../dts/overlays/qca7000-uart0-overlay.dts    |  2 +-
+ arch/arm/boot/dts/overlays/uart0-overlay.dts  |  2 +-
+ arch/arm/boot/dts/overlays/uart1-overlay.dts  |  2 +-
+ 11 files changed, 61 insertions(+), 69 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm270x-rpi.dtsi b/arch/arm/boot/dts/bcm270x-rpi.dtsi
+index 57e7d5f60d3e..be9a24c32945 100644
+--- a/arch/arm/boot/dts/bcm270x-rpi.dtsi
++++ b/arch/arm/boot/dts/bcm270x-rpi.dtsi
+@@ -132,6 +132,7 @@ &sdhci {
+ 
+ &cpu_thermal {
+ 	/delete-node/ trips;
++	/delete-node/ cooling-maps;
+ };
+ 
+ &vec {
+diff --git a/arch/arm/boot/dts/overlays/apds9960-overlay.dts b/arch/arm/boot/dts/overlays/apds9960-overlay.dts
+index c216932278ab..bb18cca1ac66 100644
+--- a/arch/arm/boot/dts/overlays/apds9960-overlay.dts
++++ b/arch/arm/boot/dts/overlays/apds9960-overlay.dts
+@@ -24,6 +24,15 @@ apds9960_pins: apds9960_pins@39 {
+ 	};
+ 
+ 	fragment@2 {
++		target = <&apds9960>;
++		apds9960_irq: __overlay__ {
++			#interrupt-cells = <2>;
++			interrupt-parent = <&gpio>;
++			interrupts = <4 1>;
++		};
++	};
++
++	fragment@3 {
+ 		target = <&i2c1>;
+ 		__overlay__ {
+ 			#address-cells = <1>;
+@@ -37,21 +46,10 @@ apds9960: apds@39 {
+ 		};
+ 	};
+ 
+-	fragment@3 {
+-		target = <&i2c1>;
+-		__overlay__ {
+-			apds9960_irq: apds@39 {
+-				#interrupt-cells=<2>;
+-				interrupt-parent = <&gpio>;
+-				interrupts = <4 1>;
+-			};
+-		};
+-	};
+-
+ 	__overrides__ {
+ 		gpiopin = <&apds9960_pins>,"brcm,pins:0",
+ 				<&apds9960_irq>,"interrupts:0";
+-		noints = <0>,"!1!3";
++		noints = <0>,"!1!2";
+ 	};
+ };
+ 
+diff --git a/arch/arm/boot/dts/overlays/balena-fin-overlay.dts b/arch/arm/boot/dts/overlays/balena-fin-overlay.dts
+index e7ead7cdf5f5..8fc22587e69c 100644
+--- a/arch/arm/boot/dts/overlays/balena-fin-overlay.dts
++++ b/arch/arm/boot/dts/overlays/balena-fin-overlay.dts
+@@ -20,7 +20,7 @@ __overlay__ {
+ 	fragment@1 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+-			sdio_pins: sdio_pins {
++			sdio_pins: sdio_ovl_pins {
+ 				brcm,pins = <34 35 36 37 38 39>;
+ 				brcm,function = <7>; /* ALT3 = SD1 */
+ 				brcm,pull = <0 2 2 2 2 2>;
+diff --git a/arch/arm/boot/dts/overlays/gc9a01-overlay.dts b/arch/arm/boot/dts/overlays/gc9a01-overlay.dts
+index f1bcd1aeffad..3d31030c5564 100644
+--- a/arch/arm/boot/dts/overlays/gc9a01-overlay.dts
++++ b/arch/arm/boot/dts/overlays/gc9a01-overlay.dts
+@@ -37,12 +37,9 @@ / {
+     compatible = "brcm,bcm2835";
+ 
+     fragment@0 {
+-        target = <&spi0>;
++        target = <&spidev0>;
+         __overlay__ {
+-            status = "okay";
+-            spidev@0 {
+-                status = "disabled";
+-            };
++            status = "disabled";
+         };
+     };
+ 
+@@ -63,6 +60,7 @@ __overlay__ {
+             /* needed to avoid dtc warning */
+             #address-cells = <1>;
+             #size-cells = <0>;
++            status = "okay";
+ 
+             gc9a01: gc9a01@0 {
+                 compatible = "ilitek,ili9340";
+diff --git a/arch/arm/boot/dts/overlays/media-center-overlay.dts b/arch/arm/boot/dts/overlays/media-center-overlay.dts
+index 1b56963f4f16..9fab935d89d3 100644
+--- a/arch/arm/boot/dts/overlays/media-center-overlay.dts
++++ b/arch/arm/boot/dts/overlays/media-center-overlay.dts
+@@ -10,21 +10,20 @@ / {
+ 	compatible = "brcm,bcm2835";
+ 
+ 	fragment@0 {
+-		target = <&spi0>;
++		target = <&spidev0>;
+ 		__overlay__ {
+-			status = "okay";
+-
+-			spidev@0{
+-				status = "disabled";
+-			};
+-
+-			spidev@1{
+-				status = "disabled";
+-			};
++			status = "disabled";
+ 		};
+ 	};
+ 
+ 	fragment@1 {
++		target = <&spidev1>;
++		__overlay__ {
++			status = "disabled";
++		};
++	};
++
++	fragment@2 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+ 			rpi_display_pins: rpi_display_pins {
+@@ -35,12 +34,13 @@ rpi_display_pins: rpi_display_pins {
+ 		};
+ 	};
+ 
+-	fragment@2 {
++	fragment@3 {
+ 		target = <&spi0>;
+ 		__overlay__ {
+ 			/* needed to avoid dtc warning */
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			status = "okay";
+ 
+ 			rpidisplay: rpi-display@0{
+ 				compatible = "ilitek,ili9341";
+@@ -73,7 +73,7 @@ rpidisplay_ts: rpi-display-ts@1 {
+ 		};
+ 	};
+ 
+-	fragment@3 {
++	fragment@4 {
+ 		target-path = "/";
+ 		__overlay__ {
+ 			lirc_rpi: lirc_rpi {
+@@ -101,7 +101,7 @@ lirc_rpi: lirc_rpi {
+ 		};
+ 	};
+ 
+-	fragment@4 {
++	fragment@5 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+ 			lirc_pins: lirc_pins {
+diff --git a/arch/arm/boot/dts/overlays/minipitft13-overlay.dts b/arch/arm/boot/dts/overlays/minipitft13-overlay.dts
+index b1a0a2a41f72..5e0941e8ba54 100644
+--- a/arch/arm/boot/dts/overlays/minipitft13-overlay.dts
++++ b/arch/arm/boot/dts/overlays/minipitft13-overlay.dts
+@@ -10,21 +10,20 @@ / {
+         compatible = "brcm,bcm2835";
+ 
+         fragment@0 {
+-                target = <&spi0>;
++                target = <&spidev0>;
+                 __overlay__ {
+-                        status = "okay";
+-
+-                        spidev@0{
+-                                status = "disabled";
+-                        };
+-
+-                        spidev@1{
+-                                status = "disabled";
+-                        };
++                        status = "disabled";
+                 };
+         };
+ 
+         fragment@1 {
++                target = <&spidev1>;
++                __overlay__ {
++                        status = "disabled";
++                };
++        };
++
++        fragment@2 {
+                 target = <&gpio>;
+                 __overlay__ {
+                         pitft_pins: pitft_pins {
+@@ -35,12 +34,13 @@ pitft_pins: pitft_pins {
+                 };
+         };
+ 
+-        fragment@2 {
++        fragment@3 {
+                 target = <&spi0>;
+                 __overlay__ {
+                         /* needed to avoid dtc warning */
+                         #address-cells = <1>;
+                         #size-cells = <0>;
++                        status = "okay";
+ 
+                         pitft: pitft@0 {
+                                 compatible = "fbtft,minipitft13";
+diff --git a/arch/arm/boot/dts/overlays/papirus-overlay.dts b/arch/arm/boot/dts/overlays/papirus-overlay.dts
+index 7b6bcfd49c86..d3e819c0578d 100644
+--- a/arch/arm/boot/dts/overlays/papirus-overlay.dts
++++ b/arch/arm/boot/dts/overlays/papirus-overlay.dts
+@@ -23,26 +23,20 @@ display_temp: lm75@48 {
+ 	};
+ 
+ 	fragment@1 {
+-		target-path = "/";
++		target-path = "/thermal-zones";
+ 		__overlay__ {
+-			thermal-zones {
+-				display {
+-					polling-delay-passive = <0>;
+-					polling-delay = <0>;
+-					thermal-sensors = <&display_temp>;
+-				};
++			display {
++				polling-delay-passive = <0>;
++				polling-delay = <0>;
++				thermal-sensors = <&display_temp>;
+ 			};
+ 		};
+ 	};
+ 
+ 	fragment@2 {
+-		target = <&spi0>;
++		target = <&spidev0>;
+ 		__overlay__ {
+-			status = "okay";
+-
+-			spidev@0{
+-				status = "disabled";
+-			};
++			status = "disabled";
+ 		};
+ 	};
+ 
+@@ -62,6 +56,7 @@ __overlay__ {
+ 			/* needed to avoid dtc warning */
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			status = "okay";
+ 
+ 			repaper: repaper@0{
+ 				compatible = "not_set";
+diff --git a/arch/arm/boot/dts/overlays/pitft22-overlay.dts b/arch/arm/boot/dts/overlays/pitft22-overlay.dts
+index 589ad13795b1..4c44ab66bc1c 100644
+--- a/arch/arm/boot/dts/overlays/pitft22-overlay.dts
++++ b/arch/arm/boot/dts/overlays/pitft22-overlay.dts
+@@ -10,21 +10,20 @@ / {
+         compatible = "brcm,bcm2835";
+ 
+         fragment@0 {
+-                target = <&spi0>;
++                target = <&spidev0>;
+                 __overlay__ {
+-                        status = "okay";
+-
+-                        spidev@0{
+-                                status = "disabled";
+-                        };
+-
+-                        spidev@1{
+-                                status = "disabled";
+-                        };
++                        status = "disabled";
+                 };
+         };
+ 
+         fragment@1 {
++                target = <&spidev1>;
++                __overlay__ {
++                        status = "disabled";
++                };
++        };
++
++        fragment@2 {
+                 target = <&gpio>;
+                 __overlay__ {
+                         pitft_pins: pitft_pins {
+@@ -35,12 +34,13 @@ pitft_pins: pitft_pins {
+                 };
+         };
+ 
+-        fragment@2 {
++        fragment@3 {
+                 target = <&spi0>;
+                 __overlay__ {
+                         /* needed to avoid dtc warning */
+                         #address-cells = <1>;
+                         #size-cells = <0>;
++                        status = "okay";
+ 
+                         pitft: pitft@0{
+                                 compatible = "ilitek,ili9340";
+diff --git a/arch/arm/boot/dts/overlays/qca7000-uart0-overlay.dts b/arch/arm/boot/dts/overlays/qca7000-uart0-overlay.dts
+index 5dee70853289..f103916c9e1c 100644
+--- a/arch/arm/boot/dts/overlays/qca7000-uart0-overlay.dts
++++ b/arch/arm/boot/dts/overlays/qca7000-uart0-overlay.dts
+@@ -24,7 +24,7 @@ eth2: qca7000 {
+ 	fragment@1 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+-			uart0_pins: uart0_pins {
++			uart0_pins: uart0_ovl_pins {
+ 				brcm,pins = <14 15>;
+ 				brcm,function = <4>; /* alt0 */
+ 				brcm,pull = <0 2>;
+diff --git a/arch/arm/boot/dts/overlays/uart0-overlay.dts b/arch/arm/boot/dts/overlays/uart0-overlay.dts
+index 73d563bbaabf..6bf2e0fd5c61 100755
+--- a/arch/arm/boot/dts/overlays/uart0-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart0-overlay.dts
+@@ -16,7 +16,7 @@ __overlay__ {
+ 	fragment@1 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+-			uart0_pins: uart0_pins {
++			uart0_pins: uart0_ovl_pins {
+ 				brcm,pins = <14 15>;
+ 				brcm,function = <4>; /* alt0 */
+ 				brcm,pull = <0 2>;
+diff --git a/arch/arm/boot/dts/overlays/uart1-overlay.dts b/arch/arm/boot/dts/overlays/uart1-overlay.dts
+index 986d725a2652..64163bf932b7 100644
+--- a/arch/arm/boot/dts/overlays/uart1-overlay.dts
++++ b/arch/arm/boot/dts/overlays/uart1-overlay.dts
+@@ -16,7 +16,7 @@ __overlay__ {
+ 	fragment@1 {
+ 		target = <&gpio>;
+ 		__overlay__ {
+-			uart1_pins: uart1_pins {
++			uart1_pins: uart1_ovl_pins {
+ 				brcm,pins = <14 15>;
+ 				brcm,function = <2>; /* alt5 */
+ 				brcm,pull = <0 2>;
+-- 
+2.32.0
+

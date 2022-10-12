@@ -1,0 +1,35 @@
+From 837e1e56bc2a5ee79d5c3715937be6f43aaeef5a Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Fri, 3 Jun 2022 21:55:22 +0100
+Subject: [PATCH] overlays: Document the rv8803 i2c-rtc parameter
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/overlays/README | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
+index 52352b083498..e423abbd535c 100644
+--- a/arch/arm/boot/dts/overlays/README
++++ b/arch/arm/boot/dts/overlays/README
+@@ -1654,6 +1654,8 @@ Params: abx80x                  Select one of the ABx80x family:
+ 
+         rv3028                  Select the Micro Crystal RV3028 device
+ 
++        rv8803                  Select the Micro Crystal RV8803 device
++
+         sd3078                  Select the ZXW Shenzhen whwave SD3078 device
+ 
+         s35390a                 Select the ABLIC S35390A device
+@@ -1724,6 +1726,8 @@ Params: abx80x                  Select one of the ABx80x family:
+ 
+         rv3028                  Select the Micro Crystal RV3028 device
+ 
++        rv8803                  Select the Micro Crystal RV8803 device
++
+         sd3078                  Select the ZXW Shenzhen whwave SD3078 device
+ 
+         s35390a                 Select the ABLIC S35390A device
+-- 
+2.32.0
+

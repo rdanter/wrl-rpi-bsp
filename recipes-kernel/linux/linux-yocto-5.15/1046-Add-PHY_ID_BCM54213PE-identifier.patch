@@ -1,0 +1,30 @@
+From b8e68d153d429de337d173e6bfc295f1d8ba557d Mon Sep 17 00:00:00 2001
+From: Jonathan Lemon <jonathan.lemon@gmail.com>
+Date: Fri, 29 Apr 2022 17:40:11 -0700
+Subject: [PATCH] Add PHY_ID_BCM54213PE identifier.
+
+The BCM54213PE identifier is a RPI-specific addition.
+Add this case to the PHY model selector.
+
+Signed-off-by: Jonathan Lemon <jonathan.lemon@gmail.com>
+---
+ drivers/net/phy/bcm-phy-ptp.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/net/phy/bcm-phy-ptp.c b/drivers/net/phy/bcm-phy-ptp.c
+index ef00d6163061..08a1824d4a53 100644
+--- a/drivers/net/phy/bcm-phy-ptp.c
++++ b/drivers/net/phy/bcm-phy-ptp.c
+@@ -915,6 +915,9 @@ struct bcm_ptp_private *bcm_ptp_probe(struct phy_device *phydev)
+ 
+ 	switch (BRCM_PHY_MODEL(phydev)) {
+ 	case PHY_ID_BCM54210E:
++#ifdef PHY_ID_BCM54213PE
++	case PHY_ID_BCM54213PE:
++#endif
+ 		break;
+ 	default:
+ 		return NULL;
+-- 
+2.32.0
+

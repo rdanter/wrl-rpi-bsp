@@ -1,0 +1,30 @@
+From ed0918e65a6f96009fda5d21abf7e88c6a4c7504 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Wed, 13 Apr 2022 13:50:30 +0100
+Subject: [PATCH] configs: bcm2711_defconfig: Enable KASLR
+
+Although KASLR is enabled in the old bcmrpi3_defconfig, it is omitted
+from bcm2711_defconfig. Correct that oversight.
+
+See: https://github.com/raspberrypi/linux/issues/4989
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 98832f25ad60..250770ba059e 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -40,6 +40,7 @@ CONFIG_ARMV8_DEPRECATED=y
+ CONFIG_SWP_EMULATION=y
+ CONFIG_CP15_BARRIER_EMULATION=y
+ CONFIG_SETEND_EMULATION=y
++CONFIG_RANDOMIZE_BASE=y
+ CONFIG_CMDLINE="console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait"
+ # CONFIG_SUSPEND is not set
+ CONFIG_CPU_IDLE=y
+-- 
+2.32.0
+

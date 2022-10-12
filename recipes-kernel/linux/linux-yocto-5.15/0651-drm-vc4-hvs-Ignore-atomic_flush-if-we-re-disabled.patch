@@ -1,0 +1,32 @@
+From fabe5ea1a0941133d475e548ba0a56eaed6f522f Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Mon, 6 Dec 2021 16:32:10 +0100
+Subject: [PATCH] drm/vc4: hvs: Ignore atomic_flush if we're disabled
+
+atomic_flush will be called for each CRTC even if they aren't enabled.
+
+The whole code we have there will thus run without a properly affected
+channel, which can then result in all sorts of weird behaviour.
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/vc4/vc4_hvs.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hvs.c b/drivers/gpu/drm/vc4/vc4_hvs.c
+index 44651229bf1d..c979d3c41353 100644
+--- a/drivers/gpu/drm/vc4/vc4_hvs.c
++++ b/drivers/gpu/drm/vc4/vc4_hvs.c
+@@ -686,6 +686,9 @@ void vc4_hvs_atomic_flush(struct drm_crtc *crtc,
+ 	u32 __iomem *dlist_start = vc4->hvs->dlist + vc4_state->mm.start;
+ 	u32 __iomem *dlist_next = dlist_start;
+ 
++	if (vc4_state->assigned_channel == VC4_HVS_CHANNEL_DISABLED)
++		return;
++
+ 	if (debug_dump_regs) {
+ 		DRM_INFO("CRTC %d HVS before:\n", drm_crtc_index(crtc));
+ 		vc4_hvs_dump_state(dev);
+-- 
+2.32.0
+

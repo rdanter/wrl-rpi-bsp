@@ -1,0 +1,106 @@
+From bcf66edaa70ddecac2de48bbf2a9b431e01faece Mon Sep 17 00:00:00 2001
+From: popcornmix <popcornmix@gmail.com>
+Date: Wed, 8 Dec 2021 15:57:15 +0000
+Subject: [PATCH] vc4/drm: Ignore vc4_hdmi->output_enabled for allowing audio
+ (#4759)
+
+Otherwise we reject audio playback when switching hdmi modes
+
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 29 ++---------------------------
+ drivers/gpu/drm/vc4/vc4_hdmi.h |  6 ------
+ 2 files changed, 2 insertions(+), 33 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index 4d8bb7f599a3..881c48e60555 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -210,6 +210,7 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
+ 			connected = true;
+ 	}
+ 
++	vc4_hdmi->encoder.hdmi_monitor = false;
+ 	if (connected) {
+ 		if (connector->status != connector_status_connected) {
+ 			struct edid *edid = drm_get_edid(connector, vc4_hdmi->ddc);
+@@ -730,15 +731,6 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
+ 	mutex_unlock(&vc4_hdmi->mutex);
+ }
+ 
+-static void vc4_hdmi_encoder_disable(struct drm_encoder *encoder)
+-{
+-	struct vc4_hdmi *vc4_hdmi = encoder_to_vc4_hdmi(encoder);
+-
+-	mutex_lock(&vc4_hdmi->mutex);
+-	vc4_hdmi->output_enabled = false;
+-	mutex_unlock(&vc4_hdmi->mutex);
+-}
+-
+ static void vc4_hdmi_csc_setup(struct vc4_hdmi *vc4_hdmi, bool enable)
+ {
+ 	unsigned long flags;
+@@ -1218,15 +1210,6 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
+ 	mutex_unlock(&vc4_hdmi->mutex);
+ }
+ 
+-static void vc4_hdmi_encoder_enable(struct drm_encoder *encoder)
+-{
+-	struct vc4_hdmi *vc4_hdmi = encoder_to_vc4_hdmi(encoder);
+-
+-	mutex_lock(&vc4_hdmi->mutex);
+-	vc4_hdmi->output_enabled = true;
+-	mutex_unlock(&vc4_hdmi->mutex);
+-}
+-
+ static void vc4_hdmi_encoder_atomic_mode_set(struct drm_encoder *encoder,
+ 					     struct drm_crtc_state *crtc_state,
+ 					     struct drm_connector_state *conn_state)
+@@ -1320,8 +1303,6 @@ static const struct drm_encoder_helper_funcs vc4_hdmi_encoder_helper_funcs = {
+ 	.atomic_check = vc4_hdmi_encoder_atomic_check,
+ 	.atomic_mode_set = vc4_hdmi_encoder_atomic_mode_set,
+ 	.mode_valid = vc4_hdmi_encoder_mode_valid,
+-	.disable = vc4_hdmi_encoder_disable,
+-	.enable = vc4_hdmi_encoder_enable,
+ };
+ 
+ static u32 vc4_hdmi_channel_map(struct vc4_hdmi *vc4_hdmi, u32 channel_mask)
+@@ -1420,17 +1401,11 @@ static bool vc4_hdmi_audio_can_stream(struct vc4_hdmi *vc4_hdmi)
+ {
+ 	lockdep_assert_held(&vc4_hdmi->mutex);
+ 
+-	/*
+-	 * If the controller is disabled, prevent any ALSA output.
+-	 */
+-	if (!vc4_hdmi->output_enabled)
+-		return false;
+-
+ 	/*
+ 	 * If the encoder is currently in DVI mode, treat the codec DAI
+ 	 * as missing.
+ 	 */
+-	if (!(HDMI_READ(HDMI_RAM_PACKET_CONFIG) & VC4_HDMI_RAM_PACKET_ENABLE))
++	if (!vc4_hdmi->encoder.hdmi_monitor)
+ 		return false;
+ 
+ 	return true;
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index ea5c3e2a2a27..be3f93a86e62 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -208,12 +208,6 @@ struct vc4_hdmi {
+ 	 */
+ 	struct drm_display_mode saved_adjusted_mode;
+ 
+-	/**
+-	 * @output_enabled: Is the HDMI controller currently active?
+-	 * Protected by @mutex.
+-	 */
+-	bool output_enabled;
+-
+ 	/**
+ 	 * @scdc_enabled: Is the HDMI controller currently running with
+ 	 * the scrambler on? Protected by @mutex.
+-- 
+2.32.0
+

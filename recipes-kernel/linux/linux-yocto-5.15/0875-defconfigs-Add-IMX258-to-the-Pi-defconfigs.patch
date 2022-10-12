@@ -1,0 +1,77 @@
+From 87b73098c46339fe1de3b3f5f142f77e366ee8e0 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Wed, 23 Mar 2022 14:07:56 +0000
+Subject: [PATCH] defconfigs: Add IMX258 to the Pi defconfigs
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 79ea8324706a..318338ea614f 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -917,6 +917,7 @@ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
+ CONFIG_VIDEO_IMX219=m
++CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+ CONFIG_VIDEO_IMX477=m
+ CONFIG_VIDEO_IMX519=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 41d9189d6beb..917ee547d14e 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -932,6 +932,7 @@ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
+ CONFIG_VIDEO_IMX219=m
++CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+ CONFIG_VIDEO_IMX477=m
+ CONFIG_VIDEO_IMX519=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 05e0c1f86b93..acff55c5afed 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -910,6 +910,7 @@ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
+ CONFIG_VIDEO_IMX219=m
++CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+ CONFIG_VIDEO_IMX477=m
+ CONFIG_VIDEO_IMX519=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index c14123320d5a..98832f25ad60 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -937,6 +937,7 @@ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
+ CONFIG_VIDEO_IMX219=m
++CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+ CONFIG_VIDEO_IMX477=m
+ CONFIG_VIDEO_IMX519=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index b218f552442c..d4ffabfdc9c6 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -858,6 +858,7 @@ CONFIG_VIDEO_TW2804=m
+ CONFIG_VIDEO_TW9903=m
+ CONFIG_VIDEO_TW9906=m
+ CONFIG_VIDEO_IMX219=m
++CONFIG_VIDEO_IMX258=m
+ CONFIG_VIDEO_IMX290=m
+ CONFIG_VIDEO_IMX477=m
+ CONFIG_VIDEO_IMX519=m
+-- 
+2.32.0
+

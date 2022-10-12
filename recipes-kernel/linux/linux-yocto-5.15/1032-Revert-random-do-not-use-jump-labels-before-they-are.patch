@@ -1,0 +1,43 @@
+From fb9383b7528973f2f234f515c5bb1b46efc51e2d Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Wed, 15 Jun 2022 15:54:33 +0100
+Subject: [PATCH] Revert "random: do not use jump labels before they are
+ initialized"
+
+This reverts commit 7a2d8599ce48cf25b2c2177139e6ce448525c3e9.
+---
+ drivers/char/random.c | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
+
+diff --git a/drivers/char/random.c b/drivers/char/random.c
+index 136c671ab212..e2f1fce8dc97 100644
+--- a/drivers/char/random.c
++++ b/drivers/char/random.c
+@@ -727,8 +727,7 @@ static void __cold _credit_init_bits(size_t bits)
+ 
+ 	if (orig < POOL_READY_BITS && new >= POOL_READY_BITS) {
+ 		crng_reseed(); /* Sets crng_init to CRNG_READY under base_crng.lock. */
+-		if (static_key_initialized)
+-			execute_in_process_context(crng_set_ready, &set_ready);
++		execute_in_process_context(crng_set_ready, &set_ready);
+ 		process_random_ready_list();
+ 		wake_up_interruptible(&crng_init_wait);
+ 		kill_fasync(&fasync, SIGIO, POLL_IN);
+@@ -844,14 +843,6 @@ int __init random_init(const char *command_line)
+ 	_mix_pool_bytes(command_line, strlen(command_line));
+ 	add_latent_entropy();
+ 
+-	/*
+-	 * If we were initialized by the bootloader before jump labels are
+-	 * initialized, then we should enable the static branch here, where
+-	 * it's guaranteed that jump labels have been initialized.
+-	 */
+-	if (!static_branch_likely(&crng_is_ready) && crng_init >= CRNG_READY)
+-		crng_set_ready(NULL);
+-
+ 	if (crng_ready())
+ 		crng_reseed();
+ 	else if (trust_cpu)
+-- 
+2.32.0
+

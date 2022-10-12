@@ -1,0 +1,29 @@
+From aed96c158e2c2b9803bd8ec7d1bf0806e34ff9f9 Mon Sep 17 00:00:00 2001
+From: Naushir Patuck <naush@raspberrypi.com>
+Date: Fri, 20 May 2022 12:05:33 +0100
+Subject: [PATCH] media: imx296: Set gain delay to 1 frame
+
+In order to behave in a similar manner to the rolling shutter sensors, set the
+gain delay to 1 frame. This simplifies userland control of the gain value.
+
+Signed-off-by: Naushir Patuck <naush@raspberrypi.com>
+---
+ drivers/media/i2c/imx296.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/imx296.c b/drivers/media/i2c/imx296.c
+index aaebf26d1a5b..64d46badbee7 100644
+--- a/drivers/media/i2c/imx296.c
++++ b/drivers/media/i2c/imx296.c
+@@ -593,7 +593,7 @@ static int imx296_setup(struct imx296 *sensor)
+ 	imx296_write(sensor, IMX296_CTRL418C, sensor->clk_params->ctrl418c,
+ 		     &ret);
+ 
+-	imx296_write(sensor, IMX296_GAINDLY, IMX296_GAINDLY_NONE, &ret);
++	imx296_write(sensor, IMX296_GAINDLY, IMX296_GAINDLY_1FRAME, &ret);
+ 	imx296_write(sensor, IMX296_BLKLEVEL, 0x03c, &ret);
+ 
+ 	if (ret < 0)
+-- 
+2.32.0
+

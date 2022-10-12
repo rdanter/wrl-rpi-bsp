@@ -1,0 +1,28 @@
+From 3e989aad29391966dcc1a04586a5d88807d32dd1 Mon Sep 17 00:00:00 2001
+From: Naushir Patuck <naush@raspberrypi.com>
+Date: Thu, 23 Jun 2022 15:19:58 +0100
+Subject: [PATCH] media: i2c: imx477: Enable sensor temperature readout
+
+Enable the internal thermal sensor which returns the temperature values through
+embedded data.
+
+Signed-off-by: Naushir Patuck <naush@raspberrypi.com>
+---
+ drivers/media/i2c/imx477.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/media/i2c/imx477.c b/drivers/media/i2c/imx477.c
+index ac79c57292b3..53e0656da53d 100644
+--- a/drivers/media/i2c/imx477.c
++++ b/drivers/media/i2c/imx477.c
+@@ -163,6 +163,7 @@ struct imx477_mode {
+ static const struct imx477_reg mode_common_regs[] = {
+ 	{0x0136, 0x18},
+ 	{0x0137, 0x00},
++	{0x0138, 0x01},
+ 	{0xe000, 0x00},
+ 	{0xe07a, 0x01},
+ 	{0x0808, 0x02},
+-- 
+2.32.0
+

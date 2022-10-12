@@ -1,0 +1,34 @@
+From e05a335a16e0fc8d030962d3c6a75446f6b42f1c Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 19 Jul 2022 08:46:14 +0100
+Subject: [PATCH] Revert "ext4: make mb_optimize_scan performance mount option
+ work with extents"
+
+This reverts commit 3c65b7309d2e0dd8d134e7813cd95debd91ea07b.
+
+The reverted commit is likely to also be reverted upstream, but with a
+performance regression like this I don't want to wait for that.
+
+See: https://github.com/raspberrypi/linux/issues/5097
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ fs/ext4/mballoc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/ext4/mballoc.c b/fs/ext4/mballoc.c
+index ad78bddfb637..49a095ec1014 100644
+--- a/fs/ext4/mballoc.c
++++ b/fs/ext4/mballoc.c
+@@ -1000,7 +1000,7 @@ static inline int should_optimize_scan(struct ext4_allocation_context *ac)
+ 		return 0;
+ 	if (ac->ac_criteria >= 2)
+ 		return 0;
+-	if (!ext4_test_inode_flag(ac->ac_inode, EXT4_INODE_EXTENTS))
++	if (ext4_test_inode_flag(ac->ac_inode, EXT4_INODE_EXTENTS))
+ 		return 0;
+ 	return 1;
+ }
+-- 
+2.32.0
+

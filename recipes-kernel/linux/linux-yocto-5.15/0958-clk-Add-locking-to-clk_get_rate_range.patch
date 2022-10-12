@@ -1,0 +1,30 @@
+From e38ef8f21af1d3a8044cd74f8255efff970da37f Mon Sep 17 00:00:00 2001
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Fri, 6 May 2022 12:24:31 +0200
+Subject: [PATCH] clk: Add locking to clk_get_rate_range
+
+clk_get_rate_range() is missing the proper locks, making lockdep
+complain.
+
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/clk/clk.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index f3dfb6b23030..de6715cd57c0 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -2589,7 +2589,9 @@ void clk_get_rate_range(struct clk *clk, unsigned long *min, unsigned long *max)
+ 	if (!clk || !min || !max)
+ 		return;
+ 
++	clk_prepare_lock();
+ 	clk_core_get_boundaries(clk->core, min, max);
++	clk_prepare_unlock();
+ }
+ EXPORT_SYMBOL_GPL(clk_get_rate_range);
+ 
+-- 
+2.32.0
+

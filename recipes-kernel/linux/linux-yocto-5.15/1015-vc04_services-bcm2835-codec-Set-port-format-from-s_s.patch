@@ -1,0 +1,69 @@
+From 6b945e6f05d5cb0a299dbbb9bdd285aff330a204 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 19 May 2022 17:38:53 +0100
+Subject: [PATCH] vc04_services: bcm2835-codec: Set port format from
+ s_selection
+
+s_selection allows the crop region of an uncompressed pixel
+format to be specified, but it wasn't passing the setting on to
+the firmware. Depending on call order this would potentially
+mean that the crop wasn't actioned.
+
+Set the port format on s_selection if we have a component created.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ .../bcm2835-codec/bcm2835-v4l2-codec.c          | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+index 7dcb3d5aa608..6df12827713a 100644
+--- a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
++++ b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+@@ -1899,6 +1899,8 @@ static int vidioc_s_selection(struct file *file, void *priv,
+ {
+ 	struct bcm2835_codec_ctx *ctx = file2ctx(file);
+ 	struct bcm2835_codec_q_data *q_data = NULL;
++	struct vchiq_mmal_port *port = NULL;
++	int ret;
+ 
+ 	/*
+ 	 * The selection API takes V4L2_BUF_TYPE_VIDEO_CAPTURE and
+@@ -1914,12 +1916,16 @@ static int vidioc_s_selection(struct file *file, void *priv,
+ 		if (ctx->dev->role == ENCODE || ctx->dev->role == ENCODE_IMAGE)
+ 			return -EINVAL;
+ 		q_data = &ctx->q_data[V4L2_M2M_DST];
++		if (ctx->component)
++			port = &ctx->component->output[0];
+ 		break;
+ 	case V4L2_BUF_TYPE_VIDEO_OUTPUT:
+ 		/* OUTPUT on deoder is not valid. */
+ 		if (ctx->dev->role == DECODE)
+ 			return -EINVAL;
+ 		q_data = &ctx->q_data[V4L2_M2M_SRC];
++		if (ctx->component)
++			port = &ctx->component->input[0];
+ 		break;
+ 	default:
+ 		return -EINVAL;
+@@ -2004,6 +2010,17 @@ static int vidioc_s_selection(struct file *file, void *priv,
+ 		break;
+ 	}
+ 
++	if (!port)
++		return 0;
++
++	setup_mmal_port_format(ctx, q_data, port);
++	ret = vchiq_mmal_port_set_format(ctx->dev->instance, port);
++	if (ret) {
++		v4l2_err(&ctx->dev->v4l2_dev, "%s: Failed vchiq_mmal_port_set_format on port, ret %d\n",
++			 __func__, ret);
++		return -EINVAL;
++	}
++
+ 	return 0;
+ }
+ 
+-- 
+2.32.0
+

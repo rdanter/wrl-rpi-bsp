@@ -1,0 +1,34 @@
+From 0cd33a0bba43fb15d83a44ae19ccecf656aa1070 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 19 May 2022 17:30:02 +0100
+Subject: [PATCH] vc04_services: bcm2835-codec: Set crop_height for compressed
+ formats
+
+In particular for the encoder where the CAPTURE format dictates
+the parameters given to the codec we need to be able to set the
+value passed as the crop_height for the compressed format.
+There's no crop available for cropped modes, so always set
+crop_height to the requested height.
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ .../staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c   | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+index dc7c0b97fbc8..7dcb3d5aa608 100644
+--- a/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
++++ b/drivers/staging/vc04_services/bcm2835-codec/bcm2835-v4l2-codec.c
+@@ -1613,7 +1613,8 @@ static int vidioc_s_fmt(struct bcm2835_codec_ctx *ctx, struct v4l2_format *f,
+ 				  f->type == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+ 	q_data->crop_width = f->fmt.pix_mp.width;
+ 	q_data->height = f->fmt.pix_mp.height;
+-	if (!q_data->selection_set)
++	if (!q_data->selection_set ||
++	    (q_data->fmt->flags & V4L2_FMT_FLAG_COMPRESSED))
+ 		q_data->crop_height = requested_height;
+ 
+ 	/*
+-- 
+2.32.0
+

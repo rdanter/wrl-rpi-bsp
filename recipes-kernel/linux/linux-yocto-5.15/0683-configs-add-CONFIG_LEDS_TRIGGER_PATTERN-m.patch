@@ -1,0 +1,79 @@
+From 86591291857eb81aa6de77e4a3aa98b8a775f6b8 Mon Sep 17 00:00:00 2001
+From: marcone <48169102+marcone@users.noreply.github.com>
+Date: Mon, 10 Jan 2022 11:37:39 -0800
+Subject: [PATCH] configs: add CONFIG_LEDS_TRIGGER_PATTERN=m
+
+Enable the pattern led trigger.
+
+Signed-off-by: Marco Nelissen <marco.nelissen@gmail.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 5 files changed, 5 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 902e7572e863..b9ecfbfc77b5 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1202,6 +1202,7 @@ CONFIG_LEDS_TRIGGER_CAMERA=m
+ CONFIG_LEDS_TRIGGER_INPUT=y
+ CONFIG_LEDS_TRIGGER_PANIC=y
+ CONFIG_LEDS_TRIGGER_NETDEV=m
++CONFIG_LEDS_TRIGGER_PATTERN=m
+ CONFIG_LEDS_TRIGGER_ACTPWR=y
+ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 29dae5a427e8..8d7d94db74b6 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -1223,6 +1223,7 @@ CONFIG_LEDS_TRIGGER_CAMERA=m
+ CONFIG_LEDS_TRIGGER_INPUT=y
+ CONFIG_LEDS_TRIGGER_PANIC=y
+ CONFIG_LEDS_TRIGGER_NETDEV=m
++CONFIG_LEDS_TRIGGER_PATTERN=m
+ CONFIG_LEDS_TRIGGER_ACTPWR=y
+ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index e5363f9e7194..cbe446265a28 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1195,6 +1195,7 @@ CONFIG_LEDS_TRIGGER_CAMERA=m
+ CONFIG_LEDS_TRIGGER_INPUT=y
+ CONFIG_LEDS_TRIGGER_PANIC=y
+ CONFIG_LEDS_TRIGGER_NETDEV=m
++CONFIG_LEDS_TRIGGER_PATTERN=m
+ CONFIG_LEDS_TRIGGER_ACTPWR=y
+ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index 7420ccb807f2..0dc48142447e 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -1228,6 +1228,7 @@ CONFIG_LEDS_TRIGGER_CAMERA=m
+ CONFIG_LEDS_TRIGGER_INPUT=y
+ CONFIG_LEDS_TRIGGER_PANIC=y
+ CONFIG_LEDS_TRIGGER_NETDEV=m
++CONFIG_LEDS_TRIGGER_PATTERN=m
+ CONFIG_LEDS_TRIGGER_ACTPWR=y
+ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index c7d9a50ec713..c741bcbb0c4a 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1090,6 +1090,7 @@ CONFIG_LEDS_TRIGGER_CAMERA=m
+ CONFIG_LEDS_TRIGGER_INPUT=y
+ CONFIG_LEDS_TRIGGER_PANIC=y
+ CONFIG_LEDS_TRIGGER_NETDEV=m
++CONFIG_LEDS_TRIGGER_PATTERN=m
+ CONFIG_LEDS_TRIGGER_ACTPWR=y
+ CONFIG_ACCESSIBILITY=y
+ CONFIG_SPEAKUP=m
+-- 
+2.32.0
+

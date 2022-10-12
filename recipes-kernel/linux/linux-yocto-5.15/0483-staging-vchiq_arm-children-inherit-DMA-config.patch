@@ -1,0 +1,41 @@
+From 858a06c7fe37742ba1cc6c9c25159f79f6dbfa77 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 21 Jul 2020 17:34:09 +0100
+Subject: [PATCH] staging: vchiq_arm: children inherit DMA config
+
+Although it is no longer necessary for vchiq's children to have a
+different DMA configuration to the parent, they do still need to
+explicitly to have their DMA configuration set - to be that of the
+parent.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ .../vc04_services/interface/vchiq_arm/vchiq_arm.c      | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
+index 2e1c1bac3a16..61a53f590062 100644
+--- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
++++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
+@@ -1861,8 +1861,18 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
+ 
+ 	child->dev.of_node = np;
+ 
++	/*
++	 * We want the dma-ranges etc to be copied from the parent VCHIQ device
++	 * to be passed on to the children without a node of their own.
++	 */
++	if (!np)
++		np = pdev->dev.of_node;
++
+ 	of_dma_configure(&child->dev, np, true);
+ 
++	if (np != pdev->dev.of_node)
++		of_node_put(np);
++
+ 	return child;
+ }
+ 
+-- 
+2.32.0
+

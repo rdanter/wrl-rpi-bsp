@@ -1,0 +1,65 @@
+From 83e66038c2c20648e759f96deea85bb1d35e935f Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Fri, 10 Dec 2021 18:03:18 +0000
+Subject: [PATCH] drm/vc4: Skip writes to disabled packet RAM
+
+This path actually occurs when audio is started during a hdmi mode set.
+As the data will be written by vc4_hdmi_set_infoframes when packet RAM
+is enabled again, don't treat as an error
+
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 5 ++++-
+ drivers/gpu/drm/vc4/vc4_hdmi.h | 6 ++++++
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index ed6a9d4ee115..cddc2270a08d 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -684,6 +684,7 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
+ 
+ 	mutex_lock(&vc4_hdmi->mutex);
+ 
++	vc4_hdmi->output_enabled = false;
+ 	spin_lock_irqsave(&vc4_hdmi->hw_lock, flags);
+ 
+ 	HDMI_WRITE(HDMI_RAM_PACKET_CONFIG, 0);
+@@ -1200,6 +1201,7 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
+ 			   VC4_HDMI_RAM_PACKET_ENABLE);
+ 
+ 		spin_unlock_irqrestore(&vc4_hdmi->hw_lock, flags);
++		vc4_hdmi->output_enabled = true;
+ 
+ 		vc4_hdmi_set_infoframes(encoder);
+ 	}
+@@ -1605,7 +1607,8 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
+ 	spin_unlock_irqrestore(&vc4_hdmi->hw_lock, flags);
+ 
+ 	memcpy(&vc4_hdmi->audio.infoframe, &params->cea, sizeof(params->cea));
+-	vc4_hdmi_set_audio_infoframe(encoder);
++	if (vc4_hdmi->output_enabled)
++		vc4_hdmi_set_audio_infoframe(encoder);
+ 
+ 	mutex_unlock(&vc4_hdmi->mutex);
+ 
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.h b/drivers/gpu/drm/vc4/vc4_hdmi.h
+index be3f93a86e62..ea5c3e2a2a27 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.h
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.h
+@@ -208,6 +208,12 @@ struct vc4_hdmi {
+ 	 */
+ 	struct drm_display_mode saved_adjusted_mode;
+ 
++	/**
++	 * @output_enabled: Is the HDMI controller currently active?
++	 * Protected by @mutex.
++	 */
++	bool output_enabled;
++
+ 	/**
+ 	 * @scdc_enabled: Is the HDMI controller currently running with
+ 	 * the scrambler on? Protected by @mutex.
+-- 
+2.32.0
+

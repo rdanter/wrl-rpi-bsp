@@ -1,0 +1,47 @@
+From 251b3f7f4b6fb9acd3d06eddd15a5f0040653b42 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Tue, 13 Apr 2021 14:10:03 +0100
+Subject: [PATCH] drm/vc4: hdmi: Convert to the new clock request API
+
+The new clock request API allows us to increase the rate of the
+core clock as required during mode set while decreasing it when
+we're done, resulting in a better power-efficiency.
+
+Signed-off-by: Dom Cobley <popcornmix@gmail.com>
+---
+ drivers/gpu/drm/vc4/vc4_kms.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_kms.c b/drivers/gpu/drm/vc4/vc4_kms.c
+index 06a4f765a51c..87e51d4d86f4 100644
+--- a/drivers/gpu/drm/vc4/vc4_kms.c
++++ b/drivers/gpu/drm/vc4/vc4_kms.c
+@@ -345,6 +345,7 @@ static void vc4_atomic_commit_tail(struct drm_atomic_state *state)
+ 	struct drm_crtc *crtc;
+ 	struct vc4_hvs_state *old_hvs_state;
+ 	unsigned int channel;
++	struct clk_request *core_req;
+ 	int i;
+ 
+ 	old_hvs_state = vc4_hvs_get_old_global_state(state);
+@@ -389,7 +390,7 @@ static void vc4_atomic_commit_tail(struct drm_atomic_state *state)
+ 						500000000,
+ 						new_hvs_state->core_clock_rate);
+ 
+-		clk_set_min_rate(hvs->core_clk, core_rate);
++		core_req = clk_request_start(hvs->core_clk, core_rate);
+ 	}
+ 
+ 	drm_atomic_helper_commit_modeset_disables(dev, state);
+@@ -417,7 +418,7 @@ static void vc4_atomic_commit_tail(struct drm_atomic_state *state)
+ 		drm_dbg(dev, "Running the core clock at %lu Hz\n",
+ 			new_hvs_state->core_clock_rate);
+ 
+-		clk_set_min_rate(hvs->core_clk, new_hvs_state->core_clock_rate);
++		clk_request_done(core_req);
+ 	}
+ }
+ 
+-- 
+2.32.0
+
