@@ -32,7 +32,10 @@ SRC_URI += "file://0025-arm-partially-revert-702b94bff3c50542a6e4ab9a4f4cef0.pat
 SRC_URI += "file://0026-Revert-rtc-pcf8523-properly-handle-oscillator-stop-b.patch"
 SRC_URI += "file://0027-Revert-staging-bcm2835-audio-Drop-DT-dependency.patch"
 SRC_URI += "file://0028-Revert-spi-spidev-Fix-CS-polarity-if-GPIO-descriptor.patch"
-SRC_URI += "file://0029-Revert-mailbox-avoid-timer-start-from-callback.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0029-Revert-mailbox-avoid-timer-start-from-callback.patch"
+
 SRC_URI += "file://0030-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0031-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0032-smsx95xx-fix-crimes-against-truesize.patch"
@@ -63,7 +66,10 @@ SRC_URI += "file://0056-amba_pl011-Don-t-use-DT-aliases-for-numbering.patch"
 SRC_URI += "file://0057-amba_pl011-Round-input-clock-up.patch"
 SRC_URI += "file://0058-amba_pl011-Insert-mb-for-correct-FIFO-handling.patch"
 SRC_URI += "file://0059-amba_pl011-Add-cts-event-workaround-DT-property.patch"
-SRC_URI += "file://0060-tty-amba-pl011-Add-un-throttle-support.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0060-tty-amba-pl011-Add-un-throttle-support.patch"
+
 SRC_URI += "file://0061-tty-amba-pl011-Avoid-rare-write-when-full-error.patch"
 SRC_URI += "file://0062-pinctrl-bcm2835-Set-base-to-0-give-expected-gpio-num.patch"
 SRC_URI += "file://0063-Main-bcm2708-bcm2709-linux-port.patch"
