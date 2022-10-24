@@ -87,7 +87,11 @@ SRC_URI += "file://0074-Add-SMI-driver.patch"
 SRC_URI += "file://0075-Add-Chris-Boot-s-i2c-driver.patch"
 SRC_URI += "file://0076-char-broadcom-Add-vcio-module.patch"
 SRC_URI += "file://0077-firmware-bcm2835-Support-ARCH_BCM270x.patch"
-SRC_URI += "file://0078-BCM2708-Add-core-Device-Tree-support.patch"
+
+# Needed rework for WRL kernel
+#SRC_URI += "file://0078-BCM2708-Add-core-Device-Tree-support.patch"
+SRC_URI += "file://0001-BCM2708-Add-core-Device-Tree-support.patch"
+
 SRC_URI += "file://0079-leds-Add-the-input-trigger-for-pwr_led.patch"
 SRC_URI += "file://0080-Added-Device-IDs-for-August-DVB-T-205.patch"
 SRC_URI += "file://0081-Improve-__copy_to_user-and-__copy_from_user-performa.patch"
