@@ -121,7 +121,11 @@ SRC_URI += "file://0101-hid-Reduce-default-mouse-polling-interval-to-60Hz.patch"
 SRC_URI += "file://0102-Add-ability-to-export-gpio-used-by-gpio-poweroff.patch"
 SRC_URI += "file://0103-firmware-raspberrypi-Notify-firmware-of-a-reboot.patch"
 SRC_URI += "file://0104-irqchip-irq-bcm2835-Calc.-FIQ_START-at-boot-time.patch"
-SRC_URI += "file://0105-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
+
+# Rework for WR kernel
+#SRC_URI += "file://0105-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
+SRC_URI += "file://0001-of-configfs-Use-of_overlay_fdt_apply-API-call.patch"
+
 SRC_URI += "file://0106-net-lan78xx-Disable-TCP-Segmentation-Offload-TSO.patch"
 SRC_URI += "file://0107-brcmfmac-Re-enable-firmware-roaming-support.patch"
 SRC_URI += "file://0108-lan78xx-Move-enabling-of-EEE-into-PHY-init-code.patch"
