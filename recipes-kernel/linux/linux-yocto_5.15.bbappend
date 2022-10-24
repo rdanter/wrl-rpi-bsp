@@ -686,7 +686,10 @@ SRC_URI += "file://0649-drm-vc4-hvs-Remove-dlist-setup-duplication.patch"
 SRC_URI += "file://0650-drm-vc4-hvs-Move-the-dlist-setup-to-its-own-function.patch"
 SRC_URI += "file://0651-drm-vc4-hvs-Ignore-atomic_flush-if-we-re-disabled.patch"
 SRC_URI += "file://0652-drm-vc4-Skip-writes-to-disabled-packet-RAM.patch"
-SRC_URI += "file://0653-drm-edid-Don-t-clear-YUV422-if-using-deep-color.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0653-drm-edid-Don-t-clear-YUV422-if-using-deep-color.patch"
+
 SRC_URI += "file://0654-drm-edid-Rename-drm_hdmi_avi_infoframe_colorspace-to.patch"
 SRC_URI += "file://0655-drm-vc4-hdmi-Add-full-range-RGB-helper.patch"
 SRC_URI += "file://0656-drm-vc4-hdmi-Use-full-range-helper-in-csc-functions.patch"
