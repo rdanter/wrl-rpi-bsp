@@ -100,7 +100,10 @@ SRC_URI += "file://0083-mfd-Add-Raspberry-Pi-Sense-HAT-core-driver.patch"
 SRC_URI += "file://0084-Add-support-for-all-the-downstream-rpi-sound-card-dr.patch"
 SRC_URI += "file://0085-rpi_display-add-backlight-driver-and-overlay.patch"
 SRC_URI += "file://0086-bcm2835-virtgpio-Virtual-GPIO-driver.patch"
-SRC_URI += "file://0087-OF-DT-Overlay-configfs-interface.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0087-OF-DT-Overlay-configfs-interface.patch"
+
 SRC_URI += "file://0088-brcm-adds-support-for-BCM43341-wifi.patch"
 SRC_URI += "file://0089-hci_h5-Don-t-send-conf_req-when-ACTIVE.patch"
 SRC_URI += "file://0090-config-Add-default-configs.patch"
