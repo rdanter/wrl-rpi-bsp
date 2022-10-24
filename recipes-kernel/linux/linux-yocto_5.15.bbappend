@@ -819,7 +819,10 @@ SRC_URI += "file://0778-dtoverlays-Switch-ov7251-to-using-Media-Controller-b.pat
 # Not needed in WR kernel
 #SRC_URI += "file://0779-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
 
-SRC_URI += "file://0780-drm-vc4-hvs-Use-pointer-to-HVS-in-HVS_READ-and-HVS_W.patch"
+# Rework for WR kernel
+#SRC_URI += "file://0780-drm-vc4-hvs-Use-pointer-to-HVS-in-HVS_READ-and-HVS_W.patch"
+SRC_URI += "file://0001-drm-vc4-hvs-Use-pointer-to-HVS-in-HVS_READ-and-HVS_W.patch"
+
 SRC_URI += "file://0781-drm-vc4-hvs-Defer-dlist-slots-deallocation.patch"
 SRC_URI += "file://0782-ARM-dts-Add-GPIO-line-names-for-downstream-RPis.patch"
 SRC_URI += "file://0783-overlays-fixes-probing-of-Hifiberry-DAC2-HD.patch"
