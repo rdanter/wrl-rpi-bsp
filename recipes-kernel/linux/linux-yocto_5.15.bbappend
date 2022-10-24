@@ -815,7 +815,10 @@ SRC_URI += "file://0775-media-i2c-ov7251-Separate-modes-from-frame-intervals.pat
 SRC_URI += "file://0776-media-i2c-ov7251-Add-V4L2_CID_VBLANK.patch"
 SRC_URI += "file://0777-media-i2c-ov7251-Switch-from-V4L2_CID_GAIN-to-V4L2_C.patch"
 SRC_URI += "file://0778-dtoverlays-Switch-ov7251-to-using-Media-Controller-b.patch"
-SRC_URI += "file://0779-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0779-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
+
 SRC_URI += "file://0780-drm-vc4-hvs-Use-pointer-to-HVS-in-HVS_READ-and-HVS_W.patch"
 SRC_URI += "file://0781-drm-vc4-hvs-Defer-dlist-slots-deallocation.patch"
 SRC_URI += "file://0782-ARM-dts-Add-GPIO-line-names-for-downstream-RPis.patch"
