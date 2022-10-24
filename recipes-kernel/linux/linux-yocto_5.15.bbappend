@@ -515,8 +515,11 @@ SRC_URI += "file://0484-staging-vchiq_arm-Usa-a-DMA-pool-for-small-bulks.patch"
 SRC_URI += "file://0485-drm-vc4-Reset-HDMI-MISC_CONTROL-register.patch"
 SRC_URI += "file://0486-drm-vc4-Release-workaround-buffer-and-DMA-in-error-p.patch"
 SRC_URI += "file://0487-drm-vc4-Correct-DSI-divider-calculations.patch"
-SRC_URI += "file://0488-drm-panel-raspberrypi-touchscreen-Avoid-NULL-deref-i.patch"
-SRC_URI += "file://0489-drm-panel-raspberrypi-touchscreen-Initialise-the-bri.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0488-drm-panel-raspberrypi-touchscreen-Avoid-NULL-deref-i.patch"
+#SRC_URI += "file://0489-drm-panel-raspberrypi-touchscreen-Initialise-the-bri.patch"
+
 SRC_URI += "file://0490-drm-panel-raspberrypi-touchscreen-Handle-I2C-errors.patch"
 SRC_URI += "file://0491-drm-panel-simple-Add-a-timing-for-the-Raspberry-Pi-7.patch"
 SRC_URI += "file://0492-Input-edt-ft54x6-Clean-up-timer-and-workqueue-on-rem.patch"
