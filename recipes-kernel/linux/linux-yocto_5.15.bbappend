@@ -502,7 +502,11 @@ SRC_URI += "file://0475-media-rpivid-Make-slice-ctrl-dynamic.patch"
 SRC_URI += "file://0476-media-rpivid-Only-create-aux-entries-for-H265-if-nee.patch"
 SRC_URI += "file://0477-usb-xhci-workaround-for-bogus-SET_DEQ_PENDING-endpoi.patch"
 SRC_URI += "file://0478-media-i2c-imx477-Allow-control-of-on-sensor-DPC.patch"
-SRC_URI += "file://0479-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
+
+# Rework for WR kernel
+#SRC_URI += "file://0479-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
+SRC_URI += "file://0001-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
+
 SRC_URI += "file://0480-sound-usb-call-usb_autopm_get_interface-for-devices-.patch"
 SRC_URI += "file://0481-brcmfmac-Try-product-specific-clm_blob-names-first.patch"
 SRC_URI += "file://0482-staging-vchiq_arm-Add-36-bit-address-support.patch"
