@@ -446,7 +446,10 @@ SRC_URI += "file://0422-Documentation-devicetree-Add-documentation-for-imx37.pat
 SRC_URI += "file://0423-media-i2c-imx477-Extend-driver-to-support-imx378-sen.patch"
 SRC_URI += "file://0424-dt-bindings-clk-raspberrypi-Remove-unused-property.patch"
 SRC_URI += "file://0425-dt-bindings-display-vc4-Add-phandle-to-the-firmware.patch"
-SRC_URI += "file://0426-bcm2711_thermal-Don-t-clamp-temperature-at-zero.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0426-bcm2711_thermal-Don-t-clamp-temperature-at-zero.patch"
+
 SRC_URI += "file://0427-media-bcm2835-unicam-Forward-input-status-from-subde.patch"
 SRC_URI += "file://0428-media-v4l2-subdev-add-subdev-wide-state-struct.patch"
 SRC_URI += "file://0429-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
