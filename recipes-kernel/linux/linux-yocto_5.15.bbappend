@@ -524,7 +524,10 @@ SRC_URI += "file://0490-drm-panel-raspberrypi-touchscreen-Handle-I2C-errors.patc
 SRC_URI += "file://0491-drm-panel-simple-Add-a-timing-for-the-Raspberry-Pi-7.patch"
 SRC_URI += "file://0492-Input-edt-ft54x6-Clean-up-timer-and-workqueue-on-rem.patch"
 SRC_URI += "file://0493-regulator-rpi-panel-Register-with-a-unique-backlight.patch"
-SRC_URI += "file://0494-regulator-rpi-panel-Handle-I2C-errors-timing-to-the-.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0494-regulator-rpi-panel-Handle-I2C-errors-timing-to-the-.patch"
+
 SRC_URI += "file://0495-regulator-rpi-panel-Serialise-operations.patch"
 SRC_URI += "file://0496-regulator-rpi-panel-Ensure-the-backlight-is-off-duri.patch"
 SRC_URI += "file://0497-regulator-rpi-panel-Convert-to-drive-lines-directly.patch"
