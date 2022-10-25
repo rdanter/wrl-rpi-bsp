@@ -1072,7 +1072,11 @@ SRC_URI += "file://1020-configs-Add-CONFIG_VIDEO_ARDUCAM_64MP-m.patch"
 SRC_URI += "file://1021-overlays-Add-arducam-64mp-overlay.dts.patch"
 SRC_URI += "file://1022-ARM-dts-bcm2711-Use-the-rpi-vid-decoder-driver.patch"
 SRC_URI += "file://1023-overlays-Delete-deprecate-the-rpivid-v4l2-overlay.patch"
-SRC_URI += "file://1024-random-do-not-use-jump-labels-before-they-are-initia.patch"
+
+# Rework for WR kernel
+#SRC_URI += "file://1024-random-do-not-use-jump-labels-before-they-are-initia.patch"
+SRC_URI += "file://0001-random-do-not-use-jump-labels-before-they-are-initia.patch"
+
 SRC_URI += "file://1025-ARM64-dts-Add-Zero-2-W-and-CM4S.patch"
 SRC_URI += "file://1026-Revert-bcm2711_thermal-Don-t-clamp-temperature-at-ze.patch"
 SRC_URI += "file://1027-Revert-Revert-mailbox-avoid-timer-start-from-callbac.patch"
