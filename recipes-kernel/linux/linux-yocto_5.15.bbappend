@@ -1083,7 +1083,9 @@ SRC_URI += "file://1025-ARM64-dts-Add-Zero-2-W-and-CM4S.patch"
 #SRC_URI += "file://1026-Revert-bcm2711_thermal-Don-t-clamp-temperature-at-ze.patch"
 SRC_URI += "file://0001-Revert-thermal-drivers-bcm2711-Don-t-clamp-temperatu.patch"
 
-SRC_URI += "file://1027-Revert-Revert-mailbox-avoid-timer-start-from-callbac.patch"
+# Not needed in WR kernel
+#SRC_URI += "file://1027-Revert-Revert-mailbox-avoid-timer-start-from-callbac.patch"
+
 SRC_URI += "file://1028-Revert-drm-vc4-txp-Force-alpha-to-be-0xff-if-it-s-di.patch"
 SRC_URI += "file://1029-Revert-drm-vc4-txp-Don-t-set-TXP_VSTART_AT_EOF.patch"
 SRC_URI += "file://1030-Revert-drm-vc4-hvs-Reset-muxes-at-probe-time.patch"
