@@ -1,0 +1,31 @@
+From 58c82eefb801ddc22f2a4f302460350b6a56480e Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Tue, 25 Oct 2022 15:08:37 +0100
+Subject: [PATCH] Revert "drm/vc4: txp: Force alpha to be 0xff if it's
+ disabled"
+
+This reverts commit d47f85cc0171a5d3c5bd8cbb8a98983ca3357cbd.
+---
+ drivers/gpu/drm/vc4/vc4_txp.c | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_txp.c b/drivers/gpu/drm/vc4/vc4_txp.c
+index 82beb8c159f2..ace2d03649ba 100644
+--- a/drivers/gpu/drm/vc4/vc4_txp.c
++++ b/drivers/gpu/drm/vc4/vc4_txp.c
+@@ -304,12 +304,6 @@ static void vc4_txp_connector_atomic_commit(struct drm_connector *conn,
+ 
+ 	if (fb->format->has_alpha)
+ 		ctrl |= TXP_ALPHA_ENABLE;
+-	else
+-		/*
+-		 * If TXP_ALPHA_ENABLE isn't set and TXP_ALPHA_INVERT is, the
+-		 * hardware will force the output padding to be 0xff.
+-		 */
+-		ctrl |= TXP_ALPHA_INVERT;
+ 
+ 	gem = drm_fb_cma_get_gem_obj(fb, 0);
+ 	TXP_WRITE(TXP_DST_PTR, gem->paddr + fb->offsets[0]);
+-- 
+2.34.1
+
