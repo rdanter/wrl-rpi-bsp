@@ -1,0 +1,37 @@
+From 79f7c9ddee7c7ec96c443317b956d323c720078e Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Tue, 25 Oct 2022 14:22:09 +0100
+Subject: [PATCH] Revert "thermal/drivers/bcm2711: Don't clamp temperature at
+ zero"
+
+This reverts commit c4e1280abead1552e1764684079a43e222ccd163.
+---
+ drivers/thermal/broadcom/bcm2711_thermal.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/thermal/broadcom/bcm2711_thermal.c b/drivers/thermal/broadcom/bcm2711_thermal.c
+index c6ff8d1eca74..9f5a1eba4238 100644
+--- a/drivers/thermal/broadcom/bcm2711_thermal.c
++++ b/drivers/thermal/broadcom/bcm2711_thermal.c
+@@ -38,6 +38,7 @@ static int bcm2711_get_temp(void *data, int *temp)
+ 	int offset = thermal_zone_get_offset(priv->thermal);
+ 	u32 val;
+ 	int ret;
++	long t;
+ 
+ 	ret = regmap_read(priv->regmap, AVS_RO_TEMP_STATUS, &val);
+ 	if (ret)
+@@ -49,7 +50,9 @@ static int bcm2711_get_temp(void *data, int *temp)
+ 	val &= AVS_RO_TEMP_STATUS_DATA_MSK;
+ 
+ 	/* Convert a HW code to a temperature reading (millidegree celsius) */
+-	*temp = slope * val + offset;
++	t = slope * val + offset;
++
++	*temp = t < 0 ? 0 : t;
+ 
+ 	return 0;
+ }
+-- 
+2.34.1
+

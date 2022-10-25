@@ -1078,7 +1078,11 @@ SRC_URI += "file://1023-overlays-Delete-deprecate-the-rpivid-v4l2-overlay.patch"
 SRC_URI += "file://0001-random-do-not-use-jump-labels-before-they-are-initia.patch"
 
 SRC_URI += "file://1025-ARM64-dts-Add-Zero-2-W-and-CM4S.patch"
-SRC_URI += "file://1026-Revert-bcm2711_thermal-Don-t-clamp-temperature-at-ze.patch"
+
+# Revert a different commit for WR kernel
+#SRC_URI += "file://1026-Revert-bcm2711_thermal-Don-t-clamp-temperature-at-ze.patch"
+SRC_URI += "file://0001-Revert-thermal-drivers-bcm2711-Don-t-clamp-temperatu.patch"
+
 SRC_URI += "file://1027-Revert-Revert-mailbox-avoid-timer-start-from-callbac.patch"
 SRC_URI += "file://1028-Revert-drm-vc4-txp-Force-alpha-to-be-0xff-if-it-s-di.patch"
 SRC_URI += "file://1029-Revert-drm-vc4-txp-Don-t-set-TXP_VSTART_AT_EOF.patch"
