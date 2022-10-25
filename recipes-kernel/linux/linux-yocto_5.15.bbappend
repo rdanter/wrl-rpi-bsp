@@ -846,8 +846,11 @@ SRC_URI += "file://0796-staging-vc04_services-codec-Add-support-for-V4L2_PIX.pat
 SRC_URI += "file://0798-drm-vc4-kms-Store-channel-in-local-variable.patch"
 SRC_URI += "file://0799-drm-vc4-kms-Warn-if-we-have-an-incompatible-muxing-s.patch"
 SRC_URI += "file://0800-drm-vc4-kms-Improve-logging.patch"
-SRC_URI += "file://0801-drm-vc4-txp-Don-t-set-TXP_VSTART_AT_EOF.patch"
-SRC_URI += "file://0802-drm-vc4-txp-Force-alpha-to-be-0xff-if-it-s-disabled.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0801-drm-vc4-txp-Don-t-set-TXP_VSTART_AT_EOF.patch"
+#SRC_URI += "file://0802-drm-vc4-txp-Force-alpha-to-be-0xff-if-it-s-disabled.patch"
+
 SRC_URI += "file://0803-ARM-dts-bcm2711-rpi-ds-Disable-the-BCM2835-STC.patch"
 SRC_URI += "file://0804-drm-bridge-Introduce-pre_enable_upstream_first-to-al.patch"
 SRC_URI += "file://0805-drm-panel-Add-prepare_upstream_first-flag-to-drm_pan.patch"
