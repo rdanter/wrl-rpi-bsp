@@ -839,7 +839,10 @@ SRC_URI += "file://0793-staging-vc04_services-isp-Permit-all-sRGB-colour-spa.pat
 SRC_URI += "file://0794-drivers-staging-bcm2835-isp-Do-not-cleanup-mmal-vcsm.patch"
 SRC_URI += "file://0795-drm-vc4-Fix-out-of-order-frames-during-asynchronous-.patch"
 SRC_URI += "file://0796-staging-vc04_services-codec-Add-support-for-V4L2_PIX.patch"
-SRC_URI += "file://0797-drm-vc4-hvs-Reset-muxes-at-probe-time.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0797-drm-vc4-hvs-Reset-muxes-at-probe-time.patch"
+
 SRC_URI += "file://0798-drm-vc4-kms-Store-channel-in-local-variable.patch"
 SRC_URI += "file://0799-drm-vc4-kms-Warn-if-we-have-an-incompatible-muxing-s.patch"
 SRC_URI += "file://0800-drm-vc4-kms-Improve-logging.patch"
