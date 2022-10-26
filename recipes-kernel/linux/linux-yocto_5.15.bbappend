@@ -1135,7 +1135,10 @@ SRC_URI += "file://1066-configs-Enable-IIO-software-trigger-modules.patch"
 SRC_URI += "file://1067-configs-Enable-IP_VS_IPV6-for-loadbalancing.patch"
 SRC_URI += "file://1068-configs-Enable-CEPH_FS-m.patch"
 SRC_URI += "file://1069-overlays-Make-more-overlays-runtime-capable.patch"
-SRC_URI += "file://1070-Revert-tty-amba-pl011-Add-un-throttle-support.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://1070-Revert-tty-amba-pl011-Add-un-throttle-support.patch"
+
 SRC_URI += "file://1071-overlays-Mark-more-overlays-as-Pi4-specific.patch"
 SRC_URI += "file://1072-overlays-Adds-HiFiBerry-AMP3.patch"
 SRC_URI += "file://1073-rpi-simple-soundcard-adds-definitions-for-the-HiFiBe.patch"
