@@ -1077,7 +1077,11 @@ SRC_URI += "file://1012-ARM-dts-zero-2-w-Better-names-for-GPIOs-14-15.patch"
 SRC_URI += "file://1013-ARM-dts-zero-w-Better-names-for-GPIOs-14-15.patch"
 SRC_URI += "file://1014-vc04_services-bcm2835-codec-Set-crop_height-for-comp.patch"
 SRC_URI += "file://1015-vc04_services-bcm2835-codec-Set-port-format-from-s_s.patch"
-SRC_URI += "file://1016-drm-vc4_hdmi-Allow-hotplug-detect-to-be-forced.patch"
+
+# Rework after removal of patch 0666
+#SRC_URI += "file://1016-drm-vc4_hdmi-Allow-hotplug-detect-to-be-forced.patch"
+SRC_URI += "file://0001-drm-vc4_hdmi-Allow-hotplug-detect-to-be-forced.patch"
+
 SRC_URI += "file://1017-media-dt-bindings-media-i2c-Add-Arducam-64MP-CMOS-se.patch"
 SRC_URI += "file://1018-media-i2c-Add-driver-of-Arducam-64MP-camera.patch"
 SRC_URI += "file://1019-media-i2c-arducam_64mp-Advertise-embedded-data-node-.patch"
