@@ -702,7 +702,10 @@ SRC_URI += "file://0662-drm-vc4-hdmi-Move-clock-calculation-into-its-own-fun.pat
 SRC_URI += "file://0663-drm-vc4-hdmi-Take-the-sink-maximum-TMDS-clock-into-a.patch"
 SRC_URI += "file://0664-drm-vc4-hdmi-Take-bpp-into-account-for-the-scrambler.patch"
 SRC_URI += "file://0665-drm-vc4-hdmi-Always-try-to-have-the-highest-bpc.patch"
-SRC_URI += "file://0666-drm-vc4-hdmi-Support-HDMI-YUV-output.patch"
+
+# Remove as it uses an undefined field, not needed for RPi 0-3 anyway
+#SRC_URI += "file://0666-drm-vc4-hdmi-Support-HDMI-YUV-output.patch"
+
 SRC_URI += "file://0667-media-v4l2-ctrls-Add-V4L2_CID_NOTIFY_GAINS-control.patch"
 SRC_URI += "file://0668-media-v4l2-ctrls-Document-V4L2_CID_NOTIFY_GAINS-cont.patch"
 SRC_URI += "file://0669-Extending-ili9881c-driver-support-for-nwe080-panel.patch"
