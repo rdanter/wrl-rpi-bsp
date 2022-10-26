@@ -1194,3 +1194,4 @@ SRC_URI += "file://1104-x86-speculation-Add-LFENCE-to-RSB-fill-sequence.patch"
 
 # Extra patches
 SRC_URI += "file://0001-drm-vc4-hdmi-Fix-dbg-output.patch"
+SRC_URI += "file://0001-Fix-mode-change-detection.patch"
