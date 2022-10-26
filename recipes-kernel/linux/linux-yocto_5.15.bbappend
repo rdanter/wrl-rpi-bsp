@@ -1073,9 +1073,8 @@ SRC_URI += "file://1021-overlays-Add-arducam-64mp-overlay.dts.patch"
 SRC_URI += "file://1022-ARM-dts-bcm2711-Use-the-rpi-vid-decoder-driver.patch"
 SRC_URI += "file://1023-overlays-Delete-deprecate-the-rpivid-v4l2-overlay.patch"
 
-# Rework for WR kernel
+# Don't apply as reverted by 1032
 #SRC_URI += "file://1024-random-do-not-use-jump-labels-before-they-are-initia.patch"
-SRC_URI += "file://0001-random-do-not-use-jump-labels-before-they-are-initia.patch"
 
 SRC_URI += "file://1025-ARM64-dts-Add-Zero-2-W-and-CM4S.patch"
 
@@ -1097,7 +1096,9 @@ SRC_URI += "file://1030-Revert-drm-vc4-hvs-Reset-muxes-at-probe-time.patch"
 #SRC_URI += "file://1031-Revert-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
 SRC_URI += "file://0001-Revert-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
 
-SRC_URI += "file://1032-Revert-random-do-not-use-jump-labels-before-they-are.patch"
+# Not needed as patch 1024 skipped
+#SRC_URI += "file://1032-Revert-random-do-not-use-jump-labels-before-they-are.patch"
+
 SRC_URI += "file://1033-Revert-pinctrl-bcm2835-Set-base-to-0-give-expected-g.patch"
 SRC_URI += "file://1034-pinctrl-bcm2835-Set-base-to-0-give-expected-gpio-num.patch"
 SRC_URI += "file://1035-configs-Enable-pstore-and-ramoops-as-built-ins.patch"
