@@ -1092,7 +1092,11 @@ SRC_URI += "file://0001-Revert-drm-vc4-txp-Force-alpha-to-be-0xff-if-it-s-di.pat
 
 SRC_URI += "file://1029-Revert-drm-vc4-txp-Don-t-set-TXP_VSTART_AT_EOF.patch"
 SRC_URI += "file://1030-Revert-drm-vc4-hvs-Reset-muxes-at-probe-time.patch"
-SRC_URI += "file://1031-Revert-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
+
+# Rework for WR kernel
+#SRC_URI += "file://1031-Revert-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
+SRC_URI += "file://0001-Revert-drm-vc4-hvs-Fix-frame-count-register-readout.patch"
+
 SRC_URI += "file://1032-Revert-random-do-not-use-jump-labels-before-they-are.patch"
 SRC_URI += "file://1033-Revert-pinctrl-bcm2835-Set-base-to-0-give-expected-g.patch"
 SRC_URI += "file://1034-pinctrl-bcm2835-Set-base-to-0-give-expected-gpio-num.patch"
