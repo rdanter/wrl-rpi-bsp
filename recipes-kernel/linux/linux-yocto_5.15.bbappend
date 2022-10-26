@@ -887,7 +887,10 @@ SRC_URI += "file://0825-CM3-cam1_reg-and-cam1_reg_gpio-fix.patch"
 SRC_URI += "file://0826-overlays-Fix-cam-_reg_gpio-parameter-on-CM1.patch"
 SRC_URI += "file://0827-overlays-iqs550-Enable-interrupt-pull-down.patch"
 SRC_URI += "file://0828-dtoverlays-Connect-the-backlight-to-the-pitft35-disp.patch"
-SRC_URI += "file://0829-drm-vc4-hdmi-Add-CSC-for-BT601-709-2020-limited-and-.patch"
+
+# Not needed after removal of 0666 patch
+#SRC_URI += "file://0829-drm-vc4-hdmi-Add-CSC-for-BT601-709-2020-limited-and-.patch"
+
 SRC_URI += "file://0830-Revert-usb-xhci-expand-the-scope-of-XHCI_VLI_SS_BULK.patch"
 SRC_URI += "file://0831-vc4-drm-vc4_plane-Keep-fractional-source-coords-insi.patch"
 SRC_URI += "file://0832-vc4-drm-Handle-fractional-coordinates-using-the-phas.patch"
