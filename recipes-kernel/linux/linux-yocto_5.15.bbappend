@@ -714,7 +714,10 @@ SRC_URI += "file://0671-Add-panel-overlay-for-CutiePi.patch"
 SRC_URI += "file://0672-dtoverlays-Enable-cam1_clock-when-using-tc358743-or-.patch"
 SRC_URI += "file://0673-uapi-v4l2-controls-Reset-V4L2_CID_USER_BCM2835_ISP_B.patch"
 SRC_URI += "file://0674-drm-vc4-hdmi-Fix-HDMI-monitor-detection-in-polled-mo.patch"
-SRC_URI += "file://0675-drm-vc4-hdmi-Fix-no-video-output-on-DVI-monitors.patch"
+
+# Not needed after removal of 0666 patch
+#SRC_URI += "file://0675-drm-vc4-hdmi-Fix-no-video-output-on-DVI-monitors.patch"
+
 SRC_URI += "file://0676-staging-bcm2835-codec-Fix-typo.patch"
 SRC_URI += "file://0677-media-i2c-ov9281-Increase-diff-between-VTS-and-max-e.patch"
 SRC_URI += "file://0678-Use-GitHubs-issue-form-for-bug-reports.patch"
