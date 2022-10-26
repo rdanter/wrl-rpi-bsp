@@ -1,0 +1,24 @@
+From d4170ef11d0e9809dedaf5727b6a87ff7b54be5b Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Wed, 26 Oct 2022 14:16:59 +0100
+Subject: [PATCH] drm/vc4: hdmi: Fix dbg output
+
+---
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index c3888ed8910b..5216913c3de5 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -1442,6 +1442,7 @@ vc4_hdmi_encoder_compute_config(const struct vc4_hdmi *vc4_hdmi,
+ 				struct vc4_hdmi_connector_state *vc4_state,
+ 				const struct drm_display_mode *mode)
+ {
++	struct drm_device *dev = vc4_hdmi->connector.dev;
+ 	struct drm_connector_state *conn_state = &vc4_state->base;
+ 	unsigned int max_bpc = clamp_t(unsigned int, conn_state->max_bpc, 8, 12);
+ 	unsigned int bpc;
+-- 
+2.34.1
+

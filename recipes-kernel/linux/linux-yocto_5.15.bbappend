@@ -1191,3 +1191,6 @@ SRC_URI += "file://1101-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x13.pat
 SRC_URI += "file://1102-macintosh-adb-fix-oob-read-in-do_adb_query-function.patch"
 SRC_URI += "file://1103-x86-speculation-Add-RSB-VM-Exit-protections.patch"
 SRC_URI += "file://1104-x86-speculation-Add-LFENCE-to-RSB-fill-sequence.patch"
+
+# Extra patches
+SRC_URI += "file://0001-drm-vc4-hdmi-Fix-dbg-output.patch"
