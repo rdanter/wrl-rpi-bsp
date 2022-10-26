@@ -748,7 +748,11 @@ SRC_URI += "file://0702-dtoverlays-Correct-h-v-sync_invert-config-in-vc4-kms.pat
 SRC_URI += "file://0703-ARM-dts-BCM2711-AON_INTR2-generates-IRQ-edges.patch"
 SRC_URI += "file://0704-update-rpi-display-overlay.dts-pins-for-5.10.patch"
 SRC_URI += "file://0705-media-i2c-imx219-Correct-the-minimum-vblanking-value.patch"
-SRC_URI += "file://0706-drm-vc4_hdmi-Add-Broadcast-RGB-property-to-allow-ove.patch"
+
+# Rework after removal of patch 0666
+#SRC_URI += "file://0706-drm-vc4_hdmi-Add-Broadcast-RGB-property-to-allow-ove.patch"
+SRC_URI += "file://0001-drm-vc4_hdmi-Add-Broadcast-RGB-property-to-allow-ove.patch"
+
 SRC_URI += "file://0707-configs-Add-CONFIG_MAX30102-m.patch"
 SRC_URI += "file://0708-overlays-Add-MAX30102-HR-to-i2c-sensor-overlay.patch"
 SRC_URI += "file://0709-misc-bcm2835_smi-Use-proper-enum-types-for-dma_-un-m.patch"
