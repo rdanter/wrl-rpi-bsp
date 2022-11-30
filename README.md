@@ -132,8 +132,8 @@ included in this BSP layer. However, it can be obtained from here:
 
 The version used for testing comes from the 'stable' branch.
 
-	Commit: 67392a7a32bddad7f571047fccafca9eeb65d29c
-	Tag:    1.20200114
+	Commit: 48cd70fe84432c5d050637b61e4b7b9c831c98bf
+	Tag:    1.20220830
 
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt
