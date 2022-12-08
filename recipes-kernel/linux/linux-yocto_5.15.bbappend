@@ -7,9 +7,16 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/linux-yocto-5.15:"
 SRC_URI += "file://0001-drm-vc4-hdmi-Split-the-CEC-disable-enable-functions-.patch"
 SRC_URI += "file://0002-drm-vc4-hdmi-Make-sure-the-device-is-powered-with-CE.patch"
 SRC_URI += "file://0003-drm-vc4-hdmi-Warn-if-we-access-the-controller-while-.patch"
-SRC_URI += "file://0004-drm-vc4-hdmi-Remove-the-DDC-probing-for-status-detec.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0004-drm-vc4-hdmi-Remove-the-DDC-probing-for-status-detec.patch"
+SRC_URI += "file://0001-drm-vc4-hdmi-Remove-the-DDC-probing-for-status-detec.patch"
+
 SRC_URI += "file://0005-drm-vc4-hdmi-Raise-the-maximum-clock-rate.patch"
-SRC_URI += "file://0006-drm-vc4-hdmi-Fix-HPD-GPIO-detection.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0006-drm-vc4-hdmi-Fix-HPD-GPIO-detection.patch"
+
 SRC_URI += "file://0007-drm-vc4-hdmi-Add-a-spinlock-to-protect-register-acce.patch"
 SRC_URI += "file://0008-drm-vc4-hdmi-Use-a-mutex-to-prevent-concurrent-frame.patch"
 SRC_URI += "file://0009-drm-vc4-hdmi-Prevent-access-to-crtc-state-outside-of.patch"
@@ -452,32 +459,54 @@ SRC_URI += "file://0425-dt-bindings-display-vc4-Add-phandle-to-the-firmware.patc
 
 SRC_URI += "file://0427-media-bcm2835-unicam-Forward-input-status-from-subde.patch"
 SRC_URI += "file://0428-media-v4l2-subdev-add-subdev-wide-state-struct.patch"
-SRC_URI += "file://0429-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0429-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
+
 SRC_URI += "file://0430-Support-RPi-DPI-interface-in-mode6-for-18-bit-color.patch"
 SRC_URI += "file://0431-drm-vc4-plane-Add-support-for-DRM_FORMAT_P030.patch"
 SRC_URI += "file://0432-drm-vc4-plane-Add-support-for-YUV-color-encodings-an.patch"
-SRC_URI += "file://0433-drm-vc4-Add-FKMS-as-an-acceptable-node-for-dma-range.patch"
-SRC_URI += "file://0434-drm-vc4-A-present-but-empty-dmas-disables-audio.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0433-drm-vc4-Add-FKMS-as-an-acceptable-node-for-dma-range.patch"
+#SRC_URI += "file://0434-drm-vc4-A-present-but-empty-dmas-disables-audio.patch"
+
 SRC_URI += "file://0435-drm-vc4-Add-debugfs-node-that-dumps-the-current-disp.patch"
 SRC_URI += "file://0436-drm-vc4-Add-all-the-HDMI-registers-into-the-debugfs-.patch"
-SRC_URI += "file://0437-drm-vc4-Add-the-2711-HVS-as-a-suitable-DMA-node.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0437-drm-vc4-Add-the-2711-HVS-as-a-suitable-DMA-node.patch"
+
 SRC_URI += "file://0438-vc4_hdmi-Report-that-3d-stereo-is-allowed.patch"
 SRC_URI += "file://0439-vc4-Clear-unused-infoframe-packet-RAM-registers.patch"
 SRC_URI += "file://0440-drm-vc4-Change-the-default-DPI-format-to-being-18bpp.patch"
-SRC_URI += "file://0441-vc4-drm-Avoid-full-hdmi-audio-fifo-writes.patch"
-SRC_URI += "file://0442-vc4-drm-vc4_plane-Remove-subpixel-positioning-check.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0441-vc4-drm-Avoid-full-hdmi-audio-fifo-writes.patch"
+#SRC_URI += "file://0442-vc4-drm-vc4_plane-Remove-subpixel-positioning-check.patch"
+
 SRC_URI += "file://0443-drm-vc4-hdmi-Convert-to-the-new-clock-request-API.patch"
-SRC_URI += "file://0444-drm-vc4-Correct-pixel-order-for-DSI0.patch"
-SRC_URI += "file://0445-drm-vc4-Register-dsi0-as-the-correct-vc4-encoder-typ.patch"
-SRC_URI += "file://0446-drm-vc4-Fix-dsi0-interrupt-support.patch"
-SRC_URI += "file://0447-drm-vc4-Add-correct-stop-condition-to-vc4_dsi_encode.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0444-drm-vc4-Correct-pixel-order-for-DSI0.patch"
+#SRC_URI += "file://0445-drm-vc4-Register-dsi0-as-the-correct-vc4-encoder-typ.patch"
+#SRC_URI += "file://0446-drm-vc4-Fix-dsi0-interrupt-support.patch"
+#SRC_URI += "file://0447-drm-vc4-Add-correct-stop-condition-to-vc4_dsi_encode.patch"
+
 SRC_URI += "file://0448-drm-atomic-Don-t-fixup-modes-that-haven-t-been-reset.patch"
 SRC_URI += "file://0449-clk-Always-clamp-the-rounded-rate.patch"
 SRC_URI += "file://0450-drm-vc4-Increase-the-core-clock-based-on-HVS-load.patch"
 SRC_URI += "file://0451-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
-SRC_URI += "file://0452-drm-vc4-Fix-timings-for-interlaced-modes.patch"
+
+# Fix for missing parts in RCPL 2
+#SRC_URI += "file://0452-drm-vc4-Fix-timings-for-interlaced-modes.patch"
+SRC_URI += "file://0001-drm-vc4-Fix-timings-for-interlaced-modes.patch"
+
 SRC_URI += "file://0453-dwc_otg-Update-NetBSD-usb.h-header-licence.patch"
-SRC_URI += "file://0454-drm-vc4-Fix-margin-calculations-for-the-right-bottom.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0454-drm-vc4-Fix-margin-calculations-for-the-right-bottom.patch"
+
 SRC_URI += "file://0455-drm-vc4-Fix-timings-for-VEC-modes.patch"
 SRC_URI += "file://0456-drm-vc4-Refactor-VEC-TV-mode-setting.patch"
 SRC_URI += "file://0457-drm-vc4-Fix-definition-of-PAL-M-mode.patch"
@@ -512,9 +541,15 @@ SRC_URI += "file://0481-brcmfmac-Try-product-specific-clm_blob-names-first.patch
 SRC_URI += "file://0482-staging-vchiq_arm-Add-36-bit-address-support.patch"
 SRC_URI += "file://0483-staging-vchiq_arm-children-inherit-DMA-config.patch"
 SRC_URI += "file://0484-staging-vchiq_arm-Usa-a-DMA-pool-for-small-bulks.patch"
-SRC_URI += "file://0485-drm-vc4-Reset-HDMI-MISC_CONTROL-register.patch"
-SRC_URI += "file://0486-drm-vc4-Release-workaround-buffer-and-DMA-in-error-p.patch"
-SRC_URI += "file://0487-drm-vc4-Correct-DSI-divider-calculations.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0485-drm-vc4-Reset-HDMI-MISC_CONTROL-register.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0486-drm-vc4-Release-workaround-buffer-and-DMA-in-error-p.patch"
+SRC_URI += "file://0001-drm-vc4-Release-workaround-buffer-and-DMA-in-error-p.patch"
+#SRC_URI += "file://0487-drm-vc4-Correct-DSI-divider-calculations.patch"
+SRC_URI += "file://0001-drm-vc4-Correct-DSI-divider-calculations.patch"
 
 # Not needed in WR kernel
 #SRC_URI += "file://0488-drm-panel-raspberrypi-touchscreen-Avoid-NULL-deref-i.patch"
@@ -653,7 +688,11 @@ SRC_URI += "file://0616-drivers-bcm2835_unicam-Add-logging-message-when-a-fr.pat
 SRC_URI += "file://0617-regulator-rpi-panel-attiny-Don-t-read-the-LCD-power-.patch"
 SRC_URI += "file://0618-regulator-rpi-panel-attiny-Use-two-transactions-for-.patch"
 SRC_URI += "file://0619-input-edt-ft5x06-Only-look-at-the-number-of-points-r.patch"
-SRC_URI += "file://0620-drm-vc4-Move-HDMI-reset-to-pm_resume.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0620-drm-vc4-Move-HDMI-reset-to-pm_resume.patch"
+SRC_URI += "file://0001-drm-vc4-Move-HDMI-reset-to-pm_resume.patch"
+
 SRC_URI += "file://0621-clk-bcm-rpi-Add-the-BCM283x-pixel-clock.patch"
 SRC_URI += "file://0622-dt-bcm283x-Change-BCM283x-HDMI-to-use-firmware-clock.patch"
 SRC_URI += "file://0623-overlays-vc4-kms-v3d-Change-composite-handling.patch"
@@ -785,7 +824,11 @@ SRC_URI += "file://0735-spi-gpio-Add-sck-idle-input-property.patch"
 SRC_URI += "file://0736-dtoverlays-Add-overlays-for-Pimoroni-Hyperpixel-disp.patch"
 SRC_URI += "file://0737-dtoverlay-Reduce-size-of-PCIE-IB-window-in-pcie-32-d.patch"
 SRC_URI += "file://0738-ARM-dts-Permanently-disable-hdmi1-and-ddc1-on-CM4S.patch"
-SRC_URI += "file://0739-net-phy-lan87xx-Decrease-phy-polling-rate.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0739-net-phy-lan87xx-Decrease-phy-polling-rate.patch"
+SRC_URI += "file://0001-net-phy-lan87xx-Decrease-phy-polling-rate.patch"
+
 SRC_URI += "file://0740-drm-panel-Fix-compilation-warnings.patch"
 SRC_URI += "file://0741-media-bcm2835-unicam-Handle-a-repeated-frame-start-w.patch"
 SRC_URI += "file://0742-overlays-rpi-poe-plus-Fix-parameters.patch"
@@ -796,7 +839,11 @@ SRC_URI += "file://0746-drm-vc4-For-DPI-MEDIA_BUS_FMT_RGB565_1X16-is-mode-1-.pat
 SRC_URI += "file://0747-dtoverlays-Add-additional-mappings-to-vc4-kms-dpi-ge.patch"
 SRC_URI += "file://0748-drm-dsi-Document-the-meaning-and-spec-references-for.patch"
 SRC_URI += "file://0749-drm-bridge-tc358762-Ignore-EPROBE_DEFER-when-logging.patch"
-SRC_URI += "file://0750-drm-vc4-Rename-bridge-to-out_bridge.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0750-drm-vc4-Rename-bridge-to-out_bridge.patch"
+SRC_URI += "file://0001-drm-vc4-Rename-bridge-to-out_bridge.patch"
+
 SRC_URI += "file://0751-drm-vc4-Move-DSI-initialisation-to-encoder_mode_set.patch"
 SRC_URI += "file://0752-drm-vc4-Remove-splitting-the-bridge-chain-from-the-d.patch"
 SRC_URI += "file://0753-drm-vc4-Convert-vc4_dsi-to-use-atomic-enable-disable.patch"
@@ -892,7 +939,11 @@ SRC_URI += "file://0828-dtoverlays-Connect-the-backlight-to-the-pitft35-disp.pat
 #SRC_URI += "file://0829-drm-vc4-hdmi-Add-CSC-for-BT601-709-2020-limited-and-.patch"
 
 SRC_URI += "file://0830-Revert-usb-xhci-expand-the-scope-of-XHCI_VLI_SS_BULK.patch"
-SRC_URI += "file://0831-vc4-drm-vc4_plane-Keep-fractional-source-coords-insi.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0831-vc4-drm-vc4_plane-Keep-fractional-source-coords-insi.patch"
+SRC_URI += "file://0001-vc4-drm-vc4_plane-Keep-fractional-source-coords-insi.patch"
+
 SRC_URI += "file://0832-vc4-drm-Handle-fractional-coordinates-using-the-phas.patch"
 SRC_URI += "file://0833-drm-Add-chroma-siting-properties.patch"
 SRC_URI += "file://0834-vc4-drm-plane-Make-use-of-chroma-siting-parameter.patch"
@@ -1037,13 +1088,20 @@ SRC_URI += "file://0972-dtoverlays-Fix-incorrect-property-name-for-display-r.pat
 SRC_URI += "file://0973-drm-vc4_hdmi-Force-a-modeset-when-Broadcast-RGB-sett.patch"
 SRC_URI += "file://0974-drm-atomic-If-margins-are-updated-update-all-planes.patch"
 SRC_URI += "file://0975-overlays-Add-gpio-hog-overlay.patch"
-SRC_URI += "file://0976-mmc-block-Don-t-do-single-sector-reads-during-recove.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0976-mmc-block-Don-t-do-single-sector-reads-during-recove.patch"
+
 SRC_URI += "file://0977-configs-Regenerate-defconfigs.patch"
 SRC_URI += "file://0978-vc04_services-vchiq-mmal-Add-defines-for-mmal_es_for.patch"
 SRC_URI += "file://0979-vc04_services-bcm2835-codec-Add-support-for-V4L2_PIX.patch"
 SRC_URI += "file://0980-drm-vc4-Add-HDMI-format-detection-registers-to-regis.patch"
 SRC_URI += "file://0981-drm-vc4-Add-MISC_CONTROL-register-for-vc4.patch"
-SRC_URI += "file://0982-drm-vc4-Correct-HDMI-timing-registers-for-interlaced.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0982-drm-vc4-Correct-HDMI-timing-registers-for-interlaced.patch"
+SRC_URI += "file://0001-drm-vc4-Correct-HDMI-timing-registers-for-interlaced.patch"
+
 SRC_URI += "file://0983-drm-vc4-Move-pixel-doubling-from-Pixelvalve-to-HDMI-.patch"
 SRC_URI += "file://0984-dt-bindings-media-i2c-Add-IMX296-CMOS-sensor-binding.patch"
 SRC_URI += "file://0985-media-i2c-IMX296-camera-sensor-driver.patch"
@@ -1161,36 +1219,38 @@ SRC_URI += "file://1071-overlays-Mark-more-overlays-as-Pi4-specific.patch"
 SRC_URI += "file://1072-overlays-Adds-HiFiBerry-AMP3.patch"
 SRC_URI += "file://1073-rpi-simple-soundcard-adds-definitions-for-the-HiFiBe.patch"
 SRC_URI += "file://1074-media-bcm2835-unicam-Correctly-handle-FS-FE-ISR-cond.patch"
-SRC_URI += "file://1075-x86-speculation-Make-all-RETbleed-mitigations-64-bit.patch"
-SRC_URI += "file://1076-selftests-bpf-Extend-verifier-and-bpf_sock-tests-for.patch"
-SRC_URI += "file://1077-selftests-bpf-Check-dst_port-only-on-the-client-sock.patch"
-SRC_URI += "file://1078-block-fix-default-IO-priority-handling-again.patch"
-SRC_URI += "file://1079-tools-vm-slabinfo-Handle-files-in-debugfs.patch"
-SRC_URI += "file://1080-ACPI-video-Force-backlight-native-for-some-TongFang-.patch"
-SRC_URI += "file://1081-ACPI-video-Shortening-quirk-list-by-identifying-Clev.patch"
-SRC_URI += "file://1082-ACPI-APEI-Better-fix-to-avoid-spamming-the-console-w.patch"
-SRC_URI += "file://1083-crypto-arm64-poly1305-fix-a-read-out-of-bound.patch"
-SRC_URI += "file://1084-KVM-x86-do-not-report-a-vCPU-as-preempted-outside-in.patch"
-SRC_URI += "file://1085-KVM-x86-do-not-set-st-preempted-when-going-back-to-u.patch"
-SRC_URI += "file://1086-KVM-selftests-Make-hyperv_clock-selftest-more-stable.patch"
-SRC_URI += "file://1087-tools-kvm_stat-fix-display-of-error-when-multiple-pr.patch"
-SRC_URI += "file://1088-selftests-KVM-Handle-compiler-optimizations-in-ucall.patch"
-SRC_URI += "file://1089-KVM-x86-svm-add-__GFP_ACCOUNT-to-__sev_dbg_-en-de-cr.patch"
-SRC_URI += "file://1090-arm64-set-UXN-on-swapper-page-tables.patch"
-SRC_URI += "file://1091-btrfs-zoned-prevent-allocation-from-previous-data-re.patch"
-SRC_URI += "file://1092-btrfs-zoned-fix-critical-section-of-relocation-inode.patch"
-SRC_URI += "file://1093-Bluetooth-hci_bcm-Add-BCM4349B1-variant.patch"
-SRC_URI += "file://1094-Bluetooth-hci_bcm-Add-DT-compatible-for-CYW55572.patch"
-SRC_URI += "file://1095-dt-bindings-bluetooth-broadcom-Add-BCM4349B1-DT-bind.patch"
-SRC_URI += "file://1096-Bluetooth-btusb-Add-support-of-IMC-Networks-PID-0x35.patch"
-SRC_URI += "file://1097-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x04.patch"
-SRC_URI += "file://1098-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x04.patch"
-SRC_URI += "file://1099-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x0C.patch"
-SRC_URI += "file://1100-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x13.patch"
-SRC_URI += "file://1101-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x13.patch"
-SRC_URI += "file://1102-macintosh-adb-fix-oob-read-in-do_adb_query-function.patch"
-SRC_URI += "file://1103-x86-speculation-Add-RSB-VM-Exit-protections.patch"
-SRC_URI += "file://1104-x86-speculation-Add-LFENCE-to-RSB-fill-sequence.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://1075-x86-speculation-Make-all-RETbleed-mitigations-64-bit.patch"
+#SRC_URI += "file://1076-selftests-bpf-Extend-verifier-and-bpf_sock-tests-for.patch"
+#SRC_URI += "file://1077-selftests-bpf-Check-dst_port-only-on-the-client-sock.patch"
+#SRC_URI += "file://1078-block-fix-default-IO-priority-handling-again.patch"
+#SRC_URI += "file://1079-tools-vm-slabinfo-Handle-files-in-debugfs.patch"
+#SRC_URI += "file://1080-ACPI-video-Force-backlight-native-for-some-TongFang-.patch"
+#SRC_URI += "file://1081-ACPI-video-Shortening-quirk-list-by-identifying-Clev.patch"
+#SRC_URI += "file://1082-ACPI-APEI-Better-fix-to-avoid-spamming-the-console-w.patch"
+#SRC_URI += "file://1083-crypto-arm64-poly1305-fix-a-read-out-of-bound.patch"
+#SRC_URI += "file://1084-KVM-x86-do-not-report-a-vCPU-as-preempted-outside-in.patch"
+#SRC_URI += "file://1085-KVM-x86-do-not-set-st-preempted-when-going-back-to-u.patch"
+#SRC_URI += "file://1086-KVM-selftests-Make-hyperv_clock-selftest-more-stable.patch"
+#SRC_URI += "file://1087-tools-kvm_stat-fix-display-of-error-when-multiple-pr.patch"
+#SRC_URI += "file://1088-selftests-KVM-Handle-compiler-optimizations-in-ucall.patch"
+#SRC_URI += "file://1089-KVM-x86-svm-add-__GFP_ACCOUNT-to-__sev_dbg_-en-de-cr.patch"
+#SRC_URI += "file://1090-arm64-set-UXN-on-swapper-page-tables.patch"
+#SRC_URI += "file://1091-btrfs-zoned-prevent-allocation-from-previous-data-re.patch"
+#SRC_URI += "file://1092-btrfs-zoned-fix-critical-section-of-relocation-inode.patch"
+#SRC_URI += "file://1093-Bluetooth-hci_bcm-Add-BCM4349B1-variant.patch"
+#SRC_URI += "file://1094-Bluetooth-hci_bcm-Add-DT-compatible-for-CYW55572.patch"
+#SRC_URI += "file://1095-dt-bindings-bluetooth-broadcom-Add-BCM4349B1-DT-bind.patch"
+#SRC_URI += "file://1096-Bluetooth-btusb-Add-support-of-IMC-Networks-PID-0x35.patch"
+#SRC_URI += "file://1097-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x04.patch"
+#SRC_URI += "file://1098-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x04.patch"
+#SRC_URI += "file://1099-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x0C.patch"
+#SRC_URI += "file://1100-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x13.patch"
+#SRC_URI += "file://1101-Bluetooth-btusb-Add-Realtek-RTL8852C-support-ID-0x13.patch"
+#SRC_URI += "file://1102-macintosh-adb-fix-oob-read-in-do_adb_query-function.patch"
+#SRC_URI += "file://1103-x86-speculation-Add-RSB-VM-Exit-protections.patch"
+#SRC_URI += "file://1104-x86-speculation-Add-LFENCE-to-RSB-fill-sequence.patch"
 
 # Extra patches
 SRC_URI += "file://0001-drm-vc4-hdmi-Fix-dbg-output.patch"
