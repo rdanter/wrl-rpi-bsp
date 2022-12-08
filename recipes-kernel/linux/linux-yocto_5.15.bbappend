@@ -29,7 +29,10 @@ SRC_URI += "file://0015-drm-vc4-crtc-Rework-the-encoder-retrieval-code-again.pat
 SRC_URI += "file://0016-drm-vc4-crtc-Add-some-logging.patch"
 SRC_URI += "file://0017-drm-vc4-Leverage-the-load-tracker-on-the-BCM2711.patch"
 SRC_URI += "file://0018-drm-vc4-Increase-the-core-clock-based-on-HVS-load.patch"
-SRC_URI += "file://0019-drm-vc4-select-PM.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0019-drm-vc4-select-PM.patch"
+
 SRC_URI += "file://0020-drm-probe-helper-Create-a-HPD-IRQ-event-helper-for-a.patch"
 SRC_URI += "file://0021-drm-vc4-hdmi-Actually-check-for-the-connector-status.patch"
 SRC_URI += "file://0022-firmware-raspberrypi-Add-RPI_FIRMWARE_NOTIFY_DISPLAY.patch"
