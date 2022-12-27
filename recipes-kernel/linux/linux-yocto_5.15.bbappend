@@ -510,7 +510,10 @@ SRC_URI += "file://0453-dwc_otg-Update-NetBSD-usb.h-header-licence.patch"
 # Not needed since RCPL 2
 #SRC_URI += "file://0454-drm-vc4-Fix-margin-calculations-for-the-right-bottom.patch"
 
-SRC_URI += "file://0455-drm-vc4-Fix-timings-for-VEC-modes.patch"
+# Rework for RCPL 3
+#SRC_URI += "file://0455-drm-vc4-Fix-timings-for-VEC-modes.patch"
+SRC_URI += "file://0001-drm-vc4-Fix-timings-for-VEC-modes.patch"
+
 SRC_URI += "file://0456-drm-vc4-Refactor-VEC-TV-mode-setting.patch"
 SRC_URI += "file://0457-drm-vc4-Fix-definition-of-PAL-M-mode.patch"
 SRC_URI += "file://0458-drm-vc4-Add-support-for-more-analog-TV-standards.patch"
@@ -705,13 +708,23 @@ SRC_URI += "file://0626-drm-vc4-dpi-Add-option-for-inverting-pixel-clock-and.pat
 SRC_URI += "file://0627-drm-vc4-dpi-Ensure-a-default-format-is-selected.patch"
 SRC_URI += "file://0628-dt-bcm270x-Add-GPIO-defines-for-RGB565-DPI-output-mo.patch"
 SRC_URI += "file://0629-dtoverlays-Add-a-generic-DPI-panel-overlay-for-KMS.patch"
-SRC_URI += "file://0630-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+
+# Rework for RCPL 3
+#SRC_URI += "file://0630-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+SRC_URI += "file://0001-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+
 SRC_URI += "file://0631-xhci-correct-room_on_ring-for-cases-where-there-is-a.patch"
 SRC_URI += "file://0632-media-imx219-Advertise-embedded-data-node-on-media-p.patch"
 SRC_URI += "file://0633-vc4-drm-Ignore-vc4_hdmi-output_enabled-for-allowing-.patch"
 SRC_URI += "file://0634-ARM-dts-Create-bcm2711-rpi-cm4s.dts-4761.patch"
-SRC_URI += "file://0635-xhci-refactor-out-TRBS_PER_SEGMENT-define-in-runtime.patch"
-SRC_URI += "file://0636-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+
+# Not needed since RCPL 3
+#SRC_URI += "file://0635-xhci-refactor-out-TRBS_PER_SEGMENT-define-in-runtime.patch"
+
+# Rework for RCPL 3
+#SRC_URI += "file://0636-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+SRC_URI += "file://0001-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+
 SRC_URI += "file://0637-drm-vc4-Fix-build-without-DRM_VC4_HDMI_CEC.patch"
 SRC_URI += "file://0638-dt-Create-static-regulators-and-clocks-for-camera-no.patch"
 SRC_URI += "file://0639-dtoverlays-Convert-the-camera-sensor-overlays-to-use.patch"
@@ -852,7 +865,11 @@ SRC_URI += "file://0752-drm-vc4-Remove-splitting-the-bridge-chain-from-the-d.pat
 SRC_URI += "file://0753-drm-vc4-Convert-vc4_dsi-to-use-atomic-enable-disable.patch"
 SRC_URI += "file://0754-drm-vc4-Convert-vc4_dsi-to-using-a-bridge-instead-of.patch"
 SRC_URI += "file://0755-drm-vc4-Remove-entry-to-ULPS-from-vc4_dsi-post_disab.patch"
-SRC_URI += "file://0756-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+
+# Rework for RCPL 3
+#SRC_URI += "file://0756-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+SRC_URI += "file://0001-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+
 SRC_URI += "file://0757-dtoverlays-Correct-link-frequency-for-ov7251.patch"
 SRC_URI += "file://0758-media-i2c-Add-acpi-support-to-ov7251.patch"
 SRC_URI += "file://0759-media-i2c-Provide-ov7251_check_hwcfg.patch"
