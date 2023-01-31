@@ -538,7 +538,7 @@ SRC_URI += "file://0476-media-rpivid-Only-create-aux-entries-for-H265-if-nee.pat
 SRC_URI += "file://0477-usb-xhci-workaround-for-bogus-SET_DEQ_PENDING-endpoi.patch"
 SRC_URI += "file://0478-media-i2c-imx477-Allow-control-of-on-sensor-DPC.patch"
 
-# Rework for WR kernel
+# Rework for WR kernel & rework again for RCPL 4
 #SRC_URI += "file://0479-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
 SRC_URI += "file://0001-sound-usb-add-device-quirks-for-A4Tech-FHD-1080p-web.patch"
 

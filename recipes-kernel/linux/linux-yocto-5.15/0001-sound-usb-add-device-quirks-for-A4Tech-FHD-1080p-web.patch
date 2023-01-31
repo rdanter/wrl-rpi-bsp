@@ -1,4 +1,4 @@
-From 665d687658f6694acc4cc0a499acd9b5ca88ecf2 Mon Sep 17 00:00:00 2001
+From d6e017a43cf11e0cf8e4a0839953393a11f9dae7 Mon Sep 17 00:00:00 2001
 From: Jonathan Bell <jonathan@raspberrypi.com>
 Date: Thu, 15 Apr 2021 13:15:14 +0100
 Subject: [PATCH] sound/usb: add device quirks for A4Tech FHD 1080p webcams
@@ -14,18 +14,18 @@ Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 968d90caeefa..a203e151153a 100644
+index 2ae9ad993ff4..4250740b7636 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -1921,6 +1921,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+@@ -1886,6 +1886,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
  		   QUIRK_FLAG_GENERIC_IMPLICIT_FB),
- 	DEVICE_FLG(0x2b53, 0x0031, /* Fiero SC-01 (firmware v1.1.0) */
- 		   QUIRK_FLAG_GENERIC_IMPLICIT_FB),
+ 	DEVICE_FLG(0x0525, 0xa4ad, /* Hamedal C20 usb camero */
+ 		   QUIRK_FLAG_IFACE_SKIP_CLOSE),
 +	DEVICE_FLG(0x09da, 0x2695, /* A4Tech FHD 1080p webcam */
 +		   QUIRK_FLAG_DISABLE_AUTOSUSPEND | QUIRK_FLAG_GET_SAMPLE_RATE),
  
  	/* Vendor matches */
  	VENDOR_FLG(0x045e, /* MS Lifecam */
 -- 
-2.32.0
+2.34.1
 
