@@ -231,7 +231,10 @@ SRC_URI += "file://0197-video-fbdev-bcm2708_fb-Use-common-compat-header.patch"
 SRC_URI += "file://0198-of-overlay-Correct-symbol-path-fixups.patch"
 SRC_URI += "file://0199-dt-bindings-pci-Add-DT-docs-for-Brcmstb-PCIe-device.patch"
 SRC_URI += "file://0200-bcmgenet-Disable-skip_umac_reset-by-default.patch"
-SRC_URI += "file://0201-drm-fourcc-Add-packed-10bit-YUV-4-2-0-format.patch"
+
+# Not needed since RCPL 5
+#SRC_URI += "file://0201-drm-fourcc-Add-packed-10bit-YUV-4-2-0-format.patch"
+
 SRC_URI += "file://0202-media-uapi-hevc-Add-scaling-matrix-control.patch"
 SRC_URI += "file://0203-media-uapi-hevc-Add-segment-address-field.patch"
 SRC_URI += "file://0204-media-videodev2.h-Add-a-format-for-column-YUV4-2-0-m.patch"
