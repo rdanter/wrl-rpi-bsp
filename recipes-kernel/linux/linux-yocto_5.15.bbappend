@@ -507,9 +507,9 @@ SRC_URI += "file://0449-clk-Always-clamp-the-rounded-rate.patch"
 SRC_URI += "file://0450-drm-vc4-Increase-the-core-clock-based-on-HVS-load.patch"
 SRC_URI += "file://0451-drm-vc4-hdmi-Simplify-the-connector-state-retrieval.patch"
 
-# Fix for missing parts in RCPL 2
+# Fix for missing parts in RCPL 2, not needed since RCPL 8
 #SRC_URI += "file://0452-drm-vc4-Fix-timings-for-interlaced-modes.patch"
-SRC_URI += "file://0001-drm-vc4-Fix-timings-for-interlaced-modes.patch"
+#SRC_URI += "file://0001-drm-vc4-Fix-timings-for-interlaced-modes.patch"
 
 SRC_URI += "file://0453-dwc_otg-Update-NetBSD-usb.h-header-licence.patch"
 
@@ -710,7 +710,10 @@ SRC_URI += "file://0622-dt-bcm283x-Change-BCM283x-HDMI-to-use-firmware-clock.pat
 SRC_URI += "file://0623-overlays-vc4-kms-v3d-Change-composite-handling.patch"
 SRC_URI += "file://0624-drm-panel-simple-Populate-bpc-when-using-panel-dpi.patch"
 SRC_URI += "file://0625-drm-panel-simple-Allow-the-bus-format-to-be-read-fro.patch"
-SRC_URI += "file://0626-drm-vc4-dpi-Add-option-for-inverting-pixel-clock-and.patch"
+
+# Not needed since RPCL 8
+#SRC_URI += "file://0626-drm-vc4-dpi-Add-option-for-inverting-pixel-clock-and.patch"
+
 SRC_URI += "file://0627-drm-vc4-dpi-Ensure-a-default-format-is-selected.patch"
 SRC_URI += "file://0628-dt-bcm270x-Add-GPIO-defines-for-RGB565-DPI-output-mo.patch"
 SRC_URI += "file://0629-dtoverlays-Add-a-generic-DPI-panel-overlay-for-KMS.patch"
