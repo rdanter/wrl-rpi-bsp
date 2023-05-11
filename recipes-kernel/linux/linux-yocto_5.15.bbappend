@@ -864,7 +864,9 @@ SRC_URI += "file://0744-dtoverlays-add-rgb565-padhi-output-to-vc4-kms-dpi-ge.pat
 #SRC_URI += "file://0745-media-i2c-imx219-Scale-the-pixel-clock-rate-for-the-.patch"
 SRC_URI += "file://0001-media-i2c-imx219-Scale-the-pixel-clock-rate-for-the-.patch"
 
-SRC_URI += "file://0746-drm-vc4-For-DPI-MEDIA_BUS_FMT_RGB565_1X16-is-mode-1-.patch"
+# Not needed since RCPL 8
+#SRC_URI += "file://0746-drm-vc4-For-DPI-MEDIA_BUS_FMT_RGB565_1X16-is-mode-1-.patch"
+
 SRC_URI += "file://0747-dtoverlays-Add-additional-mappings-to-vc4-kms-dpi-ge.patch"
 SRC_URI += "file://0748-drm-dsi-Document-the-meaning-and-spec-references-for.patch"
 SRC_URI += "file://0749-drm-bridge-tc358762-Ignore-EPROBE_DEFER-when-logging.patch"
