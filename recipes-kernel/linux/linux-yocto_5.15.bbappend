@@ -469,7 +469,10 @@ SRC_URI += "file://0428-media-v4l2-subdev-add-subdev-wide-state-struct.patch"
 # Not needed since RCPL 2
 #SRC_URI += "file://0429-drm-vc4-Adopt-the-dma-configuration-from-the-HVS-or-.patch"
 
-SRC_URI += "file://0430-Support-RPi-DPI-interface-in-mode6-for-18-bit-color.patch"
+# Rework for RCPL 8
+#SRC_URI += "file://0430-Support-RPi-DPI-interface-in-mode6-for-18-bit-color.patch"
+SRC_URI += "file://0001-Support-RPi-DPI-interface-in-mode6-for-18-bit-color.patch"
+
 SRC_URI += "file://0431-drm-vc4-plane-Add-support-for-DRM_FORMAT_P030.patch"
 SRC_URI += "file://0432-drm-vc4-plane-Add-support-for-YUV-color-encodings-an.patch"
 
