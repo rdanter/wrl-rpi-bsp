@@ -1133,7 +1133,7 @@ SRC_URI += "file://0979-vc04_services-bcm2835-codec-Add-support-for-V4L2_PIX.pat
 SRC_URI += "file://0980-drm-vc4-Add-HDMI-format-detection-registers-to-regis.patch"
 SRC_URI += "file://0981-drm-vc4-Add-MISC_CONTROL-register-for-vc4.patch"
 
-# Rework for RCPL 2
+# Rework for RCPL 2 and again for RCPL 8
 #SRC_URI += "file://0982-drm-vc4-Correct-HDMI-timing-registers-for-interlaced.patch"
 SRC_URI += "file://0001-drm-vc4-Correct-HDMI-timing-registers-for-interlaced.patch"
 
