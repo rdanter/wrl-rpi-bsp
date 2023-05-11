@@ -859,7 +859,11 @@ SRC_URI += "file://0741-media-bcm2835-unicam-Handle-a-repeated-frame-start-w.pat
 SRC_URI += "file://0742-overlays-rpi-poe-plus-Fix-parameters.patch"
 SRC_URI += "file://0743-dtoverlays-fix-overrides-in-vc4-kms-dpi-generic.patch"
 SRC_URI += "file://0744-dtoverlays-add-rgb565-padhi-output-to-vc4-kms-dpi-ge.patch"
-SRC_URI += "file://0745-media-i2c-imx219-Scale-the-pixel-clock-rate-for-the-.patch"
+
+# Rework for RCPL 8
+#SRC_URI += "file://0745-media-i2c-imx219-Scale-the-pixel-clock-rate-for-the-.patch"
+SRC_URI += "file://0001-media-i2c-imx219-Scale-the-pixel-clock-rate-for-the-.patch"
+
 SRC_URI += "file://0746-drm-vc4-For-DPI-MEDIA_BUS_FMT_RGB565_1X16-is-mode-1-.patch"
 SRC_URI += "file://0747-dtoverlays-Add-additional-mappings-to-vc4-kms-dpi-ge.patch"
 SRC_URI += "file://0748-drm-dsi-Document-the-meaning-and-spec-references-for.patch"
