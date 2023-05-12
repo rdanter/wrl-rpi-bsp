@@ -1161,7 +1161,10 @@ SRC_URI += "file://1003-drm-v3d-Switch-clock-setting-to-new-api.patch"
 SRC_URI += "file://1004-clk-raspberrypi-Enable-minimize-for-all-firmware-clo.patch"
 SRC_URI += "file://1005-ARM-dts-Add-bcm2709-rpi-cm2.dts.patch"
 SRC_URI += "file://1006-spi-bcm2835-Fix-for-shared-interrupts.patch"
-SRC_URI += "file://1007-drm-vc4-Fix-colour-order-for-xRGB1555-on-HVS5.patch"
+
+# Not needed since RCPL 8
+#SRC_URI += "file://1007-drm-vc4-Fix-colour-order-for-xRGB1555-on-HVS5.patch"
+
 SRC_URI += "file://1008-drm-vc4-0-is-a-valid-value-for-pixel_order_hvs5-so-f.patch"
 SRC_URI += "file://1009-drm-vc4-Omit-pixel_order-from-the-hvs_format-for-hvs.patch"
 SRC_URI += "file://1010-drm-vc4-Add-3-3-2-and-4-4-4-4-RGB-RGBX-RGBA-formats.patch"
