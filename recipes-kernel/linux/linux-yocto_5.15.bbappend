@@ -1293,3 +1293,4 @@ SRC_URI += "file://1074-media-bcm2835-unicam-Correctly-handle-FS-FE-ISR-cond.pat
 # Extra patches
 SRC_URI += "file://0001-drm-vc4-hdmi-Fix-dbg-output.patch"
 SRC_URI += "file://0001-Fix-mode-change-detection.patch"
+SRC_URI += "file://0001-Revert-ARM-9290-1-uaccess-Fix-KASAN-false-positives.patch"
