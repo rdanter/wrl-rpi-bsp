@@ -98,7 +98,7 @@ SRC_URI += "file://0075-Add-Chris-Boot-s-i2c-driver.patch"
 SRC_URI += "file://0076-char-broadcom-Add-vcio-module.patch"
 SRC_URI += "file://0077-firmware-bcm2835-Support-ARCH_BCM270x.patch"
 
-# Needed rework for WRL kernel
+# Needed rework for WRL kernel and further rework for RCPL 9
 #SRC_URI += "file://0078-BCM2708-Add-core-Device-Tree-support.patch"
 SRC_URI += "file://0001-BCM2708-Add-core-Device-Tree-support.patch"
 
