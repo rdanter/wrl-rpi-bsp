@@ -1,0 +1,100 @@
+From 0ff1fbbbeb70518a6fa9ce3c6bd7533718763146 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 11 May 2023 09:59:04 +0100
+Subject: [PATCH] ARM: dts: bcm27xx: Correct the dma-ranges
+
+Step one of using DMA addresses the intended way is to make sure that
+the mapping between CPU physical addresses and DMA addresses in Device
+Tree is complete and correct.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/bcm2708.dtsi        |  3 ++-
+ arch/arm/boot/dts/bcm2709.dtsi        |  3 +++
+ arch/arm/boot/dts/bcm2710.dtsi        |  3 +++
+ arch/arm/boot/dts/bcm2711-rpi-ds.dtsi | 13 ++++++++++++-
+ 4 files changed, 20 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/bcm2708.dtsi b/arch/arm/boot/dts/bcm2708.dtsi
+index b3cf34cdcc0e..fdc7f2423bbe 100644
+--- a/arch/arm/boot/dts/bcm2708.dtsi
++++ b/arch/arm/boot/dts/bcm2708.dtsi
+@@ -10,7 +10,8 @@ __overrides__ {
+ };
+ 
+ &soc {
+-	dma-ranges = <0x80000000 0x00000000 0x20000000>;
++	dma-ranges = <0x80000000 0x00000000 0x20000000>,
++		     <0x7e000000 0x20000000 0x02000000>;
+ };
+ 
+ &vc4 {
+diff --git a/arch/arm/boot/dts/bcm2709.dtsi b/arch/arm/boot/dts/bcm2709.dtsi
+index e195f7247813..7f8fcc2b404e 100644
+--- a/arch/arm/boot/dts/bcm2709.dtsi
++++ b/arch/arm/boot/dts/bcm2709.dtsi
+@@ -8,6 +8,9 @@ soc {
+ 		ranges = <0x7e000000 0x3f000000 0x01000000>,
+ 		         <0x40000000 0x40000000 0x00040000>;
+ 
++		dma-ranges = <0xc0000000 0x00000000 0x3f000000>,
++			     <0x7e000000 0x3f000000 0x01000000>;
++
+ 		/delete-node/ timer@7e003000;
+ 	};
+ 
+diff --git a/arch/arm/boot/dts/bcm2710.dtsi b/arch/arm/boot/dts/bcm2710.dtsi
+index 31b13b24affb..428a6f3a5a7e 100644
+--- a/arch/arm/boot/dts/bcm2710.dtsi
++++ b/arch/arm/boot/dts/bcm2710.dtsi
+@@ -11,6 +11,9 @@ arm-pmu {
+ 	};
+ 
+ 	soc {
++		dma-ranges = <0xc0000000 0x00000000 0x3f000000>,
++			     <0x7e000000 0x3f000000 0x01000000>;
++
+ 		/delete-node/ timer@7e003000;
+ 	};
+ 
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-ds.dtsi b/arch/arm/boot/dts/bcm2711-rpi-ds.dtsi
+index dadf9b83d344..4ce3694aaa0d 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-ds.dtsi
++++ b/arch/arm/boot/dts/bcm2711-rpi-ds.dtsi
+@@ -18,6 +18,10 @@ scb: scb {
+ 	     /* Add a label */
+ 	};
+ 
++	soc: soc {
++	     /* Add a label */
++	};
++
+ 	arm-pmu {
+ 		compatible = "arm,cortex-a72-pmu", "arm,armv8-pmuv3", "arm,cortex-a7-pmu";
+ 
+@@ -64,6 +68,12 @@ &cma {
+ 	alloc-ranges = <0x0 0x00000000 0x30000000>;
+ };
+ 
++&soc {
++	/* Add the physical <-> DMA mapping for the I/O space */
++	dma-ranges = <0xc0000000  0x0 0x00000000  0x40000000>,
++		     <0x7c000000  0x0 0xfc000000  0x03800000>;
++};
++
+ &scb {
+ 	#size-cells = <2>;
+ 
+@@ -71,7 +81,8 @@ &scb {
+ 		 <0x0 0x40000000  0x0 0xff800000  0x0 0x00800000>,
+ 		 <0x6 0x00000000  0x6 0x00000000  0x0 0x40000000>,
+ 		 <0x0 0x00000000  0x0 0x00000000  0x0 0xfc000000>;
+-	dma-ranges = <0x0 0x00000000  0x0 0x00000000  0x4 0x00000000>;
++	dma-ranges = <0x4 0x7c000000  0x0 0xfc000000  0x0 0x03800000>,
++		     <0x0 0x00000000  0x0 0x00000000  0x4 0x00000000>;
+ 
+ 	dma40: dma@7e007b00 {
+ 		compatible = "brcm,bcm2711-dma";
+-- 
+2.35.5
+

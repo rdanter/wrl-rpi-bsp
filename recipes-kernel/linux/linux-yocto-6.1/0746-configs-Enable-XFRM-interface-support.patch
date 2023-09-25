@@ -1,0 +1,92 @@
+From 461e0b72af5fc1bc5ddd85ae42d85b7e75b85861 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 27 Apr 2023 09:24:00 +0100
+Subject: [PATCH] configs: Enable XFRM interface support
+
+The XFRM_INTERFACE option enables "a virtual interface to route IPsec
+traffic". Add that as a module, enabling statistics and "sub policy"
+at the same time.
+
+See: https://github.com/raspberrypi/linux/issues/5446
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig   | 3 +++
+ arch/arm/configs/bcm2711_defconfig   | 3 +++
+ arch/arm/configs/bcmrpi_defconfig    | 3 +++
+ arch/arm64/configs/bcm2711_defconfig | 2 ++
+ arch/arm64/configs/bcmrpi3_defconfig | 3 +++
+ 5 files changed, 14 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index da14a1d8814c..80e26b6df32c 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -74,6 +74,9 @@ CONFIG_NET=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM_USER=y
++CONFIG_XFRM_INTERFACE=m
++CONFIG_XFRM_SUB_POLICY=y
++CONFIG_XFRM_STATISTICS=y
+ CONFIG_NET_KEY=m
+ CONFIG_INET=y
+ CONFIG_IP_MULTICAST=y
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index fdf724c70794..b71c5409090d 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -74,6 +74,9 @@ CONFIG_NET=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM_USER=y
++CONFIG_XFRM_INTERFACE=m
++CONFIG_XFRM_SUB_POLICY=y
++CONFIG_XFRM_STATISTICS=y
+ CONFIG_NET_KEY=m
+ CONFIG_INET=y
+ CONFIG_IP_MULTICAST=y
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 80d640589e5c..ca3d562f71f9 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -69,6 +69,9 @@ CONFIG_NET=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM_USER=y
++CONFIG_XFRM_INTERFACE=m
++CONFIG_XFRM_SUB_POLICY=y
++CONFIG_XFRM_STATISTICS=y
+ CONFIG_NET_KEY=m
+ CONFIG_INET=y
+ CONFIG_IP_MULTICAST=y
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index bf6c180b27af..7f69a5f79dcd 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -78,6 +78,8 @@ CONFIG_NET=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM_USER=m
++CONFIG_XFRM_INTERFACE=m
++CONFIG_XFRM_SUB_POLICY=y
+ CONFIG_XFRM_STATISTICS=y
+ CONFIG_NET_KEY=m
+ CONFIG_INET=y
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 473df9c4e125..31de7c40287c 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -77,6 +77,9 @@ CONFIG_NET=y
+ CONFIG_PACKET=y
+ CONFIG_UNIX=y
+ CONFIG_XFRM_USER=y
++CONFIG_XFRM_INTERFACE=m
++CONFIG_XFRM_SUB_POLICY=y
++CONFIG_XFRM_STATISTICS=y
+ CONFIG_NET_KEY=m
+ CONFIG_INET=y
+ CONFIG_IP_MULTICAST=y
+-- 
+2.35.5
+

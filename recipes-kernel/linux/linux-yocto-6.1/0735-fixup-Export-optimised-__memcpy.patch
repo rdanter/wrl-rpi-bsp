@@ -1,0 +1,32 @@
+From b006f78c9116345c6e5c6748606f1beb35370e68 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 11 Apr 2023 08:55:49 +0100
+Subject: [PATCH] fixup! Export optimised __memcpy
+
+Sinc [1] uaccess_with_memcpy.c uses __memcpy instead of memcpy. Make
+the optimised memcpy available as __memcpy as well to avoid linkage
+failures.
+
+[1] ceac10c83b33 ("ARM: 9290/1: uaccess: Fix KASAN false-positives")
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/lib/memcpy_rpi.S | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/lib/memcpy_rpi.S b/arch/arm/lib/memcpy_rpi.S
+index 77a1dbe28a18..d246f9f3903a 100644
+--- a/arch/arm/lib/memcpy_rpi.S
++++ b/arch/arm/lib/memcpy_rpi.S
+@@ -58,6 +58,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ ENTRY(mmiocpy)
+ ENTRY(memcpy)
++ENTRY(__memcpy)
+         memcpy  0
++ENDPROC(__memcpy)
+ ENDPROC(memcpy)
+ ENDPROC(mmiocpy)
+-- 
+2.35.5
+
