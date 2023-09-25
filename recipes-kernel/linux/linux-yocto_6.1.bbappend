@@ -133,7 +133,10 @@ SRC_URI += "file://0126-mfd-Add-Raspberry-Pi-Sense-HAT-core-driver.patch"
 SRC_URI += "file://0127-Add-support-for-all-the-downstream-rpi-sound-card-dr.patch"
 SRC_URI += "file://0128-rpi_display-add-backlight-driver-and-overlay.patch"
 SRC_URI += "file://0129-bcm2835-virtgpio-Virtual-GPIO-driver.patch"
-SRC_URI += "file://0130-OF-DT-Overlay-configfs-interface.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0130-OF-DT-Overlay-configfs-interface.patch"
+
 SRC_URI += "file://0131-brcm-adds-support-for-BCM43341-wifi.patch"
 SRC_URI += "file://0132-hci_h5-Don-t-send-conf_req-when-ACTIVE.patch"
 SRC_URI += "file://0133-ARM64-Round-Robin-dispatch-IRQs-between-CPUs.patch"
@@ -560,7 +563,10 @@ SRC_URI += "file://0553-configs-Enable-the-MS5637-temp-pressure-driver.patch"
 SRC_URI += "file://0554-drivers-media-imx708-Enable-long-exposure-mode.patch"
 SRC_URI += "file://0555-drivers-media-i2c-imx708-Fix-crop-information.patch"
 SRC_URI += "file://0556-configs-Add-DM_MULTIPATH-m.patch"
-SRC_URI += "file://0557-drm_probe_helper-Cancel-previous-job-before-starting.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0557-drm_probe_helper-Cancel-previous-job-before-starting.patch"
+
 SRC_URI += "file://0558-drm-vc4-hdmi-Correct-CSC-setup-for-YCbCr4-4-4.patch"
 SRC_URI += "file://0559-drm-vc4-hdmi-Add-property-to-allow-manual-config-of-.patch"
 SRC_URI += "file://0560-bcm2835-mmc-Honor-return-value-of-mmc_of_parse.patch"
@@ -755,10 +761,13 @@ SRC_URI += "file://0748-drm-v3d-New-debugfs-end-points-to-query-GPU-usage-st.pat
 SRC_URI += "file://0749-ARM-dts-bcm2711-rpi-ds-Group-the-common-pins.patch"
 SRC_URI += "file://0750-ARM-dts-bcm2711-rpi-ds-Set-default-I-O-pins.patch"
 SRC_URI += "file://0751-overlays-bcm2711-Remove-I-O-pinctrl-references.patch"
-SRC_URI += "file://0752-Bluetooth-Improve-support-for-Actions-Semi-ATS2851-b.patch"
-SRC_URI += "file://0753-Bluetooth-Add-new-quirk-for-broken-local-ext-feature.patch"
-SRC_URI += "file://0754-Bluetooth-Add-new-quirk-for-broken-set-random-RPA-ti.patch"
-SRC_URI += "file://0755-Revert-drm_probe_helper-Cancel-previous-job-before-s.patch"
+
+# Not needed in WR kernel
+#SRC_URI += "file://0752-Bluetooth-Improve-support-for-Actions-Semi-ATS2851-b.patch"
+#SRC_URI += "file://0753-Bluetooth-Add-new-quirk-for-broken-local-ext-feature.patch"
+#SRC_URI += "file://0754-Bluetooth-Add-new-quirk-for-broken-set-random-RPA-ti.patch"
+#SRC_URI += "file://0755-Revert-drm_probe_helper-Cancel-previous-job-before-s.patch"
+
 SRC_URI += "file://0756-ARM-dts-bcm27xx-Correct-the-dma-ranges.patch"
 SRC_URI += "file://0757-bcm2835-dma-Derive-slave-DMA-addresses-correctly.patch"
 SRC_URI += "file://0758-ASoC-bcm2835-i2s-Use-phys-addresses-for-DAI-DMA.patch"
