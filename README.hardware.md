@@ -51,19 +51,4 @@ The following problems have been identified with this BSP:
   See docs/Wireless.md for more details.
 
 
-4. Change History
------------------
-
-The following table lists the major changes to the BSP.
-
-Date       | Description
------------|-------------
-2020-01-20 | Ported to WRL LTS 19 RCPL 2.
-2018-11-14 | Ported to WRL LTS 18.
-2018-04-05 | Add Raspberry Pi 3 support.
-2018-04-02 | Add Raspberry Pi 2 support.
-2017-11-27 | Ported to WRL LTS 17 RCPL 1.
-2017-10-02 | Initial version for WRL 9 RCPL 11.
-
-
 [1]: https://www.raspberrypi.org/documentation/hardware/raspberrypi/README.md
