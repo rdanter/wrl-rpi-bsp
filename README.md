@@ -5,9 +5,9 @@ Raspberry Pi BSP
 ---------------------
 
 Use the following steps to configure a platform project for this BSP with
-Wind River Linux LTS 22:
+Wind River Linux LTS 23:
 
-    $ git clone --branch WRLINUX_10_22_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_23_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --machine rpi --distro wrlinux \
         --layers /path/to/wrl-rpi-bsp --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
@@ -15,7 +15,7 @@ Wind River Linux LTS 22:
 
 or, as in previous versions:
 
-    $ git clone --branch WRLINUX_10_22_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_23_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
     $ . oe-init-build-env
@@ -37,18 +37,17 @@ and finally, if required, build and install the SDK:
 
     $ bitbake -c populate_sdk wrlinux-image-std
     $ cd tmp-glibc/deploy/sdk/
-    $ ./wrlinux-10.22.33.1-glibc-x86_64-rpi-wrlinux-image-std-sdk.sh
+    $ ./wrlinux-10.23.30.1-glibc-x86_64-rpi-wrlinux-image-std-sdk.sh
 
 If you will be building kernel modules with the SDK then the following
 additional steps should be taken before building:
 
-  1. Add the layers/wrlinux/wrlinux-kernel-dev layer,
-  2. Add ENABLE_KERNEL_DEV = '1' to the local.conf file, and
-  3. Add WRTEMPLATE += "feature/kernel-dev" to the local.conf file.
+  1. Add the wr-kernel-dev layer,
+  2. Add the feature/kernel-dev template.
 
-After installing the SDK make sure to run "make scripts" within the kernel
-source directory. The SDK can then be used to build kernel modules as well as
-userspace applications.
+After installing the SDK make sure to run "make scripts prepare" within the
+kernel source directory. The SDK can then be used to build kernel modules as
+well as user-space applications.
 
 See the User Guide for further SDK usage instructions.
 
@@ -132,8 +131,7 @@ included in this BSP layer. However, it can be obtained from here:
 
 The version used for testing comes from the 'stable' branch.
 
-	Commit: 48cd70fe84432c5d050637b61e4b7b9c831c98bf
-	Tag:    1.20220830
+	Commit: abe4079532454173630b07123369fc4ba219502b
 
     $ sudo mount -t vfat /dev/mmcblk0p1 /mnt
     $ cd /mnt
