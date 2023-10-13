@@ -469,7 +469,10 @@ SRC_URI += "file://0444-media-i2c-arducam-pivariety-Add-custom-controls.patch"
 SRC_URI += "file://0445-media-bcm2835-unicam-Fix-for-possible-dummy-buffer-o.patch"
 SRC_URI += "file://0446-usb-xhci-expand-mitigations-for-VLI_SS_BULK_OUT_BUG-.patch"
 SRC_URI += "file://0447-usb-xhci-account-for-num_trbs_free-when-invalidating.patch"
-SRC_URI += "file://0448-nvmem-Use-NVMEM_DEVID_AUTO.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0448-nvmem-Use-NVMEM_DEVID_AUTO.patch"
+
 SRC_URI += "file://0449-brcmfmac-Read-alternative-firmware-names-from-DT.patch"
 SRC_URI += "file://0450-configs-arm64-Restore-the-easy-settings.patch"
 SRC_URI += "file://0451-drm-panel-Rename-GEM-CMA-helpers-GEM-DMA-helpers.patch"
