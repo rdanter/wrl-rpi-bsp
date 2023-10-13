@@ -831,7 +831,10 @@ SRC_URI += "file://0790-media-i2c-imx219-fix-binning-and-rate_factor-for-480.pat
 SRC_URI += "file://0791-serial-sc16is7xx-Read-modem-line-state-at-startup.patch"
 SRC_URI += "file://0792-drivers-media-bcm2835_unicam-Improve-frame-sequence-.patch"
 SRC_URI += "file://0793-dtoverlays-Fix-pitft-28-35-overlays-for-6.1-driver-c.patch"
-SRC_URI += "file://0794-ASoC-cs43130-Fix-numerator-denominator-mixup.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0794-ASoC-cs43130-Fix-numerator-denominator-mixup.patch"
+
 SRC_URI += "file://0795-driver-media-i2c-imx477-Re-enable-temperature-sensor.patch"
 SRC_URI += "file://0796-overlays-allo-katana-dac-audio-Reduce-I2C-clock.patch"
 SRC_URI += "file://0797-overlays-jedec-spi-nor-Add-speed-parameter.patch"
