@@ -845,3 +845,7 @@ SRC_URI += "file://0801-media-i2c-arducam_64mp-Add-8000x6000-resolution.patch"
 SRC_URI += "file://0802-media-i2c-arducam_64mp-Add-PDAF-support.patch"
 SRC_URI += "file://0803-overlays-audremap-Document-CM4-40-41-restriction.patch"
 SRC_URI += "file://0804-fixup-Allow-mac-address-to-be-set-in-smsc95xx.patch"
+
+# Additional patches
+SRC_URI += "file://0001-Fix-drm-panel-flag-name.patch"
+
