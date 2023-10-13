@@ -377,10 +377,18 @@ SRC_URI += "file://0364-input-edt-ft5x06-Only-look-at-the-number-of-points-r.pat
 SRC_URI += "file://0365-rtc-pcf8523-Fix-oscillator-stop-bit-handling.patch"
 SRC_URI += "file://0366-drm-panel-simple-Populate-bpc-when-using-panel-dpi.patch"
 SRC_URI += "file://0367-drm-panel-simple-Allow-the-bus-format-to-be-read-fro.patch"
-SRC_URI += "file://0368-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0368-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+SRC_URI += "file://0001-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+
 SRC_URI += "file://0369-xhci-correct-room_on_ring-for-cases-where-there-is-a.patch"
 SRC_URI += "file://0370-xhci-refactor-out-TRBS_PER_SEGMENT-define-in-runtime.patch"
-SRC_URI += "file://0371-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0371-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+SRC_URI += "file://0001-usb-xhci-add-VLI_TRB_CACHE_BUG-quirk.patch"
+
 SRC_URI += "file://0372-media-i2c-ov5647-Add-support-for-regulator-control.patch"
 SRC_URI += "file://0373-media-i2c-ov7251-Make-the-enable-GPIO-optional.patch"
 SRC_URI += "file://0374-staging-bcm2835-isp-Fix-cleanup-after-init-fail.patch"
@@ -408,7 +416,11 @@ SRC_URI += "file://0395-drm-panel-Add-panel-driver-for-TDO-Y17B-based-panels.pat
 SRC_URI += "file://0396-bindings-Add-sck-idle-input-to-spi-gpio.patch"
 SRC_URI += "file://0397-spi-gpio-Add-sck-idle-input-property.patch"
 SRC_URI += "file://0398-media-bcm2835-unicam-Handle-a-repeated-frame-start-w.patch"
-SRC_URI += "file://0399-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0399-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+SRC_URI += "file://0001-usb-xhci-add-a-quirk-for-Superspeed-bulk-OUT-transfe.patch"
+
 SRC_URI += "file://0400-media-i2c-ov7251-Reinstate-setting-ov7251_global_ini.patch"
 SRC_URI += "file://0401-usb-xhci-rework-XHCI_VLI_SS_BULK_OUT_BUG-quirk.patch"
 SRC_URI += "file://0402-media-i2c-Add-driver-for-Omnivision-OV2311.patch"
