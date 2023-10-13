@@ -771,7 +771,10 @@ SRC_URI += "file://0736-hwmon-emc2305-Change-OF-properties-pwm-min-pwm-max-t.pat
 SRC_URI += "file://0737-dtoverlays-Change-i2c-fan-pwm-max-min-overrides-to-u.patch"
 SRC_URI += "file://0738-drm-vc4-Limit-max_bpc-to-8-on-Pi0-3.patch"
 SRC_URI += "file://0739-serial-8250-Add-NOMSI-bug-for-bcm2835aux.patch"
-SRC_URI += "file://0740-Bluetooth-hci_sync-Add-fallback-bd-address-prop.patch"
+
+# Not applicable since RCPL 2
+#SRC_URI += "file://0740-Bluetooth-hci_sync-Add-fallback-bd-address-prop.patch"
+
 SRC_URI += "file://0741-Bluetooth-hci_bcm-Add-more-invalid-BDADDRs.patch"
 SRC_URI += "file://0742-ARM-dts-bcm27xx-Enable-kernel-Bluetooth.patch"
 SRC_URI += "file://0743-overlays-Update-miniuart-bt-now-krnbt-is-default.patch"
