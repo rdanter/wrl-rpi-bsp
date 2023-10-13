@@ -37,7 +37,10 @@ SRC_URI += "file://0030-drm-vc4-Remove-splitting-the-bridge-chain-from-the-d.pat
 SRC_URI += "file://0031-drm-vc4-Convert-vc4_dsi-to-use-atomic-enable-disable.patch"
 SRC_URI += "file://0032-drm-vc4-Convert-vc4_dsi-to-using-a-bridge-instead-of.patch"
 SRC_URI += "file://0033-drm-vc4-Remove-entry-to-ULPS-from-vc4_dsi-post_disab.patch"
-SRC_URI += "file://0034-drm-bridge-Introduce-pre_enable_upstream_first-to-al.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://0034-drm-bridge-Introduce-pre_enable_upstream_first-to-al.patch"
+
 SRC_URI += "file://0035-drm-panel-Add-prepare_upstream_first-flag-to-drm_pan.patch"
 SRC_URI += "file://0036-drm-Include-drm_connector.h-from-drm_panel.h.patch"
 SRC_URI += "file://0037-drm-tc358762-Set-the-pre_enable_upstream_first-flag-.patch"
