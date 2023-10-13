@@ -509,7 +509,11 @@ SRC_URI += "file://0481-overlays-audremap-Include-the-fsels-values.patch"
 SRC_URI += "file://0482-overlays-i2c-sensor-Make-smbus-timeout-disable-optio.patch"
 SRC_URI += "file://0483-overlays-Mention-Digi2-Pro-audio-card-in-README.patch"
 SRC_URI += "file://0484-configs-Enable-Twofish-crypto.patch"
-SRC_URI += "file://0485-usb-xhci-add-XHCI_VLI_HUB_TT_QUIRK.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0485-usb-xhci-add-XHCI_VLI_HUB_TT_QUIRK.patch"
+SRC_URI += "file://0001-usb-xhci-add-XHCI_VLI_HUB_TT_QUIRK.patch"
+
 SRC_URI += "file://0486-media-i2c-ov7251-Add-module-param-to-select-ext-trig.patch"
 SRC_URI += "file://0487-vc4_hdmi-Avoid-log-spam-for-audio-start-failure.patch"
 SRC_URI += "file://0488-drm-tests-Order-Kunit-tests-in-Makefile.patch"
