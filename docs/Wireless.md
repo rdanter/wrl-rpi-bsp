@@ -57,7 +57,7 @@ Edit the `/etc/wpa_supplicant.conf` file so it looks something like this:
     network={
         scan_ssid=1
         ssid="SSID"
-        proto=WPA
+        proto=WPA2
         key_mgmt=WPA-PSK
         psk="PASSWORD"
     }
@@ -66,7 +66,7 @@ Then start the wireless connection with:
 
     # ifconfig wlan0 up
     # wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf -B
-    # dhclient wlan0
+    # dhcpcd wlan0
 
 This assumes your access point provides a dynamic IP address using DHCP and
 that you are using WPA security.
