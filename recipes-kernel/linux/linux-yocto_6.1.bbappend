@@ -120,7 +120,11 @@ SRC_URI += "file://0110-bcm2708-framebuffer-driver.patch"
 SRC_URI += "file://0111-Pulled-in-the-multi-frame-buffer-support-from-the-Pi.patch"
 SRC_URI += "file://0112-fbdev-add-FBIOCOPYAREA-ioctl.patch"
 SRC_URI += "file://0113-dmaengine-Add-support-for-BCM2708.patch"
-SRC_URI += "file://0114-MMC-added-alternative-MMC-driver.patch"
+
+# Rework for RCPL 5
+#SRC_URI += "file://0114-MMC-added-alternative-MMC-driver.patch"
+SRC_URI += "file://0001-MMC-added-alternative-MMC-driver.patch"
+
 SRC_URI += "file://0115-Adding-bcm2835-sdhost-driver-and-an-overlay-to-enabl.patch"
 SRC_URI += "file://0116-vc_mem-Add-vc_mem-driver-for-querying-firmware-memor.patch"
 SRC_URI += "file://0117-Add-dev-gpiomem-device-for-rootless-user-GPIO-access.patch"
