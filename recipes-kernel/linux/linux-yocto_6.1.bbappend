@@ -671,7 +671,11 @@ SRC_URI += "file://0628-media-i2c-imx296-Set-a-1-frame-gain-delay.patch"
 SRC_URI += "file://0629-media-i2c-imx296-Add-horizontal-vertical-flip-suppor.patch"
 SRC_URI += "file://0630-media-i2c-imx296-Adjust-cropping-limits.patch"
 SRC_URI += "file://0631-reboot-Use-power-off-rather-than-busy-spinning-when-.patch"
-SRC_URI += "file://0632-Revert-hwrng-bcm2835-use-hwrng_msleep-instead-of-cpu.patch"
+
+# Rework for RCPL 5
+#SRC_URI += "file://0632-Revert-hwrng-bcm2835-use-hwrng_msleep-instead-of-cpu.patch"
+SRC_URI += "file://0001-Revert-hwrng-bcm2835-use-hwrng_msleep-instead-of-cpu.patch"
+
 SRC_URI += "file://0633-media-i2c-Add-PDAF-support-for-IMX519.patch"
 SRC_URI += "file://0634-dtoverlays-Reduce-the-link-frequencies-of-IMX519.patch"
 SRC_URI += "file://0635-drivers-media-i2c-imx708-Fix-WIDE_DYNAMIC_RANGE-cont.patch"
