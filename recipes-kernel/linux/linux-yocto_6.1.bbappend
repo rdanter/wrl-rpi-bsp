@@ -751,7 +751,10 @@ SRC_URI += "file://0700-media-i2c-imx290-Add-the-error-code-to-logs-in-start.pat
 SRC_URI += "file://0701-media-i2c-imx290-Add-support-for-imx327-variant.patch"
 SRC_URI += "file://0702-dtoverlays-Update-compatible-strings-for-imx290-327-.patch"
 SRC_URI += "file://0703-Revert-rpisense-fb-Flush-any-deferred-updates-on-rel.patch"
-SRC_URI += "file://0704-fbdev-Don-t-cancel-deferred-work-if-pagelist-empty.patch"
+
+# Not needed since RCPL 7
+#SRC_URI += "file://0704-fbdev-Don-t-cancel-deferred-work-if-pagelist-empty.patch"
+
 SRC_URI += "file://0705-configs-Regenerate-defconfigs.patch"
 SRC_URI += "file://0706-configs-Disable-LRU_GEN_ENABLED-on-32-bit-kernels.patch"
 SRC_URI += "file://0707-usb-xhci-drop-and-add-the-endpoint-context-in-xhci_f.patch"
