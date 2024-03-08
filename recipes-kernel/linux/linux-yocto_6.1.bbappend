@@ -168,7 +168,11 @@ SRC_URI += "file://0147-brcmfmac-Re-enable-firmware-roaming-support.patch"
 SRC_URI += "file://0148-lan78xx-Move-enabling-of-EEE-into-PHY-init-code.patch"
 SRC_URI += "file://0149-cxd2880-CXD2880_SPI_DRV-should-select-DVB_CXD2880-wi.patch"
 SRC_URI += "file://0150-firmware-raspberrypi-Add-backward-compatible-get_thr.patch"
-SRC_URI += "file://0151-sc16is7xx-Don-t-spin-if-no-data-received.patch"
+
+# Rework for RCPL 7
+#SRC_URI += "file://0151-sc16is7xx-Don-t-spin-if-no-data-received.patch"
+SRC_URI += "file://0001-sc16is7xx-Don-t-spin-if-no-data-received.patch"
+
 SRC_URI += "file://0152-drivers-thermal-step_wise-add-support-for-hysteresis.patch"
 SRC_URI += "file://0153-drivers-thermal-step_wise-avoid-throttling-at-hyster.patch"
 SRC_URI += "file://0154-Update-issue-templates-2736.patch"
