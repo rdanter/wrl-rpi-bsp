@@ -138,7 +138,7 @@ SRC_URI += "file://0124-Improve-__copy_to_user-and-__copy_from_user-performa.pat
 SRC_URI += "file://0125-gpio-poweroff-Allow-it-to-work-on-Raspberry-Pi.patch"
 SRC_URI += "file://0126-mfd-Add-Raspberry-Pi-Sense-HAT-core-driver.patch"
 
-# Rework for RCPL 4
+# Rework for RCPL 4 and again for RCPL 8
 #SRC_URI += "file://0127-Add-support-for-all-the-downstream-rpi-sound-card-dr.patch"
 SRC_URI += "file://0001-Add-support-for-all-the-downstream-rpi-sound-card-dr.patch"
 

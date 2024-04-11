@@ -1,4 +1,4 @@
-From b3025537c070cd4a364f8ad7b162f300a33cee00 Mon Sep 17 00:00:00 2001
+From 327f474aceea87bf068be4e59d990861ed70df8b Mon Sep 17 00:00:00 2001
 From: Florian Meier <florian.meier@koalo.de>
 Date: Mon, 25 Jan 2016 15:48:59 +0000
 Subject: [PATCH] Add support for all the downstream rpi sound card drivers
@@ -17763,18 +17763,18 @@ index 26268ffb8274..fa2586fc5fdb 100644
  	/*
  	 * For devices with more than one control interface, we assume the
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index f458328f9ec4..e28971b06669 100644
+index b8a474a2e4d5..023da07856c8 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2175,6 +2175,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+@@ -2087,6 +2087,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
  		   QUIRK_FLAG_FIXED_RATE),
  	DEVICE_FLG(0x0ecb, 0x2069, /* JBL Quantum810 Wireless */
  		   QUIRK_FLAG_FIXED_RATE),
 +	DEVICE_FLG(0x09da, 0x2695, /* A4Tech FHD 1080p webcam */
 +		   QUIRK_FLAG_DISABLE_AUTOSUSPEND | QUIRK_FLAG_GET_SAMPLE_RATE),
- 	DEVICE_FLG(0x1bcf, 0x2283, /* NexiGo N930AF FHD Webcam */
- 		   QUIRK_FLAG_GET_SAMPLE_RATE),
- 
+ 	DEVICE_FLG(0x0fd9, 0x0008, /* Hauppauge HVR-950Q */
+ 		   QUIRK_FLAG_SHARE_MEDIA_DEVICE | QUIRK_FLAG_ALIGN_TRANSFER),
+ 	DEVICE_FLG(0x1224, 0x2a25, /* Jieli Technology USB PHY 2.0 */
 -- 
 2.34.1
 
