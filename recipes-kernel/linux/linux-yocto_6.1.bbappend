@@ -207,7 +207,11 @@ SRC_URI += "file://0182-hwrng-iproc-rng200-Add-BCM2838-support.patch"
 SRC_URI += "file://0183-bcmgenet-constrain-max-DMA-burst-length.patch"
 SRC_URI += "file://0184-bcmgenet-Better-coalescing-parameter-defaults.patch"
 SRC_URI += "file://0185-net-genet-enable-link-energy-detect-powerdown-for-ex.patch"
-SRC_URI += "file://0186-usb-add-plumbing-for-updating-interrupt-endpoint-int.patch"
+
+# Rework for RCPL 10
+#SRC_URI += "file://0186-usb-add-plumbing-for-updating-interrupt-endpoint-int.patch"
+SRC_URI += "file://0001-usb-add-plumbing-for-updating-interrupt-endpoint-int.patch"
+
 SRC_URI += "file://0187-xhci-implement-xhci_fixup_endpoint-for-interval-adju.patch"
 SRC_URI += "file://0188-usbhid-call-usb_fixup_endpoint-after-mangling-interv.patch"
 SRC_URI += "file://0189-arm-bcm2835-Add-bcm2838-compatible-string.patch"
