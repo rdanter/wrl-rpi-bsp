@@ -303,7 +303,10 @@ SRC_URI += "file://0274-media-bcm2835-unicam-Retain-packing-information-on-G.pat
 SRC_URI += "file://0275-media-bcm2835-unicam-change-minimum-number-of-vb2_qu.patch"
 SRC_URI += "file://0276-staging-fbtft-Add-support-for-display-variants.patch"
 SRC_URI += "file://0277-brcmfmac-Increase-power-saving-delay-to-2s.patch"
-SRC_URI += "file://0278-net-bcmgenet-Reset-RBUF-on-first-open.patch"
+
+# Not needed since RCPL 11
+#SRC_URI += "file://0278-net-bcmgenet-Reset-RBUF-on-first-open.patch"
+
 SRC_URI += "file://0279-char-Add-broadcom-char-drivers-back-to-build-files.patch"
 SRC_URI += "file://0280-staging-bcm2835-camera-Replace-deprecated-V4L2_PIX_F.patch"
 SRC_URI += "file://0281-staging-vc04_services-Add-new-vc-sm-cma-driver.patch"
