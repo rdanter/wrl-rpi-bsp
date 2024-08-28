@@ -576,7 +576,10 @@ SRC_URI += "file://0522-.github-Add-Github-Workflow-for-KUnit.patch"
 SRC_URI += "file://0523-.github-workflows-Add-dtoverlaycheck-workflow.patch"
 SRC_URI += "file://0524-.github-workflows-Create-workflow-to-CI-kernel-build.patch"
 SRC_URI += "file://0525-README-Add-README.md-with-CI-kernel-build-status-tag.patch"
-SRC_URI += "file://0526-drm-panel-panel-ilitek9881c-Use-cansleep-methods.patch"
+
+# Not needed since RCPL 12
+#SRC_URI += "file://0526-drm-panel-panel-ilitek9881c-Use-cansleep-methods.patch"
+
 SRC_URI += "file://0527-drm-panel-panel-ilitek9881c-Crystalfontz-support.patch"
 SRC_URI += "file://0528-configs-Enable-LM3630A-backlight-module.patch"
 SRC_URI += "file://0529-overlays-Add-crystalfontz-cfa050_pi_m.patch"
