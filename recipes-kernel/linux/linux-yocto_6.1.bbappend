@@ -828,6 +828,10 @@ SRC_URI += "file://0751-overlays-bcm2711-Remove-I-O-pinctrl-references.patch"
 SRC_URI += "file://0756-ARM-dts-bcm27xx-Correct-the-dma-ranges.patch"
 SRC_URI += "file://0757-bcm2835-dma-Derive-slave-DMA-addresses-correctly.patch"
 SRC_URI += "file://0758-ASoC-bcm2835-i2s-Use-phys-addresses-for-DAI-DMA.patch"
+
+# Revert unneeded patch from RCPL 12, causes following patch to fail
+SRC_URI += "file://0001-Revert-drm-vc4-Fix-possible-null-pointer-dereference.patch"
+
 SRC_URI += "file://0759-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://0760-bcm2835-smi-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://0761-bcm2835-mmc-Use-phys-addresses-for-slave-DMA-config.patch"
