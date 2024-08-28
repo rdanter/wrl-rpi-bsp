@@ -88,7 +88,10 @@ SRC_URI += "file://0078-Revert-spi-spidev-Fix-CS-polarity-if-GPIO-descriptor.pat
 SRC_URI += "file://0079-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0080-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0081-Revert-net-bcmgenet-Request-APD-DLL-disable-and-IDDQ.patch"
-SRC_URI += "file://0082-smsx95xx-fix-crimes-against-truesize.patch"
+
+# Not needed since RCPL 12
+#SRC_URI += "file://0082-smsx95xx-fix-crimes-against-truesize.patch"
+
 SRC_URI += "file://0083-smsc95xx-Experimental-Enable-turbo_mode-and-packetsi.patch"
 SRC_URI += "file://0084-Allow-mac-address-to-be-set-in-smsc95xx.patch"
 SRC_URI += "file://0085-cgroup-Disable-cgroup-memory-by-default.patch"
