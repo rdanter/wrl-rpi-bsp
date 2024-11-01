@@ -843,7 +843,10 @@ SRC_URI += "file://0815-media-rp1-cfe-Use-the-MIPI_CSI2_DT_xxx-defines-for-c.pat
 SRC_URI += "file://0816-media-rp1-cfe-Add-a-csi_dt-value-for-16bit-formats.patch"
 SRC_URI += "file://0817-ARM-dts-bcm2712-rpi-5-b-Add-eth_ledx-parameters.patch"
 SRC_URI += "file://0818-ARM-dts-bcm2712-rpi-5-b-Add-fan-speed-dtparams.patch"
-SRC_URI += "file://0819-drm-vc4-don-t-check-if-plane-state-fb-state-fb.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://0819-drm-vc4-don-t-check-if-plane-state-fb-state-fb.patch"
+
 SRC_URI += "file://0820-ARM-dts-bcm2712-rpi-5-b-Use-common-LED-labels.patch"
 SRC_URI += "file://0821-spi-bcm2835-Support-spi0-0cs-and-SPI_NO_CS-mode.patch"
 SRC_URI += "file://0822-drivers-media-imx519-Add-V4L2_CID_LINK_FREQ-control.patch"
