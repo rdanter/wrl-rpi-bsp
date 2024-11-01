@@ -927,7 +927,11 @@ SRC_URI += "file://0893-ARM-dts-Add-CM5-DTS-support.patch"
 SRC_URI += "file://0894-arm-dt-bcm2712-Reduce-DDC-frequency-to-97.5kHz-from-.patch"
 SRC_URI += "file://0895-PCI-brcmstb-Set-new-flags-to-avoid-QOS-holes-on-BCM2.patch"
 SRC_URI += "file://0896-non-upstream-support-DS1-exit-firmware-re-download.patch"
-SRC_URI += "file://0897-brcmfmac-Fix-interoperating-DPP-and-other-encryption.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://0897-brcmfmac-Fix-interoperating-DPP-and-other-encryption.patch"
+SRC_URI += "file://0001-brcmfmac-Fix-interoperating-DPP-and-other-encryption.patch"
+
 SRC_URI += "file://0898-brcmfmac-support-external-SAE-authentication-in-stat.patch"
 SRC_URI += "file://0899-Impliment-driver-support-for-Interlude-Audio-Digital.patch"
 SRC_URI += "file://0900-Add-overlays-needed-for-Interlude-Audio-Digital-and-.patch"
