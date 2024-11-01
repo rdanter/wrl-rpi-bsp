@@ -971,7 +971,10 @@ SRC_URI += "file://0933-clk-rp1-Reserve-pll_audio-for-clk_i2s.patch"
 SRC_URI += "file://0934-clk-rp1-Allow-clk_i2s-to-change-the-audio-PLLs.patch"
 SRC_URI += "file://0935-Update-kernel-build.yml-to-use-node.js-20.patch"
 SRC_URI += "file://0936-pwm-bcm2835-Simplify-using-devm-functions.patch"
-SRC_URI += "file://0937-pwm-Rename-pwm_apply_state-to-pwm_apply_might_sleep.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://0937-pwm-Rename-pwm_apply_state-to-pwm_apply_might_sleep.patch"
+
 SRC_URI += "file://0938-pwm-Replace-ENOTSUPP-with-EOPNOTSUPP.patch"
 SRC_URI += "file://0939-pwm-renesas-Remove-unused-include.patch"
 SRC_URI += "file://0940-pwm-Make-it-possible-to-apply-PWM-changes-in-atomic-.patch"
