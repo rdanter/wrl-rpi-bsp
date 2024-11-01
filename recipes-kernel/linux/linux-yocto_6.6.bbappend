@@ -411,7 +411,10 @@ SRC_URI += "file://0394-net-phy-BCM54210PE-does-not-support-PTP.patch"
 SRC_URI += "file://0395-media-adv7180-Nasty-hack-to-allow-input-selection.patch"
 SRC_URI += "file://0396-media-i2c-ov7251-Add-module-param-to-select-ext-trig.patch"
 SRC_URI += "file://0397-README-Add-README.md-with-CI-kernel-build-status-tag.patch"
-SRC_URI += "file://0398-drm-panel-panel-ilitek9881c-Use-cansleep-methods.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://0398-drm-panel-panel-ilitek9881c-Use-cansleep-methods.patch"
+
 SRC_URI += "file://0399-drm-panel-panel-ilitek9881c-Crystalfontz-support.patch"
 SRC_URI += "file://0400-net-bcmgenet-Add-eee-module-parameter.patch"
 SRC_URI += "file://0401-drm-panel-simple-Add-Innolux-AT056tN53V1-5.6-VGA.patch"
