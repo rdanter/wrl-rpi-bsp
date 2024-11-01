@@ -556,7 +556,11 @@ SRC_URI += "file://0532-mmc-sdhci-of-dwcmshc-define-sdio-timeout-clocks.patch"
 SRC_URI += "file://0533-mmc-sdhci-of-dwcmshc-rp1-sdio-changes.patch"
 SRC_URI += "file://0534-clk-rp1-Add-sdio-clk-driver.patch"
 SRC_URI += "file://0535-i2c-designware-Add-SMBUS-quick-command-support.patch"
-SRC_URI += "file://0536-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://0536-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
+SRC_URI += "file://0001-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
+
 SRC_URI += "file://0537-spi-dw-Handle-combined-tx-and-rx-messages.patch"
 SRC_URI += "file://0538-pwm-Add-support-for-RP1-PWM.patch"
 SRC_URI += "file://0539-drm-Add-RP1-DSI-driver.patch"
