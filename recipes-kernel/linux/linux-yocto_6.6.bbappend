@@ -875,7 +875,10 @@ SRC_URI += "file://0844-Pisound-Don-t-export-the-button-GPIO-via-sysfs-GPIO-.pat
 SRC_URI += "file://0845-Pisound-Read-out-the-SPI-speed-to-use-from-the-Devic.patch"
 SRC_URI += "file://0846-Pisound-Set-the-spi-speed-hz-for-Pisound-in-the-Devi.patch"
 SRC_URI += "file://0847-Improvement-on-backup-switchover-mode-overlay-value-.patch"
-SRC_URI += "file://0848-PCI-brcmstb-fix-broken-brcm_pcie_mdio_write-polling.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://0848-PCI-brcmstb-fix-broken-brcm_pcie_mdio_write-polling.patch"
+
 SRC_URI += "file://0849-drivers-w1-gpio-add-flag-to-force-read-polling-while.patch"
 SRC_URI += "file://0850-arm-dts-overlays-add-Pi-5-variants-for-w1-gpio-overl.patch"
 SRC_URI += "file://0851-drivers-w1-gpio-Fixup-uninitialised-variable-use-in-.patch"
