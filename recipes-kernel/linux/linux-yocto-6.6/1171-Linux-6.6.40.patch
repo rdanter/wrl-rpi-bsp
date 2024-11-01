@@ -1,0 +1,26 @@
+From 29e3119abcad2a2ba81c44a919212e47d71cadc2 Mon Sep 17 00:00:00 2001
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Date: Mon, 15 Jul 2024 09:24:53 +0200
+Subject: [PATCH] Linux 6.6.40
+
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 5ba70f0649f3..c84413077456 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
+ VERSION = 6
+ PATCHLEVEL = 6
+-SUBLEVEL = 39
++SUBLEVEL = 40
+ EXTRAVERSION =
+ NAME = Hurr durr I'ma ninja sloth
+ 
+-- 
+2.34.1
+

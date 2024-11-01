@@ -1,0 +1,73 @@
+From 8eadf1f4e3bef368c0f1f031bced55de1de89f08 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 4 Apr 2024 17:05:00 +0100
+Subject: [PATCH] Revert "ARM: dts: rp1: Add a safe I2C SDA hold time"
+
+This reverts commit a3d53c8e96353c0d31e8984e67ff53d05378780a.
+---
+ arch/arm/boot/dts/broadcom/rp1.dtsi | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/arch/arm/boot/dts/broadcom/rp1.dtsi b/arch/arm/boot/dts/broadcom/rp1.dtsi
+index 3b0ca1edb932..551a02a955a1 100644
+--- a/arch/arm/boot/dts/broadcom/rp1.dtsi
++++ b/arch/arm/boot/dts/broadcom/rp1.dtsi
+@@ -307,7 +307,6 @@ rp1_i2c0: i2c@70000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -318,7 +317,6 @@ rp1_i2c1: i2c@74000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -329,7 +327,6 @@ rp1_i2c2: i2c@78000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -340,7 +337,6 @@ rp1_i2c3: i2c@7c000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -351,7 +347,6 @@ rp1_i2c4: i2c@80000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -362,7 +357,6 @@ rp1_i2c5: i2c@84000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+@@ -373,7 +367,6 @@ rp1_i2c6: i2c@88000 {
+ 			clocks = <&rp1_clocks RP1_CLK_SYS>;
+ 			i2c-scl-rising-time-ns = <65>;
+ 			i2c-scl-falling-time-ns = <100>;
+-			i2c-sda-hold-time-ns = <300>;
+ 			status = "disabled";
+ 		};
+ 
+-- 
+2.34.1
+

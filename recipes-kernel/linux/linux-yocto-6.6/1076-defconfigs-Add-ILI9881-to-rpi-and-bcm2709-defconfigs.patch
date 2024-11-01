@@ -1,0 +1,38 @@
+From dda85fda5b2dda7c4e2ba18770bd2033313006d2 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Mon, 11 Mar 2024 15:19:07 +0000
+Subject: [PATCH] defconfigs: Add ILI9881 to rpi and bcm2709 defconfigs
+
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ arch/arm/configs/bcm2709_defconfig | 1 +
+ arch/arm/configs/bcmrpi_defconfig  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index a1271b02fec9..f54eaec96297 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -957,6 +957,7 @@ CONFIG_DRM_LOAD_EDID_FIRMWARE=y
+ CONFIG_DRM_UDL=m
+ CONFIG_DRM_PANEL_SIMPLE=m
+ CONFIG_DRM_PANEL_ILITEK_ILI9806E=m
++CONFIG_DRM_PANEL_ILITEK_ILI9881C=m
+ CONFIG_DRM_PANEL_JDI_LT070ME05000=m
+ CONFIG_DRM_PANEL_RASPBERRYPI_TOUCHSCREEN=m
+ CONFIG_DRM_PANEL_SITRONIX_ST7701=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index ff76fefd883f..4c2cf05be22b 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -951,6 +951,7 @@ CONFIG_DRM_LOAD_EDID_FIRMWARE=y
+ CONFIG_DRM_UDL=m
+ CONFIG_DRM_PANEL_SIMPLE=m
+ CONFIG_DRM_PANEL_ILITEK_ILI9806E=m
++CONFIG_DRM_PANEL_ILITEK_ILI9881C=m
+ CONFIG_DRM_PANEL_JDI_LT070ME05000=m
+ CONFIG_DRM_PANEL_RASPBERRYPI_TOUCHSCREEN=m
+ CONFIG_DRM_PANEL_SITRONIX_ST7701=m
+-- 
+2.34.1
+

@@ -1,0 +1,42 @@
+From 6434f2735f344288028b5b81c0bd95aa617bf0f9 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Thu, 25 Jul 2024 13:58:38 +0100
+Subject: [PATCH] Revert "input: ads7846: Add missing spi_device_id strings"
+
+This reverts commit 3b391ceadf0d4ab5ce45f98d2f1d41f40e5aedd7.
+---
+ drivers/input/touchscreen/ads7846.c | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/drivers/input/touchscreen/ads7846.c b/drivers/input/touchscreen/ads7846.c
+index 262d23749440..faea40dd66d0 100644
+--- a/drivers/input/touchscreen/ads7846.c
++++ b/drivers/input/touchscreen/ads7846.c
+@@ -1114,16 +1114,6 @@ static const struct of_device_id ads7846_dt_ids[] = {
+ };
+ MODULE_DEVICE_TABLE(of, ads7846_dt_ids);
+ 
+-static const struct spi_device_id ads7846_spi_ids[] = {
+-	{ "tsc2046", 0 },
+-	{ "ads7843", 0 },
+-	{ "ads7845", 0 },
+-	{ "ads7846", 0 },
+-	{ "ads7873", 0 },
+-	{ }
+-};
+-MODULE_DEVICE_TABLE(spi, ads7846_spi_ids);
+-
+ static const struct ads7846_platform_data *ads7846_get_props(struct device *dev)
+ {
+ 	struct ads7846_platform_data *pdata;
+@@ -1400,7 +1390,6 @@ static struct spi_driver ads7846_driver = {
+ 		.pm	= pm_sleep_ptr(&ads7846_pm),
+ 		.of_match_table = ads7846_dt_ids,
+ 	},
+-	.id_table	= ads7846_spi_ids,
+ 	.probe		= ads7846_probe,
+ 	.remove		= ads7846_remove,
+ };
+-- 
+2.34.1
+

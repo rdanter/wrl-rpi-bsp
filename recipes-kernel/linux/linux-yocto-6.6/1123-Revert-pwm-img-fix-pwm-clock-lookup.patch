@@ -1,0 +1,29 @@
+From 7bf68e9677d2d2fe7b80b287712999a3a475e505 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Wed, 12 Jun 2024 17:11:15 +0100
+Subject: [PATCH] Revert "pwm: img: fix pwm clock lookup"
+
+This reverts commit 674545b4852c191a6cd73ec88ec7ad012efff040.
+---
+ drivers/pwm/pwm-img.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/pwm/pwm-img.c b/drivers/pwm/pwm-img.c
+index fd1535c47b6d..326af85888e7 100644
+--- a/drivers/pwm/pwm-img.c
++++ b/drivers/pwm/pwm-img.c
+@@ -289,9 +289,9 @@ static int img_pwm_probe(struct platform_device *pdev)
+ 		return PTR_ERR(imgchip->sys_clk);
+ 	}
+ 
+-	imgchip->pwm_clk = devm_clk_get(&pdev->dev, "pwm");
++	imgchip->pwm_clk = devm_clk_get(&pdev->dev, "imgchip");
+ 	if (IS_ERR(imgchip->pwm_clk)) {
+-		dev_err(&pdev->dev, "failed to get pwm clock\n");
++		dev_err(&pdev->dev, "failed to get imgchip clock\n");
+ 		return PTR_ERR(imgchip->pwm_clk);
+ 	}
+ 
+-- 
+2.34.1
+

@@ -1,0 +1,22 @@
+From d0ea54e1c941aaebd45e0f389f41b08f5393de03 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Mon, 5 Aug 2024 15:12:33 +0100
+Subject: [PATCH] mfd: Partial revert of Add rp1 driver
+
+---
+ drivers/mfd/Makefile | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+index 7ff577165099..8e2cc41040fa 100644
+--- a/drivers/mfd/Makefile
++++ b/drivers/mfd/Makefile
+@@ -285,5 +285,3 @@ rsmu-i2c-objs			:= rsmu_core.o rsmu_i2c.o
+ rsmu-spi-objs			:= rsmu_core.o rsmu_spi.o
+ obj-$(CONFIG_MFD_RSMU_I2C)	+= rsmu-i2c.o
+ obj-$(CONFIG_MFD_RSMU_SPI)	+= rsmu-spi.o
+- 
+-obj-$(CONFIG_MFD_RP1)		+= rp1.o
+-- 
+2.34.1
+

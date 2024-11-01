@@ -1,0 +1,48 @@
+From 8d52db8486a9d2ef22205f78e492a2b9b4afbc88 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>
+Date: Wed, 19 Jun 2024 20:32:50 +0200
+Subject: [PATCH] arm: remove ARCH_BCM_63XX config symbol
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Commit c4ea7afcf110e89c91462081166509f35368ee7c accidentally added back a
+symbol (CONFIG_ARCH_BCM_63XX) that had been removed upstream.
+
+Fixes: c4ea7afcf110 ("Improve __copy_to_user and __copy_from_user performance")
+Signed-off-by: Álvaro Fernández Rojas <noltari@gmail.com>
+---
+ arch/arm/mach-bcm/Kconfig | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+diff --git a/arch/arm/mach-bcm/Kconfig b/arch/arm/mach-bcm/Kconfig
+index d3206a2a257b..cf6b751c4eaf 100644
+--- a/arch/arm/mach-bcm/Kconfig
++++ b/arch/arm/mach-bcm/Kconfig
+@@ -182,23 +182,6 @@ config ARCH_BCM_53573
+ 	  The base chip is BCM53573 and there are some packaging modifications
+ 	  like BCM47189 and BCM47452.
+ 
+-config ARCH_BCM_63XX
+-	bool "Broadcom BCM63xx DSL SoC"
+-	depends on ARCH_MULTI_V7
+-	select ARCH_HAS_RESET_CONTROLLER
+-	select ARM_ERRATA_754322
+-	select ARM_ERRATA_764369 if SMP
+-	select ARM_GIC
+-	select ARM_GLOBAL_TIMER
+-	select CACHE_L2X0
+-	select HAVE_ARM_ARCH_TIMER
+-	select HAVE_ARM_TWD if SMP
+-	select HAVE_ARM_SCU if SMP
+-	help
+-	  This enables support for systems based on Broadcom DSL SoCs.
+-	  It currently supports the 'BCM63XX' ARM-based family, which includes
+-	  the BCM63138 variant.
+-
+ config BCM2835_FAST_MEMCPY
+ 	bool "Enable optimized __copy_to_user and __copy_from_user"
+ 	depends on ARCH_BCM2835 && ARCH_MULTI_V6
+-- 
+2.34.1
+

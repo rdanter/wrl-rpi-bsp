@@ -1,0 +1,61 @@
+From d9639ac439dcc7e29d290763f5dd3d96b66949c3 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Mon, 20 May 2024 15:12:18 +0100
+Subject: [PATCH] Revert "net: bcmgenet: Reset RBUF on first open"
+
+This reverts commit be050832c16780a34a9cc7c5ed4d3096356222f6.
+---
+ drivers/net/ethernet/broadcom/genet/bcmgenet.c | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/net/ethernet/broadcom/genet/bcmgenet.c b/drivers/net/ethernet/broadcom/genet/bcmgenet.c
+index 0ca1dcc04002..dafbd419863c 100644
+--- a/drivers/net/ethernet/broadcom/genet/bcmgenet.c
++++ b/drivers/net/ethernet/broadcom/genet/bcmgenet.c
+@@ -3310,7 +3310,7 @@ static void bcmgenet_get_hw_addr(struct bcmgenet_priv *priv,
+ }
+ 
+ /* Returns a reusable dma control register value */
+-static u32 bcmgenet_dma_disable(struct bcmgenet_priv *priv, bool flush_rx)
++static u32 bcmgenet_dma_disable(struct bcmgenet_priv *priv)
+ {
+ 	unsigned int i;
+ 	u32 reg;
+@@ -3335,14 +3335,6 @@ static u32 bcmgenet_dma_disable(struct bcmgenet_priv *priv, bool flush_rx)
+ 	udelay(10);
+ 	bcmgenet_umac_writel(priv, 0, UMAC_TX_FLUSH);
+ 
+-	if (flush_rx) {
+-	    reg = bcmgenet_rbuf_ctrl_get(priv);
+-	    bcmgenet_rbuf_ctrl_set(priv, reg | BIT(0));
+-	    udelay(10);
+-	    bcmgenet_rbuf_ctrl_set(priv, reg);
+-	    udelay(10);
+-	}
+-
+ 	return dma_ctrl;
+ }
+ 
+@@ -3406,8 +3398,8 @@ static int bcmgenet_open(struct net_device *dev)
+ 
+ 	bcmgenet_set_hw_addr(priv, dev->dev_addr);
+ 
+-	/* Disable RX/TX DMA and flush TX and RX queues */
+-	dma_ctrl = bcmgenet_dma_disable(priv, true);
++	/* Disable RX/TX DMA and flush TX queues */
++	dma_ctrl = bcmgenet_dma_disable(priv);
+ 
+ 	/* Reinitialize TDMA and RDMA and SW housekeeping */
+ 	ret = bcmgenet_init_dma(priv);
+@@ -4292,7 +4284,7 @@ static int bcmgenet_resume(struct device *d)
+ 			bcmgenet_hfb_create_rxnfc_filter(priv, rule);
+ 
+ 	/* Disable RX/TX DMA and flush TX queues */
+-	dma_ctrl = bcmgenet_dma_disable(priv, false);
++	dma_ctrl = bcmgenet_dma_disable(priv);
+ 
+ 	/* Reinitialize TDMA and RDMA and SW housekeeping */
+ 	ret = bcmgenet_init_dma(priv);
+-- 
+2.34.1
+

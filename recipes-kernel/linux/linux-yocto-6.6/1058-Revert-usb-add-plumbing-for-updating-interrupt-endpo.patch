@@ -1,0 +1,102 @@
+From c239f7ca288c01dd8da44830660c37e8a3060b53 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Mon, 29 Apr 2024 14:31:18 +0100
+Subject: [PATCH] Revert "usb: add plumbing for updating interrupt endpoint
+ interval state"
+
+This reverts commit 27a137b2ece7089dff54562e473ae105f2603a02.
+---
+ drivers/usb/core/hcd.c     | 10 ----------
+ drivers/usb/core/message.c | 15 ---------------
+ include/linux/usb.h        |  2 --
+ include/linux/usb/hcd.h    |  7 -------
+ 4 files changed, 34 deletions(-)
+
+diff --git a/drivers/usb/core/hcd.c b/drivers/usb/core/hcd.c
+index 0de6ac768188..12b6dfeaf658 100644
+--- a/drivers/usb/core/hcd.c
++++ b/drivers/usb/core/hcd.c
+@@ -1952,16 +1952,6 @@ int usb_hcd_alloc_bandwidth(struct usb_device *udev,
+ 	return ret;
+ }
+ 
+-void usb_hcd_fixup_endpoint(struct usb_device *udev,
+-			    struct usb_host_endpoint *ep, int interval)
+-{
+-	struct usb_hcd *hcd;
+-
+-	hcd = bus_to_hcd(udev->bus);
+-	if (hcd->driver->fixup_endpoint)
+-		hcd->driver->fixup_endpoint(hcd, udev, ep, interval);
+-}
+-
+ /* Disables the endpoint: synchronizes with the hcd to make sure all
+  * endpoint state is gone from hardware.  usb_hcd_flush_endpoint() must
+  * have been called previously.  Use for set_configuration, set_interface,
+diff --git a/drivers/usb/core/message.c b/drivers/usb/core/message.c
+index 89c7339386a6..1ee070e98fc8 100644
+--- a/drivers/usb/core/message.c
++++ b/drivers/usb/core/message.c
+@@ -1265,21 +1265,6 @@ static void remove_intf_ep_devs(struct usb_interface *intf)
+ 	intf->ep_devs_created = 0;
+ }
+ 
+-void usb_fixup_endpoint(struct usb_device *dev, int epaddr, int interval)
+-{
+-	unsigned int epnum = epaddr & USB_ENDPOINT_NUMBER_MASK;
+-	struct usb_host_endpoint *ep;
+-
+-	if (usb_endpoint_out(epaddr))
+-		ep = dev->ep_out[epnum];
+-	else
+-		ep = dev->ep_in[epnum];
+-
+-	if (ep && usb_endpoint_xfer_int(&ep->desc))
+-		usb_hcd_fixup_endpoint(dev, ep, interval);
+-}
+-EXPORT_SYMBOL_GPL(usb_fixup_endpoint);
+-
+ /**
+  * usb_disable_endpoint -- Disable an endpoint by address
+  * @dev: the device whose endpoint is being disabled
+diff --git a/include/linux/usb.h b/include/linux/usb.h
+index 4a521591a357..a21074861f91 100644
+--- a/include/linux/usb.h
++++ b/include/linux/usb.h
+@@ -1888,8 +1888,6 @@ extern int usb_clear_halt(struct usb_device *dev, int pipe);
+ extern int usb_reset_configuration(struct usb_device *dev);
+ extern int usb_set_interface(struct usb_device *dev, int ifnum, int alternate);
+ extern void usb_reset_endpoint(struct usb_device *dev, unsigned int epaddr);
+-extern void usb_fixup_endpoint(struct usb_device *dev, int epaddr,
+-			       int interval);
+ 
+ /* this request isn't really synchronous, but it belongs with the others */
+ extern int usb_driver_set_configuration(struct usb_device *udev, int config);
+diff --git a/include/linux/usb/hcd.h b/include/linux/usb/hcd.h
+index d3c789ac5a05..61d4f0b793dc 100644
+--- a/include/linux/usb/hcd.h
++++ b/include/linux/usb/hcd.h
+@@ -372,11 +372,6 @@ struct hc_driver {
+ 		 * or bandwidth constraints.
+ 		 */
+ 	void	(*reset_bandwidth)(struct usb_hcd *, struct usb_device *);
+-		/* Override the endpoint-derived interval
+-		 * (if there is any cached hardware state).
+-		 */
+-	void	(*fixup_endpoint)(struct usb_hcd *hcd, struct usb_device *udev,
+-				  struct usb_host_endpoint *ep, int interval);
+ 		/* Returns the hardware-chosen device address */
+ 	int	(*address_device)(struct usb_hcd *, struct usb_device *udev);
+ 		/* prepares the hardware to send commands to the device */
+@@ -441,8 +436,6 @@ extern void usb_hcd_unmap_urb_setup_for_dma(struct usb_hcd *, struct urb *);
+ extern void usb_hcd_unmap_urb_for_dma(struct usb_hcd *, struct urb *);
+ extern void usb_hcd_flush_endpoint(struct usb_device *udev,
+ 		struct usb_host_endpoint *ep);
+-extern void usb_hcd_fixup_endpoint(struct usb_device *udev,
+-		struct usb_host_endpoint *ep, int interval);
+ extern void usb_hcd_disable_endpoint(struct usb_device *udev,
+ 		struct usb_host_endpoint *ep);
+ extern void usb_hcd_reset_endpoint(struct usb_device *udev,
+-- 
+2.34.1
+

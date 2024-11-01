@@ -1,0 +1,31 @@
+From 53071351758f7da4a208dd78a5887e1e3367a424 Mon Sep 17 00:00:00 2001
+From: Jonathan Bell <jonathan@raspberrypi.com>
+Date: Tue, 23 Jan 2024 14:37:12 +0000
+Subject: [PATCH] PCI: brcmstb: fix broken brcm_pcie_mdio_write() polling
+
+MDIO_WR_DONE() tests bit 31, which is always 0 (==done) as
+readw_poll_timeout_atomic does a 16-bit read. Replace with the readl
+variant.
+
+Fixes: ca5dcc76314d ("PCI: brcmstb: Replace status loops with read_poll_timeout_atomic()")
+Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
+---
+ drivers/pci/controller/pcie-brcmstb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/pci/controller/pcie-brcmstb.c b/drivers/pci/controller/pcie-brcmstb.c
+index 618e84402eb5..a7f05e0c4ac5 100644
+--- a/drivers/pci/controller/pcie-brcmstb.c
++++ b/drivers/pci/controller/pcie-brcmstb.c
+@@ -420,7 +420,7 @@ static int brcm_pcie_mdio_write(void __iomem *base, u8 port,
+ 	readl(base + PCIE_RC_DL_MDIO_ADDR);
+ 	writel(MDIO_DATA_DONE_MASK | wrdata, base + PCIE_RC_DL_MDIO_WR_DATA);
+ 
+-	err = readw_poll_timeout_atomic(base + PCIE_RC_DL_MDIO_WR_DATA, data,
++	err = readl_poll_timeout_atomic(base + PCIE_RC_DL_MDIO_WR_DATA, data,
+ 					MDIO_WT_DONE(data), 10, 100);
+ 	return err;
+ }
+-- 
+2.34.1
+

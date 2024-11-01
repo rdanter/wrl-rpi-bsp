@@ -1,0 +1,43 @@
+From c6ee9316ac1ed750c61d068cecc155d2c744fa1b Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Fri, 19 Apr 2024 14:56:32 +0100
+Subject: [PATCH] pinctrl: bcm2835: Add strict_gpiod module parameter
+
+Setting strict_gpiod to Y makes libgpiod and the gpiod utilities behave
+as documented, i.e. pins are returned to being GPIO inputs when they are
+released.
+drivers/pinctrl/bcm/pinctrl-bcm2835.c
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ drivers/pinctrl/bcm/pinctrl-bcm2835.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/pinctrl/bcm/pinctrl-bcm2835.c b/drivers/pinctrl/bcm/pinctrl-bcm2835.c
+index 8b178b8d7242..675cf96d7465 100644
+--- a/drivers/pinctrl/bcm/pinctrl-bcm2835.c
++++ b/drivers/pinctrl/bcm/pinctrl-bcm2835.c
+@@ -244,6 +244,10 @@ static const char * const irq_type_names[] = {
+ 	[IRQ_TYPE_LEVEL_LOW] = "level-low",
+ };
+ 
++static bool strict_gpiod;
++module_param(strict_gpiod, bool, 0644);
++MODULE_PARM_DESC(strict_gpiod, "unless true, outputs remain outputs when freed");
++
+ static inline u32 bcm2835_gpio_rd(struct bcm2835_pinctrl *pc, unsigned reg)
+ {
+ 	return readl(pc->base + reg);
+@@ -941,8 +945,8 @@ static int bcm2835_pmx_free(struct pinctrl_dev *pctldev,
+ 	struct bcm2835_pinctrl *pc = pinctrl_dev_get_drvdata(pctldev);
+ 	enum bcm2835_fsel fsel = bcm2835_pinctrl_fsel_get(pc, offset);
+ 
+-	/* Return non-GPIOs to GPIO_IN */
+-	if (fsel != BCM2835_FSEL_GPIO_IN && fsel != BCM2835_FSEL_GPIO_OUT)
++	/* Return non-GPIOs to GPIO_IN, unless strict_gpiod is set */
++	if (strict_gpiod || (fsel != BCM2835_FSEL_GPIO_IN && fsel != BCM2835_FSEL_GPIO_OUT))
+ 		bcm2835_pinctrl_fsel_set(pc, offset, BCM2835_FSEL_GPIO_IN);
+ 
+ 	return 0;
+-- 
+2.34.1
+

@@ -1,0 +1,35 @@
+From a408a1a13d55e71a6e788310e7c0bc2f9dfc3c81 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <8911409+pelwell@users.noreply.github.com>
+Date: Tue, 6 Feb 2024 14:17:56 +0000
+Subject: [PATCH] Update kernel-build.yml to use node.js 20
+
+Upgrade the actions to v4 to get rid of the warning about migrating from node.js 16.
+---
+ .github/workflows/kernel-build.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.github/workflows/kernel-build.yml b/.github/workflows/kernel-build.yml
+index 9ab08a79be00..a7a581049ece 100644
+--- a/.github/workflows/kernel-build.yml
++++ b/.github/workflows/kernel-build.yml
+@@ -69,7 +69,7 @@ jobs:
+         fi
+       timeout-minutes: 5
+ 
+-    - uses: actions/checkout@v3
++    - uses: actions/checkout@v4
+       with:
+         fetch-depth: 1
+         clean: true
+@@ -101,7 +101,7 @@ jobs:
+       run: tar -cvf ${{matrix.name}}_build.tar -C ${{github.workspace}}/install .
+ 
+     - name: Upload results
+-      uses: actions/upload-artifact@v3
++      uses: actions/upload-artifact@v4
+       with:
+         name: ${{matrix.name}}_build
+         path: ${{matrix.name}}_build.tar
+-- 
+2.34.1
+

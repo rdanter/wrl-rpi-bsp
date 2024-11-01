@@ -1,0 +1,54 @@
+From d447564b5ef9bf9b4c5f69adbfadfbbbfb05d9a2 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Thu, 23 May 2024 15:40:58 +0100
+Subject: [PATCH] configs: Enable Hailo accelerator driver
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/configs/bcm2711_defconfig   | 2 --
+ arch/arm64/configs/bcm2711_defconfig | 2 --
+ arch/arm64/configs/bcm2712_defconfig | 2 --
+ 3 files changed, 6 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index c21271866954..442e18282bdb 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -923,8 +923,6 @@ CONFIG_VIDEO_EM28XX=m
+ CONFIG_VIDEO_EM28XX_V4L2=m
+ CONFIG_VIDEO_EM28XX_ALSA=m
+ CONFIG_VIDEO_EM28XX_DVB=m
+-CONFIG_MEDIA_PCI_SUPPORT=y
+-CONFIG_MEDIA_PCI_HAILO=m
+ CONFIG_RADIO_SAA7706H=m
+ CONFIG_RADIO_SHARK=m
+ CONFIG_RADIO_SHARK2=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index f5e4a1263c6e..38ef9d2d8221 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -951,8 +951,6 @@ CONFIG_VIDEO_EM28XX=m
+ CONFIG_VIDEO_EM28XX_V4L2=m
+ CONFIG_VIDEO_EM28XX_ALSA=m
+ CONFIG_VIDEO_EM28XX_DVB=m
+-CONFIG_MEDIA_PCI_SUPPORT=y
+-CONFIG_MEDIA_PCI_HAILO=m
+ CONFIG_RADIO_SAA7706H=m
+ CONFIG_RADIO_SHARK=m
+ CONFIG_RADIO_SHARK2=m
+diff --git a/arch/arm64/configs/bcm2712_defconfig b/arch/arm64/configs/bcm2712_defconfig
+index df8f058a1ddf..67e9a9703528 100644
+--- a/arch/arm64/configs/bcm2712_defconfig
++++ b/arch/arm64/configs/bcm2712_defconfig
+@@ -954,8 +954,6 @@ CONFIG_VIDEO_EM28XX=m
+ CONFIG_VIDEO_EM28XX_V4L2=m
+ CONFIG_VIDEO_EM28XX_ALSA=m
+ CONFIG_VIDEO_EM28XX_DVB=m
+-CONFIG_MEDIA_PCI_SUPPORT=y
+-CONFIG_MEDIA_PCI_HAILO=m
+ CONFIG_RADIO_SAA7706H=m
+ CONFIG_RADIO_SHARK=m
+ CONFIG_RADIO_SHARK2=m
+-- 
+2.34.1
+

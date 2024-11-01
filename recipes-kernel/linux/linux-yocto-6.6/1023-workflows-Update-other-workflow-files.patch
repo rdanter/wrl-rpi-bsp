@@ -1,0 +1,74 @@
+From 15669e6a06525d15475d2d39315cf75a88aacd8e Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Mon, 15 Apr 2024 11:45:44 +0100
+Subject: [PATCH] workflows: Update other workflow files
+
+Get rid of the remaining node.js warnings by updating the actions.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ .github/workflows/checkpatch.yml     | 2 +-
+ .github/workflows/dtoverlaycheck.yml | 2 +-
+ .github/workflows/kunit.yml          | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/.github/workflows/checkpatch.yml b/.github/workflows/checkpatch.yml
+index 4a01aee5fd2a..c214226654dc 100644
+--- a/.github/workflows/checkpatch.yml
++++ b/.github/workflows/checkpatch.yml
+@@ -8,7 +8,7 @@ jobs:
+     steps:
+     - name: 'Calculate PR commits + 1'
+       run: echo "PR_FETCH_DEPTH=$(( ${{ github.event.pull_request.commits }} + 1 ))" >> $GITHUB_ENV
+-    - uses: actions/checkout@v3
++    - uses: actions/checkout@v4
+       with:
+         ref: ${{ github.event.pull_request.head.sha }}
+         fetch-depth: ${{ env.PR_FETCH_DEPTH }}
+diff --git a/.github/workflows/dtoverlaycheck.yml b/.github/workflows/dtoverlaycheck.yml
+index 2e6d4f2a0b6d..3d96814fe19f 100644
+--- a/.github/workflows/dtoverlaycheck.yml
++++ b/.github/workflows/dtoverlaycheck.yml
+@@ -25,7 +25,7 @@ jobs:
+         sudo apt-get install gcc-arm-linux-gnueabihf libfdt-dev device-tree-compiler
+       timeout-minutes: 10
+ 
+-    - uses: actions/checkout@v3
++    - uses: actions/checkout@v4
+       with:
+         fetch-depth: 1
+         clean: true
+diff --git a/.github/workflows/kunit.yml b/.github/workflows/kunit.yml
+index e4160d597f18..5713297d7571 100644
+--- a/.github/workflows/kunit.yml
++++ b/.github/workflows/kunit.yml
+@@ -13,7 +13,7 @@ jobs:
+     runs-on: ubuntu-latest
+ 
+     steps:
+-      - uses: actions/checkout@v3
++      - uses: actions/checkout@v4
+ 
+       - name: Run Generic DRM Tests
+         run: |
+@@ -25,7 +25,7 @@ jobs:
+     runs-on: ubuntu-latest
+ 
+     steps:
+-      - uses: actions/checkout@v3
++      - uses: actions/checkout@v4
+ 
+       - name: Install Dependencies
+         run: |
+@@ -43,7 +43,7 @@ jobs:
+     runs-on: ubuntu-latest
+ 
+     steps:
+-      - uses: actions/checkout@v3
++      - uses: actions/checkout@v4
+ 
+       - name: Install Dependencies
+         run: |
+-- 
+2.34.1
+

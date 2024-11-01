@@ -1,0 +1,26 @@
+From 36f4d1e66db419c45ae9fed3a5685255c11b823c Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Fri, 5 Apr 2024 14:29:20 +0100
+Subject: [PATCH] Revert "brcmfmac: Fix 802.1x"
+
+This reverts commit 10bda80ab14365f31d857d01b7c20087bd8654c7.
+---
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+index e477b98bbc57..46762623160f 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+@@ -2493,7 +2493,7 @@ brcmf_cfg80211_connect(struct wiphy *wiphy, struct net_device *ndev,
+ 				brcmf_dbg(INFO, "using PSK offload\n");
+ 				profile->use_fwsup = BRCMF_PROFILE_FWSUP_PSK;
+ 			}
+-		} else if (profile->use_fwsup != BRCMF_PROFILE_FWSUP_1X) {
++		} else {
+ 			profile->use_fwsup = BRCMF_PROFILE_FWSUP_NONE;
+ 		}
+ 
+-- 
+2.34.1
+

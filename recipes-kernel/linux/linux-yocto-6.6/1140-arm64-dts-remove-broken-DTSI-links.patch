@@ -1,0 +1,40 @@
+From 47dce8e9803dc0588bf76ff39a69aff7be61b76e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>
+Date: Wed, 19 Jun 2024 20:37:20 +0200
+Subject: [PATCH] arm64: dts: remove broken DTSI links
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Both bcm283x-rpi-csi1-2lane.dtsi and bcm283x-rpi-lan7515.dtsi are linked to
+"../arm/boot/dts/" instead of "../arm/boot/dts/broadcom", so the links are
+broken.
+
+Fixes: d060fc0b4568 ("BCM2708: Add core Device Tree support")
+Signed-off-by: Álvaro Fernández Rojas <noltari@gmail.com>
+---
+ arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi | 1 -
+ arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi    | 1 -
+ 2 files changed, 2 deletions(-)
+ delete mode 120000 arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi
+ delete mode 120000 arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
+
+diff --git a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi
+deleted file mode 120000
+index e5c400284467..000000000000
+--- a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-csi1-2lane.dtsi
++++ /dev/null
+@@ -1 +0,0 @@
+-../../../../arm/boot/dts/bcm283x-rpi-csi1-2lane.dtsi
+\ No newline at end of file
+diff --git a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi b/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
+deleted file mode 120000
+index fc4c05bbe7fd..000000000000
+--- a/arch/arm64/boot/dts/broadcom/bcm283x-rpi-lan7515.dtsi
++++ /dev/null
+@@ -1 +0,0 @@
+-../../../../arm/boot/dts/bcm283x-rpi-lan7515.dtsi
+\ No newline at end of file
+-- 
+2.34.1
+

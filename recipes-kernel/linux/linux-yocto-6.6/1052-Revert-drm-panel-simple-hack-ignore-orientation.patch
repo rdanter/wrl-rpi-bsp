@@ -1,0 +1,29 @@
+From 1f63a90b8b965ee9b3b1502399e4cb822e749d28 Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 18 Apr 2024 12:40:42 +0100
+Subject: [PATCH] Revert "drm/panel-simple: hack ignore orientation"
+
+This reverts commit 1b2a7364e82f14295137dd64fdecb336c1a3ef7b.
+---
+ drivers/gpu/drm/panel/panel-simple.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/panel/panel-simple.c b/drivers/gpu/drm/panel/panel-simple.c
+index 035ee7a2f8a0..9c486cbf696f 100644
+--- a/drivers/gpu/drm/panel/panel-simple.c
++++ b/drivers/gpu/drm/panel/panel-simple.c
+@@ -432,9 +432,9 @@ static int panel_simple_get_timings(struct drm_panel *panel,
+ 
+ static enum drm_panel_orientation panel_simple_get_orientation(struct drm_panel *panel)
+ {
+-	//struct panel_simple *p = to_panel_simple(panel);
++	struct panel_simple *p = to_panel_simple(panel);
+ 
+-	return DRM_MODE_PANEL_ORIENTATION_UNKNOWN;
++	return p->orientation;
+ }
+ 
+ static const struct drm_panel_funcs panel_simple_funcs = {
+-- 
+2.34.1
+

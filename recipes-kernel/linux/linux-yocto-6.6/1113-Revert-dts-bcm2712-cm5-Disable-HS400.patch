@@ -1,0 +1,30 @@
+From 58caebecb89e442edaae41f766e07d9b851e44f5 Mon Sep 17 00:00:00 2001
+From: Jonathan Bell <jonathan@raspberrypi.com>
+Date: Tue, 4 Jun 2024 13:53:02 +0100
+Subject: [PATCH] Revert "dts: bcm2712: cm5: Disable HS400"
+
+Now that we've figured out why the PHY didn't do the right thing, HS400
+is stable again.
+
+This reverts commit 6aeacfcb1bd474545cd4ad5f1cd94022bf5b8b66.
+
+Signed-off-by: Jonathan Bell <jonathan@raspberrypi.com>
+---
+ arch/arm/boot/dts/broadcom/bcm2712-rpi-cm5.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/broadcom/bcm2712-rpi-cm5.dtsi b/arch/arm/boot/dts/broadcom/bcm2712-rpi-cm5.dtsi
+index b90d24a40bc1..c8731a97243f 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2712-rpi-cm5.dtsi
++++ b/arch/arm/boot/dts/broadcom/bcm2712-rpi-cm5.dtsi
+@@ -353,6 +353,7 @@ &sdio1 {
+ 	sd-uhs-ddr50;
+ 	sd-uhs-sdr104;
+ 	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
+ 	broken-cd;
+ 	supports-cqe;
+ 	status = "okay";
+-- 
+2.34.1
+

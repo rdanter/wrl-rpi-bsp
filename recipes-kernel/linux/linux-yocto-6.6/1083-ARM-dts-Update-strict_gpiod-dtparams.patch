@@ -1,0 +1,43 @@
+From c10f02385f07e40a35eef2fc9d69ecf5a37da778 Mon Sep 17 00:00:00 2001
+From: Phil Elwell <phil@raspberrypi.com>
+Date: Tue, 7 May 2024 13:38:21 +0100
+Subject: [PATCH] ARM: dts: Update strict_gpiod dtparams
+
+Following the adoption upstream of a similar parameter but with another
+name, update the dtparam definitions to use the new name and sense.
+
+Signed-off-by: Phil Elwell <phil@raspberrypi.com>
+---
+ arch/arm/boot/dts/broadcom/bcm270x-rpi.dtsi | 2 +-
+ arch/arm/boot/dts/broadcom/bcm2712-rpi.dtsi | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/broadcom/bcm270x-rpi.dtsi b/arch/arm/boot/dts/broadcom/bcm270x-rpi.dtsi
+index f997d908e4b4..bc533f329640 100644
+--- a/arch/arm/boot/dts/broadcom/bcm270x-rpi.dtsi
++++ b/arch/arm/boot/dts/broadcom/bcm270x-rpi.dtsi
+@@ -111,7 +111,7 @@ __overrides__ {
+ 			    <&csi0>, "sync-gpios:4",
+ 			    <&csi0>, "sync-gpios:8=0", <GPIO_ACTIVE_LOW>;
+ 
+-		strict_gpiod = <&chosen>, "bootargs=pinctrl_bcm2835.strict_gpiod=y";
++		strict_gpiod = <&chosen>, "bootargs=pinctrl_bcm2835.persist_gpio_outputs=n";
+ 	};
+ };
+ 
+diff --git a/arch/arm/boot/dts/broadcom/bcm2712-rpi.dtsi b/arch/arm/boot/dts/broadcom/bcm2712-rpi.dtsi
+index 89d12634f20b..f88de824e9d7 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2712-rpi.dtsi
++++ b/arch/arm/boot/dts/broadcom/bcm2712-rpi.dtsi
+@@ -99,7 +99,7 @@ __overrides__ {
+ 		nvmem_cust_rw = <&nvmem_cust>,"rw?";
+ 		nvmem_priv_rw = <&nvmem_priv>,"rw?";
+ 		nvmem_mac_rw = <&nvmem_mac>,"rw?";
+-		strict_gpiod = <&chosen>, "bootargs=pinctrl_rp1.strict_gpiod=y";
++		strict_gpiod = <&chosen>, "bootargs=pinctrl_rp1.persist_gpio_outputs=n";
+ 	};
+ };
+ 
+-- 
+2.34.1
+

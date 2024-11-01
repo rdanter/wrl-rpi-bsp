@@ -1,0 +1,96 @@
+From 333b17ab1a97de7d72146a9509f6d2cdbf9ca04d Mon Sep 17 00:00:00 2001
+From: Xavier L <xavier.l@magnax.ca>
+Date: Sat, 20 Jul 2024 12:03:13 -0400
+Subject: [PATCH] configs: rpi: enable CONFIG_BRIDGE_VLAN_FILTERING
+
+Enabling CONFIG_BRIDGE_VLAN_FILTERING allows bridges to automatically
+receive and forward packets based on the 802.1q VLAN information and
+the device/port configuration.
+
+See: #6275
+
+Signed-off-by: Xavier L. <xavier.l@magnax.ca>
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 +
+ arch/arm/configs/bcm2711_defconfig   | 1 +
+ arch/arm/configs/bcmrpi_defconfig    | 1 +
+ arch/arm64/configs/bcm2711_defconfig | 1 +
+ arch/arm64/configs/bcm2712_defconfig | 1 +
+ arch/arm64/configs/bcmrpi3_defconfig | 1 +
+ 6 files changed, 6 insertions(+)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index e08ba0b8e27a..7df86f275292 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -330,6 +330,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index ec0c826e50a4..49f3159e40b2 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -331,6 +331,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 9c8bc303a2c8..063128ca74c4 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -325,6 +325,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index f2e5dca7866d..e799f17be411 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -341,6 +341,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+diff --git a/arch/arm64/configs/bcm2712_defconfig b/arch/arm64/configs/bcm2712_defconfig
+index bdaf3190f9b3..a0dda267f776 100644
+--- a/arch/arm64/configs/bcm2712_defconfig
++++ b/arch/arm64/configs/bcm2712_defconfig
+@@ -344,6 +344,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index d51ba7ba7841..9d4bfca0e642 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -332,6 +332,7 @@ CONFIG_L2TP_V3=y
+ CONFIG_L2TP_IP=m
+ CONFIG_L2TP_ETH=m
+ CONFIG_BRIDGE=m
++CONFIG_BRIDGE_VLAN_FILTERING=y
+ CONFIG_VLAN_8021Q=m
+ CONFIG_VLAN_8021Q_GVRP=y
+ CONFIG_ATALK=m
+-- 
+2.34.1
+
