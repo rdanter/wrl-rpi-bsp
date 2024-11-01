@@ -481,7 +481,11 @@ SRC_URI += "file://0461-dt-bindings-media-imx258-Add-alternate-compatible-st.pat
 SRC_URI += "file://0462-media-i2c-imx258-Change-register-settings-for-varian.patch"
 SRC_URI += "file://0463-media-i2c-imx258-Make-HFLIP-and-VFLIP-controls-writa.patch"
 SRC_URI += "file://0464-drm-v3d-New-debugfs-end-points-to-query-GPU-usage-st.patch"
-SRC_URI += "file://0465-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://0465-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
+SRC_URI += "file://0001-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
+
 SRC_URI += "file://0466-mmc-bcm2835-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://0467-spi-bcm2835-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://0468-drm-vc4-hdmi-Increase-MAI-fifo-dreq-threshold.patch"
