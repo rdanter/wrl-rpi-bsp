@@ -65,7 +65,10 @@ SRC_URI += "file://0058-Revert-Bluetooth-Always-request-for-user-confirmatio.pat
 SRC_URI += "file://0059-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0060-Revert-net-bcmgenet-Request-APD-DLL-disable-and-IDDQ.patch"
 SRC_URI += "file://0061-Revert-Revert-xhci-add-quirk-for-host-controllers-th.patch"
-SRC_URI += "file://0062-smsx95xx-fix-crimes-against-truesize.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://0062-smsx95xx-fix-crimes-against-truesize.patch"
+
 SRC_URI += "file://0063-smsc95xx-Experimental-Enable-turbo_mode-and-packetsi.patch"
 SRC_URI += "file://0064-Allow-mac-address-to-be-set-in-smsc95xx.patch"
 SRC_URI += "file://0065-cgroup-Disable-cgroup-memory-by-default.patch"
