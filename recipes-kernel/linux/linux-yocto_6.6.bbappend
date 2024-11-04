@@ -1068,7 +1068,10 @@ SRC_URI += "file://1020-drivers-mmc-sdhci-brcmstb-bcm2712-supports-HS400es-a.pat
 SRC_URI += "file://1021-module-Avoid-ABI-changes-when-debug-info-is-disabled.patch"
 SRC_URI += "file://1022-overlays-Add-SunFounder-Pironman-5-overlay.patch"
 SRC_URI += "file://1023-workflows-Update-other-workflow-files.patch"
-SRC_URI += "file://1024-usb-gadget-uvc-use-correct-buffer-size-when-parsing-.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1024-usb-gadget-uvc-use-correct-buffer-size-when-parsing-.patch"
+
 SRC_URI += "file://1025-ARM-dts-Move-virtgpio-under-the-firmware-node.patch"
 SRC_URI += "file://1026-configs-Add-various-Intel-Ethernet-drivers.patch"
 SRC_URI += "file://1027-DTS-rp1-fix-setting-xHCI-TX-burst-fifo-thresholds.patch"
