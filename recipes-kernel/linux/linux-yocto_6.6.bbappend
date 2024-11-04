@@ -1053,7 +1053,11 @@ SRC_URI += "file://1009-pinctrl-rp1-Clear-events-when-setting-IRQ-type.patch"
 SRC_URI += "file://1010-nvmem-raspberrypi-Add-nvmem-driver-for-accessing-OTP.patch"
 SRC_URI += "file://1011-nvmem-raspberrypi-Enable-nvmem-otp-driver-through-DT.patch"
 SRC_URI += "file://1012-Revert-brcmfmac-Fix-802.1x.patch"
-SRC_URI += "file://1013-Revert-brcmfmac-Fix-interoperating-DPP-and-other-enc.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://1013-Revert-brcmfmac-Fix-interoperating-DPP-and-other-enc.patch"
+SRC_URI += "file://0001-Revert-brcmfmac-Fix-interoperating-DPP-and-other-enc.patch"
+
 SRC_URI += "file://1014-Revert-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1015-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1016-brcmfmac-Fix-interoperating-DPP-and-other-encryption.patch"
