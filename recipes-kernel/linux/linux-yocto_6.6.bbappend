@@ -1105,7 +1105,11 @@ SRC_URI += "file://1054-drm-panel-simple-Remove-custom-handling-of-orientati.pat
 SRC_URI += "file://1055-drm-rp1-vec-Support-more-video-modes-in-the-RP1-VEC-.patch"
 SRC_URI += "file://1056-configs-Add-IP_NF_TARGET_SYNPROXY-m.patch"
 SRC_URI += "file://1057-dts-overlay-ov5647-Specify-clock-noncontinuous-on-CS.patch"
-SRC_URI += "file://1058-Revert-usb-add-plumbing-for-updating-interrupt-endpo.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://1058-Revert-usb-add-plumbing-for-updating-interrupt-endpo.patch"
+SRC_URI += "file://0001-Revert-usb-add-plumbing-for-updating-interrupt-endpo.patch"
+
 SRC_URI += "file://1059-usb-add-plumbing-for-updating-interrupt-endpoint-int.patch"
 SRC_URI += "file://1060-drm-bridge-tc358762-Program-the-DPI-mode-into-the-ch.patch"
 SRC_URI += "file://1061-drm-bridge-tc358762-revert-move-ops-to-enable.patch"
