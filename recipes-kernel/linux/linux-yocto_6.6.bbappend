@@ -1038,7 +1038,10 @@ SRC_URI += "file://0997-drivers-mmc-handle-1024-byte-SD-General-Info-lengths.pat
 SRC_URI += "file://0998-i2c-designware-Add-support-for-bus-clear-feature.patch"
 SRC_URI += "file://0999-Revert-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1000-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
-SRC_URI += "file://1001-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1001-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
+
 SRC_URI += "file://1002-dts-bcm2712-cm5-Disable-HS400.patch"
 SRC_URI += "file://1003-i2c-designware-Make-the-SDA-hold-time-half-LCNT.patch"
 SRC_URI += "file://1004-Revert-ARM-dts-rp1-Add-a-safe-I2C-SDA-hold-time.patch"
