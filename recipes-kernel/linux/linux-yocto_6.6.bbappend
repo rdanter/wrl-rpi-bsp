@@ -1146,7 +1146,11 @@ SRC_URI += "file://1091-regulator-rpi_panel_v2-Add-remove-and-shutdown-hooks.pat
 SRC_URI += "file://1092-regulator-rpi_panel_v2-Add-delay-on-I2C-reads.patch"
 SRC_URI += "file://1093-drm-vc4-dpi-Add-override-for-RGB-order.patch"
 SRC_URI += "file://1094-dtoverlay-Add-rgb-order-override-for-vc4-kms-dpi-gen.patch"
-SRC_URI += "file://1095-Revert-net-bcmgenet-Reset-RBUF-on-first-open.patch"
+
+# Rework for LTS 24 RCPL 1
+#SRC_URI += "file://1095-Revert-net-bcmgenet-Reset-RBUF-on-first-open.patch"
+SRC_URI += "file://0001-Revert-net-bcmgenet-Reset-RBUF-on-first-open.patch"
+
 SRC_URI += "file://1096-DTS-bcm2712-don-t-assume-L1-sub-state-support-at-chi.patch"
 SRC_URI += "file://1097-DTS-overlays-add-pciex1-compat-pi5.patch"
 SRC_URI += "file://1098-overlays-Add-sdio-sdio-pi5-mapping.patch"
