@@ -1177,7 +1177,10 @@ SRC_URI += "file://1118-ASoC-da7213-Add-a-set_bclk_ratio-method.patch"
 SRC_URI += "file://1119-iqaudio-codec-Use-the-codec-s-new-set_bclk_ratio.patch"
 SRC_URI += "file://1120-Revert-Allow-mac-address-to-be-set-in-smsc95xx.patch"
 SRC_URI += "file://1121-Revert-smsc95xx-Experimental-Enable-turbo_mode-and-p.patch"
-SRC_URI += "file://1122-Revert-smsx95xx-fix-crimes-against-truesize.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1122-Revert-smsx95xx-fix-crimes-against-truesize.patch"
+
 SRC_URI += "file://1123-Revert-pwm-img-fix-pwm-clock-lookup.patch"
 SRC_URI += "file://1124-Revert-pwm-Make-it-possible-to-apply-PWM-changes-in-.patch"
 SRC_URI += "file://1125-Revert-pwm-Rename-pwm_apply_state-to-pwm_apply_might.patch"
