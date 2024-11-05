@@ -1235,7 +1235,10 @@ SRC_URI += "file://1158-media-uapi-pisp_be_config-Re-sort-pisp_be_tiles_conf.pat
 SRC_URI += "file://1159-media-uapi-pisp_be_config-Add-extra-config-fields.patch"
 SRC_URI += "file://1160-media-pisp_be-Re-introduce-multi-context-support.patch"
 SRC_URI += "file://1161-media-pisp_be-Re-introduce-video-node-offset.patch"
-SRC_URI += "file://1162-Revert-bpf-Take-return-from-set_memory_rox-into-acco.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1162-Revert-bpf-Take-return-from-set_memory_rox-into-acco.patch"
+
 SRC_URI += "file://1163-dts-Make-camN_reg-and-camN_reg_gpio-overrides-generi.patch"
 SRC_URI += "file://1164-spi-dt-bindings-Add-RPI-RP2040-GPIO-Bridge.patch"
 SRC_URI += "file://1165-spi-Add-a-driver-for-the-RPI-RP2040-GPIO-bridge.patch"
