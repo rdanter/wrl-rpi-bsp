@@ -1246,7 +1246,10 @@ SRC_URI += "file://1166-dmaengine-dw-axi-dmac-Honour-snps-block-size.patch"
 SRC_URI += "file://1167-mmc-restrict-posted-write-counts-for-SD-cards-in-CQ-.patch"
 SRC_URI += "file://1168-fixup-mmc-restrict-posted-write-counts-for-SD-cards-.patch"
 SRC_URI += "file://1169-mmc-brcmstb-don-t-squash-card-busy-detection-on-bcm2.patch"
-SRC_URI += "file://1170-Revert-usb-xhci-prevent-potential-failure-in-handle_.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1170-Revert-usb-xhci-prevent-potential-failure-in-handle_.patch"
+
 SRC_URI += "file://1171-Linux-6.6.40.patch"
 SRC_URI += "file://1172-Revert-Update-DAC8x-to-support-384khz-6187.patch"
 SRC_URI += "file://1173-brcmfmac-Only-match-complete-feature-names.patch"
