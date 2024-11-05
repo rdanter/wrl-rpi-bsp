@@ -1215,9 +1215,10 @@ SRC_URI += "file://1143-Revert-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
 
 # Rework for LTS 24 RCPL 1
 #SRC_URI += "file://1144-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
+#SRC_URI += "file://1145-fixup-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
 SRC_URI += "file://0002-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
+SRC_URI += "file://0001-fixup-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
 
-SRC_URI += "file://1145-fixup-dmaengine-dw-axi-dmac-Fixes-for-RP1.patch"
 SRC_URI += "file://1146-drivers-dwc_otg-use-C11-style-variable-array-declara.patch"
 SRC_URI += "file://1147-media-uapi-pixfmt-luma-Document-MIPI-CSI-2-packing.patch"
 SRC_URI += "file://1148-media-uapi-Add-a-pixel-format-for-BGR48-and-RGB48.patch"
