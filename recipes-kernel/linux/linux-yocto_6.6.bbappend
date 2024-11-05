@@ -1183,7 +1183,10 @@ SRC_URI += "file://1121-Revert-smsc95xx-Experimental-Enable-turbo_mode-and-p.pat
 
 SRC_URI += "file://1123-Revert-pwm-img-fix-pwm-clock-lookup.patch"
 SRC_URI += "file://1124-Revert-pwm-Make-it-possible-to-apply-PWM-changes-in-.patch"
-SRC_URI += "file://1125-Revert-pwm-Rename-pwm_apply_state-to-pwm_apply_might.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1125-Revert-pwm-Rename-pwm_apply_state-to-pwm_apply_might.patch"
+
 SRC_URI += "file://1126-Revert-drm-vc4-Use-phys-addresses-for-slave-DMA-conf.patch"
 SRC_URI += "file://1127-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://1128-pwm-Make-it-possible-to-apply-PWM-changes-in-atomic-.patch"
