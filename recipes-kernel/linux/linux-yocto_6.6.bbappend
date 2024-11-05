@@ -1200,7 +1200,10 @@ SRC_URI += "file://1131-Allow-mac-address-to-be-set-in-smsc95xx.patch"
 SRC_URI += "file://1132-configs-Enable-BLK_DEV_RBD.patch"
 SRC_URI += "file://1133-drivers-mmc-sdhci-brcmstb-improve-bcm2712-card-remov.patch"
 SRC_URI += "file://1134-drivers-mmc-core-handle-card-removal-when-running-CQ.patch"
-SRC_URI += "file://1135-ax25-Fix-refcount-imbalance-on-inbound-connections.patch"
+
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1135-ax25-Fix-refcount-imbalance-on-inbound-connections.patch"
+
 SRC_URI += "file://1136-feat-Add-support-for-SunFounder-PiPower-3-overlay.patch"
 SRC_URI += "file://1137-pwm-gpio-pwm-follow-pwm_apply_might_sleep-rename.patch"
 SRC_URI += "file://1138-drm-bridge-panel-Ensure-backlight-is-reachable.patch"
