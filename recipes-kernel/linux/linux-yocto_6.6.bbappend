@@ -1249,8 +1249,8 @@ SRC_URI += "file://1169-mmc-brcmstb-don-t-squash-card-busy-detection-on-bcm2.pat
 
 # Not needed in LTS-24 kernel
 #SRC_URI += "file://1170-Revert-usb-xhci-prevent-potential-failure-in-handle_.patch"
+#SRC_URI += "file://1171-Linux-6.6.40.patch"
 
-SRC_URI += "file://1171-Linux-6.6.40.patch"
 SRC_URI += "file://1172-Revert-Update-DAC8x-to-support-384khz-6187.patch"
 SRC_URI += "file://1173-brcmfmac-Only-match-complete-feature-names.patch"
 SRC_URI += "file://1174-brcmfmac-Add-extsae-as-an-alias-for-sae_ext.patch"
