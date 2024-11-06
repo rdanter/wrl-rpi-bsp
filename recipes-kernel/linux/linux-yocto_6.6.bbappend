@@ -482,9 +482,8 @@ SRC_URI += "file://0462-media-i2c-imx258-Change-register-settings-for-varian.pat
 SRC_URI += "file://0463-media-i2c-imx258-Make-HFLIP-and-VFLIP-controls-writa.patch"
 SRC_URI += "file://0464-drm-v3d-New-debugfs-end-points-to-query-GPU-usage-st.patch"
 
-# Rework for LTS 24 RCPL 1
+# Not needed in LTS-24 kernel
 #SRC_URI += "file://0465-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
-SRC_URI += "file://0001-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
 
 SRC_URI += "file://0466-mmc-bcm2835-Use-phys-addresses-for-slave-DMA-config.patch"
 SRC_URI += "file://0467-spi-bcm2835-Use-phys-addresses-for-slave-DMA-config.patch"
@@ -1187,11 +1186,9 @@ SRC_URI += "file://1124-Revert-pwm-Make-it-possible-to-apply-PWM-changes-in-.pat
 # Not needed in LTS-24 kernel
 #SRC_URI += "file://1125-Revert-pwm-Rename-pwm_apply_state-to-pwm_apply_might.patch"
 
-SRC_URI += "file://1126-Revert-drm-vc4-Use-phys-addresses-for-slave-DMA-conf.patch"
-
-# Rework for LTS 24 RCPL 1
+# Not needed in LTS-24 kernel
+#SRC_URI += "file://1126-Revert-drm-vc4-Use-phys-addresses-for-slave-DMA-conf.patch"
 #SRC_URI += "file://1127-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
-SRC_URI += "file://0002-drm-vc4-Use-phys-addresses-for-slave-DMA-config.patch"
 
 SRC_URI += "file://1128-pwm-Make-it-possible-to-apply-PWM-changes-in-atomic-.patch"
 SRC_URI += "file://1129-pwm-img-fix-pwm-clock-lookup.patch"
