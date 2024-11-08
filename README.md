@@ -5,9 +5,9 @@ Raspberry Pi BSP
 ---------------------
 
 Use the following steps to configure a platform project for this BSP with
-Wind River Linux LTS 23:
+Wind River Linux LTS 24:
 
-    $ git clone --branch WRLINUX_10_23_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_24_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --machine rpi --distro wrlinux \
         --layers /path/to/wrl-rpi-bsp --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
@@ -15,7 +15,7 @@ Wind River Linux LTS 23:
 
 or, as in previous versions:
 
-    $ git clone --branch WRLINUX_10_23_LTS /path/to/wrlinux-x
+    $ git clone --branch WRLINUX_10_24_LTS /path/to/wrlinux-x
     $ ./wrlinux-x/setup.sh --distro wrlinux --dl-layers --accept-eula yes
     $ . environment-setup-x86_64-wrlinuxsdk-linux
     $ . oe-init-build-env
@@ -37,7 +37,7 @@ and finally, if required, build and install the SDK:
 
     $ bitbake -c populate_sdk wrlinux-image-std
     $ cd tmp-glibc/deploy/sdk/
-    $ ./wrlinux-10.23.30.1-glibc-x86_64-rpi-wrlinux-image-std-sdk.sh
+    $ ./wrlinux-10.24.33.1-glibc-x86_64-rpi-wrlinux-image-std-sdk.sh
 
 If you will be building kernel modules with the SDK then the following
 additional steps should be taken before building:
