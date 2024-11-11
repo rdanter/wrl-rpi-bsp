@@ -1077,7 +1077,10 @@ SRC_URI += "file://1014-Revert-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1015-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1016-brcmfmac-Fix-interoperating-DPP-and-other-encryption.patch"
 SRC_URI += "file://1017-brcmfmac-Fix-802.1x.patch"
-SRC_URI += "file://1018-drivers-mmc-apply-SD-quirks-earlier-during-probe.patch"
+
+# Not needed since RCPL 2
+#SRC_URI += "file://1018-drivers-mmc-apply-SD-quirks-earlier-during-probe.patch"
+
 SRC_URI += "file://1019-drivers-mmc-disable-write-caching-on-Samsung-2023-mo.patch"
 SRC_URI += "file://1020-drivers-mmc-sdhci-brcmstb-bcm2712-supports-HS400es-a.patch"
 SRC_URI += "file://1021-module-Avoid-ABI-changes-when-debug-info-is-disabled.patch"
