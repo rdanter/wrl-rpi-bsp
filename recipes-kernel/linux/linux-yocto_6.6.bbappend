@@ -553,7 +553,11 @@ SRC_URI += "file://0522-V4L2-Add-PiSP-opaque-formats-to-V4L2.patch"
 SRC_URI += "file://0523-V4L2-Add-PiSP-compressed-formats-to-V4L2.patch"
 SRC_URI += "file://0524-bcm2708_fb-Fix-more-build-warnings.patch"
 SRC_URI += "file://0525-dt-binding-mfd-Add-binding-for-Raspberry-Pi-RP1.patch"
-SRC_URI += "file://0526-mfd-Add-rp1-driver.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0526-mfd-Add-rp1-driver.patch"
+SRC_URI += "file://0001-mfd-Add-rp1-driver.patch"
+
 SRC_URI += "file://0527-dt-bindings-clock-Add-bindings-for-Raspberry-Pi-RP1.patch"
 SRC_URI += "file://0528-clk-Add-rp1-clock-driver.patch"
 SRC_URI += "file://0529-dt-bindings-pinctrl-Add-bindings-for-Raspberry-Pi-RP.patch"
