@@ -1,0 +1,22 @@
+From 535a1249a3ed3326cd52bc72fc62d45139cd1736 Mon Sep 17 00:00:00 2001
+From: Dom Cobley <popcornmix@gmail.com>
+Date: Mon, 5 Aug 2024 15:12:33 +0100
+Subject: [PATCH] mfd: Partial revert of Add rp1 driver
+
+---
+ drivers/mfd/Makefile | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+index 918044a2f1a8..d6de1ac41213 100644
+--- a/drivers/mfd/Makefile
++++ b/drivers/mfd/Makefile
+@@ -283,5 +283,3 @@ obj-$(CONFIG_MFD_ATC260X_I2C)	+= atc260x-i2c.o
+ 
+ obj-$(CONFIG_MFD_RSMU_I2C)	+= rsmu_i2c.o rsmu_core.o
+ obj-$(CONFIG_MFD_RSMU_SPI)	+= rsmu_spi.o rsmu_core.o
+-
+-obj-$(CONFIG_MFD_RP1)		+= rp1.o
+-- 
+2.34.1
+

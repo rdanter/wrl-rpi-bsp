@@ -1304,4 +1304,7 @@ SRC_URI += "file://1205-fixup-pinctrl-bcm2712-pinctrl-pinconf-driver.patch"
 SRC_URI += "file://1206-dtoverlays-Add-overlay-for-HD44780-via-I2C-PCF8574-b.patch"
 SRC_URI += "file://1207-dtoverlays-Document-display_-width-height-on-hd44780.patch"
 SRC_URI += "file://1208-DTS-bcm2712-enable-SD-slot-CQE-by-default-on-Pi-5.patch"
-SRC_URI += "file://1209-mfd-Partial-revert-of-Add-rp1-driver.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://1209-mfd-Partial-revert-of-Add-rp1-driver.patch"
+SRC_URI += "file://0001-mfd-Partial-revert-of-Add-rp1-driver.patch"
