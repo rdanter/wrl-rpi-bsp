@@ -337,7 +337,11 @@ SRC_URI += "file://0316-brcmfmac-Don-t-promote-INFO-logging-to-ERR.patch"
 SRC_URI += "file://0317-media-i2c-ov5647-Support-HFLIP-and-VFLIP.patch"
 SRC_URI += "file://0318-drivers-bcm2835_isp-Allow-multiple-users-for-the-ISP.patch"
 SRC_URI += "file://0319-drivers-bcm2835_isp-Fix-div-by-0-bug.patch"
-SRC_URI += "file://0320-spi-spidev-Restore-loading-from-Device-Tree.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0320-spi-spidev-Restore-loading-from-Device-Tree.patch"
+SRC_URI += "file://0001-spi-spidev-Restore-loading-from-Device-Tree.patch"
+
 SRC_URI += "file://0321-drivers-bcm2835_unicam-Add-logging-message-when-a-fr.patch"
 SRC_URI += "file://0322-regulator-rpi-panel-attiny-Don-t-read-the-LCD-power-.patch"
 SRC_URI += "file://0323-rtc-pcf8523-Fix-oscillator-stop-bit-handling.patch"
