@@ -1041,7 +1041,11 @@ SRC_URI += "file://0989-drm-vc4-Enable-bg_fill-if-there-are-no-planes-enable.pat
 SRC_URI += "file://0990-dts-bcm2712-Add-blpubkey-nvram-node.patch"
 SRC_URI += "file://0991-allo-boss-dac-mute-output-when-changing-parameters.patch"
 SRC_URI += "file://0992-overlays-i2c-rtc-added-pcf2131-param.patch"
-SRC_URI += "file://0993-drivers-mmc-cqhci-clear-CQHCI_CTL-if-halt-fails.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0993-drivers-mmc-cqhci-clear-CQHCI_CTL-if-halt-fails.patch"
+SRC_URI += "file://0001-drivers-mmc-cqhci-clear-CQHCI_CTL-if-halt-fails.patch"
+
 SRC_URI += "file://0994-drivers-mmc-export-SD-extension-register-read-write-.patch"
 SRC_URI += "file://0995-drivers-mmc-be-more-cautious-when-manipulating-Comma.patch"
 SRC_URI += "file://0996-drivers-mmc-add-debugfs-entries-for-SD-extension-reg.patch"
