@@ -61,7 +61,11 @@ SRC_URI += "file://0054-clk-bcm2835-Remove-VEC-clock-support.patch"
 SRC_URI += "file://0055-arm-partially-revert-702b94bff3c50542a6e4ab9a4f4cef0.patch"
 SRC_URI += "file://0056-cache-export-clean-and-invalidate.patch"
 SRC_URI += "file://0057-Revert-spi-spidev-Fix-CS-polarity-if-GPIO-descriptor.patch"
-SRC_URI += "file://0058-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
+
+# Rework for RCPL 2
+#SRC_URI += "file://0058-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
+SRC_URI += "file://0001-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
+
 SRC_URI += "file://0059-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0060-Revert-net-bcmgenet-Request-APD-DLL-disable-and-IDDQ.patch"
 SRC_URI += "file://0061-Revert-Revert-xhci-add-quirk-for-host-controllers-th.patch"
