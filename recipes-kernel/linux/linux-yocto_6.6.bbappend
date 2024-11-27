@@ -96,7 +96,11 @@ SRC_URI += "file://0082-amba_pl011-Insert-mb-for-correct-FIFO-handling.patch"
 SRC_URI += "file://0083-amba_pl011-Add-cts-event-workaround-DT-property.patch"
 SRC_URI += "file://0084-tty-amba-pl011-Avoid-rare-write-when-full-error.patch"
 SRC_URI += "file://0085-pinctrl-bcm2835-Set-base-to-0-give-expected-gpio-num.patch"
-SRC_URI += "file://0086-Main-bcm2708-bcm2709-linux-port.patch"
+
+# Rework for RCPL 3
+#SRC_URI += "file://0086-Main-bcm2708-bcm2709-linux-port.patch"
+SRC_URI += "file://0001-Main-bcm2708-bcm2709-linux-port.patch"
+
 SRC_URI += "file://0087-Add-dwc_otg-driver.patch"
 SRC_URI += "file://0088-bcm2708-framebuffer-driver.patch"
 SRC_URI += "file://0089-Pulled-in-the-multi-frame-buffer-support-from-the-Pi.patch"
