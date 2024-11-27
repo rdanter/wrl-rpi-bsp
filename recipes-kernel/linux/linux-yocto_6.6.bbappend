@@ -1316,3 +1316,6 @@ SRC_URI += "file://1208-DTS-bcm2712-enable-SD-slot-CQE-by-default-on-Pi-5.patch"
 # Rework for RCPL 2
 #SRC_URI += "file://1209-mfd-Partial-revert-of-Add-rp1-driver.patch"
 SRC_URI += "file://0001-mfd-Partial-revert-of-Add-rp1-driver.patch"
+
+# New patch required for RCPL 3
+SRC_URI += "file://0001-Fix-build-errors-introduced-by-export-interface-func.patch"

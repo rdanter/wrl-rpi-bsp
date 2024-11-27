@@ -1,0 +1,43 @@
+From 5432c65d89bf5539eedbbcf4e741484366190c4c Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Wed, 27 Nov 2024 10:42:03 +0000
+Subject: [PATCH] Fix build errors introduced by export interface functions
+ patch
+
+With the following commit:
+
+wifi: brcmfmac: export firmware interface functions
+
+the build fails with:
+
+drivers/net/wireless/broadcom/brcm80211/brcmfmac/fwil.h:90:9:
+error: implicit declaration of function 'brcmf_dbg'
+
+Move the include of the debug functions to above the fwil.h header.
+---
+ drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+index 8a95bb2573a1..4df48bf2c2d7 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c
+@@ -35,6 +35,7 @@
+ #include "core.h"
+ #include "common.h"
+ #include "bcdc.h"
++#include "debug.h"
+ #include "fwil.h"
+ 
+ #define DCMD_RESP_TIMEOUT	msecs_to_jiffies(2500)
+@@ -112,7 +113,6 @@ struct rte_console {
+ #include <chipcommon.h>
+ 
+ #include "bus.h"
+-#include "debug.h"
+ #include "tracepoint.h"
+ 
+ #define TXQLEN		2048	/* bulk tx queue length */
+-- 
+2.34.1
+
