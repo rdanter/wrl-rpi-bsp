@@ -1054,7 +1054,11 @@ SRC_URI += "file://0994-drivers-mmc-export-SD-extension-register-read-write-.pat
 SRC_URI += "file://0995-drivers-mmc-be-more-cautious-when-manipulating-Comma.patch"
 SRC_URI += "file://0996-drivers-mmc-add-debugfs-entries-for-SD-extension-reg.patch"
 SRC_URI += "file://0997-drivers-mmc-handle-1024-byte-SD-General-Info-lengths.patch"
-SRC_URI += "file://0998-i2c-designware-Add-support-for-bus-clear-feature.patch"
+
+# Rework for RCPL 3
+#SRC_URI += "file://0998-i2c-designware-Add-support-for-bus-clear-feature.patch"
+SRC_URI += "file://0001-i2c-designware-Add-support-for-bus-clear-feature.patch"
+
 SRC_URI += "file://0999-Revert-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 SRC_URI += "file://1000-Revert-usb-phy-generic-Get-the-vbus-supply.patch"
 
