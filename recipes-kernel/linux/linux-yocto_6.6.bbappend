@@ -318,7 +318,11 @@ SRC_URI += "file://0293-media-i2c-ov5647-Fix-v4l2-compliance-failure-subscri.pat
 SRC_URI += "file://0294-staging-vc04_services-isp-Set-the-YUV420-YVU420-form.patch"
 SRC_URI += "file://0295-media-bcm2835-unicam-Forward-input-status-from-subde.patch"
 SRC_URI += "file://0296-media-i2c-ov7251-Add-fwnode-properties-controls.patch"
-SRC_URI += "file://0297-staging-vchiq_arm-Add-36-bit-address-support.patch"
+
+# Rework for RCPL 4
+#SRC_URI += "file://0297-staging-vchiq_arm-Add-36-bit-address-support.patch"
+SRC_URI += "file://0001-staging-vchiq_arm-Add-36-bit-address-support.patch"
+
 SRC_URI += "file://0298-staging-vchiq_arm-children-inherit-DMA-config.patch"
 SRC_URI += "file://0299-staging-vchiq_arm-Usa-a-DMA-pool-for-small-bulks.patch"
 SRC_URI += "file://0300-drm-panel-raspberrypi-touchscreen-Handle-I2C-errors.patch"
