@@ -1059,7 +1059,7 @@ SRC_URI += "file://0995-drivers-mmc-be-more-cautious-when-manipulating-Comma.pat
 SRC_URI += "file://0996-drivers-mmc-add-debugfs-entries-for-SD-extension-reg.patch"
 SRC_URI += "file://0997-drivers-mmc-handle-1024-byte-SD-General-Info-lengths.patch"
 
-# Rework for RCPL 3
+# Rework for RCPL 3 and again for RCPL 4
 #SRC_URI += "file://0998-i2c-designware-Add-support-for-bus-clear-feature.patch"
 SRC_URI += "file://0001-i2c-designware-Add-support-for-bus-clear-feature.patch"
 

@@ -1,4 +1,4 @@
-From ddb101fa813ffb76403fb1dd5b8fc903a21d2886 Mon Sep 17 00:00:00 2001
+From 907431d91a1fb6513cc683b20005939b58e0e91a Mon Sep 17 00:00:00 2001
 From: Phil Elwell <phil@raspberrypi.com>
 Date: Tue, 26 Mar 2024 15:57:46 +0000
 Subject: [PATCH] i2c: designware: Add support for bus clear feature
@@ -23,7 +23,7 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  3 files changed, 37 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/i2c/busses/i2c-designware-common.c b/drivers/i2c/busses/i2c-designware-common.c
-index f666277312cd..43b4b5c20d04 100644
+index 35b8dda52c5a..73291cd9f448 100644
 --- a/drivers/i2c/busses/i2c-designware-common.c
 +++ b/drivers/i2c/busses/i2c-designware-common.c
 @@ -57,6 +57,8 @@ static char *abort_sources[] = {
@@ -35,7 +35,7 @@ index f666277312cd..43b4b5c20d04 100644
  };
  
  static int dw_reg_read(void *context, unsigned int reg, unsigned int *val)
-@@ -607,8 +609,16 @@ int i2c_dw_wait_bus_not_busy(struct dw_i2c_dev *dev)
+@@ -609,8 +611,16 @@ int i2c_dw_wait_bus_not_busy(struct dw_i2c_dev *dev)
  int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
  {
  	unsigned long abort_source = dev->abort_source;
@@ -52,7 +52,7 @@ index f666277312cd..43b4b5c20d04 100644
  	if (abort_source & DW_IC_TX_ABRT_NOACK) {
  		for_each_set_bit(i, &abort_source, ARRAY_SIZE(abort_sources))
  			dev_dbg(dev->dev,
-@@ -623,6 +633,8 @@ int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
+@@ -625,6 +635,8 @@ int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
  		return -EAGAIN;
  	else if (abort_source & DW_IC_TX_ABRT_GCALL_READ)
  		return -EINVAL; /* wrong msgs[] data */
@@ -62,7 +62,7 @@ index f666277312cd..43b4b5c20d04 100644
  		return -EIO;
  }
 diff --git a/drivers/i2c/busses/i2c-designware-core.h b/drivers/i2c/busses/i2c-designware-core.h
-index e970a0940586..1606191ed41b 100644
+index e1ce21e06418..3dd3e6dda36e 100644
 --- a/drivers/i2c/busses/i2c-designware-core.h
 +++ b/drivers/i2c/busses/i2c-designware-core.h
 @@ -79,9 +79,12 @@
@@ -78,7 +78,7 @@ index e970a0940586..1606191ed41b 100644
  #define DW_IC_COMP_TYPE				0xfc
  #define DW_IC_COMP_TYPE_VALUE			0x44570140 /* "DW" + 0x0140 */
  
-@@ -111,12 +114,14 @@
+@@ -111,6 +114,7 @@
  
  #define DW_IC_ENABLE_ENABLE			BIT(0)
  #define DW_IC_ENABLE_ABORT			BIT(1)
@@ -86,14 +86,15 @@ index e970a0940586..1606191ed41b 100644
  
  #define DW_IC_STATUS_ACTIVITY			BIT(0)
  #define DW_IC_STATUS_TFE			BIT(2)
- #define DW_IC_STATUS_RFNE			BIT(3)
+@@ -118,6 +122,7 @@
  #define DW_IC_STATUS_MASTER_ACTIVITY		BIT(5)
  #define DW_IC_STATUS_SLAVE_ACTIVITY		BIT(6)
+ #define DW_IC_STATUS_MASTER_HOLD_TX_FIFO_EMPTY	BIT(7)
 +#define DW_IC_STATUS_SDA_STUCK_NOT_RECOVERED	BIT(11)
  
  #define DW_IC_SDA_HOLD_RX_SHIFT			16
  #define DW_IC_SDA_HOLD_RX_MASK			GENMASK(23, 16)
-@@ -164,6 +169,7 @@
+@@ -165,6 +170,7 @@
  #define ABRT_SLAVE_FLUSH_TXFIFO			13
  #define ABRT_SLAVE_ARBLOST			14
  #define ABRT_SLAVE_RD_INTX			15
@@ -101,7 +102,7 @@ index e970a0940586..1606191ed41b 100644
  
  #define DW_IC_TX_ABRT_7B_ADDR_NOACK		BIT(ABRT_7B_ADDR_NOACK)
  #define DW_IC_TX_ABRT_10ADDR1_NOACK		BIT(ABRT_10ADDR1_NOACK)
-@@ -179,6 +185,7 @@
+@@ -180,6 +186,7 @@
  #define DW_IC_RX_ABRT_SLAVE_RD_INTX		BIT(ABRT_SLAVE_RD_INTX)
  #define DW_IC_RX_ABRT_SLAVE_ARBLOST		BIT(ABRT_SLAVE_ARBLOST)
  #define DW_IC_RX_ABRT_SLAVE_FLUSH_TXFIFO	BIT(ABRT_SLAVE_FLUSH_TXFIFO)
