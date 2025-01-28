@@ -32,7 +32,10 @@ SRC_URI += "file://0025-drm-atomic-helpers-remove-legacy_cursor_update-hacks.pat
 SRC_URI += "file://0026-drm-atomic-If-margins-are-updated-update-all-planes.patch"
 SRC_URI += "file://0027-drm-vc4-hvs-Skip-DebugFS-Registration-for-FKMS.patch"
 SRC_URI += "file://0028-drm-vc4_hdmi-Allow-hotplug-detect-to-be-forced.patch"
-SRC_URI += "file://0029-vc4_hdmi-Avoid-log-spam-for-audio-start-failure.patch"
+
+# Not needed since RCPL 5
+#SRC_URI += "file://0029-vc4_hdmi-Avoid-log-spam-for-audio-start-failure.patch"
+
 SRC_URI += "file://0030-drm-vc4-hvs-Defer-dlist-slots-deallocation.patch"
 SRC_URI += "file://0031-drm-vc4-hvs-Initialize-the-dlist-allocation-list-ent.patch"
 SRC_URI += "file://0032-drm-vc4-hvs-Move-the-dlist-allocation-destruction-to.patch"
