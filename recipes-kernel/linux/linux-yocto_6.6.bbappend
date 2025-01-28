@@ -649,8 +649,11 @@ SRC_URI += "file://0595-drm-vc4-hvs-Change-prototype-of-__vc4_hvs_alloc-to-p.pat
 SRC_URI += "file://0596-drm-vc4-UV-planes-vertical-scaling-must-always-be-en.patch"
 SRC_URI += "file://0597-drm-vc4-hdmi-Avoid-hang-with-debug-registers-when-su.patch"
 SRC_URI += "file://0598-drm-vc4-Move-the-buffer-offset-out-of-the-vc4_plane_.patch"
-SRC_URI += "file://0599-drm-vc4-Fix-dlist-debug-not-resetting-the-next-entry.patch"
-SRC_URI += "file://0600-drm-vc4-Remove-incorrect-limit-from-hvs_dlist-debugf.patch"
+
+# Not needed since RCPL 5
+#SRC_URI += "file://0599-drm-vc4-Fix-dlist-debug-not-resetting-the-next-entry.patch"
+#SRC_URI += "file://0600-drm-vc4-Remove-incorrect-limit-from-hvs_dlist-debugf.patch"
+
 SRC_URI += "file://0601-drm-vc4-hvs-Remove-ABORT_ON_EMPTY-flag.patch"
 SRC_URI += "file://0602-drm-vc4-Enable-SCALER_CONTROL-early-in-HVS-init.patch"
 SRC_URI += "file://0603-dt-bindings-display-Add-BCM2712-HDMI-bindings.patch"
