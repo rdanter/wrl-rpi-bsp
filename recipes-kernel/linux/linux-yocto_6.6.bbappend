@@ -765,7 +765,11 @@ SRC_URI += "file://0704-dts-rp1-Add-spi6-fix-spi1-address-cells.patch"
 SRC_URI += "file://0705-overlays-uart-n-pi5-Add-the-pinctrl-0-property.patch"
 SRC_URI += "file://0706-drivers-media-imx477-Add-V4L2_CID_LINK_FREQ-control.patch"
 SRC_URI += "file://0707-drivers-media-imx477-Correctly-set-IMX477_PIXEL_RATE.patch"
-SRC_URI += "file://0708-drm-vc4-Correct-logic-on-stopping-an-HVS-channel.patch"
+
+# Rework for RCPL 5
+#SRC_URI += "file://0708-drm-vc4-Correct-logic-on-stopping-an-HVS-channel.patch"
+SRC_URI += "file://0001-drm-vc4-Correct-logic-on-stopping-an-HVS-channel.patch"
+
 SRC_URI += "file://0709-drm-vc4-Drop-WARN-for-HVS-FIFOs-not-being-empty.patch"
 SRC_URI += "file://0710-drm-vc4-Free-all-stale-dlists-if-channel-is-disabled.patch"
 SRC_URI += "file://0711-drm-vc4-Add-hvs_dlist_allocs-debugfs-function.patch"

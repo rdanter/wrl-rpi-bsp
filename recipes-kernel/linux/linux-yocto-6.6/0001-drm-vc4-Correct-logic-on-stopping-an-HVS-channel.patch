@@ -1,0 +1,40 @@
+From 42e4e5e6b4fdf11e4031e5dc92a7e1af58d4b56e Mon Sep 17 00:00:00 2001
+From: Dave Stevenson <dave.stevenson@raspberrypi.com>
+Date: Thu, 26 Oct 2023 17:46:13 +0100
+Subject: [PATCH] drm/vc4: Correct logic on stopping an HVS channel
+
+When factoring out __vc4_hvs_stop_channel, the logic got inverted from
+	if (condition)
+	  // stop channel
+to
+	if (condition)
+	  goto out
+	//stop channel
+	out:
+and also changed the exact register writes used to stop the channel.
+
+Correct the logic so that the channel is actually stopped, and revert
+to the original register writes.
+
+Fixes: 6d01a106b4c8 ("drm/vc4: crtc: Move HVS init and close to a function")
+Signed-off-by: Dave Stevenson <dave.stevenson@raspberrypi.com>
+---
+ drivers/gpu/drm/vc4/vc4_hvs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hvs.c b/drivers/gpu/drm/vc4/vc4_hvs.c
+index 05b2c24edd2a..6fd8dd498c6f 100644
+--- a/drivers/gpu/drm/vc4/vc4_hvs.c
++++ b/drivers/gpu/drm/vc4/vc4_hvs.c
+@@ -1027,7 +1027,7 @@ static void __vc6_hvs_stop_channel(struct vc4_hvs *hvs, unsigned int chan)
+ 	if (!drm_dev_enter(drm, &idx))
+ 		return;
+ 
+-	if (HVS_READ(SCALER6_DISPX_CTRL0(chan)) & SCALER6_DISPX_CTRL0_ENB)
++	if (!(HVS_READ(SCALER6_DISPX_CTRL0(chan)) & SCALER6_DISPX_CTRL0_ENB))
+ 		goto out;
+ 
+ 	HVS_WRITE(SCALER6_DISPX_CTRL0(chan),
+-- 
+2.34.1
+
