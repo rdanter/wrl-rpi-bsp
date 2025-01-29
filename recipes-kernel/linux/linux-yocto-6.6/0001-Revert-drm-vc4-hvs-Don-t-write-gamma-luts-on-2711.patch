@@ -1,0 +1,29 @@
+From 60b8b34aaeff794ae940606f6cf5a448d43f511e Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Wed, 29 Jan 2025 12:53:06 +0000
+Subject: [PATCH] Revert "drm/vc4: hvs: Don't write gamma luts on 2711"
+
+This reverts commit 40c77e93cfdda320f47fc1a00a76ce466d20e976.
+
+The change causes a build failure.
+---
+ drivers/gpu/drm/vc4/vc4_hvs.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/vc4/vc4_hvs.c b/drivers/gpu/drm/vc4/vc4_hvs.c
+index 4e640b76bacc..5975e4b5146e 100644
+--- a/drivers/gpu/drm/vc4/vc4_hvs.c
++++ b/drivers/gpu/drm/vc4/vc4_hvs.c
+@@ -518,9 +518,6 @@ static void vc4_hvs_lut_load(struct vc4_hvs *hvs,
+ 	if (!drm_dev_enter(drm, &idx))
+ 		return;
+ 
+-	if (hvs->vc4->is_vc5)
+-		return;
+-
+ 	/* The LUT memory is laid out with each HVS channel in order,
+ 	 * each of which takes 256 writes for R, 256 for G, then 256
+ 	 * for B.
+-- 
+2.34.1
+

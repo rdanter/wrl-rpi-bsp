@@ -1341,3 +1341,6 @@ SRC_URI += "file://0001-mfd-Partial-revert-of-Add-rp1-driver.patch"
 
 # New patch required for RCPL 3
 SRC_URI += "file://0001-Fix-build-errors-introduced-by-export-interface-func.patch"
+
+# Nw patch required for RCPL 5
+SRC_URI += "file://0001-Revert-drm-vc4-hvs-Don-t-write-gamma-luts-on-2711.patch"
