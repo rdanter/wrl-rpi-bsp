@@ -663,7 +663,11 @@ SRC_URI += "file://0606-dt-bindings-display-Add-BCM2712-MOP-bindings.patch"
 SRC_URI += "file://0607-dt-bindings-display-Add-BCM2712-MOPLET-bindings.patch"
 SRC_URI += "file://0608-dt-bindings-display-Add-BCM2712-KMS-driver-bindings.patch"
 SRC_URI += "file://0609-drm-vc4-drv-Support-BCM2712.patch"
-SRC_URI += "file://0610-drm-vc4-hvs-Support-BCM2712-HVS.patch"
+
+# Rework for RCPL 5
+#SRC_URI += "file://0610-drm-vc4-hvs-Support-BCM2712-HVS.patch"
+SRC_URI += "file://0001-drm-vc4-hvs-Support-BCM2712-HVS.patch"
+
 SRC_URI += "file://0611-drm-vc4-crtc-Add-support-for-BCM2712-PixelValves.patch"
 SRC_URI += "file://0612-drm-vc4-hdmi-Add-support-for-BCM2712-HDMI-controller.patch"
 SRC_URI += "file://0613-drm-vc4-txp-Introduce-structure-to-deal-with-revisio.patch"
