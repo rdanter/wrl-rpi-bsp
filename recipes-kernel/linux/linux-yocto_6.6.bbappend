@@ -561,7 +561,11 @@ SRC_URI += "file://0515-Add-new-pispbe-driver-though-not-yet-the-Makesfiles-.pat
 SRC_URI += "file://0516-irqchip-irq-bcm2712-mip-Support-for-2712-s-MIP.patch"
 SRC_URI += "file://0517-reset-reset-brcmstb-rescal-Support-shared-use.patch"
 SRC_URI += "file://0518-net-macb-Also-set-DMA-coherent-mask.patch"
-SRC_URI += "file://0519-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
+
+# Rework for RCPL 7
+#SRC_URI += "file://0519-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
+SRC_URI += "file://0001-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
+
 SRC_URI += "file://0520-drm-panel-raspberrypi-touchscreen-Insert-more-delays.patch"
 SRC_URI += "file://0521-PCI-brcmstb-Add-BCM2712-support.patch"
 SRC_URI += "file://0522-V4L2-Add-PiSP-opaque-formats-to-V4L2.patch"
