@@ -71,7 +71,10 @@ SRC_URI += "file://0001-Revert-Bluetooth-Always-request-for-user-confirmatio.pat
 
 SRC_URI += "file://0059-Revert-Bluetooth-Always-request-for-user-confirmatio.patch"
 SRC_URI += "file://0060-Revert-net-bcmgenet-Request-APD-DLL-disable-and-IDDQ.patch"
-SRC_URI += "file://0061-Revert-Revert-xhci-add-quirk-for-host-controllers-th.patch"
+
+# Rework for RCPL 8
+#SRC_URI += "file://0061-Revert-Revert-xhci-add-quirk-for-host-controllers-th.patch"
+SRC_URI += "file://0001-Revert-Revert-xhci-add-quirk-for-host-controllers-th.patch"
 
 # Not needed in LTS-24 kernel
 #SRC_URI += "file://0062-smsx95xx-fix-crimes-against-truesize.patch"
@@ -524,9 +527,18 @@ SRC_URI += "file://0478-media-i2c-arducam_64mp-Modify-the-line-length-of-128.pat
 SRC_URI += "file://0479-media-i2c-arducam_64mp-Add-8000x6000-resolution.patch"
 SRC_URI += "file://0480-media-i2c-arducam_64mp-Add-PDAF-support.patch"
 SRC_URI += "file://0481-xhci-Use-more-event-ring-segment-table-entries.patch"
-SRC_URI += "file://0482-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
-SRC_URI += "file://0483-usb-xhci-borrow-upstream-TRB_FETCH-quirk-on-VL805-ho.patch"
-SRC_URI += "file://0484-usb-xhci-add-VLI_SS_BULK_OUT_BUG-quirk.patch"
+
+# Rework for RCPL 8
+#SRC_URI += "file://0482-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+SRC_URI += "file://0001-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
+
+# Not needed since RCPL 8
+#SRC_URI += "file://0483-usb-xhci-borrow-upstream-TRB_FETCH-quirk-on-VL805-ho.patch"
+
+# Rework for RCPL 8
+#SRC_URI += "file://0484-usb-xhci-add-VLI_SS_BULK_OUT_BUG-quirk.patch"
+SRC_URI += "file://0001-usb-xhci-add-VLI_SS_BULK_OUT_BUG-quirk.patch"
+
 SRC_URI += "file://0485-usb-xhci-add-XHCI_VLI_HUB_TT_QUIRK.patch"
 SRC_URI += "file://0486-cfg80211-ship-debian-certificates-as-hex-files.patch"
 SRC_URI += "file://0487-drivers-media-imx296-Add-standby-delay-during-probe.patch"
