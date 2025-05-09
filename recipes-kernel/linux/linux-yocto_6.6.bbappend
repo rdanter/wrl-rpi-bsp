@@ -574,7 +574,7 @@ SRC_URI += "file://0516-irqchip-irq-bcm2712-mip-Support-for-2712-s-MIP.patch"
 SRC_URI += "file://0517-reset-reset-brcmstb-rescal-Support-shared-use.patch"
 SRC_URI += "file://0518-net-macb-Also-set-DMA-coherent-mask.patch"
 
-# Rework for RCPL 7
+# Rework for RCPL 7 and again for RCPL 8
 #SRC_URI += "file://0519-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
 SRC_URI += "file://0001-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
 

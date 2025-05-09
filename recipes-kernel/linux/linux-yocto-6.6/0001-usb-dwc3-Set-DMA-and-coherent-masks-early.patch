@@ -1,4 +1,4 @@
-From e93a3faec1834277a583b6897c45381463d5544e Mon Sep 17 00:00:00 2001
+From c8795b628beea0c3aab5df06240279f1f16ec249 Mon Sep 17 00:00:00 2001
 From: Jonathan Bell <jonathan@raspberrypi.com>
 Date: Mon, 13 Sep 2021 11:14:32 +0100
 Subject: [PATCH] usb: dwc3: Set DMA and coherent masks early
@@ -219,10 +219,10 @@ index a16f0b58eb74..edac75f59879 100644
  		.compatible = "brcm,brcmstb-usb-phy",
  		.data = &chip_info_7445,
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 318ae24a41f4..22fcdd164460 100644
+index 30404461ef7d..e7e1f18a5823 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -1208,6 +1208,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
+@@ -1223,6 +1223,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
  	}
  }
  
@@ -247,7 +247,7 @@ index 318ae24a41f4..22fcdd164460 100644
  /**
   * dwc3_core_init - Low-level initialization of DWC3 Core
   * @dwc: Pointer to our controller context structure
-@@ -1273,6 +1291,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1288,6 +1306,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_set_incr_burst_type(dwc);
  
@@ -256,7 +256,7 @@ index 318ae24a41f4..22fcdd164460 100644
  	ret = dwc3_phy_power_on(dwc);
  	if (ret)
  		goto err_exit_phy;
-@@ -1362,6 +1382,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1377,6 +1397,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_config_threshold(dwc);
  
@@ -281,7 +281,7 @@ index 318ae24a41f4..22fcdd164460 100644
  	return 0;
  
  err_power_off_phy:
-@@ -1505,6 +1543,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1520,6 +1558,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	u8			tx_thr_num_pkt_prd = 0;
  	u8			tx_max_burst_prd = 0;
  	u8			tx_fifo_resize_max_num;
@@ -289,7 +289,7 @@ index 318ae24a41f4..22fcdd164460 100644
  
  	/* default to highest possible threshold */
  	lpm_nyet_threshold = 0xf;
-@@ -1525,6 +1564,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1540,6 +1579,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	 */
  	tx_fifo_resize_max_num = 6;
  
@@ -299,7 +299,7 @@ index 318ae24a41f4..22fcdd164460 100644
  	dwc->maximum_speed = usb_get_maximum_speed(dev);
  	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
  	dwc->dr_mode = usb_get_dr_mode(dev);
-@@ -1639,6 +1681,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1654,6 +1696,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->dis_split_quirk = device_property_read_bool(dev,
  				"snps,dis-split-quirk");
  
@@ -309,16 +309,16 @@ index 318ae24a41f4..22fcdd164460 100644
  	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
  	dwc->tx_de_emphasis = tx_de_emphasis;
  
-@@ -1656,6 +1701,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1671,6 +1716,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->tx_thr_num_pkt_prd = tx_thr_num_pkt_prd;
  	dwc->tx_max_burst_prd = tx_max_burst_prd;
  
 +	dwc->axi_pipe_limit = axi_pipe_limit;
-+
- 	dwc->imod_interval = 0;
- 
++	
  	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
-@@ -1948,6 +1995,12 @@ static int dwc3_probe(struct platform_device *pdev)
+ }
+ 
+@@ -1959,6 +2006,12 @@ static int dwc3_probe(struct platform_device *pdev)
  
  	dwc3_get_properties(dwc);
  
@@ -332,7 +332,7 @@ index 318ae24a41f4..22fcdd164460 100644
  	if (IS_ERR(dwc->usb_psy))
  		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
 diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 516bace7e1dc..d2fe0f56642b 100644
+index 06be72f78969..9a6eef0de919 100644
 --- a/drivers/usb/dwc3/core.h
 +++ b/drivers/usb/dwc3/core.h
 @@ -185,6 +185,9 @@
