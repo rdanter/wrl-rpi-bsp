@@ -366,7 +366,11 @@ SRC_URI += "file://0323-rtc-pcf8523-Fix-oscillator-stop-bit-handling.patch"
 SRC_URI += "file://0324-drm-panel-simple-Populate-bpc-when-using-panel-dpi.patch"
 SRC_URI += "file://0325-drm-panel-simple-Allow-the-bus-format-to-be-read-fro.patch"
 SRC_URI += "file://0326-media-i2c-ov5647-Add-support-for-regulator-control.patch"
-SRC_URI += "file://0327-media-i2c-ov7251-Make-the-enable-GPIO-optional.patch"
+
+# Rework for RCPL 9
+#SRC_URI += "file://0327-media-i2c-ov7251-Make-the-enable-GPIO-optional.patch"
+SRC_URI += "file://0001-media-i2c-ov7251-Make-the-enable-GPIO-optional.patch"
+
 SRC_URI += "file://0328-staging-bcm2835-isp-Fix-cleanup-after-init-fail.patch"
 SRC_URI += "file://0329-uapi-v4l2-controls-Reset-V4L2_CID_USER_BCM2835_ISP_B.patch"
 SRC_URI += "file://0330-bcm2835-v4l2-isp-Add-missing-lock-initialization.patch"
