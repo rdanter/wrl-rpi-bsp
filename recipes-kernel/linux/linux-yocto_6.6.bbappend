@@ -530,7 +530,9 @@ SRC_URI += "file://0477-driver-media-i2c-imx477-Re-enable-temperature-sensor.pat
 SRC_URI += "file://0478-media-i2c-arducam_64mp-Modify-the-line-length-of-128.patch"
 SRC_URI += "file://0479-media-i2c-arducam_64mp-Add-8000x6000-resolution.patch"
 SRC_URI += "file://0480-media-i2c-arducam_64mp-Add-PDAF-support.patch"
-SRC_URI += "file://0481-xhci-Use-more-event-ring-segment-table-entries.patch"
+
+# Not needed since RCPL 10
+#SRC_URI += "file://0481-xhci-Use-more-event-ring-segment-table-entries.patch"
 
 # Rework for RCPL 8
 #SRC_URI += "file://0482-xhci-quirks-add-link-TRB-quirk-for-VL805.patch"
