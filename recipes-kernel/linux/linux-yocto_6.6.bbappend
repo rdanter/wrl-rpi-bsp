@@ -469,7 +469,10 @@ SRC_URI += "file://0419-rtc-ds3232-Add-DT-compatible-string-for-ds3234.patch"
 SRC_URI += "file://0420-hwmon-sht3x-Add-DT-compatible-string.patch"
 SRC_URI += "file://0421-iio-light-tsl4531-Add-DT-compatible-string.patch"
 SRC_URI += "file://0422-iio-light-veml6070-Add-DT-compatible-string.patch"
-SRC_URI += "file://0423-media-i2c-imx219-Correct-the-minimum-vblanking-value.patch"
+
+# Not needed since RCPL 11
+#SRC_URI += "file://0423-media-i2c-imx219-Correct-the-minimum-vblanking-value.patch"
+
 SRC_URI += "file://0424-ad5398_vcm-Fixup-ad5398_probe-prototype.patch"
 SRC_URI += "file://0425-clk-bcm-rpi-Create-helper-to-retrieve-private-data.patch"
 SRC_URI += "file://0426-media-i2c-Add-PDAF-support-for-IMX519.patch"
