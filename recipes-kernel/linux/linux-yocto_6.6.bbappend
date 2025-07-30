@@ -710,7 +710,11 @@ SRC_URI += "file://0620-drm-vc4-txp-Add-support-for-BCM2712-MOP.patch"
 SRC_URI += "file://0621-drm-vc4-txp-Add-BCM2712-MOPLET-support.patch"
 SRC_URI += "file://0622-drm-vc4-Add-additional-warn_on.patch"
 SRC_URI += "file://0623-drm-vc4-tests-Switch-generation-mockup-to-a-switch.patch"
-SRC_URI += "file://0624-drm-vc4-tests-Drop-drm-parameter-for-vc4_find_crtc_f.patch"
+
+# Rework for RCPL 11
+#SRC_URI += "file://0624-drm-vc4-tests-Drop-drm-parameter-for-vc4_find_crtc_f.patch"
+SRC_URI += "file://0001-drm-vc4-tests-Drop-drm-parameter-for-vc4_find_crtc_f.patch"
+
 SRC_URI += "file://0625-drm-vc4-tests-Return-the-allocated-output.patch"
 SRC_URI += "file://0626-drm-vc4-tests-Add-BCM2712-mock-driver.patch"
 SRC_URI += "file://0627-drm-vc4-tests-Add-tests-for-BCM2712-PixelValve-Muxin.patch"
