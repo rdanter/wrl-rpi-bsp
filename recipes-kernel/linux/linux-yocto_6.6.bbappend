@@ -113,7 +113,7 @@ SRC_URI += "file://0089-Pulled-in-the-multi-frame-buffer-support-from-the-Pi.pat
 SRC_URI += "file://0090-fbdev-add-FBIOCOPYAREA-ioctl.patch"
 SRC_URI += "file://0091-dmaengine-Add-support-for-BCM2708.patch"
 
-# Rework for RCPL 2
+# Rework for RCPL 2 and again for RCPL 12
 #SRC_URI += "file://0092-MMC-added-alternative-MMC-driver.patch"
 SRC_URI += "file://0001-MMC-added-alternative-MMC-driver.patch"
 
