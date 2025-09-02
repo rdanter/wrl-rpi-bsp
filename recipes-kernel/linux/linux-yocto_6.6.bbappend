@@ -768,7 +768,11 @@ SRC_URI += "file://0674-vc_mem-Add-the-DMA-memcpy-support-from-bcm2708_fb.patch"
 SRC_URI += "file://0675-drm-vc4-Correct-address-offset-for-planes-with-src_-.patch"
 SRC_URI += "file://0676-drivers-media-rp1_cfe-Fix-link-validate-test-for-pix.patch"
 SRC_URI += "file://0677-dts-bcm2712-Use-the-new-model-name.patch"
-SRC_URI += "file://0678-fbdev-Allow-client-to-request-a-particular-dev-fbN-n.patch"
+
+# Rework for RCPL 12
+#SRC_URI += "file://0678-fbdev-Allow-client-to-request-a-particular-dev-fbN-n.patch"
+SRC_URI += "file://0001-fbdev-Allow-client-to-request-a-particular-dev-fbN-n.patch"
+
 SRC_URI += "file://0679-drm-fb-helper-Look-up-preferred-fbdev-node-number-fr.patch"
 SRC_URI += "file://0680-dt-Add-overrides-for-drm-framebuffer-allocations-on-.patch"
 SRC_URI += "file://0681-overlays-Add-Pi-5-version-of-dwc2.patch"
