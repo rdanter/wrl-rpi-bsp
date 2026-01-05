@@ -159,15 +159,24 @@ SRC_URI += "file://0131-net-lan78xx-Support-auto-downshift-to-100Mb-s.patch"
 SRC_URI += "file://0132-firmware-raspberrypi-Report-the-fw-variant-during-pr.patch"
 SRC_URI += "file://0133-lan78xx-Debounce-link-events-to-minimize-poll-storm.patch"
 SRC_URI += "file://0134-lan78xx-EEE-support-is-now-a-PHY-property.patch"
-SRC_URI += "file://0135-media-tc358743-Increase-FIFO-level-to-374.patch"
+
+# Not needed since RCPL 13
+#SRC_URI += "file://0135-media-tc358743-Increase-FIFO-level-to-374.patch"
+
 SRC_URI += "file://0136-media-tc358743-Add-support-for-972Mbit-s-link-freq.patch"
-SRC_URI += "file://0137-media-tc358743-Check-I2C-succeeded-during-probe.patch"
+
+# Not needed since RCPL 13
+#SRC_URI += "file://0137-media-tc358743-Check-I2C-succeeded-during-probe.patch"
+
 SRC_URI += "file://0138-media-adv7180-Default-to-the-first-valid-input.patch"
 SRC_URI += "file://0139-media-adv7180-Add-YPrPb-support-for-ADV7282M.patch"
 SRC_URI += "file://0140-media-videodev2-Add-helper-defines-for-printing-FOUR.patch"
 SRC_URI += "file://0141-dt-bindings-Document-BCM283x-CSI2-CCP2-receiver.patch"
 SRC_URI += "file://0142-MAINTAINERS-Add-entry-for-BCM2835-Unicam-driver.patch"
-SRC_URI += "file://0143-media-tc358743-Return-an-appropriate-colorspace-from.patch"
+
+# Not needed since RCPL 13
+#SRC_URI += "file://0143-media-tc358743-Return-an-appropriate-colorspace-from.patch"
+
 SRC_URI += "file://0144-staging-mmal-vchiq-Avoid-use-of-bool-in-structures.patch"
 SRC_URI += "file://0145-staging-mmal-vchiq-Add-support-for-event-callbacks.patch"
 SRC_URI += "file://0146-staging-vc04_services-Support-sending-data-to-MMAL-p.patch"
@@ -265,7 +274,10 @@ SRC_URI += "file://0233-media-bcm2835-unicam-Set-VPU-min-clock-freq-to-250Mh.pat
 SRC_URI += "file://0234-dt-bindings-bcm2835-unicam-Update-documentation-with.patch"
 SRC_URI += "file://0235-leds-Add-the-actpwr-trigger.patch"
 SRC_URI += "file://0236-media-bcm2835-unicam-Drop-WARN-on-uing-direct-cache-.patch"
-SRC_URI += "file://0237-media-i2c-tc358743-Only-allow-supported-pixel-fmts-i.patch"
+
+# Not needed since RCPL 13
+#SRC_URI += "file://0237-media-i2c-tc358743-Only-allow-supported-pixel-fmts-i.patch"
+
 SRC_URI += "file://0238-media-bcm2835-unicam-Always-service-interrupts.patch"
 SRC_URI += "file://0239-media-bcm2835-unicam-Fix-uninitialized-warning.patch"
 SRC_URI += "file://0240-media-bcm2835-unicam-Fixup-review-comments-from-Hans.patch"
