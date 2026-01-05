@@ -585,7 +585,10 @@ SRC_URI += "file://0506-defconfigs-Add-RASPBERRYPI_GPIOMEM-as-a-module.patch"
 SRC_URI += "file://0507-drivers-char-delete-bcm2835-gpiomem.patch"
 SRC_URI += "file://0508-bcm2708_fb-Hack-out-dma-support.patch"
 SRC_URI += "file://0509-gpio_brcmstb-Allow-to-build-for-ARCH_BCM2835.patch"
-SRC_URI += "file://0510-Allow-RESET_BRCMSTB-on-ARCH_BCM2835.patch"
+
+# Not needed since RCPL 13
+#SRC_URI += "file://0510-Allow-RESET_BRCMSTB-on-ARCH_BCM2835.patch"
+
 SRC_URI += "file://0511-pinctrl-bcm2712-pinctrl-pinconf-driver.patch"
 SRC_URI += "file://0512-vc4-fkms-Remove-use-of-SMI-peripheral.patch"
 SRC_URI += "file://0513-mmc-brcmstb-add-support-for-BCM2712.patch"
