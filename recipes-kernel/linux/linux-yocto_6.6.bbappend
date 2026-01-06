@@ -596,7 +596,10 @@ SRC_URI += "file://0514-sdhci-Add-SD-Express-hook.patch"
 SRC_URI += "file://0515-Add-new-pispbe-driver-though-not-yet-the-Makesfiles-.patch"
 SRC_URI += "file://0516-irqchip-irq-bcm2712-mip-Support-for-2712-s-MIP.patch"
 SRC_URI += "file://0517-reset-reset-brcmstb-rescal-Support-shared-use.patch"
-SRC_URI += "file://0518-net-macb-Also-set-DMA-coherent-mask.patch"
+
+# Rework for RCPL 13
+#SRC_URI += "file://0518-net-macb-Also-set-DMA-coherent-mask.patch"
+SRC_URI += "file://0001-net-macb-Also-set-DMA-coherent-mask.patch"
 
 # Rework for RCPL 7 and again for RCPL 8
 #SRC_URI += "file://0519-usb-dwc3-Set-DMA-and-coherent-masks-early.patch"
