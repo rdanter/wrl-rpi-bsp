@@ -1,0 +1,27 @@
+From bc26da22cf13647e833951ff3910c5cedc204e98 Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Tue, 6 Jan 2026 10:17:02 +0000
+Subject: [PATCH] media: i2c: fix OmniVision OV64A40 function use
+
+The pm_runtime_get_if_active() function now requires only the
+device parameter.
+---
+ drivers/media/i2c/ov64a40.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/i2c/ov64a40.c b/drivers/media/i2c/ov64a40.c
+index ee75bbf8d8bf..03f37ebbb1a9 100644
+--- a/drivers/media/i2c/ov64a40.c
++++ b/drivers/media/i2c/ov64a40.c
+@@ -3284,7 +3284,7 @@ static int ov64a40_set_ctrl(struct v4l2_ctrl *ctrl)
+ 					 exp_max, 1, exp_val);
+ 	}
+ 
+-	pm_status = pm_runtime_get_if_active(ov64a40->dev, true);
++	pm_status = pm_runtime_get_if_active(ov64a40->dev);
+ 	if (!pm_status)
+ 		return 0;
+ 
+-- 
+2.34.1
+

@@ -1399,3 +1399,6 @@ SRC_URI += "file://0001-Fix-build-errors-introduced-by-export-interface-func.pat
 
 # Nw patch required for RCPL 5
 SRC_URI += "file://0001-Revert-drm-vc4-hvs-Don-t-write-gamma-luts-on-2711.patch"
+
+# New patch required for RCPL 13
+SRC_URI += "file://0001-media-i2c-fix-OmniVision-OV64A40-function-use.patch"
