@@ -1,0 +1,90 @@
+From b8356b15a16233dfff5992cc9b1030e1a3eb49f2 Mon Sep 17 00:00:00 2001
+From: Richard Danter <radanter@gmail.com>
+Date: Wed, 11 Feb 2026 13:44:52 +0000
+Subject: [PATCH] Remove RTL8712U default config option
+
+This staging driver has ben removed from the kernel source.
+---
+ arch/arm/configs/bcm2709_defconfig   | 1 -
+ arch/arm/configs/bcm2711_defconfig   | 1 -
+ arch/arm/configs/bcmrpi_defconfig    | 1 -
+ arch/arm64/configs/bcm2711_defconfig | 1 -
+ arch/arm64/configs/bcm2712_defconfig | 1 -
+ arch/arm64/configs/bcmrpi3_defconfig | 1 -
+ 6 files changed, 6 deletions(-)
+
+diff --git a/arch/arm/configs/bcm2709_defconfig b/arch/arm/configs/bcm2709_defconfig
+index 7df86f275292..f520a581d6a3 100644
+--- a/arch/arm/configs/bcm2709_defconfig
++++ b/arch/arm/configs/bcm2709_defconfig
+@@ -1344,7 +1344,6 @@ CONFIG_UIO=m
+ CONFIG_UIO_PDRV_GENIRQ=m
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_STAGING_MEDIA_DEPRECATED=y
+diff --git a/arch/arm/configs/bcm2711_defconfig b/arch/arm/configs/bcm2711_defconfig
+index 49f3159e40b2..dd43c84176a7 100644
+--- a/arch/arm/configs/bcm2711_defconfig
++++ b/arch/arm/configs/bcm2711_defconfig
+@@ -1372,7 +1372,6 @@ CONFIG_UIO=m
+ CONFIG_UIO_PDRV_GENIRQ=m
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_VIDEO_RPIVID=m
+diff --git a/arch/arm/configs/bcmrpi_defconfig b/arch/arm/configs/bcmrpi_defconfig
+index 063128ca74c4..7b146248a512 100644
+--- a/arch/arm/configs/bcmrpi_defconfig
++++ b/arch/arm/configs/bcmrpi_defconfig
+@@ -1337,7 +1337,6 @@ CONFIG_UIO=m
+ CONFIG_UIO_PDRV_GENIRQ=m
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_STAGING_MEDIA_DEPRECATED=y
+diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
+index e799f17be411..963b7b778397 100644
+--- a/arch/arm64/configs/bcm2711_defconfig
++++ b/arch/arm64/configs/bcm2711_defconfig
+@@ -1417,7 +1417,6 @@ CONFIG_VHOST_VSOCK=m
+ CONFIG_VHOST_CROSS_ENDIAN_LEGACY=y
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_VIDEO_RPIVID=m
+diff --git a/arch/arm64/configs/bcm2712_defconfig b/arch/arm64/configs/bcm2712_defconfig
+index a0dda267f776..fa0951571799 100644
+--- a/arch/arm64/configs/bcm2712_defconfig
++++ b/arch/arm64/configs/bcm2712_defconfig
+@@ -1420,7 +1420,6 @@ CONFIG_VHOST_VSOCK=m
+ CONFIG_VHOST_CROSS_ENDIAN_LEGACY=y
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_VIDEO_RPIVID=m
+diff --git a/arch/arm64/configs/bcmrpi3_defconfig b/arch/arm64/configs/bcmrpi3_defconfig
+index 9d4bfca0e642..d477519c882e 100644
+--- a/arch/arm64/configs/bcmrpi3_defconfig
++++ b/arch/arm64/configs/bcmrpi3_defconfig
+@@ -1317,7 +1317,6 @@ CONFIG_UIO_PDRV_GENIRQ=m
+ CONFIG_VHOST_VSOCK=m
+ CONFIG_STAGING=y
+ CONFIG_PRISM2_USB=m
+-CONFIG_R8712U=m
+ CONFIG_VT6656=m
+ CONFIG_STAGING_MEDIA=y
+ CONFIG_STAGING_MEDIA_DEPRECATED=y
+-- 
+2.34.1
+
