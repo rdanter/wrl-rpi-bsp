@@ -930,7 +930,11 @@ SRC_URI += "file://0810-drm-vc4-Fix-reading-of-frame-count-on-GEN5-Pi4.patch"
 SRC_URI += "file://0811-drm-vc4-Fixup-of-patches-adding-debugfs-functions.patch"
 SRC_URI += "file://0812-media-rp1-cfe-Fix-error-paths-in-cfe_start_streaming.patch"
 SRC_URI += "file://0813-media-i2c-adv7180-Use-MEDIA_BUS_FMT_UYVY8_1X16-for-C.patch"
-SRC_URI += "file://0814-media-i2c-adv7180-Add-support-for-V4L2_CID_LINK_FREQ.patch"
+
+# Rework for RCPL 15
+#SRC_URI += "file://0814-media-i2c-adv7180-Add-support-for-V4L2_CID_LINK_FREQ.patch"
+SRC_URI += "file://0001-media-i2c-adv7180-Add-support-for-V4L2_CID_LINK_FREQ.patch"
+
 SRC_URI += "file://0815-media-rp1-cfe-Use-the-MIPI_CSI2_DT_xxx-defines-for-c.patch"
 SRC_URI += "file://0816-media-rp1-cfe-Add-a-csi_dt-value-for-16bit-formats.patch"
 SRC_URI += "file://0817-ARM-dts-bcm2712-rpi-5-b-Add-eth_ledx-parameters.patch"
