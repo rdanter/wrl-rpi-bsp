@@ -334,8 +334,11 @@ SRC_URI += "file://0287-drm-panel-jdi-lt070me05000-Use-gpiod_set_value_cansl.pat
 SRC_URI += "file://0288-staging-bcm2835-camera-Add-support-for-H264-levels-4.patch"
 SRC_URI += "file://0289-staging-bcm2835-isp-Fix-compiler-warning.patch"
 SRC_URI += "file://0290-gpio-poweroff-Remember-the-old-poweroff-handler.patch"
-SRC_URI += "file://0291-media-i2c-ov5647-Correct-pixel-array-offset.patch"
-SRC_URI += "file://0292-media-i2c-ov5647-Correct-minimum-VBLANK-value.patch"
+
+# Not needed since RCPL 16
+#SRC_URI += "file://0291-media-i2c-ov5647-Correct-pixel-array-offset.patch"
+#SRC_URI += "file://0292-media-i2c-ov5647-Correct-minimum-VBLANK-value.patch"
+
 SRC_URI += "file://0293-media-i2c-ov5647-Fix-v4l2-compliance-failure-subscri.patch"
 SRC_URI += "file://0294-staging-vc04_services-isp-Set-the-YUV420-YVU420-form.patch"
 SRC_URI += "file://0295-media-bcm2835-unicam-Forward-input-status-from-subde.patch"
@@ -357,7 +360,10 @@ SRC_URI += "file://0306-Add-Raspberry-Pi-PoE-HAT-support.patch"
 SRC_URI += "file://0307-staging-mmal-vchiq-Add-module-parameter-to-enable-lo.patch"
 SRC_URI += "file://0308-staging-mmal-vchiq-Reset-buffers_with_vpu-on-port_en.patch"
 SRC_URI += "file://0309-drivers-gpio-Add-a-driver-that-wraps-the-PWM-API-as-.patch"
-SRC_URI += "file://0310-media-i2c-ov5647-Sensor-should-report-RAW-color-spac.patch"
+
+# Not needed since RCPL 16
+#SRC_URI += "file://0310-media-i2c-ov5647-Sensor-should-report-RAW-color-spac.patch"
+
 SRC_URI += "file://0311-vc04_services-isp-Report-input-node-as-wanting-full-.patch"
 SRC_URI += "file://0312-media-bcm2835-unicam-Parse-pad-numbers-correctly.patch"
 SRC_URI += "file://0313-media-bcm2835-unicam-Add-support-for-configuration-v.patch"
