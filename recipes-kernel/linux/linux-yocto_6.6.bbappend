@@ -392,7 +392,11 @@ SRC_URI += "file://0001-media-i2c-ov7251-Make-the-enable-GPIO-optional.patch"
 SRC_URI += "file://0328-staging-bcm2835-isp-Fix-cleanup-after-init-fail.patch"
 SRC_URI += "file://0329-uapi-v4l2-controls-Reset-V4L2_CID_USER_BCM2835_ISP_B.patch"
 SRC_URI += "file://0330-bcm2835-v4l2-isp-Add-missing-lock-initialization.patch"
-SRC_URI += "file://0331-mfd-simple-mfd-i2c-Add-configuration-for-RPi-POE-HAT.patch"
+
+# Rework for RCPL 16
+#SRC_URI += "file://0331-mfd-simple-mfd-i2c-Add-configuration-for-RPi-POE-HAT.patch"
+SRC_URI += "file://0001-mfd-simple-mfd-i2c-Add-configuration-for-RPi-POE-HAT.patch"
+
 SRC_URI += "file://0332-pwm-raspberrypi-poe-Add-option-of-being-created-by-M.patch"
 SRC_URI += "file://0333-power-rpi-poe-Drop-CURRENT_AVG-as-it-is-not-hardware.patch"
 SRC_URI += "file://0334-power-rpi-poe-Add-option-of-being-created-by-MFD-or-.patch"
