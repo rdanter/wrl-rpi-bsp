@@ -1,4 +1,4 @@
-From 5c221c4ac0873c59f7a4bebeb5dd10972732fa04 Mon Sep 17 00:00:00 2001
+From b92d7d03f96f6cd24b19c2fdf6dc66476949520c Mon Sep 17 00:00:00 2001
 From: gellert <gellert@raspberrypi.org>
 Date: Fri, 15 Aug 2014 16:35:06 +0100
 Subject: [PATCH] MMC: added alternative MMC driver
@@ -265,12 +265,12 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.com>
  drivers/mmc/host/bcm2835-mmc.c | 1562 ++++++++++++++++++++++++++++++++
  drivers/mmc/host/sdhci-iproc.c |    1 +
  drivers/mmc/host/sdhci.c       |    6 +-
- include/linux/mmc/card.h       |    3 +-
- 9 files changed, 1638 insertions(+), 6 deletions(-)
+ include/linux/mmc/card.h       |    1 +
+ 9 files changed, 1637 insertions(+), 5 deletions(-)
  create mode 100644 drivers/mmc/host/bcm2835-mmc.c
 
 diff --git a/drivers/mmc/core/block.c b/drivers/mmc/core/block.c
-index 3564a0f63c9c..e57067c8b594 100644
+index f53f0bf4ae60..6282ba800703 100644
 --- a/drivers/mmc/core/block.c
 +++ b/drivers/mmc/core/block.c
 @@ -171,6 +171,13 @@ static DEFINE_MUTEX(open_lock);
@@ -287,7 +287,7 @@ index 3564a0f63c9c..e57067c8b594 100644
  static inline int mmc_blk_part_switch(struct mmc_card *card,
  				      unsigned int part_type);
  static void mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
-@@ -3008,6 +3015,8 @@ static int mmc_blk_probe(struct mmc_card *card)
+@@ -3016,6 +3023,8 @@ static int mmc_blk_probe(struct mmc_card *card)
  {
  	struct mmc_blk_data *md;
  	int ret = 0;
@@ -296,7 +296,7 @@ index 3564a0f63c9c..e57067c8b594 100644
  
  	/*
  	 * Check that the card supports the command class(es) we need.
-@@ -3015,7 +3024,16 @@ static int mmc_blk_probe(struct mmc_card *card)
+@@ -3023,7 +3032,16 @@ static int mmc_blk_probe(struct mmc_card *card)
  	if (!(card->csd.cmdclass & CCC_BLOCK_READ))
  		return -ENODEV;
  
@@ -314,7 +314,7 @@ index 3564a0f63c9c..e57067c8b594 100644
  
  	card->complete_wq = alloc_workqueue("mmc_complete",
  					WQ_MEM_RECLAIM | WQ_HIGHPRI, 0);
-@@ -3030,6 +3048,17 @@ static int mmc_blk_probe(struct mmc_card *card)
+@@ -3038,6 +3056,17 @@ static int mmc_blk_probe(struct mmc_card *card)
  		goto out_free;
  	}
  
@@ -347,7 +347,7 @@ index 39b5846db389..6a2055b797f3 100644
  	return 0;
  }
 diff --git a/drivers/mmc/core/quirks.h b/drivers/mmc/core/quirks.h
-index c417ed34c057..85b1e043e1bd 100644
+index 1f7406c0ab03..d9a3f636671c 100644
 --- a/drivers/mmc/core/quirks.h
 +++ b/drivers/mmc/core/quirks.h
 @@ -50,6 +50,14 @@ static const struct mmc_fixup __maybe_unused mmc_sd_fixups[] = {
@@ -366,7 +366,7 @@ index c417ed34c057..85b1e043e1bd 100644
  };
  
 diff --git a/drivers/mmc/host/Kconfig b/drivers/mmc/host/Kconfig
-index bc7e2ad37002..50746210a647 100644
+index 9dea5111d48c..64620c46cdaa 100644
 --- a/drivers/mmc/host/Kconfig
 +++ b/drivers/mmc/host/Kconfig
 @@ -5,6 +5,35 @@
@@ -1998,7 +1998,7 @@ index 10235fdff246..f014437cb911 100644
  	.reset = sdhci_reset,
  	.set_uhs_signaling = sdhci_set_uhs_signaling,
 diff --git a/drivers/mmc/host/sdhci.c b/drivers/mmc/host/sdhci.c
-index 9796a3cb3ca6..b44170ef453d 100644
+index d25d1a461e7d..572a01f43c96 100644
 --- a/drivers/mmc/host/sdhci.c
 +++ b/drivers/mmc/host/sdhci.c
 @@ -40,7 +40,7 @@
@@ -2029,19 +2029,17 @@ index 9796a3cb3ca6..b44170ef453d 100644
  		sdhci_err_stats_inc(host, REQ_TIMEOUT);
  		sdhci_dumpregs(host);
 diff --git a/include/linux/mmc/card.h b/include/linux/mmc/card.h
-index 7c6da19fff9f..6cd42f032555 100644
+index d9fbd389dce2..e5beff37491d 100644
 --- a/include/linux/mmc/card.h
 +++ b/include/linux/mmc/card.h
-@@ -298,7 +298,8 @@ struct mmc_card {
- #define MMC_QUIRK_BROKEN_CACHE_FLUSH	(1<<16)	/* Don't flush cache until the write has occurred */
+@@ -299,6 +299,7 @@ struct mmc_card {
  #define MMC_QUIRK_BROKEN_SD_POWEROFF_NOTIFY	(1<<17) /* Disable broken SD poweroff notify support */
  #define MMC_QUIRK_NO_UHS_DDR50_TUNING	(1<<18) /* Disable DDR50 tuning */
--
+ #define MMC_QUIRK_FIXED_SECURE_ERASE_TRIM_TIME	(1<<20) /* Secure erase/trim time is fixed regardless of size */
 +#define MMC_QUIRK_ERASE_BROKEN (1<<31)		/* Skip erase */
-+ 
+ 
  	bool			written_flag;	/* Indicates eMMC has been written since power on */
  	bool			reenable_cmdq;	/* Re-enable Command Queue */
- 
 -- 
-2.34.1
+2.47.3
 
