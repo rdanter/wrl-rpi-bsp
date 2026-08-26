@@ -191,7 +191,11 @@ SRC_URI += "file://0154-arm-bcm2835-Fix-FIQ-early-ioremap.patch"
 SRC_URI += "file://0155-arm-bcm2835-DMA-can-only-address-1GB.patch"
 SRC_URI += "file://0156-hwrng-iproc-rng200-Add-BCM2838-support.patch"
 SRC_URI += "file://0157-bcmgenet-constrain-max-DMA-burst-length.patch"
-SRC_URI += "file://0158-bcmgenet-Better-coalescing-parameter-defaults.patch"
+
+# Rework for LTS 24 RCPL 18
+#SRC_URI += "file://0158-bcmgenet-Better-coalescing-parameter-defaults.patch"
+SRC_URI += "file://0001-bcmgenet-Better-coalescing-parameter-defaults.patch"
+
 SRC_URI += "file://0159-net-genet-enable-link-energy-detect-powerdown-for-ex.patch"
 
 # Rework for LTS 24 RCPL 1
